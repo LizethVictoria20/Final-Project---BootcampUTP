@@ -1,3 +1,6 @@
+import LogoPurple from '../../assets/images/logo-purple.jpeg'
+import "./style.css";
+
 function Navbar() {
   return (
     <nav className="navbar navbar-default">
@@ -33,7 +36,7 @@ function Navbar() {
           </form>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <a href="/">Link</a>
+              <a href="/"><img className='logo-navbar' src={LogoPurple} alt="" /> </a>
             </li>
             <li className="dropdown">
               <a

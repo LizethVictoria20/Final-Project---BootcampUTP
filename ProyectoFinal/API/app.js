@@ -5,7 +5,6 @@ import sequelize from "./config/config.js";
 import usersRouter from "./routes/Users.routes.js";
 import productsRouter from "./routes/Products.routes.js";
 import categoriesRouter from "./routes/Categories.routes.js";
-import ordersRouter from "./routes/orders.routes.js";
 import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.Routes.js";
 
@@ -31,7 +30,6 @@ app.use(
 app.use("/api/users", usersRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/categories", categoriesRouter);
-app.use("/api/orders", ordersRouter);
 app.use("/api/auth", authRouter);
 
 app.use((req, res) => {

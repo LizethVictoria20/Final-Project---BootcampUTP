@@ -1,4 +1,3 @@
-// models/User.js
 import { DataTypes } from "sequelize";
 import sequelize from "../config/config.js";
 import bcrypt from 'bcrypt'
@@ -21,7 +20,15 @@ const User = sequelize.define('User', {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isStrongPassword(value) {
+          // Validación personalizada para asegurar que la contraseña cumpla con los requerimientos
+          if (!/\d/.test(value) || !/[a-zA-Z]/.test(value) || value.length < 8) {
+            throw new Error('La contraseña debe contener al menos 8 caracteres, incluyendo al menos un número y una letra.');
+          }
+        }
+      }
     },
     first_name: {
       type: DataTypes.STRING,

@@ -1,12 +1,13 @@
 import express from "express";
-import cors from "cors";
 import session from 'express-session';
+import cookieParser from "cookie-parser";
+import cors from "cors";
 import sequelize from "./config/config.js";
 import usersRouter from "./routes/Users.routes.js";
 import productsRouter from "./routes/Products.routes.js";
 import categoriesRouter from "./routes/Categories.routes.js";
-import cookieParser from "cookie-parser";
 import authRouter from "./routes/auth.Routes.js";
+import { authenticateJWT } from './middleware/jwtMiddleware.js'; // Importamos el middleware JWT
 
 const app = express();
 const PORT = 3000;
@@ -27,10 +28,12 @@ app.use(
   })
 );
 
-app.use("/api/users", usersRouter);
-app.use("/api/products", productsRouter);
-app.use("/api/categories", categoriesRouter);
-app.use("/api/auth", authRouter);
+app.use('/api/auth', authRouter); // Rutas de autenticación
+
+// Rutas protegidas con JWT
+app.use('/api/users', authenticateJWT, usersRouter);
+app.use('/api/products', authenticateJWT, productsRouter);
+app.use('/api/categories', authenticateJWT, categoriesRouter);
 
 app.use((req, res) => {
   res.status(404).json({

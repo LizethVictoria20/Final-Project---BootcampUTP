@@ -1,8 +1,8 @@
 import express from 'express';
 import Product from '../models/Product.js'
 import ProductSchema from '../schemas/ProductShema.js';
-
-
+import { authenticateJWT } from '../middleware/jwtMiddleware.js'; // Importamos el middleware JWT
+ 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', authenticateJWT, async (req, res) => { 
   try {
     const productData = ProductSchema.parse(req.body);
     const newProduct = await Product.create(productData);
@@ -25,5 +25,7 @@ router.post('/', async (req, res) => {
     res.status(400).json({ message: err.errors });
   }
 });
+
+// router.put('/', authenticateJWT, async (req, res) =>)
 
 export default router;

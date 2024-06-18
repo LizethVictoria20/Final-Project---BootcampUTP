@@ -1,9 +1,10 @@
-import LogoPurple from '../../assets/images/logo-purple.jpeg'
+import LogoPurple from "../../assets/images/logo-purple.jpeg";
+import { FaShoppingBag } from "react-icons/fa";
 import "./style.css";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-default">
+    <nav className="navbar bg-light">
       <div className="container-fluid">
         <div className="navbar-header">
           {/* button para menú colapsado */}
@@ -36,7 +37,9 @@ function Navbar() {
           </form>
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <a href="/"><img className='logo-navbar' src={LogoPurple} alt="" /> </a>
+              <a href="/">
+                <img className="logo-navbar" src={LogoPurple} alt="" />{" "}
+              </a>
             </li>
             <li className="dropdown">
               <a
@@ -47,7 +50,7 @@ function Navbar() {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Dropdown
+                <FaShoppingBag />
               </a>
               <ul className="dropdown-menu">
                 <li>

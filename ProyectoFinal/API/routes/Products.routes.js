@@ -1,7 +1,7 @@
 import express from 'express';
 import Product from '../models/Product.js'
 import ProductSchema from '../schemas/ProductShema.js';
-import { authenticateJWT } from '../middleware/jwtMiddleware.js'; // Importamos el middleware JWT
+import { authenticateJWT } from '../middleware/jwtMiddleware.js'; 
  
 const router = express.Router();
 

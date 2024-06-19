@@ -2,7 +2,9 @@
     margin: 0 2rem 0 2rem;
 }
 .navbar {
-    height: 100px
+    height: 100px;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
 }
 
 .items-navbar {

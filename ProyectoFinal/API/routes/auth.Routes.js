@@ -14,14 +14,12 @@ router.post("/register", async (req, res) => {
   try {
     UserSchema.parse(req.body);
   } catch (error) {
-    res.status(401).json({ message: "credenciales invalidas como tu"})
+    return res.status(401).json({ message: "credenciales invalidas como tu"})
   }
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ message: "El usuario ya está registrado." });
+      return res.status(400).json({ message: "El usuario ya está registrado." });
     }
 
     const newUser = await User.create({
@@ -32,10 +30,10 @@ router.post("/register", async (req, res) => {
       last_name,
     });
 
-    res.status(201).json(newUser);
+    return res.status(201).json(newUser);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Error en el servidor." });
+    return res.status(500).json({ message: "Error en el servidor." });
   }
 });
 

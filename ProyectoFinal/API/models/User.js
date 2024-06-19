@@ -37,6 +37,10 @@ const User = sequelize.define('User', {
     last_name: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   }, {
     timestamps: false,

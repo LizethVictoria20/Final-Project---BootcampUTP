@@ -1,5 +1,12 @@
+import Navbar from "../Navbar/index";
+
 function Card() {
-  return <h1>Card</h1>;
+  return (
+    <>
+      <Navbar />
+      <h1>Card</h1>
+    </>
+  );
 }
 
 export default Card;

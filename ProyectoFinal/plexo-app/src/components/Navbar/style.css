@@ -1,3 +1,30 @@
-.logo-navbar {
-    width: 35%;
+.container-nav_bar {
+    margin: 0 2rem 0 2rem;
 }
+.navbar {
+    height: 100px
+}
+
+.items-navbar {
+    gap: 22px;
+}
+
+
+.navbar-logo {
+    max-height: 50px; /* Ajusta la altura según sea necesario */
+}
+
+.search-form input {
+    background-color: #e1e1e1;
+    border: none;
+    width: 20rem;
+}
+
+@media (max-width: 991.98px) {
+    .img-logo img {
+        display: none;
+    }
+ }
+
+
+/* MEDIA QUERY */

@@ -1,5 +1,7 @@
 import LogoPurple from "../../assets/images/logo-purple.jpeg";
 import { FaShoppingBag } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
+
 import "./style.css";
 
 function Navbar() {
@@ -41,17 +43,11 @@ function Navbar() {
                 <img className="logo-navbar" src={LogoPurple} alt="" />{" "}
               </a>
             </li>
-            <li className="dropdown">
-              <a
-                href="/"
-                className="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
+            <li className="dropdown d-flex flex-row">
+              <a href="/">
                 <FaShoppingBag />
               </a>
+              <a href="/"><FaUserCircle /></a>
               <ul className="dropdown-menu">
                 <li>
                   <a href="/">Action</a>

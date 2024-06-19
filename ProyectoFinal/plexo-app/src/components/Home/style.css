@@ -38,8 +38,8 @@
         width: 45%;
     }
     .containerImg {
-        bottom: 21rem;
-        left: 15rem;    
+        bottom: 18rem;
+        left: 10rem;   
     }
 
     .container-home {
@@ -62,3 +62,11 @@
         
      }
    }
+
+   @media (max-width: 383.98px) { 
+    .containerImg {
+        left: 7rem;
+        bottom: 9rem;
+    }
+
+    }

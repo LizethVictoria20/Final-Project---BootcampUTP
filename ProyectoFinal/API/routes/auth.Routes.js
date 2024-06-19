@@ -51,13 +51,13 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Credenciales inválidas' });
     }
 
-    const token = jwt.sign({ userId: user.user_id, email: user.email }, '12345', { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.user_id, email: user.email, admin: user.admin }, '12345', { expiresIn: '1h' });
 
     // Configurar la cookie
     res.cookie("token", token, { httpOnly: true });
 
     // Enviar la respuesta JSON con el token y otros datos
-    res.json({  message: "Login exitoso", userId: user.user_id, username: user.username });
+    res.json({  message: "Login exitoso", userId: user.user_id, username: user.username, admin: user.admin });
 
   } catch (error) {
     console.error(error);

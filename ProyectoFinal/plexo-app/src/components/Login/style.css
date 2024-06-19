@@ -6,6 +6,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 6%;
     box-shadow: 1px 3px 76px 24px rgba(109,89,128,1);
+    border-radius: 3rem;
 }
 
 .card-container-login .card-title,

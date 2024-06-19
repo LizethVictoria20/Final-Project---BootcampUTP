@@ -1,5 +1,12 @@
+import Navbar from "../Navbar/index";
+
 function Register() {
-  return <h1>ShoppingCard</h1>;
+  return (
+    <>
+      <Navbar />
+      <h1>Shopping card</h1>
+    </>
+  );
 }
 
 export default Register;

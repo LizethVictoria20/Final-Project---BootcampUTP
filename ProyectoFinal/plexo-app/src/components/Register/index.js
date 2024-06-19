@@ -1,5 +1,12 @@
+import Navbar from "../Navbar/index";
+
 function Register() {
-  return <h1>Register</h1>;
+  return (
+    <>
+      <Navbar />
+      <h1>Register</h1>
+    </>
+  );
 }
 
 export default Register;

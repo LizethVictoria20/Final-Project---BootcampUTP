@@ -1,0 +1,64 @@
+.container-home {
+    border: solid 35px white;
+    background-color: #a3a3a3;
+    margin: 2rem;
+    color: #7429ba;
+    padding: 2rem;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 75%;
+}
+
+.containerImg {
+    position: relative;
+    bottom: 24rem;
+    left: 22rem;
+}
+
+.title-home {
+    font-size: 12rem;
+    align-self: center;
+}
+
+.btn-home {
+    background-color:#7429ba;
+    width: 20%;
+
+}
+
+
+/* MEDIA QUERY */
+
+ @media (max-width: 1199.98px) { 
+    .title-home {
+        font-size: 7rem;
+    }
+    .containerImg  img {
+        width: 45%;
+    }
+    .containerImg {
+        bottom: 21rem;
+        left: 15rem;    
+    }
+
+    .container-home {
+        height: 60%;
+    }
+  }
+
+  @media (max-width: 767.98px) { 
+    .title-home {
+        font-size: 5rem;
+    }
+    .btn-home {
+        width: 20rem;
+        align-self: center;
+    }
+    .container-home {
+        height: 50%;
+    }
+    @media (max-width: 575.98px) { 
+        
+     }
+   }

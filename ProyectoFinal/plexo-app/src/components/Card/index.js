@@ -11,7 +11,7 @@ function Card(props) {
       <div className="container text-center mt-5">
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4">
           <div className="col">      
-            <div className="card rounded-5">
+            <div className="card card-container rounded-5">
               <img src={Product} className="card-img-top centered-image rounded-5" alt="..." />
               <div className="card-body text-dark">
                 <h5 className="card-title">Product name</h5>

@@ -1,9 +1,9 @@
-.card {
+.card-container {
     width: 88%;
     padding-top: 11%;
 }
 
-.card img {
+.card-container img {
     width: 60%;
     display: block;
     margin-left: auto;

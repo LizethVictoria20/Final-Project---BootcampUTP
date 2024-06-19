@@ -1,5 +1,11 @@
+import Navbar from "../Navbar/index";
 function Admin() {
-  return <h1>Admin</h1>;
+  return (
+    <>
+      <Navbar />
+      <h1>Admin</h1>
+    </>
+  );
 }
 
 export default Admin;

@@ -1,5 +1,12 @@
+import Navbar from "../Navbar/index";
+
 function Footer() {
-  return <h1>Footer</h1>;
+  return (
+    <>
+      <Navbar />
+      <h1>Footer</h1>
+    </>
+  );
 }
 
 export default Footer;

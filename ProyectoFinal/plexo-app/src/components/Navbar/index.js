@@ -15,7 +15,6 @@ function Navbar() {
             type="search"
             placeholder="Enter your search..."
             aria-label="Search"
-            
           />
         </form>
         {/* Desplegable */}
@@ -39,13 +38,13 @@ function Navbar() {
         >
           <ul className="navbar-nav mb-2 mb-lg-0 items-navbar">
             <li className="nav-item">
-              <a className="nav-link" href="/">
-                <FaShoppingBag color="#7429ba" fontSize="2em"  />
+              <a className="nav-link" href="/shopping-card">
+                <FaShoppingBag color="#7429ba" fontSize="2em" />
               </a>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link disabled" href="/">
+              <a className="nav-link" href="/login">
                 <FaUserCircle color="#7429ba" fontSize="2em" />
               </a>
             </li>

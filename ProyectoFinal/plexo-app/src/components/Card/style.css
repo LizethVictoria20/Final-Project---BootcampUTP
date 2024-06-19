@@ -1,0 +1,28 @@
+.card {
+    width: 22%;
+    height: 25%;
+    padding-top: 2%;
+}
+
+.card img {
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 50%;
+}
+
+.card-body {
+    padding-left: 21%;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+@media (min-width: 992px) { 
+    
+}

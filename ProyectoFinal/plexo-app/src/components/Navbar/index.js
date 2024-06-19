@@ -30,7 +30,7 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="col-8 d-flex justify-content-center align-items-center img-logo">
+        <div className="col-7 d-flex justify-content-center align-items-center img-logo">
           <img src={LogoPurple} alt="Logo" className="navbar-logo" />
         </div>
         <div

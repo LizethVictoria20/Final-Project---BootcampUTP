@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
 import axios from 'axios'
 import { Add, Login } from "./addProduct";
+import "./stylesheet.css"
+
 function Admin() {
 
   const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login'
@@ -23,23 +25,38 @@ useEffect(() => {
 
   return (
     <>
-      <Navbar/>
-      <h1>Admin</h1>
-      <div className="container">{productsData.map(product => (  
-          <div className="product">
-            <img className="img-product" src={product.image_url} alt="img-product"></img>
-            <h4>{product.name}</h4>
-            <h4>{product.price}</h4>
-            <p>{product.description}</p>
-            <button>Edit</button>
-            <button>Delete</button>
-            <button onClick={Login(urlAcess)}>Login</button>
-            <button onClick={Add(UrlPostProducts)}>Agregar</button>
-          </div>
-      ))}</div>
+    
+      <Navbar />
+      <div className="containerAll">
+        <div className="container">
+          <div className="containerElements">
+                <div className="productsAddSearch">
+                  <h1>Productos</h1> 
+                  <button className="addItem" ></button>
+                  <input className="searchBar"></input>
+                </div>
+                <div className="containerProducts">{productsData.map(product => (  
+                    <div className="product">
+                          <img className="img-product" src={product.image_url} alt="img-product"/>
+                          <h4>{product.name}</h4>
+                          <h4>${product.price}</h4>
+                          <h4>{product.stock} </h4>
+                          
+                          <div className="buttons">
+                            <button className="addItem">Edit</button>
+                            <button className="addItem">Delete</button>
+                          </div>
+                    </div>
+            ))}</div>
+            </div>
+        </div>
+      </div>
+
     </>
+      
+      
   );
 }
 
-
+{/* <p>{product.description}</p> */}
 export default Admin;

@@ -5,6 +5,7 @@ export function Login(){
     // const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login'
     
 
+<<<<<<< HEAD
     const LoginAdmin = async(url) => {
         
         try {
@@ -16,6 +17,12 @@ export function Login(){
         } catch (error) {
             console.error('Error enviando la respuesta', error);
         }
+=======
+    const AddProduct = (url) => {
+        axios.post(url, {
+
+        })
+>>>>>>> 7035a456d262dc22c103627468028f95ea6dd208
     }
     // useEffect(() => {
     //     LoginAdmin(urlAcess)

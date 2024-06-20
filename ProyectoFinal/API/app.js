@@ -22,6 +22,11 @@ const corsOptions = {
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
 };
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // Permitir todas las solicitudes
+  next();
+});
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());

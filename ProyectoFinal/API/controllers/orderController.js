@@ -1,7 +1,8 @@
 import Order from "../models/Order.js";
 import OrderItem from "../models/OrderItem.js";
 import Product from "../models/Product.js";
-
+import Cart from '../models/Cart.js'
+import CartItem from '../models/CartItem.js'
 // Crear una nueva orden
 export const createOrder = async (req, res) => {
   try {
@@ -52,29 +53,49 @@ export const updateOrder = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-// Agregar un elemento a una orden
-export const addOrderItem = async (req, res) => {
-  try {
-    const { orderId, productName, quantity } = req.body;
-    const product = await Product.findOne({ where: { name: productName } });
-    if (!product) {
-      return res.status(404).json({ message: "Product not found" });
-    }
-    const price = product.price * quantity;
-    const newItem = await OrderItem.create({
-      order_id: orderId,
-      product_id: product.product_id,
-      quantity,
-      price: price,
-    });
 
-    res.status(201).json(newItem);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+export const addOrderItem = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+
+        const userId = req.user.userId;
+        const cart = await Cart.findOne({ where: { user_id: userId } });
+        if (!cart) {
+            return res.status(404).json({ message: "Cart not found" });
+        }
+
+        const cartItems = await CartItem.findAll({ where: { cart_id: cart.cart_id } });
+
+        if (cartItems.length === 0) {
+            return res.status(400).json({ message: "Cart is empty" });
+        }
+
+        const orderItems = await Promise.all(cartItems.map(async (cartItem) => {
+            const product = await Product.findByPk(cartItem.product_id);
+            if (!product) {
+                return res.status(404).json({ message: `Product with ID ${cartItem.product_id} not found` });
+            }
+
+            const price = product.price * cartItem.quantity;
+
+            return {
+                order_id: orderId,
+                product_id: product.product_id,
+                quantity: cartItem.quantity,
+                price,
+            };
+        }));
+
+        const createdOrderItems = await OrderItem.bulkCreate(orderItems);
+
+        await CartItem.destroy({ where: { cart_id: cart.cart_id } });
+
+        res.status(201).json(createdOrderItems);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };
 
-// Obtener elementos de una orden
 export const getOrderItems = async (req, res) => {
   try {
     const { orderId } = req.params;
@@ -96,7 +117,7 @@ export const getOrderItems = async (req, res) => {
   }
 };
 
-// Actualizar un elemento de una orden
+
 export const updateOrderItem = async (req, res) => {
   try {
     const { itemId } = req.params;

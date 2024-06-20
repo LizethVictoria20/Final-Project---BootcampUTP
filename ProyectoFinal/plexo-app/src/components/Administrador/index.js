@@ -22,21 +22,17 @@ useEffect(() => {
     <>
       <Navbar />
       <h1>Admin</h1>
-      <div className="container">{productsData.map(product => (
-        <>
+      <div className="container">{productsData.map(product => (  
           <div className="product">
-            <img className="img-product" src={product.image_url}></img>
+            <img className="img-product" src={product.image_url} alt="img-product"></img>
             <h4>{product.name}</h4>
             <h4>{product.price}</h4>
             <p>{product.description}</p>
             <button>Edit</button>
             <button>Delete</button>
           </div>
-        </>
-
       ))}</div>
     </>
-    
   );
 }
 

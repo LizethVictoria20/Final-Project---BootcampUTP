@@ -19,9 +19,16 @@ function ModalComponent() {
       <button onClick={openModal} className='addItem'><img src={pluscircle} alt="plus circle"/></button>
       {showModal && (
         <div className="modal">
-          Contenido del modal
-          <button onClick={closeModal}>Cerrar</button>
-        </div>
+          <div className="modal-content">
+            <span className="close-button" onClick={closeModal}>&times;</span>
+            <h1 className='titleh1'>Nuevo Producto</h1>
+            <button>Subir Foto</button>
+              <div>
+                <p>precio</p>
+                <input type='number'/>
+              </div>
+          </div>
+      </div>
       )}
     </div>
   );

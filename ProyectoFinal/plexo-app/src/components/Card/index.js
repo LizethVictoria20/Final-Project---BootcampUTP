@@ -1,4 +1,3 @@
-import Navbar from "../Navbar/index";
 import "./style.css";
 import { CiHeart } from "react-icons/ci";
 
@@ -7,9 +6,9 @@ function Card({ product }) {
   return (
     <div className="container text-center mt-5">
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-        <div className="col">
-          {productR?.map((data) => (
-            <div className="card card-container rounded-5">
+        {productR?.map((data) => (
+          <div className="col" key={data.product_id}>
+            <div className="card card-container rounded-5 mb-4">
               <img
                 src={data.image_url}
                 className="card-img-top centered-image rounded-5"
@@ -23,8 +22,8 @@ function Card({ product }) {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );

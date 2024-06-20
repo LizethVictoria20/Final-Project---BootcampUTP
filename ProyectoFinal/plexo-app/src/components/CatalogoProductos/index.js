@@ -1,7 +1,7 @@
-import Navbar from "../Navbar/index";
 import Axios from "axios";
-import { useState, useEffect } from 'react';
-import Card from '../Card/index'
+import { useState, useEffect } from "react";
+import Card from "../Card/index";
+import Navbar from "../Navbar/index";
 
 function Catalogo() {
   const [product, setProduct] = useState([]);
@@ -10,15 +10,13 @@ function Catalogo() {
     try {
       const response = await Axios.get(
         "https://final-project-bootcamputp.onrender.com/api/products"
-      )
-      .then((data) => {
-        setProduct(data)
-      })
+      ).then((data) => {
+        setProduct(data);
+      });
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
-
 
   useEffect(() => {
     getProducts();
@@ -26,7 +24,8 @@ function Catalogo() {
 
   return (
     <>
-      <Card product={product}/>
+      <Navbar />
+      <Card product={product} />
     </>
   );
 }

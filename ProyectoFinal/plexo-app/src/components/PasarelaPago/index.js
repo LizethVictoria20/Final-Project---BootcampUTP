@@ -1,4 +1,3 @@
-import Navbar from "../Navbar/index";
 function PasarelaPago(params) {
   return (
     <>

@@ -16,15 +16,15 @@ function ModalComponent() {
 
   return (
     <div>
-      <button onClick={openModal} className='addItem'><img src={pluscircle} alt="plus circle"/></button>
+      <button onClick={openModal} className='addItem_admin'><img src={pluscircle} alt="plus circle"/></button>
       {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close-button" onClick={closeModal}>&times;</span>
-            <h1 className='titleh1'>Nuevo Producto</h1>
+        <div className="modal_admin">
+          <div className="modal-content_admin">
+            <span className="close-button_admin" onClick={closeModal}>&times;</span>
+            <h1 className='titleh1_admin'>Nuevo Producto</h1>
             <button>Subir Foto</button>
               <div>
-                <p>precio</p>
+                <p className='price_admin'>precio</p>
                 <input type='text' placeholder='Precio'/>
               </div>
           </div>

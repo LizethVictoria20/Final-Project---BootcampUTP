@@ -3,8 +3,7 @@ import { promisify } from 'util';
 
 const verifyJwt = promisify(jwt.verify);
 
-export const authenticateJWT = (req, res, next) => {
-  // const token = req.headers.token?.split(' ')[1];
+export const authenticateJWT = async  (req, res, next) => {
   const {token} = req.cookies;
 
   if (!token) {
@@ -12,8 +11,9 @@ export const authenticateJWT = (req, res, next) => {
   }
 
   try {
-    const decoded = verifyJwt(token, '12345');
-    req.user = decoded; // Adjunta los datos decodificados del usuario al objeto de solicitud
+    const decoded = await verifyJwt(token, '12345');
+    // console.log('Token decodificado:', decoded);
+    req.user = decoded; 
     next();
   } catch (error) {
     console.error(error);

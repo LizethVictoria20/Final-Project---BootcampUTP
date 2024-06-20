@@ -1,7 +1,7 @@
 import express from 'express';
 import Product from '../models/Product.js'
 import ProductSchema from '../schemas/ProductShema.js';
-import { authenticateJWT } from '../middleware/jwtMiddleware.js'; 
+import { isAdmin } from '../middleware/authMiddleware.js';
  
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', authenticateJWT, async (req, res) => { 
+router.post('/', isAdmin, async (req, res) => { 
   try {
     const productData = ProductSchema.parse(req.body);
     const newProduct = await Product.create(productData);
@@ -26,7 +26,7 @@ router.post('/', authenticateJWT, async (req, res) => {
   }
 });
 
-router.put('/', authenticateJWT, async (req, res) =>{
+router.put('/', isAdmin, async (req, res) =>{
   try {
     const productData = ProductSchema.parse(req.body);
     const updatedProduct = await Product.update(productData, {
@@ -39,7 +39,7 @@ router.put('/', authenticateJWT, async (req, res) =>{
   }
 });
 
-router.delete('/', authenticateJWT, async (req, res) => {
+router.delete('/', isAdmin, async (req, res) => {
   try {
     const id = req.query.id;
     await Product.destroy({ where: { id } });

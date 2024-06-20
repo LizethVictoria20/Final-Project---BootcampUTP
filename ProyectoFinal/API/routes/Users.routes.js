@@ -1,9 +1,10 @@
 import express from 'express';
 import User from '../models/User.js'
+import { isAdmin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', isAdmin, async (req, res) => {
   try {
     const users = await User.findAll();
     res.json(users);
@@ -26,7 +27,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', isAdmin, async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id);
     if (!user) {

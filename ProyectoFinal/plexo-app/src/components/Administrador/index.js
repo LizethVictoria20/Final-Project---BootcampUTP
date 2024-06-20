@@ -13,7 +13,7 @@ function Admin() {
 
   const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login'
   const UrlPostProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
-  const [ productsData, setProductsData] = useState('')
+  const [ productsData, setProductsData] = useState([])
   const UrlProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
 
   const GetApiData = (url) => {
@@ -32,23 +32,25 @@ useEffect(() => {
     <>
 
       <Navbar />
-      <div className="containerAll">
-        <div className="container">
-          <div className="containerElements">
-                <div className="productsAddSearch">
-                  <h1>Productos</h1>
-                  <button className="addItem" onClick={ModalComponent}><img src={pluscircle} alt="plus circle"/></button>
-                  <input className="searchBar"/>
+      <div className="containerAll_admin">
+        <div className="container_admin">
+          <div className="containerElements_admin">
+                <div className="productsAddSearch_admin">
+                  <h1 className="h1_admin">Productos</h1>
+                  <ModalComponent/><div className="searchBar_admin">
+                    <img src={searchcircle} alt="search bar" className="searchImg_admin" />
+                    <input className="Bar_admin" type="search"/>
+                  </div>
                 </div>
-                <div className="containerProducts">{productsData.map(product => (
-                    <div className="product">
-                          <img className="img-product" src={product.image_url} alt="img-product"/>
-                          <h4>{product.name}</h4>
-                          <h4>${product.price}</h4>
-                          <h4>{product.stock} </h4>
-                          <div className="buttons">
-                            <button className="addItem"><img src={pencil} alt="edit"/></button>
-                            <button className="addItem"><img src={trash} alt="trash"/></button>
+                <div className="containerProducts_admin">{productsData?.map(product => (
+                    <div className="product_admin">
+                          <img className="img-product_admin" src={product.image_url} alt="img-product"/>
+                          <h4 className="h4_admin">{product.name}</h4>
+                          <h4 className="h4_admin">${product.price}</h4>
+                          <h4 className="h4_admin">{product.stock} </h4>
+                          <div className="buttons_admin">
+                            <button className="addItem_admin"><img src={pencil} alt="edit"/></button>
+                            <button className="addItem_admin"><img src={trash} alt="trash"/></button>
                           </div>
                     </div>
             ))}</div>
@@ -60,6 +62,6 @@ useEffect(() => {
 
   );
 }
-
+{/* <button className="addItem" onClick={ModalComponent}><img src={pluscircle} alt="plus circle"/></button> */}
 {/* <p>{product.description}</p> */}
 export default Admin;

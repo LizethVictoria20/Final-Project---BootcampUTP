@@ -21,9 +21,10 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: #2b2b2b;
-  border-radius: 10px;
   padding: 10px;
   margin: 10px 0;
+  border-radius: 3rem;
+
 }
 
 .product-info {
@@ -50,7 +51,7 @@ body {
   border: none;
   padding: 5px 10px;
   margin: 0 5px;
-  border-radius: 5px;
+  border-radius: 1rem;
   cursor: pointer;
 }
 
@@ -64,6 +65,8 @@ body {
   padding: 20px;
   width: 25%;
   text-align: left;
+  border-radius: 3rem;
+
 }
 
 .summary p {
@@ -77,4 +80,5 @@ body {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  border-radius: 2rem;
 }

@@ -5,7 +5,7 @@ function Add(){
     const urlAcess = '/api/auth/login'
     const [ add, setAdd] = useState('')
 
-    const AddProduct = (url) {
+    const AddProduct = (url) => {
         axios.post(url, {
 
         })

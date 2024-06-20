@@ -36,7 +36,7 @@ useEffect(() => {
         <div className="container_admin">
           <div className="containerElements_admin">
                 <div className="productsAddSearch_admin">
-                  <h1 className="h1_admin">Productos</h1>
+                  <h1 className="h1_admin">Products</h1>
                   <ModalComponent/><div className="searchBar_admin">
                     <img src={searchcircle} alt="search bar" className="searchImg_admin" />
                     <input className="Bar_admin" type="search"/>
@@ -47,7 +47,7 @@ useEffect(() => {
                           <img className="img-product_admin" src={product.image_url} alt="img-product"/>
                           <h4 className="h4_admin">{product.name}</h4>
                           <h4 className="h4_admin">${product.price}</h4>
-                          <h4 className="h4_admin">Ud/{product.stock} </h4>
+                          <h4 className="h4_admin">{product.stock}/u </h4>
                           <div className="buttons_admin">
                             <button className="addItem_admin"><img src={pencil} alt="edit"/></button>
                             <button className="addItem_admin"><img src={trash} alt="trash"/></button>

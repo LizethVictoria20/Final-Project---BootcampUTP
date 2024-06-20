@@ -1,27 +1,27 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
 import axios from 'axios'
-import { Add, Login } from "./addProduct";
+import { AddProduct, login } from "./addProduct";
 import "./stylesheet.css"
 
 function Admin() {
 
   const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login'
   const UrlPostProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
-  const [ productsData, setProductsData] = useState('')
+  const [ productsData, setProductsData] = useState([])
   const UrlProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
   
   const GetApiData = (url) => {
     axios.get(url).then((response) => {
       setProductsData(response.data)
       console.log(productsData);
-      
+      login()
   })
 };
 
 useEffect(() => {
-  GetApiData(UrlProducts) 
-});
+  GetApiData(UrlProducts)
+}, []);
 
   return (
     <>
@@ -32,7 +32,7 @@ useEffect(() => {
           <div className="containerElements">
                 <div className="productsAddSearch">
                   <h1>Productos</h1> 
-                  <button className="addItem" ></button>
+                  <button className="addItem" onClick={AddProduct}></button>
                   <input className="searchBar"></input>
                 </div>
                 <div className="containerProducts">{productsData.map(product => (  
@@ -42,7 +42,7 @@ useEffect(() => {
                           <h4>${product.price}</h4>
                           <h4>{product.stock} </h4>
                           
-                          <div className="buttons">
+                          <div className="buttons" >
                             <button className="addItem">Edit</button>
                             <button className="addItem">Delete</button>
                           </div>

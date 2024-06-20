@@ -3,9 +3,8 @@ import axios from "axios";
 
 const ProductFilter = () => {
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [firstNames, setFirstNames] = useState([]);
+  const [selectedFirstName, setSelectedFirstName] = useState("");
 
   useEffect(() => {
     // Fetch products from the API
@@ -17,59 +16,54 @@ const ProductFilter = () => {
         const productsData = response.data;
         setProducts(productsData);
 
-        // Extract unique categories from products
-        const uniqueCategories = [
-          ...new Set(productsData.map((product) => product.category_id)),
+        const uniqueFirstNames = [
+          ...new Set(productsData.map((product) => product.name.split(" ")[0])),
         ];
-        setCategories(uniqueCategories);
-
-        // Set filtered products initially to all products
-        setFilteredProducts(productsData);
+        setFirstNames(uniqueFirstNames);
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error de la petición:", error);
       }
     };
 
     fetchProducts();
   }, []);
 
-  const handleCategoryChange = (event) => {
-    const category = event.target.value;
-    setSelectedCategory(category);
+  const handleFirstNameChange = (firstName) => {
+    setSelectedFirstName(firstName);
+  };
 
-    if (category) {
-      setFilteredProducts(
-        products.filter((product) => product.category === category)
-      );
-    } else {
-      setFilteredProducts(products);
+  const getFilteredProducts = () => {
+    if (!selectedFirstName) {
+      return products;
     }
+    return products.filter(
+      (product) => product.name.split(" ")[0] === selectedFirstName
+    );
   };
 
   return (
     <div>
       <h1>Product Filter</h1>
 
-      <label htmlFor="category">Select Category: </label>
-      <select
-        id="category"
-        value={selectedCategory}
-        onChange={handleCategoryChange}
-      >
-        <option value="">All Categories</option>
-        {categories.map((category) => (
-          <option key={category} value={category}>
-            {category}
-          </option>
+      <div>
+        <button onClick={() => handleFirstNameChange("")}>All Products</button>
+        {firstNames.map((firstName) => (
+          <button
+            key={firstName}
+            onClick={() => handleFirstNameChange(firstName)}
+          >
+            {firstName}
+          </button>
         ))}
-      </select>
+      </div>
 
       <ul>
-        {filteredProducts.map((product) => (
+        {getFilteredProducts().map((product) => (
           <li key={product.product_id}>
             <h2>{product.name}</h2>
-            <p>Category: {product.category_id}</p>
+            <p>{product.description}</p>
             <p>Price: ${product.price}</p>
+            <img src={product.image_url} alt={product.name} width="100" />
           </li>
         ))}
       </ul>

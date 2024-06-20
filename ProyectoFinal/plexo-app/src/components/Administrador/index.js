@@ -37,8 +37,8 @@ useEffect(() => {
           <div className="containerElements">
                 <div className="productsAddSearch">
                   <h1>Productos</h1>
-                  <button className="addItem" onClick={ModalComponent}><img src={pluscircle} alt="plus circle"/></button>
-                  <input className="searchBar"/>
+                  <ModalComponent/>
+                  <input className="searchBar" type="search"/>
                 </div>
                 <div className="containerProducts">{productsData.map(product => (
                     <div className="product">
@@ -60,6 +60,6 @@ useEffect(() => {
 
   );
 }
-
+{/* <button className="addItem" onClick={ModalComponent}><img src={pluscircle} alt="plus circle"/></button> */}
 {/* <p>{product.description}</p> */}
 export default Admin;

@@ -1,15 +1,19 @@
 .card-container {
-    width: 88%;
     padding-top: 11%;
+}
+.container-image {
+    width: 17rem;
 }
 
 .card-container img {
-    width: 50%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    top: 50%;
+    height: 200px;
+    width: 96%;
+    object-fit: cover;
+
 
 }
 

@@ -5,24 +5,10 @@ export function Login(){
     // const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login'
     
 
-<<<<<<< HEAD
-    const LoginAdmin = async(url) => {
-        
-        try {
-            const response = await axios.post(url, {
-                "email": "liz@example.com",
-                "password": "aguapanela987"
-            });
-           return console.log('Respuesta del servidor:', response.data);
-        } catch (error) {
-            console.error('Error enviando la respuesta', error);
-        }
-=======
     const AddProduct = (url) => {
         axios.post(url, {
 
         })
->>>>>>> 7035a456d262dc22c103627468028f95ea6dd208
     }
     // useEffect(() => {
     //     LoginAdmin(urlAcess)

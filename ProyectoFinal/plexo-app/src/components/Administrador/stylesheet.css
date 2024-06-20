@@ -19,6 +19,7 @@
     border-radius: 20px;
     display: flex;
     flex-direction: column;
+    padding-left: 15px;
 }
 .productsAddSearch{
     margin-top: 15px;
@@ -85,15 +86,12 @@ border: none;
 }
 
 .product{
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr ;
     margin: 10px;
     align-items: center;
     justify-content: space-between;
     background-color: rgba(240, 240, 240, 1);
-    width: 100ch;
-    height: 97px;
-    top: 447px;
-    left: 334px;
     gap: 15px;
     border-radius: 20px ;
     opacity: 0px;
@@ -105,14 +103,15 @@ width: 60px;
 height: 60px;
 top: 335px;
 left: 366px;
+margin-left: 15px;
 gap: 0px;
-border-radius: 20px 0px 0px 0px;
+border-radius: 20px ;
 opacity: 0px;
 
 }
 h4 { 
-    font-family: DM Sans,sans-serif;
-    font-size: 30px;
+    font-family: DM Sans,;
+    font-size: 1.5rem;
     font-weight: 500;
     line-height: 16px;
     text-align: center;

@@ -66,7 +66,9 @@ export const addCartItem = async (req, res) => {
 };
 export const getCartItems = async (req, res) => {
   try {
-    const { cartId } = req.params;
+    const userId  = req.user.userId;
+    const cart = await Cart.findOne({ where: { user_id: userId } });
+    const cartId = cart.cart_id
     const items = await CartItem.findAll({
       where: { cart_id: cartId },
       include: [Product],
@@ -86,17 +88,16 @@ export const getCartItems = async (req, res) => {
 
 export const updateCartItem = async (req, res) => {
   try {
-    const { itemId } = req.params;
-    const { productName, quantity } = req.body;
-
+    const { itemId, quantity } = req.body;
     const item = await CartItem.findByPk(itemId);
+
 
     if (!item) {
       return res.status(404).json({ message: "Cart item not found" });
     }
 
     if (productName) {
-      const product = await Product.findOne({ where: { name: productName } });
+      const product = await Product.findByPk(item.product_id);
       if (!product) {
         return res.status(404).json({ message: "Product not found" });
       }

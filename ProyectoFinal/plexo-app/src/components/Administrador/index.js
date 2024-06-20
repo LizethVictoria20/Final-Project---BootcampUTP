@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
 import axios from 'axios'
+import { Add, Login } from "./addProduct";
 function Admin() {
 
+  const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login'
+  const UrlPostProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
   const [ productsData, setProductsData] = useState('')
   const UrlProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
   
@@ -13,13 +16,14 @@ function Admin() {
       
   })
 };
+
 useEffect(() => {
-   GetApiData(UrlProducts)
+  GetApiData(UrlProducts) 
 });
 
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <h1>Admin</h1>
       <div className="container">{productsData.map(product => (  
           <div className="product">
@@ -29,6 +33,8 @@ useEffect(() => {
             <p>{product.description}</p>
             <button>Edit</button>
             <button>Delete</button>
+            <button onClick={Login(urlAcess)}>Login</button>
+            <button onClick={Add(UrlPostProducts)}>Agregar</button>
           </div>
       ))}</div>
     </>

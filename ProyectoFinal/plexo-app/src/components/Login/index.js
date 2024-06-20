@@ -1,36 +1,40 @@
 import Navbar from "../Navbar/index";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useState } from "react";
 
 function Login() {
   const [userEmail, setuserEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [isLogged, setIsLogged] = useState(false);
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   const PostData = async (event) => {
     event.preventDefault();
+    setError(null); 
+
     try {
-      const responseAPi = Axios.post(
-        "https://final-project-bootcamputp.onrender.com/api/auth/login",
+      const response = await Axios.post(
+        'https://final-project-bootcamputp.onrender.com/api/auth/login',
         {
           email: userEmail,
           password: password,
         }
       );
-
-      if (responseAPi.staus === 200 && responseAPi.data.token) {
+      if (response.status === 200) {
         setIsLogged(true);
-        console.log("Loggin succesful");
-        console.log(responseAPi)
+        console.log('Login successful');
+        navigate('/admin');
+
       } else {
         setIsLogged(false);
-        console.log("Incorrects credentiales");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      setIsLogged(false);
+      console.error('Login failed: ', err);
     }
   };
 
@@ -55,6 +59,7 @@ function Login() {
                 placeholder="example@plexo.com"
                 value={userEmail}
                 onChange={(e) => setuserEmail(e.target.value)}
+                required
               />
               <div id="emailHelp" className="form-text">
                 We'll never share your email with anyone else.
@@ -69,8 +74,11 @@ function Login() {
                 placeholder="*******"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
+            {error && <div className="alert alert-danger">{error}</div>}
+            {isLogged && <div className="alert alert-success">Login successful!</div>}
             <div className="d-flex justify-content-center">
               <button type="submit" className="btn button-sign_in text-white">
                 Sign in

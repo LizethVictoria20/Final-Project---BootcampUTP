@@ -68,5 +68,16 @@
         left: 7rem;
         bottom: 9rem;
     }
+}
 
-    }
+.category button{
+    margin: 5px;
+    border-radius: 15%;
+    background-color: #131313;
+    color: #7429ba;
+}
+
+.category button:hover {
+    background-color: #7429ba;
+    color: white;
+}

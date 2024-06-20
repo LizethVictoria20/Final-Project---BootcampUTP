@@ -25,7 +25,7 @@ function ModalComponent() {
             <button>Subir Foto</button>
               <div>
                 <p>precio</p>
-                <input type='number'/>
+                <input type='text' placeholder='Precio'/>
               </div>
           </div>
       </div>

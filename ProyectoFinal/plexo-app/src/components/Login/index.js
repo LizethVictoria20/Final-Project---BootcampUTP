@@ -1,4 +1,3 @@
-import Navbar from "../Navbar/index";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
@@ -44,8 +43,6 @@ function Login() {
   };
 
   return (
-    <>
-      <Navbar />
       <div className="card card-container-login text-dark mx-auto">
         <div className="card-body card-body-login">
           <h5 className="card-title">Welcome Back 👋🏻</h5>
@@ -100,7 +97,6 @@ function Login() {
           </form>
         </div>
       </div>
-    </>
   );
 }
 

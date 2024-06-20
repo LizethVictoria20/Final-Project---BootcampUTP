@@ -29,9 +29,6 @@ useEffect(() => {
 });
 
   return (
-    <>
-
-      <Navbar />
       <div className="containerAll_admin">
         <div className="container_admin">
           <div className="containerElements_admin">
@@ -57,8 +54,6 @@ useEffect(() => {
             </div>
         </div>
       </div> 
-    </>
-
 
   );
 }

@@ -1,4 +1,3 @@
-import Navbar from "../Navbar/index";
 import Headphone from '../../assets/images/headphones.png'
 import './style.css'
 import Clothes from '../../assets/images/clothes.png'
@@ -8,7 +7,6 @@ import Gaming from '../../assets/images/gaming.png'
 function Home(params) {
   return (
     <>
-      <Navbar />
       <div className="category">
       <h3>Category</h3>
         <button> <img src={Clothes} alt="clothes"/> clothes </button> <br/>

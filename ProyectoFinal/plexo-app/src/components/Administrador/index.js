@@ -47,7 +47,7 @@ useEffect(() => {
                           <img className="img-product_admin" src={product.image_url} alt="img-product"/>
                           <h4 className="h4_admin">{product.name}</h4>
                           <h4 className="h4_admin">${product.price}</h4>
-                          <h4 className="h4_admin">{product.stock} </h4>
+                          <h4 className="h4_admin">Ud/{product.stock} </h4>
                           <div className="buttons_admin">
                             <button className="addItem_admin"><img src={pencil} alt="edit"/></button>
                             <button className="addItem_admin"><img src={trash} alt="trash"/></button>

@@ -1,8 +1,8 @@
 import Axios from "axios";
 import Navbar from "../Navbar/index";
 import "./style.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Register() {
   const [isRegister, setIsRegister] = useState(false);
@@ -11,11 +11,16 @@ function Register() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const postNewUser = async (event) => {
     event.preventDefault();
-
+    // Confirmación de password
+    if (userPassword !== confirmPassword) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
     try {
       const response = await Axios.post(
         "https://final-project-bootcamputp.onrender.com/api/auth/register",
@@ -26,11 +31,17 @@ function Register() {
           first_name: firstName,
           last_name: lastName,
         }
-      ).then((data) => {
-        console.log(data);
-      });
+      );
+
+      if (response.status === 201 || response.status === 200) {
+        setIsRegister(true);
+        setTimeout(() => {
+          navigate("/admin");
+        }, 2000);
+      }
     } catch (err) {
       console.log(err);
+      alert("Registro fallido");
     }
   };
 
@@ -45,30 +56,27 @@ function Register() {
             <div className="mb-3">
               <label className="form-label">First Name</label>
               <input
-                type="Name"
+                type="text"
                 className="form-control"
                 id="firstname"
-                aria-describedby="namelHelp"
                 placeholder="First Name"
                 value={firstName}
                 onChange={(event) => setFirstName(event.target.value)}
               />
               <label className="form-label">Last Name</label>
               <input
-                type="Last Name"
+                type="text"
                 className="form-control"
                 id="lastname"
-                aria-describedby="namelHelp"
                 placeholder="Last Name"
                 value={lastName}
                 onChange={(event) => setLastName(event.target.value)}
               />
               <label className="form-label">Username</label>
               <input
-                type="Username"
+                type="text"
                 className="form-control"
                 id="name"
-                aria-describedby="namelHelp"
                 placeholder="Username"
                 value={userName}
                 onChange={(event) => setUserName(event.target.value)}
@@ -78,12 +86,10 @@ function Register() {
                 type="email"
                 className="form-control"
                 id="exampleInputEmail1"
-                aria-describedby="emailHelp"
                 placeholder="example@plexo.com"
                 value={userEmail}
                 onChange={(event) => setEmail(event.target.value)}
               />
-              <div id="emailHelp" className="form-text"></div>
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>
@@ -96,10 +102,6 @@ function Register() {
                 onChange={(event) => setUserPassword(event.target.value)}
               />
             </div>
-            {isRegister && (
-              <div className="alert alert-success">Register successful!</div>
-            )}
-
             <div className="mb-3">
               <label className="form-label">Confirm Password</label>
               <input
@@ -107,10 +109,13 @@ function Register() {
                 className="form-control"
                 id="exampleInputPassword2"
                 placeholder="*******"
-                value={userPassword}
-                onChange={(event) => setUserPassword(event.target.value)}
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
               />
             </div>
+            {isRegister && (
+              <div className="alert alert-success">Registro exitoso</div>
+            )}
             <div className="d-flex justify-content-center">
               <button type="submit" className="btn button-sign_in text-white">
                 Sign in

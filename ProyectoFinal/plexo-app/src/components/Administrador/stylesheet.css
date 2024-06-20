@@ -21,6 +21,7 @@
     display: flex;
     flex-direction: column;
     
+    
 }
 .productsAddSearch{
     margin-top: 15px;
@@ -64,9 +65,6 @@ input{
     border: none;
 }
 
-.containerElements{
-
-}
 
 .searchBar{
 width: 691px;
@@ -79,12 +77,11 @@ opacity: 0px;
 background: rgba(116, 41, 186, 1);
 box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25);
 border: none;
+outline: none;
 }
 
 .containerProducts{
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr 2fr 1fr 1fr;
-    grid-template-columns: auto;
     gap: 20px;
     padding: 60px;
     justify-content: space-around;

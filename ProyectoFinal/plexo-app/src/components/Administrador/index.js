@@ -3,8 +3,11 @@ import Navbar from "../Navbar/index";
 import axios from 'axios'
 import pluscircle from "../../assets/images/plus-circle.png"
 import searchcircle from "../../assets/images/search-circle.png"
+import pencil from "../../assets/images/pencil.png"
+import trash from "../../assets/images/trash.png"
 import { Add, Login } from "./addProduct";
 import "./stylesheet.css"
+import ModalComponent from './modalAdd';
 
 function Admin() {
 
@@ -34,8 +37,8 @@ useEffect(() => {
           <div className="containerElements">
                 <div className="productsAddSearch">
                   <h1>Productos</h1>
-                  <button className="addItem" ><img src={pluscircle} alt="plus circle"/></button>
-                  <input className="searchBar"></input>
+                  <button className="addItem" onClick={ModalComponent}><img src={pluscircle} alt="plus circle"/></button>
+                  <input className="searchBar"/>
                 </div>
                 <div className="containerProducts">{productsData.map(product => (
                     <div className="product">
@@ -44,8 +47,8 @@ useEffect(() => {
                           <h4>${product.price}</h4>
                           <h4>{product.stock} </h4>
                           <div className="buttons">
-                            <button className="addItem">Edit</button>
-                            <button className="addItem">Delete</button>
+                            <button className="addItem"><img src={pencil} alt="edit"/></button>
+                            <button className="addItem"><img src={trash} alt="trash"/></button>
                           </div>
                     </div>
             ))}</div>

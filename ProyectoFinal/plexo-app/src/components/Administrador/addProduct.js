@@ -29,6 +29,7 @@ export function Add() {
                 "category_id": 1
             });
             return console.log('Respuesta del servidor:', response.data);
+            
         } catch (error) {
             console.error('Error enviando la respuesta', error);
         }

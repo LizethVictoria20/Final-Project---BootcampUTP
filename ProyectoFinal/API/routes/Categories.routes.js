@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', authenticateJWT, isAdmin, async (req, res) => { // Protegemos la ruta con authenticateJWT
+router.post('/', isAdmin, async (req, res) => { // Protegemos la ruta con authenticateJWT
   try {
     const categoryData = CategorySchema.parse(req.body);
     const newCategory = await Category.create(categoryData);

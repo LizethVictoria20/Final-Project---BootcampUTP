@@ -24,7 +24,7 @@ export const getOrder = async (req, res) => {
     if (orders.length > 0) {
       res.status(200).json(orders);
     } else {
-      res.status(404).json({ message: "No orders found for this user" });
+      res.status(404).json({ message: "El usuario no tiene ordenes" });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -33,36 +33,41 @@ export const getOrder = async (req, res) => {
 
 // Actualizar una orden
 export const updateOrder = async (req, res) => {
-    try {
-        const { orderId } = req.params;
-        const order = await Order.findByPk(orderId);
-        
-        if (order) {
-            if (order.status === "pending") {
-                order.status = "success";
-            } else if (order.status === "success") {
-                order.status = "pending";
-            }
-            await order.save();
-            res.status(200).json(order);
-        } else {
-            res.status(404).json({ message: "Orden no encontrada" });
-        }
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+  try {
+    const orderId = req.user.userId;
+    const order = await Order.findByPk(orderId);
+
+    if (order) {
+      if (order.status === "pending") {
+        order.status = "success";
+      } else if (order.status === "success") {
+        order.status = "pending";
+      }
+      await order.save();
+      res.status(200).json(order);
+    } else {
+      res.status(404).json({ message: "Orden no encontrada" });
     }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 // Agregar un elemento a una orden
 export const addOrderItem = async (req, res) => {
   try {
-    const { orderId } = req.params;
-    const { productId, quantity, price } = req.body;
+    const { orderId, productName, quantity } = req.body;
+    const product = await Product.findOne({ where: { name: productName } });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    const price = product.price * quantity;
     const newItem = await OrderItem.create({
       order_id: orderId,
-      product_id: productId,
+      product_id: product.product_id,
       quantity,
-      price,
+      price: price,
     });
+
     res.status(201).json(newItem);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -77,7 +82,15 @@ export const getOrderItems = async (req, res) => {
       where: { order_id: orderId },
       include: [Product],
     });
-    res.status(200).json(items);
+
+    const detailedItems = items.map((item) => ({
+      order_item_id: item.order_item_id,
+      product_name: item.Product.name,
+      quantity: item.quantity,
+      price: item.price,
+    }));
+
+    res.status(200).json(detailedItems);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

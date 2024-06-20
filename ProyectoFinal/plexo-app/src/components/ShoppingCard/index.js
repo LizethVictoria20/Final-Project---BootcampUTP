@@ -3,7 +3,7 @@ import Navbar from "../Navbar/index";
 import "./styles.css";
 
 const Product = ({ product, index, increment, decrement }) => (
-  <div className="product rounded-4">
+  <div className="product">
     <div className="product-info">
       <div className="product-image"></div>
       <div>

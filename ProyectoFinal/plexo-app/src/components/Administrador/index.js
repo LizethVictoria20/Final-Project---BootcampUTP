@@ -1,9 +1,18 @@
 import Navbar from "../Navbar/index";
+import "./stylesheet.css"
 function Admin() {
   return (
     <>
       <Navbar />
-      <h1>Admin</h1>
+      <div className="containerAll">
+        <div className="container">
+          <div className="productsAddSearch">
+            <h1>Productos</h1> 
+            <button className="addItem"></button>
+            <input className="searchBar"></input>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

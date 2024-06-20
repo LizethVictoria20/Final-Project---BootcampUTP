@@ -3,6 +3,7 @@ import Product from "../models/Product.js";
 import ProductSchema from "../schemas/ProductShema.js";
 import { isAdmin } from "../middleware/authMiddleware.js";
 import { authenticateJWT } from "../middleware/jwtMiddleware.js";
+import z from 'zod';
 
 
 const router = express.Router();

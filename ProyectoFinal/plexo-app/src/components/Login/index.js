@@ -24,6 +24,7 @@ function Login() {
       if (responseAPi.staus === 200 && responseAPi.data.token) {
         setIsLogged(true);
         console.log("Loggin succesful");
+        console.log(responseAPi)
       } else {
         setIsLogged(false);
         console.log("Incorrects credentiales");
@@ -43,7 +44,7 @@ function Login() {
             Today is a new day. It's your day. You shape it. Sign in to start
             managing your products.
           </p>
-          <form>
+          <form onSubmit={PostData}>
             <div className="mb-3">
               <label className="form-label">Email</label>
               <input
@@ -52,7 +53,8 @@ function Login() {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 placeholder="example@plexo.com"
-                value={email}
+                value={userEmail}
+                onChange={(e) => setuserEmail(e.target.value)}
               />
               <div id="emailHelp" className="form-text">
                 We'll never share your email with anyone else.
@@ -65,6 +67,8 @@ function Login() {
                 className="form-control"
                 id="exampleInputPassword1"
                 placeholder="*******"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="d-flex justify-content-center">

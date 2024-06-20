@@ -1,5 +1,12 @@
+import Navbar from "../Navbar/index";
+
 function Login() {
-  return <h1>Login</h1>;
+  return (
+    <>
+      <Navbar />
+      <h1>Login</h1>
+    </>
+  );
 }
 
 export default Login;

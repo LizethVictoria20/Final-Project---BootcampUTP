@@ -1,5 +1,12 @@
+import Navbar from "../Navbar/index";
+
 function Catalogo() {
-  return <h1>Catalogo</h1>;
+  return (
+    <>
+      <Navbar />
+      <h1>catalogo</h1>
+    </>
+  );
 }
 
 export default Catalogo;

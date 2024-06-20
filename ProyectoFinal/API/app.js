@@ -24,6 +24,7 @@ const corsOptions = {
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); // Permitir todas las solicitudes
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
@@ -43,12 +44,13 @@ app.use(
   })
 );
 
-app.use('/api/auth', authRouter); // Rutas de autenticación
+// Rutas de autenticación
+app.use('/api/auth', authRouter); 
+app.use('/api/products', productsRouter);
+app.use('/api/categories', categoriesRouter);
 
 // Rutas protegidas con JWT
 app.use('/api/users', authenticateJWT, usersRouter);
-app.use('/api/products', authenticateJWT, productsRouter);
-app.use('/api/categories', authenticateJWT, categoriesRouter);
 app.use('/api/orders', authenticateJWT, OrdersRouter);
 app.use('/api/carts', authenticateJWT, CartsRoutes);
 

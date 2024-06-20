@@ -16,7 +16,7 @@ const PORT = 3000;
 
 // Configuración de CORS
 const corsOptions = {
-  origin: 'https://plexoshop.vercel.app', // Cambia esto al dominio que quieres permitir
+  origin: '*', // Cambia esto al dominio que quieres permitir
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Habilita el uso de cookies
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',

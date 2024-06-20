@@ -1,9 +1,9 @@
+import z from "zod";
 import express from "express";
 import Product from "../models/Product.js";
 import ProductSchema from "../schemas/ProductShema.js";
 import { isAdmin } from "../middleware/authMiddleware.js";
 import { authenticateJWT } from "../middleware/jwtMiddleware.js";
-
 
 const router = express.Router();
 
@@ -17,9 +17,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/",authenticateJWT, isAdmin, async (req, res) => {
+router.post("/", authenticateJWT, isAdmin, async (req, res) => {
   try {
-
     const productData = ProductSchema.parse(req.body);
 
     const existingProduct = await Product.findOne({

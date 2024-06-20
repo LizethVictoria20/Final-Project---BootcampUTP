@@ -13,7 +13,7 @@ function Admin() {
 
   const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login'
   const UrlPostProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
-  const [ productsData, setProductsData] = useState('')
+  const [ productsData, setProductsData] = useState([])
   const UrlProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
 
   const GetApiData = (url) => {
@@ -40,7 +40,7 @@ useEffect(() => {
                   <ModalComponent/>
                   <input className="searchBar" type="search"/>
                 </div>
-                <div className="containerProducts">{productsData.map(product => (
+                <div className="containerProducts">{productsData?.map(product => (
                     <div className="product">
                           <img className="img-product" src={product.image_url} alt="img-product"/>
                           <h4>{product.name}</h4>

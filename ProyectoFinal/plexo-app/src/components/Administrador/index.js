@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
-import { AddProduct } from "./AdminCrud";
 import Navbar from "../Navbar/index";
 import axios from 'axios';
 import ModalComponent from './modalAdd';
 import ModalComponentEdit from "./modalEdit";
 import DeleteConfirmationModal from "./modalDelete";
 import "./stylesheet.css";
-import { IoSearchCircle } from "react-icons/io5";
+import { IoSearchCircle } from "react-icons/io5"; 
 
 
 function Admin() {
-  const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login';
-  const UrlPostProducts = 'https://final-project-bootcamputp.onrender.com/api/products';
+
   const [productsData, setProductsData] = useState([]);
   const UrlProducts = 'https://final-project-bootcamputp.onrender.com/api/products';
 
@@ -24,7 +22,7 @@ function Admin() {
 
   useEffect(() => {
     GetApiData(UrlProducts);
-  }, []);
+  });
 
   return (
     <>
@@ -34,7 +32,8 @@ function Admin() {
           <div className="d-flex justify-content-space-between align-items-center mb-3"id="d-flex">
             <h1 className="">Productos</h1>
             <div className="d-flex justify-content-between  custom1" >
-              <ModalComponent />
+              <button onclick><ModalComponent /></button>
+              
               <div className="input-group">
                 <span className="input-group-text bg-primary border-0">
                 <IoSearchCircle  size="40px" color="white"/>

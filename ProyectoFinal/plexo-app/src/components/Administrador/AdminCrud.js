@@ -20,7 +20,7 @@ export const AddProduct = async() =>{
 }
 
 
-export const DeleteProduct = () => {
+export const DeleteProduct = (product_id) => {
     const [products, setProducts] = useState([]);
     const [deleteProductId, setDeleteProductId] = useState('');
   

@@ -1,67 +1,73 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
-import axios from 'axios'
-import pluscircle from "../../assets/images/plus-circle.png"
-import searchcircle from "../../assets/images/search-circle.png"
-import pencil from "../../assets/images/pencil.png"
-import trash from "../../assets/images/trash.png"
-import { Add, Login } from "./addProduct";
-import "./stylesheet.css"
+import axios from 'axios';
+import pluscircle from "../../assets/images/plus-circle.png";
+import searchcircle from "../../assets/images/search-circle.png";
+import pencil from "../../assets/images/pencil.png";
+import trash from "../../assets/images/trash.png";
 import ModalComponent from './modalAdd';
+import "./stylesheet.css";
 
 function Admin() {
-
-  const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login'
-  const UrlPostProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
-  const [ productsData, setProductsData] = useState([])
-  const UrlProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
+  const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login';
+  const UrlPostProducts = 'https://final-project-bootcamputp.onrender.com/api/products';
+  const [productsData, setProductsData] = useState([]);
+  const UrlProducts = 'https://final-project-bootcamputp.onrender.com/api/products';
 
   const GetApiData = (url) => {
     axios.get(url).then((response) => {
-      setProductsData(response.data)
+      setProductsData(response.data);
       console.log(productsData);
+    });
+  };
 
-  })
-};
-
-useEffect(() => {
-  GetApiData(UrlProducts)
-});
+  useEffect(() => {
+    GetApiData(UrlProducts);
+  }, []);
 
   return (
     <>
-
       <Navbar />
-      <div className="containerAll_admin">
-        <div className="container_admin">
-          <div className="containerElements_admin">
-                <div className="productsAddSearch_admin">
-                  <h1 className="h1_admin">Products</h1>
-                  <ModalComponent/><div className="searchBar_admin">
-                    <img src={searchcircle} alt="search bar" className="searchImg_admin" />
-                    <input className="Bar_admin" type="search"/>
+      <div className="container mt-5">
+        <div className="bg-light p-4 shadow rounded custom-container">
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h1>Productos</h1>
+            <div className="d-flex">
+              <ModalComponent />
+              <div className="input-group">
+                <span className="input-group-text bg-primary border-0">
+                  <img src={searchcircle} alt="search bar" style={{ width: '24px' }} />
+                </span>
+                <input type="search" className="form-control" placeholder="Buscar" />
+              </div>
+            </div>
+          </div>
+          <div className="list-group">
+            {productsData.map(product => (
+              <div className="list-group-item d-flex justify-content-between align-items-center mb-2 custom-item" key={product.id}>
+                <div className="d-flex align-items-center">
+                  <img src={product.image_url} alt="product" className="rounded-circle me-3" style={{ width: '50px', height: '50px' }} />
+                  <div>
+                    <h5 className="mb-1">{product.name}</h5>
+                    <small>${product.price}</small>
+                    <p className="mb-1">{product.description}</p>
                   </div>
                 </div>
-                <div className="containerProducts_admin">{productsData?.map(product => (
-                    <div className="product_admin">
-                          <img className="img-product_admin" src={product.image_url} alt="img-product"/>
-                          <h4 className="h4_admin">{product.name}</h4>
-                          <h4 className="h4_admin">${product.price}</h4>
-                          <h4 className="h4_admin">{product.stock}/u </h4>
-                          <div className="buttons_admin">
-                            <button className="addItem_admin"><img src={pencil} alt="edit"/></button>
-                            <button className="addItem_admin"><img src={trash} alt="trash"/></button>
-                          </div>
-                    </div>
-            ))}</div>
-            </div>
+                <div className="d-flex">
+                  <button className="btn btn-outline-primary me-2">
+                    <img src={pencil} alt="edit" style={{ width: '20px' }} />
+                  </button>
+                  <button className="btn btn-outline-danger">
+                    <img src={trash} alt="delete" style={{ width: '20px' }} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div> 
+      </div>
     </>
-
-
   );
 }
-{/* <button className="addItem" onClick={ModalComponent}><img src={pluscircle} alt="plus circle"/></button> */}
-{/* <p>{product.description}</p> */}
+
 export default Admin;

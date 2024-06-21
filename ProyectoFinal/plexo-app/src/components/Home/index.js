@@ -43,7 +43,7 @@ function Home() {
               <h6>Wireless</h6>
               <h6 className='title-morado'>Headphones</h6>
               <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <button className='btn btn-morado text-white'>Shop by category</button>
               <div className='elecontainerImgc'>
                 <img src={Controller} alt=""  />
               </div>
@@ -55,7 +55,7 @@ function Home() {
               <h6>Wireless</h6>
               <h6 className='title-morado'>Headphones</h6>
               <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <button className='btn  btn-morado-big text-white'>Shop by category</button>
               <div className='elecontainerImgc-4'>
                 <img src={Controller} alt="" />
               </div>
@@ -67,7 +67,7 @@ function Home() {
               <h6>Wireless</h6>
               <h6 className='title-morado'>Headphones</h6>
               <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <button className='btn  btn-morado-big text-white'>Shop by category</button>
               <div className='elecontainerImgc-4'>
                 <img src={Controller} alt="" />
               </div>
@@ -79,7 +79,7 @@ function Home() {
               <h6>Wireless</h6>
               <h6 className='title-morado'>Headphones</h6>
               <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <button className='btn btn-morado text-white'>Shop by category</button>
               <div className='elecontainerImgc'>
                 <img src={Controller} alt="" />
               </div>
@@ -91,7 +91,7 @@ function Home() {
               <h6>Wireless</h6>
               <h6 className='title-morado'>Headphones</h6>
               <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <button className='btn btn-morado text-white'>Shop by category</button>
               <div className='elecontainerImgc'>
                 <img src={Controller} alt="" />
               </div>

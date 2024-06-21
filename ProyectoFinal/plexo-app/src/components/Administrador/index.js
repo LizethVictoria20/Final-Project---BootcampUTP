@@ -11,6 +11,14 @@ import { DeleteProduct } from "./AdminCrud";
 
 function Admin() {
 
+  const deleteProduct = DeleteProduct();
+
+  const handleDeleteClick = async (productId) => {
+    await deleteProduct(productId);
+  } ;
+
+
+  // get
   const [productsData, setProductsData] = useState([]);
   const UrlProducts = 'https://final-project-bootcamputp.onrender.com/api/products';
 
@@ -59,7 +67,7 @@ function Admin() {
                   <button className="btn btn-outline-primary me-2">
                   <ModalComponentEdit />
                   </button>
-                  <button className="btn btn-outline-danger" >
+                  <button className="btn btn-outline-danger"onClick={() => handleDeleteClick(product.product_id)} >
                     Delete
                   </button>
                 </div>  

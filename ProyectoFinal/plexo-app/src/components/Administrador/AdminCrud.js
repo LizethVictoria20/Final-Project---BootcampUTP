@@ -13,18 +13,9 @@ export const addProduct = async (productData) => {
     }
 };
 
-export const DeleteProduct = async (productId) => {
-    try {
-        await axios.delete(`https://final-project-bootcamputp.onrender.com/api/products/?id=${productId}`);
-    } catch (error) {
-        console.error('Error eliminando producto:', error);
-        throw error;
-    }
-};
-
 export const updateProduct = async (productId, productData) => {
     try {
-        const response = await axios.put(`/${productId}`, productData);
+        const response = await axios.put(`${urlProduct}/${productId}`, productData);
         return response.data;
     } catch (error) {
         console.error('Error actualizando producto:', error);
@@ -42,3 +33,24 @@ export const fetchProducts = async () => {
     }
 };
 
+
+export const DeleteProduct = () => {
+    // Suponiendo que quieras manejar un único productId
+    const [productId, setProductId] = useState('');
+  
+    // Función para manejar la eliminación de un producto
+    const handleDelete = async (productId) => {
+      try {
+        // Realiza la solicitud DELETE
+        await axios.delete(`https://final-project-bootcamputp.onrender.com/api/products/?id=${productId}`);
+  
+        // Actualiza el estado de productos después de eliminar el producto (si es necesario)
+        // Puedes manejar la actualización del estado aquí si lo deseas
+      } catch (error) {
+        console.error('Error deleting product:', error);
+        // Maneja el error aquí si es necesario
+      }
+    };
+  
+    return handleDelete;
+  };

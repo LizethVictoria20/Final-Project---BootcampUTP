@@ -19,7 +19,7 @@ function Card({ product }) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

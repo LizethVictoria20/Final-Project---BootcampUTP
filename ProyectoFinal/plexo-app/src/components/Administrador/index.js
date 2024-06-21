@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
 import axios from 'axios';
-import pencil from "../../assets/images/pencil.png";
-import trash from "../../assets/images/trash.png";
 import ModalComponent from './modalAdd';
 import "./stylesheet.css";
+import { IoSearchCircle } from "react-icons/io5";
 
 
 function Admin() {
@@ -19,7 +18,6 @@ function Admin() {
       console.log(productsData);
     });
   };
-      login()
 
   useEffect(() => {
     GetApiData(UrlProducts);
@@ -30,13 +28,13 @@ function Admin() {
       <Navbar />
       <div className="container mt-5">
         <div className="bg-light p-4 shadow rounded custom-container">
-          <div className="d-flex justify-content-space- align-items-center mb-3">
+          <div className="d-flex justify-content-space-between align-items-center mb-3"id="d-flex">
             <h1>Productos</h1>
-            <div className="d-flex">
+            <div className="d-flex justify-content-between  custom1" >
               <ModalComponent />
               <div className="input-group">
                 <span className="input-group-text bg-primary border-0">
-                  <img src="" alt="search bar" style={{ width: '24px' }} />
+                <IoSearchCircle  size="40px" color="white"/>
                 </span>
                 <input type="search" className="form-control" placeholder="Buscar" />
               </div>
@@ -47,7 +45,7 @@ function Admin() {
               <div className="list-group-item d-flex justify-content-between align-items-center mb-2 custom-item" key={product.id}>
                 <div className="d-flex align-items-center">
                   <img src={product.image_url} alt="product" className="rounded-circle me-3" style={{ width: '50px', height: '50px' }} />
-                  <div>
+                  <div className="d-grid template-columns-3fr">
                     <h5 className="mb-1">{product.name}</h5>
                     <small>${product.price}</small>
                     <p className="mb-1">{product.description}</p>
@@ -55,10 +53,10 @@ function Admin() {
                 </div>
                 <div className="d-flex">
                   <button className="btn btn-outline-primary me-2">
-                    <img src={pencil} alt="edit" style={{ width: '20px' }} />
+                    <img src="" alt="edit" style={{ width: '20px' }} />
                   </button>
                   <button className="btn btn-outline-danger">
-                    <img src={trash} alt="delete" style={{ width: '20px' }} />
+                    <img src="" alt="delete" style={{ width: '20px' }} />
                   </button>
                 </div>
               </div>

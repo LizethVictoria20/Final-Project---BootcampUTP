@@ -167,3 +167,11 @@
     border-radius: 5px;
   }
   
+  #d-flex{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .custom1{
+    border: red 5px solid;
+    gap: 10px;
+  }

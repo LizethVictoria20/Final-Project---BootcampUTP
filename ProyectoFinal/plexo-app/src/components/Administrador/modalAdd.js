@@ -1,8 +1,8 @@
 
 import './stylesheet.css';
-import pluscircle from "../../assets/images/plus-circle.png";
 import React, { useState } from 'react';
 import './stylesheet.css';
+import { FaCirclePlus } from "react-icons/fa6";
 
 function ModalComponent() {
   const [show, setShow] = useState(false);
@@ -13,7 +13,7 @@ function ModalComponent() {
   return (
     <>
       <button className="btn btn-primary" onClick={handleShow}>
-        <img src={pluscircle} alt="Add" style={{ width: '24px' }} />
+      <FaCirclePlus size="30px" />
       </button>
 
       {show && (

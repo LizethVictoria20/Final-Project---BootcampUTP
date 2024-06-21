@@ -5,13 +5,14 @@ import Home from "./components/Home";
 import Admin from "./components/Administrador";
 import Card from "./components/Card";
 import Catalogo from "./components/CatalogoProductos";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 import Gmail from "./components/Gmail";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
 import PasarelaPago from "./components/PasarelaPago";
+
 
 function App() {
   return (

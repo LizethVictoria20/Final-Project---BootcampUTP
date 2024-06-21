@@ -85,7 +85,7 @@ paymentRouter.get("/success", async (req, res) => {
     });
 
     return res.redirect(
-      `https://store-angular-wheat.vercel.app/paymentStatus/${userID}`// Cambiar al hosteo de la API
+      `https://final-project-bootcamputp.onrender.com/success`
     );
   } catch (error) {
     console.log(error);
@@ -94,7 +94,8 @@ paymentRouter.get("/success", async (req, res) => {
 });
 
 paymentRouter.get("/cancel", (req, res) => {
-  res.status(200).json({ message: "Payment cancelled" }); //debería de devolver al carrito otra vez
+  res.status(200).json({ message: "Payment cancelled" });
+  return res.redirect(`https://final-project-bootcamputp.onrender.com/cancel`);
 });
 
 export default paymentRouter;

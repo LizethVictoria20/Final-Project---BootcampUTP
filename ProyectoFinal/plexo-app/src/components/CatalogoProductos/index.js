@@ -48,6 +48,7 @@ const Catalogo = () => {
 
   const guardarProducto = (id) => {
     setProductIds((prevProductIds) => [...prevProductIds, id]);
+    console.log("array id", productIds )
   };
 
   return (

@@ -1,5 +1,4 @@
 import Axios from "axios";
-import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../Navbar";

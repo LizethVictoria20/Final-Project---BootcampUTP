@@ -10,9 +10,8 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
-import NotFound from "./components/Error/NotFound";
-
-
+import PasarelaPago from "./components/PasarelaPago";
+import Perfil from "./components/Perfil";
 function App() {
   return (
     <Router>
@@ -27,8 +26,8 @@ function App() {
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/register" element={<Register />} />
         <Route path="/shopping-card" element={<ShoppingCard />} />
-        <Route path="/404" element={<NotFound />} />
-        <Route path="/*" element={<NotFound />} />
+        <Route path="/pago" element={<PasarelaPago />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
     </Router>
   );

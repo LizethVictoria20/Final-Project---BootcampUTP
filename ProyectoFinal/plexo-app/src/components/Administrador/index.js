@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
 import axios from 'axios';
-
 import pencil from "../../assets/images/pencil.png";
 import trash from "../../assets/images/trash.png";
 import ModalComponent from './modalAdd';
 import "./stylesheet.css";
+
 
 function Admin() {
   const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login';
@@ -35,7 +35,7 @@ function Admin() {
               <ModalComponent />
               <div className="input-group">
                 <span className="input-group-text bg-primary border-0">
-                  <img src=""} alt="search bar" style={{ width: '24px' }} />
+                  <img src="" alt="search bar" style={{ width: '24px' }} />
                 </span>
                 <input type="search" className="form-control" placeholder="Buscar" />
               </div>

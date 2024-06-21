@@ -6,12 +6,12 @@ import './PaymentSuccess.css';
 const PaymentSuccess = () => {
     const navigate = useNavigate();
   
-    useEffect(() => { // Agregar punto y coma después de useEffect
+    useEffect(() => {
       const timeoutId = setTimeout(() => {
-        navigate('/');  // Redireccionar a "/" después de 5 segundos
-      }, 5000);
+        navigate('/');
+      }, 60000);
   
-      return () => clearTimeout(timeoutId); // Limpiar timeout al desmontar el componente
+      return () => clearTimeout(timeoutId);
     }, []);
 
 return (

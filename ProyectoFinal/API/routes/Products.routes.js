@@ -56,16 +56,15 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/", async (req, res) => {
+router.put("/:product_id", async (req, res) => {
   try {
-    // Verificar que el ID esté presente en el cuerpo de la solicitud
-    if (!req.body.product_id) {
+    const { product_id } = req.params
+    if (!product_id) {
       return res.status(400).json({ message: "Product ID is required" });
     }
 
     // Obtener los datos del cuerpo de la solicitud
     const {
-      product_id,
       name,
       description,
       price,

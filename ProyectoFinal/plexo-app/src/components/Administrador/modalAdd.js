@@ -3,6 +3,7 @@ import './stylesheet.css';
 import React, { useState } from 'react';
 import './stylesheet.css';
 import { FaCirclePlus } from "react-icons/fa6";
+import axios from 'axios';
 
 function ModalComponent() {
 
@@ -125,6 +126,7 @@ function ModalComponent() {
     </>
   );
 }
+}
 
 
 export default ModalComponent;
@@ -190,7 +192,7 @@ export default ModalComponent;
 //       console.error('Error adding product:', error);
 //     }
 //   };
-}
+
 
 //   return (
 //     <form onSubmit={handleSubmit}>

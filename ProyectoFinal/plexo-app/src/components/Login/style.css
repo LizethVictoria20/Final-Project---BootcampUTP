@@ -39,6 +39,10 @@ hr {
     color:white;
     text-decoration: none;
 }
+.nav-link-login:hover {
+    color: #9c70c4;
+}
+
 .nav-link-login span {
     color:#9c70c4;
 }

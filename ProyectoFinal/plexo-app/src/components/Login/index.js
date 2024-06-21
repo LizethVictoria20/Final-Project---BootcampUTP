@@ -93,9 +93,13 @@ function Login() {
             </div>
             <hr />
             <div id="emailHelp" className="form-text form-text-login">
-              <Link className="nav-link-login" to="/register">
-                ¿Don't you have an account? <span>Sign up</span>
-              </Link>
+              ¿Don't you have an account?{" "}
+              <span>
+                {" "}
+                <Link className="nav-link-login" to="/register">
+                  Sign up
+                </Link>
+              </span>
             </div>
           </form>
         </div>

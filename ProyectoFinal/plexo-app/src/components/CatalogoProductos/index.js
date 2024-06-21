@@ -44,6 +44,12 @@ const Catalogo = () => {
     );
   };
 
+  const [productIds, setProductIds] = useState([]);
+
+  const guardarProducto = (id) => {
+    setProductIds((prevProductIds) => [...prevProductIds, id]);
+  };
+
   return (
     <>
       <Navbar />
@@ -76,7 +82,7 @@ const Catalogo = () => {
             <div className="container-products d-flex flex-wrap">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
-                  <Card key={product.product_id} product={product} />
+                  <Card key={product.product_id} product={product} guardarProducto={guardarProducto} />
                 ))
               ) : (
                 <p>No products found</p>

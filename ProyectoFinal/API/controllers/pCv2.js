@@ -10,6 +10,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export const openStripePaymentLink = async (req, res) => {
   try {
     const { cart_id } = req.body;
+    if (!cart_id) {
+      return res.status(400).json({ message: "Cart ID is required" });
+    }
     const url =
       process.env.NODE_ENV === "production"
         ? process.env.PROD_URL
@@ -20,7 +23,9 @@ export const openStripePaymentLink = async (req, res) => {
         cart_id: cart_id,
       },
     });
-
+    if (!cartItems) {
+      return res.status(404).json({ message: "Carts items not found" });
+    }
     const cart = await Cart.findByPk(cart_id);
     if (!cart) {
       return res.status(404).json({ error: "Cart not found" });

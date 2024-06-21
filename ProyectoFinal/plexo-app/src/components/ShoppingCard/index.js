@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+<<<<<<< HEAD
 import Navbar from "../Navbar/index";
 import "./styles.css";
+=======
+import "./styles.css";
+import Navbar from "../Navbar";
+>>>>>>> 4754763445897c562474b86f6dc2e2ba43401fc8
 
 const Product = ({ product, index, increment, decrement }) => (
   <div className="product">
@@ -89,31 +94,35 @@ const ShoppingCard = () => {
   return (
     <>
       <Navbar />
-      <div className="cart-container d-flex justify-content-between">
-        <>
-          <div className="products-container">
-            {products.map((product, index) => (
-              <Product
-                key={index}
-                product={product}
-                index={index}
-                increment={incrementQuantity}
-                decrement={decrementQuantity}
-              />
-            ))}
-          </div>
-          <div className="summary">
-            <p>
-              Cantidad de productos:{" "}
-              {products.reduce((acc, product) => acc + product.quantity, 0)}
-            </p>
-            <p>Valor: ${subtotal}</p>
-            <p>Impuesto 19%: ${tax.toFixed(2)}</p>
-            <p>Envío: GRATIS</p>
-            <p>Total: ${total.toFixed(2)}</p>
-            <button className="confirm-button">CONFIRMAR COMPRA</button>
-          </div>
-        </>
+      <div className="cart-container">
+        {products.length === 0 ? (
+          <p>Cargando productos...</p>
+        ) : (
+          <>
+            <div className="products-container">
+              {products.map((product, index) => (
+                <Product
+                  key={index}
+                  product={product}
+                  index={index}
+                  increment={incrementQuantity}
+                  decrement={decrementQuantity}
+                />
+              ))}
+            </div>
+            <div className="summary">
+              <p>
+                Cantidad de productos:{" "}
+                {products.reduce((acc, product) => acc + product.quantity, 0)}
+              </p>
+              <p>Valor: ${subtotal}</p>
+              <p>Impuesto 19%: ${tax.toFixed(2)}</p>
+              <p>Envío: GRATIS</p>
+              <p>Total: ${total.toFixed(2)}</p>
+              <button className="confirm-button">CONFIRMAR COMPRA</button>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

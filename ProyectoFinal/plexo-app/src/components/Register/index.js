@@ -1,8 +1,8 @@
 import Axios from "axios";
-import Navbar from "../Navbar/index";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Navbar from "../Navbar";
 
 function Register() {
   const [isRegister, setIsRegister] = useState(false);

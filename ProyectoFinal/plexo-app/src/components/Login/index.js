@@ -1,8 +1,8 @@
-import Navbar from "../Navbar/index";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useState } from "react";
+import Navbar from "../Navbar";
 
 function Login() {
   const [userEmail, setuserEmail] = useState("");
@@ -14,11 +14,11 @@ function Login() {
 
   const PostData = async (event) => {
     event.preventDefault();
-    setError(null); 
+    setError(null);
 
     try {
       const response = await Axios.post(
-        'https://final-project-bootcamputp.onrender.com/api/auth/login',
+        "https://final-project-bootcamputp.onrender.com/api/auth/login",
         {
           email: userEmail,
           password: password,
@@ -26,15 +26,20 @@ function Login() {
       );
       if (response.status === 200) {
         setIsLogged(true);
-        console.log('Login successful');
-        navigate('/admin');
-
+        console.log("Login successful");
+        const userRole = response.data.admin;
+        if (userRole === false) {
+          navigate("/");
+        } else if (userRole === true) {
+          navigate("/admin");
+        }
+        console.log(userRole);
       } else {
         setIsLogged(false);
       }
     } catch (err) {
       setIsLogged(false);
-      console.error('Login failed: ', err);
+      console.error("Login failed: ", err);
     }
   };
 
@@ -78,7 +83,9 @@ function Login() {
               />
             </div>
             {error && <div className="alert alert-danger">{error}</div>}
-            {isLogged && <div className="alert alert-success">Login successful!</div>}
+            {isLogged && (
+              <div className="alert alert-success">Login successful!</div>
+            )}
             <div className="d-flex justify-content-center">
               <button type="submit" className="btn button-sign_in text-white">
                 Sign in

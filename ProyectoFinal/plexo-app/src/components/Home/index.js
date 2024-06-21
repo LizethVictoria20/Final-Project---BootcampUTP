@@ -1,9 +1,9 @@
-import Navbar from "../Navbar/index";
 import Headphone from '../../assets/images/headphones.png'
 import './style.css'
 import Clothes from '../../assets/images/clothes.png'
 import Sport from '../../assets/images/sport.png'
 import Gaming from '../../assets/images/gaming.png'
+import Navbar from '../Navbar';
 
 function Home(params) {
   return (

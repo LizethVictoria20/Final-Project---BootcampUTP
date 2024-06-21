@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./style.css";
 import Card from "../Card/index";
 import Navbar from "../Navbar/index";
 
@@ -46,28 +47,40 @@ const Catalogo = () => {
   return (
     <>
       <Navbar />
-      <div>
-        <div>
-          <button onClick={() => handleCategoryChange("")}>
-            All Categories
-          </button>
-          {categories.map((categoryId) => (
-            <button
-              key={categoryId}
-              onClick={() => handleCategoryChange(categoryId)}
-            >
-              {categoryId}
-            </button>
-          ))}
-        </div>
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {getFilteredProducts().length > 0 ? (
-            getFilteredProducts().map((product) => (
-              <Card key={product.product_id} product={product} />
-            ))
-          ) : (
-            <p>No products found</p>
-          )}
+
+      <div className="container text-center container-catalogo">
+        <div className="row">
+          <div className="col col-lg-2 container-products">
+            <div>
+              <button
+                className="container-categories_btn"
+                onClick={() => handleCategoryChange("")}
+              >
+                All Categories
+              </button>
+              {categories.map((categoryId) => (
+                <button
+                  className="container-categories_btn d-flex flex-column"
+                  key={categoryId}
+                  onClick={() => handleCategoryChange(categoryId)}
+                >
+                  {categoryId}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="col">
+            {" "}
+            <div className="container-products d-flex flex-wrap">
+              {getFilteredProducts().length > 0 ? (
+                getFilteredProducts().map((product) => (
+                  <Card key={product.product_id} product={product} />
+                ))
+              ) : (
+                <p>No products found</p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </>

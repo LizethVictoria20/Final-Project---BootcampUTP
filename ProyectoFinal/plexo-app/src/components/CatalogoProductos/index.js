@@ -56,7 +56,9 @@ const Catalogo = () => {
                 className="container-categories_btn"
                 onClick={() => handleCategoryChange("")}
               >
-                All Categories
+                <div>
+                <p>All categories</p>
+                </div>
               </button>
               {categories.map((categoryId) => (
                 <button

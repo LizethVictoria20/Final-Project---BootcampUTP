@@ -43,24 +43,20 @@ export const fetchProducts = async () => {
 };
 
 
-export const DeleteProduct = (product_id) => {
+export const DeleteProduct = (productId) => {
      const [products, setProducts] = useState([]);
      const [deleteProductId, setDeleteProductId] = useState('');
   
      // Función para manejar la eliminación de un producto
-     const handleDelete = async (productId) => {
+     const handleDelete = async () => {
        try {
          // Realiza la solicitud DELETE
-         await axios.delete(`https://final-project-bootcamputp.onrender.com/api/products/${productId}`);
+         await axios.delete(`https://final-project-bootcamputp.onrender.com/api/products/?id=${productId}`);
   
          // Actualiza el estado de productos después de eliminar el producto
-         const updatedProducts = products.filter(product => product.id !== productId);
-         setProducts(updatedProducts);
-  
-         // Limpia el estado de deleteProductId después de eliminar
-         setDeleteProductId('');
        } catch (error) {
          console.error('Error deleting product:', error);
        }
     };
+    return handleDelete
 }

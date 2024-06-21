@@ -6,7 +6,7 @@ import DeleteConfirmationModal from "./modalDelete";
 import "./stylesheet.css";
 import { IoSearchCircle } from "react-icons/io5"; 
 import ModalComponentAdd from "./modalAdd";
-
+import { DeleteProduct } from "./AdminCrud";
 
 
 function Admin() {
@@ -59,10 +59,10 @@ function Admin() {
                   <button className="btn btn-outline-primary me-2">
                   <ModalComponentEdit />
                   </button>
-                  <button className="btn btn-outline-danger">
-                    <DeleteConfirmationModal />
+                  <button className="btn btn-outline-danger" onClick={DeleteProduct}>
+                    Delete
                   </button>
-                </div>
+                </div>  
               </div>
             ))}
           </div>

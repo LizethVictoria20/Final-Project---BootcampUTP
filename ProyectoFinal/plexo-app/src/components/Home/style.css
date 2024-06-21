@@ -15,11 +15,11 @@
 
 .containerImg {
     position: absolute;
-    bottom: 10rem;
-    left: 32rem;
+    bottom: 11rem;
+    left: 40rem;
 }
 .containerImg img {
-    width: 90%;
+    width: 70%;
 }
 
 .title-home {
@@ -42,6 +42,7 @@
     background-image: linear-gradient(to bottom, #7429ba, #7c39bc, #8446be, #8c53c0, #9360c2, #9869c2, #9d72c2, #a17bc2, #a483c1, #a78cbf, #aa94be, #ad9cbc);    color: white;
     padding: 1rem;
     display: grid;
+    margin: 2%;
     grid-template-columns:repeat(3, 1fr);
     gap: 10px;
     height: 40vh;
@@ -59,7 +60,7 @@
 
 .elecontainerImgc img {
     width: 22vh;
-    height: 12vh;
+    height: 15vh;
 }
 
 @media (max-width: 1199.98px) {

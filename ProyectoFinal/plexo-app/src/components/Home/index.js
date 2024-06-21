@@ -2,13 +2,11 @@ import { Link } from 'react-router-dom'
 import Navbar from "../Navbar/index";
 import Headphone from '../../assets/images/headphones.png'
 import './style.css'
-import Clothes from '../../assets/images/clothes.png'
-import Sport from '../../assets/images/sport.png'
-import Gaming from '../../assets/images/gaming.png'
+import Balones from '../../assets/images/balones.png'
 import Controller from '../../assets/images/controller.png'
-
-
-
+import Xbox from '../../assets/images/xbox.png'
+import Jordan from '../../assets/images/air-jordan-.png'
+import BalonFutbol from '../../assets/images/balon-futbol.png'
 
 function Home() {
   return (
@@ -32,7 +30,7 @@ function Home() {
               <br /><br />
               <button className='btn btn-morado text-white'>Shop by category</button>
               <div className='elecontainerImgc'>
-                <img src={Controller} alt=""  />
+                <img src={Jordan} alt=""  />
               </div>
             </div>
           </div>
@@ -45,7 +43,7 @@ function Home() {
               <br /><br />
               <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
               <div className='elecontainerImgc'>
-                <img src={Controller} alt=""  />
+                <img src={Xbox} alt=""  />
               </div>
             </div>
           </div>
@@ -69,7 +67,19 @@ function Home() {
               <br /><br />
               <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
               <div className='elecontainerImgc-4'>
-                <img src={Controller} alt="" />
+                <img src={Balones} alt="" />
+              </div>
+            </div>
+          </div>
+          <div className="morado-4">
+            <div className="container-fluid container-morado rounded-4">
+              <p>Beats Solo</p>
+              <h6>Wireless</h6>
+              <h6 className='title-morado'>Headphones</h6>
+              <br /><br />
+              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <div className='elecontainerImgc-4'>
+                <img src={BalonFutbol} alt="" />
               </div>
             </div>
           </div>
@@ -81,22 +91,11 @@ function Home() {
               <br /><br />
               <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
               <div className='elecontainerImgc'>
-                <img src={Controller} alt="" />
+                <img src={BalonFutbol} alt="" />
               </div>
-            </div>
           </div>
-          <div className="morado">
-            <div className="container-fluid container-morado rounded-4">
-              <p>Beats Solo</p>
-              <h6>Wireless</h6>
-              <h6 className='title-morado'>Headphones</h6>
-              <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
-              <div className='elecontainerImgc'>
-                <img src={Controller} alt="" />
-              </div>
-            </div>
           </div>
+          
         </div>
       </>
   );

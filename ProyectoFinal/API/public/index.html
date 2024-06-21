@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+</head>
+<body>
+    <button id="checkout">Pay</button>
+    <script>
+        const button = document.querySelector('#checkout')
+        button.addEventListener("click", async () =>{
+            const rest = await fetch('/create-checkout-session', {
+                method: 'POST'
+            })
+            const data = rest.json()
+            console.log(data);
+        })
+    </script>
+</body>
+</html>

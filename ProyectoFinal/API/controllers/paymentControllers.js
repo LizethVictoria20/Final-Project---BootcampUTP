@@ -1,18 +1,17 @@
 import Stripe from 'stripe';
 import dotenv from 'dotenv';
-import Product from '../models/Product.js'; // Asegúrate de que las importaciones se alineen con tu estructura de modelos
+import Product from '../models/Product.js'; 
 
 dotenv.config();
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // Utiliza la clave secreta de Stripe desde las variables de entorno
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); 
 
-// Controlador para abrir el enlace de pago de Stripe
-const openStripePaymentLink = async (carts, totalPrice, userID) => {
+export const openStripePaymentLink = async (carts, totalPrice, userID) => {
   const url = process.env.NODE_ENV === 'production' ? process.env.PROD_URL : process.env.DEV_URL;
 
   const products = [];
 
-  // Obtener los productos de los ítems del carrito
+
   for (const cart of carts) {
     const product = await Product.findByPk(cart.productID);
     console.log(product)
@@ -53,4 +52,4 @@ const openStripePaymentLink = async (carts, totalPrice, userID) => {
   }
 };
 
-export { openStripePaymentLink };
+

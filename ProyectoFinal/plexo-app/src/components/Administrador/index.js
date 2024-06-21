@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
 import axios from 'axios';
-import ModalComponent from './modalAdd';
 import ModalComponentEdit from "./modalEdit";
 import DeleteConfirmationModal from "./modalDelete";
 import "./stylesheet.css";
 import { IoSearchCircle } from "react-icons/io5"; 
+import ModalComponentAdd from "./modalAdd";
+
 
 
 function Admin() {
@@ -32,8 +33,9 @@ function Admin() {
           <div className="d-flex justify-content-space-between align-items-center mb-3"id="d-flex">
             <h1 className="">Productos</h1>
             <div className="d-flex justify-content-between  custom1" >
-              <button onclick><ModalComponent /></button>
-              
+                <button >
+                  <ModalComponentAdd color="red" />
+                </button>
               <div className="input-group">
                 <span className="input-group-text bg-primary border-0">
                 <IoSearchCircle  size="40px" color="white"/>
@@ -58,7 +60,7 @@ function Admin() {
                   <ModalComponentEdit />
                   </button>
                   <button className="btn btn-outline-danger">
-                    <DeleteConfirmationModal/>
+                    <DeleteConfirmationModal />
                   </button>
                 </div>
               </div>

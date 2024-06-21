@@ -1,5 +1,4 @@
 import { DeleteProduct } from './AdminCrud';
-import './stylesheet.css';
 import React, { useState } from 'react';
 import './stylesheet.css';
 import { FaCirclePlus } from "react-icons/fa6";
@@ -13,7 +12,7 @@ function ModalComponent() {
   return (
     <>
       <button className="btn btn-primary" onClick={handleShow}>
-      <FaCirclePlus size="30px" />
+      <FaCirclePlus size="40px" />
       </button>
 
       {show && (

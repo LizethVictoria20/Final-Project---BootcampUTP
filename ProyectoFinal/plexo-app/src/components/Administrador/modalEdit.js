@@ -34,12 +34,7 @@ function ModalComponentEdit() {
                   </div>
                   <div className="mb-3 d-flex gap-2">
                     <input type="number" className="form-control" placeholder="Precio" />
-                    <select className="form-control">
-                      <option>Categoría</option>
-                      <option value="1">Categoría 1</option>
-                      <option value="2">Categoría 2</option>
-                      <option value="3">Categoría 3</option>
-                    </select>
+                    
                   </div>
                   <div className="mb-3">
                     <textarea className="form-control" rows="3" placeholder="Descripción"></textarea>

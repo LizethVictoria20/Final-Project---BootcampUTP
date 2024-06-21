@@ -1,0 +1,110 @@
+  .profile-container {
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;  
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .myprofile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px;
+  }
+  
+  .myprofile-header img {
+    margin-top: 20px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+  }
+  
+  .myprofile-header h2 {
+    margin-top: 5px;
+  }
+  
+  .profile-section {
+    margin-top: 1px;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .label-custom {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+    text-align: left;
+  }
+
+  
+  .form-group input {
+    height: 45px;
+    background-color: #f0f0f0;
+    box-shadow: 1px 6px rgb(184, 185, 185);
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 18px;
+    width: 40rem; 
+  
+  }
+  
+  .icono-user, .icono-shopp{
+    color: #7429BA;
+  }
+  
+  .btn-custom {
+    width: 197px;
+    height: 70px;
+    background-color: #ffffff;
+    color: rgb(45, 45, 45);
+    background-color: #f0f0f0;
+    box-shadow: 1px 6px rgb(228, 230, 230);
+    border-radius: 20px;
+    border: none;
+    margin: 15px 0;
+  }
+  
+  .profile-form {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px;
+    margin-left: 30px;
+    margin-top: 15px;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .col-md-4, .col-md-8 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .btn-custom .iconos {
+    margin-right: 15px; 
+    margin-left: -10px; 
+  }
+  
+  .btn-custom .dos {
+    margin-right: 25px; 
+    margin-left: -18px; 
+  }

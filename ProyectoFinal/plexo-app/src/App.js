@@ -12,8 +12,7 @@ import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
 import PasarelaPago from "./components/PasarelaPago";
-import Perfil from "./components/Perfil"
-
+import Perfil from "./components/Perfil";
 function App() {
   return (
     <Router>
@@ -30,7 +29,6 @@ function App() {
         <Route path="/shopping-card" element={<ShoppingCard />} />
         <Route path="/pago" element={<PasarelaPago />} />
         <Route path="/perfil" element={<Perfil />} />
-
       </Routes>
     </Router>
   );

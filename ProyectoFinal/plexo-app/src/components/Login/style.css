@@ -39,6 +39,40 @@ hr {
     color:white;
     text-decoration: none;
 }
+.nav-link-login:hover {
+    color: #9c70c4;
+}
+
 .nav-link-login span {
     color:#9c70c4;
 }
+
+
+/* MEDIA QUERY */
+
+@media (min-width: 375px) { 
+    .card-container-login {
+        width: 88%;
+    }
+    .card-body-login{
+        padding: 1rem;
+    }
+ }
+
+ @media (min-width: 360px) { 
+    .card-container-login {
+        width: 88%;
+    }
+    .card-body-login{
+        padding: 1rem;
+    }
+ }
+
+ @media (min-width: 344px) { 
+    .card-container-login {
+        width: 88%;
+    }
+    .card-body-login{
+        padding: 1rem;
+    }
+ }

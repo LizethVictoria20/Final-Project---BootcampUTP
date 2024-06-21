@@ -59,7 +59,7 @@ function Admin() {
                   <button className="btn btn-outline-primary me-2">
                   <ModalComponentEdit />
                   </button>
-                  <button className="btn btn-outline-danger" onClick={DeleteProduct}>
+                  <button className="btn btn-outline-danger" >
                     Delete
                   </button>
                 </div>  

@@ -58,14 +58,55 @@ router.post("/", async (req, res) => {
 
 router.put("/", async (req, res) => {
   try {
-    const productData = ProductSchema.parse(req.body);
-    const updatedProduct = await Product.update(productData, {
-      where: { id: req.body.id },
+    // Verificar que el ID esté presente en el cuerpo de la solicitud
+    if (!req.body.product_id) {
+      return res.status(400).json({ message: "Product ID is required" });
+    }
+
+    // Obtener los datos del cuerpo de la solicitud
+    const {
+      product_id,
+      name,
+      description,
+      price,
+      stock,
+      image_url,
+      category_id
+      // Agrega aquí otros campos si es necesario
+    } = req.body;
+
+    // Construir el objeto con los datos actualizados del producto
+    const updatedProduct = {
+      name,
+      description,
+      price,
+      stock,
+      image_url,
+      category_id
+    };
+
+    // Intentar actualizar el producto
+    const [updatedRowsCount] = await Product.update(updatedProduct, {
+      where: { product_id: product_id },
+      returning: true,
     });
-    res.json(updatedProduct);
+
+    // Comprobar si el producto fue actualizado
+    if (updatedRowsCount === 0) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    // Devolver el producto actualizado
+    const updatedProductData = await Product.findOne({
+      where: { product_id: product_id }
+    });
+
+    res.json(updatedProductData);
   } catch (err) {
     console.error(err);
-    res.status(400).json({ message: err.errors });
+
+    // Devolver un mensaje de error genérico
+    res.status(500).json({ message: "An error occurred while updating the product" });
   }
 });
 

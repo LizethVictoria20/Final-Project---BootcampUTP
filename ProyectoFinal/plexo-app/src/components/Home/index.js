@@ -3,10 +3,12 @@ import './style.css'
 import Clothes from '../../assets/images/clothes.png'
 import Sport from '../../assets/images/sport.png'
 import Gaming from '../../assets/images/gaming.png'
+import Navbar from '../Navbar';
 
 function Home(params) {
   return (
     <>
+      <Navbar />
       <div className="category">
       <h3>Category</h3>
         <button> <img src={Clothes} alt="clothes"/> clothes </button> <br/>

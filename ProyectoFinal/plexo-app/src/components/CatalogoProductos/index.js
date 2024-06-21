@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { useState, useEffect } from "react";
 import Card from "../Card/index";
+import Navbar from "../Navbar";
 
 function Catalogo() {
   const [product, setProduct] = useState([]);
@@ -22,7 +23,10 @@ function Catalogo() {
   }, []);
 
   return (
+    <>
+      <Navbar />
       <Card product={product} />
+    </>
   );
 }
 

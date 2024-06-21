@@ -7,71 +7,28 @@ import Catalogo from "./components/CatalogoProductos";
 import Footer from "./components/Footer";
 import Gmail from "./components/Gmail";
 import Login from "./components/Login";
+import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
 import NotFound from "./components/Error/NotFound";
-import DefaultLayout from "./layouts/DefaultLayout";
 
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={
-          <DefaultLayout>
-            <Home />
-          </DefaultLayout>
-          } />
-        <Route path="/admin" element={
-          <DefaultLayout>
-            <Admin />
-          </DefaultLayout>
-          } />
-        <Route path="/card" element={
-          <DefaultLayout>
-            <Card />
-          </DefaultLayout>
-          } />
-        <Route path="/catalogo" element={
-          <DefaultLayout>
-            <Catalogo />
-          </DefaultLayout>
-          } />
-        <Route path="/footer" element={
-          <DefaultLayout>
-            <Footer />
-          </DefaultLayout>
-          } />
-        <Route path="/gmail" element={
-          <DefaultLayout>
-            <Gmail />
-          </DefaultLayout>
-          } />
-        <Route path="/login" element={
-          <DefaultLayout>
-            <Login />
-          </DefaultLayout>
-          } />
-        <Route path="/register" element={
-          <DefaultLayout>
-            <Register />
-          </DefaultLayout>
-          } />
-        <Route path="/shopping-card" element={
-          <DefaultLayout>
-            <ShoppingCard />
-          </DefaultLayout>
-          } />
-        <Route path="/404" element={
-          <DefaultLayout>
-            <NotFound />
-          </DefaultLayout>
-        } />
-        <Route path="/*" element={
-          <DefaultLayout>
-            <NotFound />
-          </DefaultLayout>
-        } />
+        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/card" element={<Card />} />
+        <Route path="/catalogo" element={<Catalogo />} />
+        <Route path="/footer" element={<Footer />} />
+        <Route path="/gmail" element={<Gmail />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/navbar" element={<Navbar />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/shopping-card" element={<ShoppingCard />} />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </Router>
   );

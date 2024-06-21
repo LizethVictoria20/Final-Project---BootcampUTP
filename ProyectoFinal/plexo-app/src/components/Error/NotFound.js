@@ -1,8 +1,11 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
+import Navbar from '../Navbar';
 
 const NotFound = () => {
     return (
+        <>
+        <Navbar />
         <Container fluid className="text-center" style={{paddingTop: '50px'}}>
             <Row>
                 <Col>
@@ -18,6 +21,7 @@ const NotFound = () => {
                 </Col>
             </Row>
         </Container>
+        </>
     );
 }
 

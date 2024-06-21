@@ -1,4 +1,4 @@
-
+import { DeleteProduct } from './AdminCrud';
 import './stylesheet.css';
 import React, { useState } from 'react';
 import './stylesheet.css';
@@ -27,8 +27,8 @@ function ModalComponent() {
               
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-primary" onClick={handleClose}>Agregar</button>
-              <button type="button" className="btn btn-primary" onClick={handleClose}>eliminar</button>
+              <button type="button" className="btn btn-primary" onClick={handleClose}>Cancelar</button>
+              <button type="button" className="btn btn-primary" onClick={DeleteProduct}>eliminar</button>
             </div>
           </div>
         </div>

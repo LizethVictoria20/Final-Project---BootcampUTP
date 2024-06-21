@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { AddProduct } from "./AdminCrud";
 import Navbar from "../Navbar/index";
 import axios from 'axios';
 import ModalComponent from './modalAdd';

@@ -8,7 +8,8 @@ import Xbox from '../../assets/images/xbox.png'
 import Jordan from '../../assets/images/air-jordan-.png'
 import BalonFutbol from '../../assets/images/balon-futbol.png'
 import Tablet from '../../assets/images/electrodomesticos.png'
-import Camisanegra from '../../assets/images/camisanegra.png'
+import Tablet2 from '../../assets/images/tablet.png'
+import Audifonnooreja from '../../assets/images/audifonosorejas-removebg-preview.png'
 
 function Home() {
   return (
@@ -92,7 +93,27 @@ function Home() {
               </div>
           </div>
           </div>
-          
+          <div className="morado-4">
+            <div className="container-fluid container-morado rounded-4">
+              <p>Your favorite</p>
+              <h6>headphones</h6>
+              <h6 className='title-morado'>Here you find them</h6>
+              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <div className='elecontainerImgc-4'>
+                <img src={Audifonnooreja} alt="" />
+              </div>
+            </div>
+          </div>
+
+        <div className="container-sm container-home rounded-4">
+          <p>arphones</p> 
+          <h1>Wireless</h1>  
+          <h6 className='title-home'>Tablet</h6> 
+          <Link to='catalogo' className='btn btn-home text-white'>Shop by category</Link> 
+          <div className='containerImg'>
+            <img src={Tablet2} alt="" />
+            </div>
+        </div>
         </div>
       </>
   );

@@ -32,7 +32,9 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="col-7 d-flex justify-content-center align-items-center img-logo">
-          <img src={LogoPurple} alt="Logo" className="navbar-logo" />
+          <Link to="/">
+            <img src={LogoPurple} alt="Logo" className="navbar-logo" />
+          </Link>
         </div>
         <div
           className="collapse navbar-collapse justify-content-end"

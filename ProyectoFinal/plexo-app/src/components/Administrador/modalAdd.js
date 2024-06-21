@@ -27,7 +27,7 @@ function ModalComponent() {
               <form>
                 <div className="d-flex flex-column align-items-center">
                   <div className="mb-3 text-center">
-                    <input type="number" className="form-control" placeholder="Precio" />
+                    <input type="text" className="form-control" placeholder="url" />
                   </div>
                   <div className="mb-3">
                     <input type="text" className="form-control" placeholder="Nombre" />

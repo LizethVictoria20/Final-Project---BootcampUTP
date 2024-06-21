@@ -53,7 +53,7 @@ function Admin() {
                 </div>
                 <div className="d-flex">
                   <button className="btn btn-outline-primary me-2">
-                    <img src="" alt="edit" style={{ width: '20px' }} />
+                  <ModalComponent />
                   </button>
                   <button className="btn btn-outline-danger">
                     <img src="" alt="delete" style={{ width: '20px' }} />

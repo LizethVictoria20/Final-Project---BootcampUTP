@@ -175,3 +175,6 @@
     border: red 5px solid;
     gap: 10px;
   }
+  .modal-footer{
+    display: flex;
+  }

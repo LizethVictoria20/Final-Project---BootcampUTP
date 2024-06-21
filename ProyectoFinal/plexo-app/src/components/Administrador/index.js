@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
 import axios from 'axios';
 import ModalComponent from './modalAdd';
+import ModalComponentEdit from "./modalEdit";
+import DeleteConfirmationModal from "./modalDelete";
 import "./stylesheet.css";
 import { IoSearchCircle } from "react-icons/io5";
 
@@ -53,10 +55,10 @@ function Admin() {
                 </div>
                 <div className="d-flex">
                   <button className="btn btn-outline-primary me-2">
-                  <ModalComponent />
+                  <ModalComponentEdit />
                   </button>
                   <button className="btn btn-outline-danger">
-                    <img src="" alt="delete" style={{ width: '20px' }} />
+                    <DeleteConfirmationModal/>
                   </button>
                 </div>
               </div>

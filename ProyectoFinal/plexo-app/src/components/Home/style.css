@@ -39,9 +39,7 @@
 .morado-4 {
     width: 74vh;
     border: solid 20px rgb(255, 255, 255);
-    background-color: #7429ba;
-    margin: 1rem;
-    color: white;
+    background-image: linear-gradient(to bottom, #7429ba, #7c39bc, #8446be, #8c53c0, #9360c2, #9869c2, #9d72c2, #a17bc2, #a483c1, #a78cbf, #aa94be, #ad9cbc);    color: white;
     padding: 1rem;
     display: grid;
     grid-template-columns:repeat(3, 1fr);

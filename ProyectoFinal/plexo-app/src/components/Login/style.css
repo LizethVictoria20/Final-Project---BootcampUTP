@@ -110,3 +110,13 @@ hr {
         padding: 1rem;
     }
  }
+
+
+ @media (min-width: 1400px) { 
+    .card-container-login {
+        width: 34%;
+    }
+    .card-body-login{
+        padding: 1rem;
+    }
+  }

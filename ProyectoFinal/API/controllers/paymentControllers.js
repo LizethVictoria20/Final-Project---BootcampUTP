@@ -9,9 +9,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export const openStripePaymentLink = async (carts, totalPrice, userID) => {
   const url = process.env.NODE_ENV === 'production' ? process.env.PROD_URL : process.env.DEV_URL;
 
-  const products = [];
-
-
   for (const cart of carts) {
     const product = await Product.findByPk(cart.productID);
     console.log(product)

@@ -3,74 +3,89 @@ import dotenv from "dotenv";
 import Cart from "../models/Cart.js";
 import Product from "../models/Product.js";
 import Order from "../models/Order.js";
+import OrderItem from "../models/OrderItem.js";
 import CartItem from "../models/CartItem.js";
 import { openStripePaymentLink } from "../controllers/pCv2.js";
 dotenv.config();
 
 const paymentRouter = express.Router();
-paymentRouter.post("/creat-checkout-session", openStripePaymentLink);
+paymentRouter.post("/create-checkout-session", openStripePaymentLink);
 
-// Ruta para el éxito del pago (ruta base /api/payment/success)
 paymentRouter.get("/success", async (req, res) => {
   try {
     const { totalPrice, userID } = req.query;
     if (!totalPrice || !userID) {
       return res.status(400).json({ message: "Invalid request" });
     }
-    // Obtener los carritos activos del usuario
-    const Carts = await Cart.find({
+
+    const cart = await Cart.findOne({
       where: {
         user_id: userID,
       },
       raw: true,
     });
 
-    console.log(Carts);
-
-    if (!Carts) {
+    if (!cart) {
       return res
         .status(404)
         .json({ message: "No hay carrito para ese usuario" });
     }
-    const activeCarts = await CartItem.findAll(Cart.cart_id);
 
-    console.log(activeCarts);
+    const cartItems = await CartItem.findAll({
+      where: {
+        cart_id: cart.cart_id,
+      },
+      raw: true,
+    });
 
-    // Verificar si hay suficiente inventario para los productos de los carritos activos
+    if (cartItems.length === 0) {
+      return res.status(404).json({ message: "El carrito está vacío" });
+    }
+
     const inventory = await Promise.all(
-      activeCarts.map(async (cart) => {
-        const product = await Product.findByPk(cart.productID);
+      cartItems.map(async (cartItem) => {
+        const product = await Product.findByPk(cartItem.product_id);
         return product;
       })
     );
 
     for (let i = 0; i < inventory.length; i++) {
-      if (inventory[i].quantity < activeCarts[i].quantity) {
+      if (inventory[i].quantity < cartItems[i].quantity) {
         return res.status(400).json({ message: "Not enough stock" });
       }
     }
 
     // Crear la orden
-    await Order.create({
+    const order = await Order.create({
       user_id: userID,
       total: totalPrice,
     });
 
-    // Actualizar el inventario
+    await Promise.all(
+      cartItems.map(async (cartItem, index) => {
+        await OrderItem.create({
+          order_id: order.order_id,
+          product_id: cartItem.product_id,
+          quantity: cartItem.quantity,
+          price: inventory[index].price,
+        });
+      })
+    );
     for (let i = 0; i < inventory.length; i++) {
       await Product.update(
-        { quantity: inventory[i].quantity - activeCarts[i].quantity },
+        { quantity: inventory[i].quantity - cartItems[i].quantity },
         {
-          where: { productID: activeCarts[i].productID },
+          where: { product_id: cartItems[i].product_id },
         }
       );
     }
 
-    // Actualizar el estado del carrito
-    // await Cart.destroy({where: activeCarts.cart_id});
+    await CartItem.destroy({
+      where: { cart_id: cart.cart_id },
+    });
 
     return res.redirect(
-      `https://store-angular-wheat.vercel.app/paymentStatus/${userID}`
+      `https://store-angular-wheat.vercel.app/paymentStatus/${userID}`// Cambiar al hosteo de la API
     );
   } catch (error) {
     console.log(error);
@@ -78,9 +93,8 @@ paymentRouter.get("/success", async (req, res) => {
   }
 });
 
-// Ruta para la cancelación del pago (ruta base /api/payment/cancel)
 paymentRouter.get("/cancel", (req, res) => {
-  res.status(200).json({ message: "Payment cancelled" });
+  res.status(200).json({ message: "Payment cancelled" }); //debería de devolver al carrito otra vez
 });
 
 export default paymentRouter;

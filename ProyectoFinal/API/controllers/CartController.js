@@ -44,7 +44,12 @@ export const addCartItem = async (req, res) => {
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }
-
+    if(!productName){
+      return res.status(400).json({ message: "Product name is required" });
+    }
+    if(quantity <= 0 || !quantity){
+      return res.status(400).json({ message: "Quantity should be greater than 0"})
+    }
     const product = await Product.findOne({ where: { name: productName } });
     if (!product) {
       return res.status(404).json({ message: "Product not found" });

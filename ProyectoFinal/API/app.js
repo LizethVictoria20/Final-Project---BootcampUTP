@@ -10,6 +10,7 @@ import authRouter from "./routes/auth.Routes.js";
 import { authenticateJWT } from './middleware/jwtMiddleware.js'; // Importamos el middleware JWT
 import OrdersRouter from './routes/Orders.Routes.js';
 import CartsRoutes from './routes/Carts.Routes.js';
+import paymentRouter from './routes/payment.routes.js';
 
 const app = express();
 const PORT = 3000;
@@ -53,7 +54,7 @@ app.use('/api/categories', categoriesRouter);
 app.use('/api/users', authenticateJWT, usersRouter);
 app.use('/api/orders', authenticateJWT, OrdersRouter);
 app.use('/api/carts', authenticateJWT, CartsRoutes);
-
+// app.use('/api/pay', paymentRouter);
 app.use((req, res) => {
   res.status(404).json({
     message: "No se encontró el endpoint",

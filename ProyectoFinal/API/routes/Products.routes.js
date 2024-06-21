@@ -58,10 +58,10 @@ router.put("/",  async (req, res) => {
   }
 });
 
-router.delete("/",async (req, res) => {
+router.delete("/", async (req, res) => {
   try {
     const id = req.query.id;
-    await Product.destroy({ where: { id } });
+    await Product.destroy({ where: { product_id: id } });
     res.json({ message: "Product deleted successfully" });
   } catch (err) {
     console.error(err);

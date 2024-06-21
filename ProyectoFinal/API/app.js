@@ -33,17 +33,6 @@ app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.use(
-  session({
-    name: "user_sid",
-    secret: "your_secret_key",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 1200000,
-    },
-  })
-);
 
 // Rutas de autenticación
 app.use('/api/auth', authRouter); 

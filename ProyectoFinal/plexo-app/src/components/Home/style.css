@@ -1,53 +1,86 @@
+.sol {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .container-home {
     border: solid 35px white;
     background-color: #a3a3a3;
-    margin: 2rem;
+    margin: 3rem;
     color: #7429ba;
-    padding: 2rem;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    height: 75%;
+    padding: 1rem;
+    height: 60vh;
+    width: 175vh;
 }
 
 .containerImg {
-    position: relative;
-    bottom: 24rem;
-    left: 22rem;
+    position: absolute;
+    bottom: 10rem;
+    left: 32rem;
+}
+.containerImg img {
+    width: 90%;
 }
 
 .title-home {
-    font-size: 12rem;
-    align-self: center;
+    font-size: 10rem;
+    text-align: center;
 }
 
 .btn-home {
-    background-color:#7429ba;
+    background-color: #7429ba;
     width: 20%;
-
 }
 
+.btn-home:hover {
+    background-color: #9c70c4;
+}
 
-/* MEDIA QUERY */
+.morado-4 {
+    width: 74vh;
+    border: solid 20px rgb(255, 255, 255);
+    background-color: #7429ba;
+    margin: 1rem;
+    color: white;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap: 10px;
+    height: 40vh;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5%;
+}
+.btn-morado-big {
+    background-color: #9c70c4;
+}
 
- @media (max-width: 1199.98px) { 
+.btn-morado-big:hover {
+    background-color: #a3a3a3;
+}
+
+.elecontainerImgc img {
+    width: 22vh;
+    height: 12vh;
+}
+
+@media (max-width: 1199.98px) {
     .title-home {
         font-size: 7rem;
     }
-    .containerImg  img {
+    .containerImg img {
         width: 45%;
     }
     .containerImg {
         bottom: 18rem;
-        left: 10rem;   
+        left: 10rem;
     }
-
     .container-home {
         height: 60%;
     }
-  }
+}
 
-  @media (max-width: 767.98px) { 
+@media (max-width: 767.98px) {
     .title-home {
         font-size: 5rem;
     }
@@ -58,19 +91,23 @@
     .container-home {
         height: 50%;
     }
-    @media (max-width: 575.98px) { 
-        
-     }
-   }
+}
 
-   @media (max-width: 383.98px) { 
+@media (max-width: 383.98px) {
     .containerImg {
-        left: 7rem;
         bottom: 9rem;
+        left: 7rem;
     }
 }
 
-.category button{
+.category {
+    border: 2px solid #7429ba;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+}
+
+.category button {
     margin: 5px;
     border-radius: 15%;
     background-color: #131313;
@@ -80,4 +117,54 @@
 .category button:hover {
     background-color: #7429ba;
     color: white;
+}
+
+
+.morado {
+    border: solid 20px rgb(255, 255, 255);
+    background-color: #a3a3a3;
+    margin: 1rem;
+    color: #7429ba;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap: 10px;
+    height: 40vh;
+    width: 50vh;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5%;
+}
+
+.elecontainerImgc {
+    position: relative;
+    bottom: 14rem;
+    left: 8rem;
+}
+
+.elecontainerImgc-4 {
+    position: relative;
+    bottom: 12rem;
+    left: 13rem;
+    transform: rotate(30deg);
+
+}
+.elecontainerImgc-4 img {
+    width: 36vh;
+    height: 21vh;
+
+
+}
+
+.title-morado {
+    font-size: 5vh;
+    align-self: center;
+}
+
+.btn-morado {
+    background-color: #7429ba;
+    width: 80%;
+}
+.btn-morado:hover {
+    background-color: #9c70c4;
 }

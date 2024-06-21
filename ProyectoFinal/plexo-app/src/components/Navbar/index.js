@@ -3,7 +3,6 @@ import { FaShoppingBag } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import "./style.css";
 
 import "./style.css";
 

@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
-import Navbar from "../Navbar/index";
-import "./styles.css";
-=======
 import "./styles.css";
 import Navbar from "../Navbar";
->>>>>>> 4754763445897c562474b86f6dc2e2ba43401fc8
 
 const Product = ({ product, index, increment, decrement }) => (
   <div className="product">

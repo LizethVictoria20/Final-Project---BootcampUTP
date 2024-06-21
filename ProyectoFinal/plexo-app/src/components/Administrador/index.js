@@ -31,7 +31,7 @@ function Admin() {
       <div className="container mt-5">
         <div className="bg-light p-4 shadow rounded custom-container">
           <div className="d-flex justify-content-space-between align-items-center mb-3"id="d-flex">
-            <h1>Productos</h1>
+            <h1 className="">Productos</h1>
             <div className="d-flex justify-content-between  custom1" >
               <ModalComponent />
               <div className="input-group">

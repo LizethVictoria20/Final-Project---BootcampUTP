@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
 import axios from 'axios';
 import ModalComponentEdit from "./modalEdit";
-import DeleteConfirmationModal from "./modalDelete";
 import "./stylesheet.css";
 import { IoSearchCircle } from "react-icons/io5"; 
 import ModalComponentAdd from "./modalAdd";

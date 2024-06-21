@@ -1,19 +1,70 @@
-
-import './stylesheet.css';
 import React, { useState } from 'react';
+import { FaCirclePlus } from 'react-icons/fa6';
+import { updateProduct } from './AdminCrud'; // Asegúrate de que este archivo tenga la función updateProduct exportada correctamente
 import './stylesheet.css';
-import { FaCirclePlus } from "react-icons/fa6";
 
-function ModalComponentEdit() {
+function ModalComponentAdd({ product, onProductUpdated }) {
   const [show, setShow] = useState(false);
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [image_url, setImage_url] = useState('');
+  const [stock, setStock] = useState('');
+  const [category_id, setCategory_id] = useState('');
+
+  // Cuando se monta el componente, inicializamos el estado con los datos del producto si existe
+  React.useEffect(() => {
+    if (product) {
+      console.log(product)
+      setName(product.name);
+      setPrice(product.price.toString());
+      setDescription(product.description);
+      setImage_url(product.image_url);
+      setStock(product.stock.toString());
+      setCategory_id(product.category_id.toString());
+    }
+  }, [product]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const updatedProduct = {
+        id: product, // Necesitamos el ID del producto para la solicitud PUT
+        name,
+        price: parseFloat(price),
+        description,
+        image_url,
+        stock: parseInt(stock, 10),
+        category_id: parseInt(category_id, 10),
+      };
+
+      const response = await updateProduct(updatedProduct);
+
+      if (onProductUpdated) {
+        onProductUpdated(response);
+      }
+
+      // Clear the form
+      setName('');
+      setPrice('');
+      setDescription('');
+      setImage_url('');
+      setStock('');
+      setCategory_id('');
+      handleClose();
+    } catch (error) {
+      console.error('Error updating product:', error);
+    }
+  };
+
   return (
     <>
       <button className="btn btn-primary" onClick={handleShow}>
-      <FaCirclePlus size="30px" />
+        <FaCirclePlus size="30px" />
       </button>
 
       {show && (
@@ -24,26 +75,65 @@ function ModalComponentEdit() {
               <button type="button" className="close-button" onClick={handleClose}>&times;</button>
             </div>
             <div className="modal-body">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="d-flex flex-column align-items-center">
                   <div className="mb-3 text-center">
-                    <input type="text" className="form-control" placeholder="url" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="URL"
+                      value={image_url}
+                      onChange={(e) => setImage_url(e.target.value)}
+                    />
                   </div>
                   <div className="mb-3">
-                    <input type="text" className="form-control" placeholder="Nombre" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Nombre"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </div>
                   <div className="mb-3 d-flex gap-2">
-                    <input type="number" className="form-control" placeholder="Precio" />
-                    
+                    <input
+                      type="number"
+                      className="form-control"
+                      placeholder="Precio"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                    />
                   </div>
-                  <div className="mb-3">
-                    <textarea className="form-control" rows="3" placeholder="Descripción"></textarea>
+                  <div className="mb-3 d-flex gap-2">
+                    <input
+                      type="number"
+                      className="form-control"
+                      placeholder="Stock"
+                      value={stock}
+                      onChange={(e) => setStock(e.target.value)}
+                    />
                   </div>
+                  <div className="mb-3 d-flex gap-2">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Descripción"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-3 d-flex gap-2">
+                    <input
+                      type="number"
+                      className="form-control"
+                      placeholder="Categoría"
+                      value={category_id}
+                      onChange={(e) => setCategory_id(e.target.value)}
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary">Actualizar Producto</button>
                 </div>
               </form>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-primary" onClick={handleClose}>Agregar</button>
             </div>
           </div>
         </div>
@@ -52,4 +142,4 @@ function ModalComponentEdit() {
   );
 }
 
-export default ModalComponentEdit;
+export default ModalComponentAdd;

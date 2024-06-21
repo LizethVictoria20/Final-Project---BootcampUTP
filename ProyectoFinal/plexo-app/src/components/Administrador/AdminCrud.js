@@ -15,7 +15,7 @@ export const addProduct = async (productData) => {
 
 export const updateProduct = async (productId, productData) => {
     try {
-        const response = await axios.put(`${urlProduct}/${productId}`, productData);
+        const response = await axios.put(`https://final-project-bootcamputp.onrender.com/api/products/?id=64`, productData);
         return response.data;
     } catch (error) {
         console.error('Error actualizando producto:', error);

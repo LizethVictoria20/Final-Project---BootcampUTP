@@ -19,6 +19,7 @@ function Admin() {
       console.log(productsData);
     });
   };
+      login()
 
   useEffect(() => {
     GetApiData(UrlProducts);

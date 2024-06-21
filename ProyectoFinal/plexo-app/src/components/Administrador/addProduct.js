@@ -1,42 +1,50 @@
 import axios from "axios";
 // import { useEffect } from "react";
 
-export function Login(){
-    // const urlAcess = 'https://final-project-bootcamputp.onrender.com/api/auth/login'
+export const login = async () => {
     
+  try {
+    axios.defaults.withCredentials = true;
+    const response = await axios.post(
+      "https://final-project-bootcamputp.onrender.com/api/auth/login",
+      {
+        email: "liz@example.com",
+        password: "aguapanela987",
+      }
+    );
+    return console.log("Respuesta del servidor:", response.data);
+  } catch (error) {
+    console.error("Error enviando la respuesta", error);
+  }
+};
 
-    const AddProduct = (url) => {
-        axios.post(url, {
-
-        })
-    }
-    // useEffect(() => {
-    //     LoginAdmin(urlAcess)
-    //  });  
-}
-
-export function Add() {
-    const UrlPostProducts = 'https://final-project-bootcamputp.onrender.com/api/products'
-    const AddProduct = async(url) => {
-
-        try {
-            const response = await axios.post(url, {
-                "name": "Prueba Post",
-                "description": "Una cómoda camiseta de algodón 100% perfecta para el uso diario.",
-                "price": 19.99,
-                "stock": 150,
-                "image_url": "https://hmcolombia.vtexassets.com/arquivos/ids/3299034/Camiseta-en-algodon-pima-Slim-Fit---Blanco---H-M-CO.jpg?v=638371012387000000",
-                "category_id": 1
-            });
-            return console.log('Respuesta del servidor:', response.data);
-            
-        } catch (error) {
-            console.error('Error enviando la respuesta', error);
+export const AddProduct = async () => {
+    try {
+      axios.defaults.withCredentials = true; 
+      const response = await axios.post(
+        "https://final-project-bootcamputp.onrender.com/api/products",
+        {
+          name : "Royal Shoes",
+          description : "Royal shoes for men",
+          price : 100,
+          stock : 15,
+          image_url : "https://static.dafiti.com.co/p/royal-county-of-berkshire-polo-club-6654-5502281-1-catalog-new.jpg",
+          category_id : 10
         }
+      );
+      console.log("Respuesta del servidor:", response.data);
+      return response.data; // Devolver la respuesta para manejarla fuera de la función si es necesario
+    } catch (error) {
+      console.error("Error enviando la respuesta", error);
+      throw error; // Propagar el error para manejarlo fuera de la función si es necesario
     }
-    // useEffect(() => {
-    //     AddProduct(UrlPostProducts)
-    //  });
-}
+  };
 
- 
+//     export const DeleteProduct = async() =>{
+//     try {
+//         const response = await axios.delete(
+//             "https://final-project-bootcamputp.onrender.com/api/products",
+
+//         )
+//     }
+//   }

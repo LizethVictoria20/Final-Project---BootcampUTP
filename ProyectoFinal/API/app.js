@@ -11,7 +11,7 @@ import { authenticateJWT } from './middleware/jwtMiddleware.js'; // Importamos e
 import OrdersRouter from './routes/Orders.Routes.js';
 import CartsRoutes from './routes/Carts.Routes.js';
 import paymentRouter from './routes/payment.routes.js';
-
+import path from 'path';
 const app = express();
 const PORT = 3000;
 
@@ -54,7 +54,9 @@ app.use('/api/categories', categoriesRouter);
 app.use('/api/users', authenticateJWT, usersRouter);
 app.use('/api/orders', authenticateJWT, OrdersRouter);
 app.use('/api/carts', authenticateJWT, CartsRoutes);
-// app.use('/api/pay', paymentRouter);
+app.use('/api/payment', paymentRouter);
+app.use(express.static(path.resolve('public')))
+
 app.use((req, res) => {
   res.status(404).json({
     message: "No se encontró el endpoint",

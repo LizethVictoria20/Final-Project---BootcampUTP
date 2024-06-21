@@ -5,7 +5,7 @@ import Product from "../models/Product.js";
 import Order from "../models/Order.js";
 import OrderItem from "../models/OrderItem.js";
 import CartItem from "../models/CartItem.js";
-import { openStripePaymentLink } from "../controllers/pCv2.js";
+import { openStripePaymentLink } from "../controllers/paymentController.js";
 dotenv.config();
 
 const paymentRouter = express.Router();

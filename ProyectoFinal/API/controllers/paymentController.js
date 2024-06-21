@@ -55,6 +55,7 @@ export const openStripePaymentLink = async (req, res) => {
             name: result.product.name,
             description: result.product.description,
             images: [result.product.image_url],
+            
           },
           currency: "usd",
           unit_amount: result.product.price * 100,

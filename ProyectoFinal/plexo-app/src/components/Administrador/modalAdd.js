@@ -27,10 +27,7 @@ function ModalComponent() {
               <form>
                 <div className="d-flex flex-column align-items-center">
                   <div className="mb-3 text-center">
-                    <label htmlFor="upload-photo" className="upload-placeholder">
-                      <span>Subir foto</span>
-                      <input type="file" id="upload-photo" className="d-none" />
-                    </label>
+                    <input type="number" className="form-control" placeholder="Precio" />
                   </div>
                   <div className="mb-3">
                     <input type="text" className="form-control" placeholder="Nombre" />

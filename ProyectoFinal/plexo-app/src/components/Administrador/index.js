@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
 import axios from 'axios';
-import pluscircle from "../../assets/images/plus-circle.png";
-import searchcircle from "../../assets/images/search-circle.png";
+
 import pencil from "../../assets/images/pencil.png";
 import trash from "../../assets/images/trash.png";
 import ModalComponent from './modalAdd';
@@ -30,13 +29,13 @@ function Admin() {
       <Navbar />
       <div className="container mt-5">
         <div className="bg-light p-4 shadow rounded custom-container">
-          <div className="d-flex justify-content-between align-items-center mb-3">
+          <div className="d-flex justify-content-space- align-items-center mb-3">
             <h1>Productos</h1>
             <div className="d-flex">
               <ModalComponent />
               <div className="input-group">
                 <span className="input-group-text bg-primary border-0">
-                  <img src={searchcircle} alt="search bar" style={{ width: '24px' }} />
+                  <img src=""} alt="search bar" style={{ width: '24px' }} />
                 </span>
                 <input type="search" className="form-control" placeholder="Buscar" />
               </div>

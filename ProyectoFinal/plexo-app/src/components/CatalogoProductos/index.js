@@ -19,7 +19,7 @@ const Catalogo = () => {
         setProducts(productsData);
 
         const uniqueCategories = [
-          ...new Set(productsData.map((product) => product.category_id)),
+          ...new Set(productsData.map((product) => product.name.split(" ")[0])),
         ];
         setCategories(uniqueCategories);
       } catch (error) {
@@ -39,7 +39,7 @@ const Catalogo = () => {
       return products;
     }
     return products.filter(
-      (product) => product.category_id === selectedCategory
+      (product) => product.name.split(" ")[0] === selectedCategory
     );
   };
 
@@ -47,7 +47,6 @@ const Catalogo = () => {
     <>
       <Navbar />
       <div>
-        <h1>Product Filter</h1>
         <div>
           <button onClick={() => handleCategoryChange("")}>
             All Categories
@@ -57,7 +56,7 @@ const Catalogo = () => {
               key={categoryId}
               onClick={() => handleCategoryChange(categoryId)}
             >
-              Category {categoryId}
+              {categoryId}
             </button>
           ))}
         </div>

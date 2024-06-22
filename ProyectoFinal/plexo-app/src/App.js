@@ -11,8 +11,8 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
-import Category from "./components/Categorias";
-
+import PasarelaPago from "./components/PasarelaPago";
+import Perfil from "./components/Perfil";
 function App() {
   return (
     <Router>
@@ -27,7 +27,8 @@ function App() {
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/register" element={<Register />} />
         <Route path="/shopping-card" element={<ShoppingCard />} />
-        <Route path="/categorias" element={<Category />} />
+        <Route path="/pago" element={<PasarelaPago />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
     </Router>
   );

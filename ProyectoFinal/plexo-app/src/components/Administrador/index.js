@@ -29,6 +29,7 @@ function Admin() {
 
   useEffect(() => {
     if (!productsData) {
+      console.log("Loadding");
       GetApiData(UrlProducts);
     }
   }, [productsData]);

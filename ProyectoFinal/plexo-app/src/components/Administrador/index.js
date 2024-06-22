@@ -1,40 +1,41 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
 import axios from "axios";
-import { AddProduct, login } from "./addProduct";
-import pluscircle from "../../assets/images/plus-circle.png";
-import searchcircle from "../../assets/images/search-circle.png";
-import pencil from "../../assets/images/pencil.png";
-import trash from "../../assets/images/trash.png";
-import { Add, Login } from "./addProduct";
-import "./stylesheet.css";
-import ModalComponent from "./modalAdd";
-import api from "../../http";
-import ModalComponentAdd from "./modalAdd";
 import ModalComponentEdit from "./modalEdit";
-
+import "./stylesheet.css";
+import { IoSearchCircle } from "react-icons/io5";
+import ModalComponentAdd from "./modalAdd";
+import { DeleteProduct } from "./AdminCrud";
+import { FaRegTrashAlt } from "react-icons/fa";
+import api from "../../http/index";
 function Admin() {
-  const urlAcess = "auth/login";
-  const UrlPostProducts = "products";
-  const [productsData, setProductsData] = useState();
-  const UrlProducts = "products";
+  const deleteProduct = DeleteProduct();
 
-  const GetApiData = async (url) => {
-    try {
-      const response = await api.get(url);
-      console.log(response);
+  const handleDeleteClick = async (productId) => {
+    await deleteProduct(productId);
+    // Refresh the product list after deletion
+    GetApiData(UrlProducts);
+  };
+
+  // get
+  const [productsData, setProductsData] = useState([]);
+  const UrlProducts =
+    "https://final-project-bootcamputp.onrender.com/api/products";
+
+  const GetApiData = (url) => {
+    api.get(url).then((response) => {
       setProductsData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    });
   };
 
   useEffect(() => {
-    if (!productsData) {
-      console.log("Loadding");
-      GetApiData(UrlProducts);
-    }
-  }, [productsData]);
+    GetApiData(UrlProducts);
+  }, []); // Added empty dependency array to run only on mount
+
+  const handleProductUpdated = () => {
+    // Refresh the product list after an update
+    GetApiData(UrlProducts);
+  };
 
   return (
     <>
@@ -52,7 +53,11 @@ function Admin() {
                 onProductAdded={handleProductUpdated}
               />
               <div className="input-group  ">
-                {/* <IoSearchCircle size="40px" color="white" className="addItem_admin" /> */}
+                <IoSearchCircle
+                  size="40px"
+                  color="white"
+                  className="addItem_admin"
+                />
                 <input
                   type="search"
                   className=" searchBar_admin"
@@ -91,7 +96,7 @@ function Admin() {
                     className="btn btn-outline-danger "
                     onClick={() => handleDeleteClick(product.product_id)}
                   >
-                    {/* <FaRegTrashAlt /> */}
+                    <FaRegTrashAlt />
                   </button>
                 </div>
               </div>

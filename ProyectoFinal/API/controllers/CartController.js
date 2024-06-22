@@ -101,17 +101,6 @@ export const updateCartItem = async (req, res) => {
       return res.status(404).json({ message: "Cart item not found" });
     }
 
-    if (productName) {
-      const product = await Product.findByPk(item.product_id);
-      if (!product) {
-        return res.status(404).json({ message: "Product not found" });
-      }
-      if (product.stock <= quantity) {
-        return res.status(400).json({ message: "Product out of stock" });
-      }
-      item.product_id = product.product_id;
-    }
-
     item.quantity = quantity !== undefined ? quantity : item.quantity;
 
     await item.save();

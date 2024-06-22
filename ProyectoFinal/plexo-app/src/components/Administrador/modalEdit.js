@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { FaCirclePlus } from 'react-icons/fa6';
-import { addProduct } from './AdminCrud'; // Ensure this file has the addProduct function exported correctly
+import { BiSolidPencil } from "react-icons/bi";
+import { updateProduct } from './AdminCrud';
 import './stylesheet.css';
 
-function ModalComponentAdd({ onProductAdded }) {
+function ModalComponentEdit({ product, onProductUpdated }) {
   const [show, setShow] = useState(false);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -12,6 +12,19 @@ function ModalComponentAdd({ onProductAdded }) {
   const [stock, setStock] = useState('');
   const [category_id, setCategory_id] = useState('');
 
+  // Cuando se monta el componente, inicializamos el estado con los datos del producto
+  React.useEffect(() => {
+    if (product) {
+      console.log(product)
+      setName(product.name);
+      setPrice(product.price.toString());
+      setDescription(product.description);
+      setImage_url(product.image_url);
+      setStock(product.stock.toString());
+      setCategory_id(product.category_id.toString());
+    }
+  }, [product]);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -19,7 +32,8 @@ function ModalComponentAdd({ onProductAdded }) {
     event.preventDefault();
 
     try {
-      const newProduct = {
+      const putProduct = {
+        id: product.product_id,
         name,
         price: parseFloat(price),
         description,
@@ -27,14 +41,14 @@ function ModalComponentAdd({ onProductAdded }) {
         stock: parseInt(stock, 10),
         category_id: parseInt(category_id, 10),
       };
+      console.log(putProduct)
+      const response = await updateProduct(putProduct);
 
-      const response = await addProduct(newProduct);
-
-      if (onProductAdded) {
-        onProductAdded(response);
+      if (onProductUpdated) {
+        onProductUpdated(response);
       }
 
-      // Reinicia los estados
+      // reinicia los estados
       setName('');
       setPrice('');
       setDescription('');
@@ -43,35 +57,33 @@ function ModalComponentAdd({ onProductAdded }) {
       setCategory_id('');
       handleClose();
     } catch (error) {
-      console.error('Error adding product:', error);
+      console.error('Error updating product:', error);
     }
   };
 
   return (
     <>
-      <button className="btn  btn_admin" onClick={handleShow}>
-        <FaCirclePlus size="30px" />
-      </button>
+      
+        <BiSolidPencil size="30px" onClick={handleShow} className='btnEdit_admin'/>
+      
 
       {show && (
         <div className="modal-backdrop">
           <div className="custom-modal">
-            <div className="modal-header text-center">
-              <h5 className="modal-title text-black">New Product</h5>
+            <div className="modal-header">
+              <h5 className="modal-title">Editar producto</h5>
               <button type="button" className="close-button" onClick={handleClose}>&times;</button>
             </div>
-            <div className="modal-body  ">
-              
+            <div className="modal-body">
               <form onSubmit={handleSubmit}>
                 <div className="d-flex flex-column align-items-center">
-                  <div className="mb-3 ">
+                  <div className="mb-3 text-center">
                     <input
                       type="text"
                       className="form-control"
                       placeholder="URL"
                       value={image_url}
                       onChange={(e) => setImage_url(e.target.value)}
-                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -81,7 +93,6 @@ function ModalComponentAdd({ onProductAdded }) {
                       placeholder="Nombre"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      required
                     />
                   </div>
                   <div className="mb-3 d-flex gap-2">
@@ -91,17 +102,24 @@ function ModalComponentAdd({ onProductAdded }) {
                       placeholder="Precio"
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
-                      required
                     />
                   </div>
-                  <div className="mb-3 d-flex gap-2 inputStyle_admin">
+                  <div className="mb-3 d-flex gap-2">
                     <input
                       type="number"
                       className="form-control"
                       placeholder="Stock"
                       value={stock}
                       onChange={(e) => setStock(e.target.value)}
-                      required
+                    />
+                  </div>
+                  <div className="mb-3 d-flex gap-2">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Descripción"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
                   <div className="mb-3 d-flex gap-2">
@@ -111,21 +129,9 @@ function ModalComponentAdd({ onProductAdded }) {
                       placeholder="Categoría"
                       value={category_id}
                       onChange={(e) => setCategory_id(e.target.value)}
-                      required
-                    />
-                    
-                  </div>
-                  <div className="mb-3 d-flex gap-2">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Descripción"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      required
                     />
                   </div>
-                  <button type="submit" className=" btn btn-primary btn-purple text-white">Agregar Producto</button>
+                  <button type="submit" className="btn btn-primary">Actualizar Producto</button>
                 </div>
               </form>
             </div>
@@ -136,4 +142,4 @@ function ModalComponentAdd({ onProductAdded }) {
   );
 }
 
-export default ModalComponentAdd;
+export default ModalComponentEdit;

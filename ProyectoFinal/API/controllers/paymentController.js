@@ -13,19 +13,20 @@ export const openStripePaymentLink = async (req, res) => {
     if (!cart_id) {
       return res.status(400).json({ message: "Cart ID is required" });
     }
+
     const url =
       process.env.NODE_ENV === "production"
         ? process.env.PROD_URL
         : process.env.DEV_URL;
 
     const cartItems = await CartItem.findAll({
-      where: {
-        cart_id: cart_id,
-      },
+      where: { cart_id: cart_id },
     });
-    if (!cartItems) {
-      return res.status(404).json({ message: "Carts items not found" });
+
+    if (!cartItems.length) {
+      return res.status(404).json({ message: "Cart items not found" });
     }
+
     const cart = await Cart.findByPk(cart_id);
     if (!cart) {
       return res.status(404).json({ error: "Cart not found" });
@@ -55,7 +56,6 @@ export const openStripePaymentLink = async (req, res) => {
             name: result.product.name,
             description: result.product.description,
             images: [result.product.image_url],
-            
           },
           currency: "usd",
           unit_amount: result.product.price * 100,
@@ -68,7 +68,12 @@ export const openStripePaymentLink = async (req, res) => {
       0
     );
 
+    if (lineItems.length === 0) {
+      return res.status(400).json({ message: "No valid products found" });
+    }
+
     const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
       line_items: lineItems,
       mode: "payment",
       success_url: `${url}/api/payment/success/?totalPrice=${
@@ -77,7 +82,7 @@ export const openStripePaymentLink = async (req, res) => {
       cancel_url: `${url}/api/payment/cancel`,
     });
 
-    return res.json(session);
+    return res.json({ url: session.url });
   } catch (error) {
     console.error(error);
     return res

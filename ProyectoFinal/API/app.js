@@ -1,5 +1,5 @@
 import sequelize from "./config/config.js";
-import { authenticateJWT } from './middleware/jwtMiddleware.js'; // Importamos el middleware JWT
+import { authenticateJWT } from './middleware/jwtMiddleware.js'; 
 import usersRouter from "./routes/Users.routes.js";
 import productsRouter from "./routes/Products.routes.js";
 import categoriesRouter from "./routes/Categories.routes.js";
@@ -10,14 +10,18 @@ import paymentRouter from './routes/payment.routes.js';
 import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
-const app = express();
-const PORT = 3000;
+import dotenv from 'dotenv';
 
-// Configuración de CORS
+dotenv.config(); 
+
+const app = express();
+const PORT = process.env.PORT;
+
+
 const corsOptions = {
-  origin: '*', // Cambia esto al dominio que quieres permitir
+  origin: '*', 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Habilita el uso de cookies
+  credentials: true, 
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
 };
 
@@ -32,10 +36,10 @@ app.use('/api/products', productsRouter);
 app.use('/api/categories', categoriesRouter);
 
 // Rutas protegidas con JWT
+app.use('/api/payment', paymentRouter);
 app.use('/api/users', authenticateJWT, usersRouter);
 app.use('/api/orders', authenticateJWT, OrdersRouter);
 app.use('/api/carts', authenticateJWT, CartsRoutes);
-app.use('/api/payment', authenticateJWT, paymentRouter);
 
 app.use((req, res) => {
   res.status(404).json({

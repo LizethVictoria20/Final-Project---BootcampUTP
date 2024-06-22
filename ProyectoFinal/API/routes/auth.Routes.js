@@ -81,14 +81,12 @@ router.post("/login", async (req, res) => {
 });
 router.get("/logout", authenticateJWT, (req, res) => {
   try {
-    // Limpiar la cookie del token
-    res.clearCookie("plexoCookie");
-
+    // Destruir la cookie del token estableciendo su tiempo de expiración en el pasado
+    res.cookie("plexoCookie", "", { expires: new Date(0) });
     res.json({ message: "Logout exitoso" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error en el servidor" });
   }
 });
-
 export default router;

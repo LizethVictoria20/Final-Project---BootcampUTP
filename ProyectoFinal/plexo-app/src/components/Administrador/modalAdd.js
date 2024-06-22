@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaCirclePlus } from 'react-icons/fa6';
-import { addProduct } from './AdminCrud'; // Asegúrate de que este archivo tenga la función addProduct exportada correctamente
+import { addProduct } from './AdminCrud'; // Ensure this file has the addProduct function exported correctly
 import './stylesheet.css';
 
 function ModalComponentAdd({ onProductAdded }) {
@@ -49,21 +49,22 @@ function ModalComponentAdd({ onProductAdded }) {
 
   return (
     <>
-      <button className="btn btn-primary" onClick={handleShow}>
+      <button className="btn  btn_admin" onClick={handleShow}>
         <FaCirclePlus size="30px" />
       </button>
 
       {show && (
         <div className="modal-backdrop">
           <div className="custom-modal">
-            <div className="modal-header">
-              <h5 className="modal-title">Nuevo producto</h5>
+            <div className="modal-header text-center">
+              <h5 className="modal-title text-black">New Product</h5>
               <button type="button" className="close-button" onClick={handleClose}>&times;</button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body  ">
+              
               <form onSubmit={handleSubmit}>
                 <div className="d-flex flex-column align-items-center">
-                  <div className="mb-3 text-center">
+                  <div className="mb-3 ">
                     <input
                       type="text"
                       className="form-control"
@@ -93,23 +94,13 @@ function ModalComponentAdd({ onProductAdded }) {
                       required
                     />
                   </div>
-                  <div className="mb-3 d-flex gap-2">
+                  <div className="mb-3 d-flex gap-2 inputStyle_admin">
                     <input
                       type="number"
                       className="form-control"
                       placeholder="Stock"
                       value={stock}
                       onChange={(e) => setStock(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="mb-3 d-flex gap-2">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Descripción"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
                       required
                     />
                   </div>
@@ -122,8 +113,19 @@ function ModalComponentAdd({ onProductAdded }) {
                       onChange={(e) => setCategory_id(e.target.value)}
                       required
                     />
+                    
                   </div>
-                  <button type="submit" className="btn btn-primary">Agregar Producto</button>
+                  <div className="mb-3 d-flex gap-2">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Descripción"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <button type="submit" className=" btn btn-primary btn-purple text-white">Agregar Producto</button>
                 </div>
               </form>
             </div>

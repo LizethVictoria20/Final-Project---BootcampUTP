@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaCirclePlus } from 'react-icons/fa6';
+import { BiSolidPencil } from "react-icons/bi";
 import { updateProduct } from './AdminCrud'; // Asegúrate de que este archivo tenga la función updateProduct exportada correctamente
 import './stylesheet.css';
 
@@ -63,9 +63,9 @@ function ModalComponentEdit({ product, onProductUpdated }) {
 
   return (
     <>
-      <button className="btn btn-primary" onClick={handleShow}>
-        <FaCirclePlus size="30px" />
-      </button>
+      
+        <BiSolidPencil size="30px" onClick={handleShow} className='btnEdit_admin'/>
+      
 
       {show && (
         <div className="modal-backdrop">

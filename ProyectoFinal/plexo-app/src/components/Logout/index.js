@@ -1,22 +1,14 @@
-import api from "../../http/index";
+import { CiLogout } from "react-icons/ci";
+import { Link } from "react-router-dom";
+
 function Logout() {
-  const logoutUser = async () => {
-    try {
-      const response = await api.get("auth/logout", {});
-      if (response.status === 200) {
-        console.log("Logout successful.");
-        // Limpiar el estado de autenticación, por ejemplo, eliminar el token del local storage
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
     <>
-        <button onClick={logoutUser}>Logout</button>
+      <Link to="/">
+        <CiLogout color="#7429ba" fontSize="2em" />
+      </Link>
     </>
-  )
-
+  );
 }
 
-export default Logout
+export default Logout;

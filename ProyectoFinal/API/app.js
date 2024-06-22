@@ -16,6 +16,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
+console.log(PORT);
 const whitelist = ["http://localhost:3000", "https://plexoshop.vercel.app"];
 
 app.use(cookieParser());

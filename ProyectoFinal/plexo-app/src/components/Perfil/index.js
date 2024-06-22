@@ -5,12 +5,15 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { BiSupport } from "react-icons/bi";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import Navbar from "../Navbar/index";
+import { BiLogOut } from "react-icons/bi";
+import { Link } from "react-router-dom";
+
 import "./style.css";
 
 function Perfil() {
   return (
     <div>
-    <Navbar/>
+      <Navbar />
       {/* Profile Content */}
       <div className="profile-container">
         <div className="myprofile-header">
@@ -31,7 +34,9 @@ function Perfil() {
                 <MdAdminPanelSettings className="iconos" /> Account Settings
               </button>
               <button className="btn btn-custom mb-2">
-                <BiSupport className="iconos" /> Technical Support
+                <Link to="/" className="logo-logout">
+                  <BiLogOut className="iconos" /> Logout
+                </Link>
               </button>
             </div>
           </div>

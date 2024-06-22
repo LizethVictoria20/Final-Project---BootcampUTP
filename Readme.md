@@ -9,7 +9,7 @@ Toda la API está protegida con JWT (JSON Web Token). Para acceder a las rutas p
 
 ### `POST /users/register`
 Registro de usuarios.
-- **Body**: `{ username, email, password, first_name, last_name }`
+- **Body**: `{ username: string , email: string, password:string (debe contener min 8, una letra y un numero), first_name:string, last_name:string }`
 - **Respuesta exitosa**: `201 Created`
 - **Respuesta de error**: `400 Bad Request`, `500 Internal Server Error`
 
@@ -51,13 +51,13 @@ Obtener todas las categorías de productos.
 
 ### `POST /categories`
 Crear una nueva categoría de productos (requiere rol de administrador).
-- **Body**: `{ name, description }`
+- **Body**: `{ name: string, description: string (opcional) }`
 - **Respuesta exitosa**: `201 Created`
 - **Respuesta de error**: `401 Unauthorized`, `403 Forbidden`, `400 Bad Request`, `500 Internal Server Error`
 
 ### `POST /products`
 Crear un nuevo producto (requiere rol de administrador).
-- **Body**: `{ name, description, price, stock, image_url, category_id }`
+- **Body**: `{ name: string, description: string (opcional), price: int, stock: int, image_url: string, category_id: int }`
 - **Respuesta exitosa**: `201 Created`
 - **Respuesta de error**: `401 Unauthorized`, `403 Forbidden`, `400 Bad Request`, `500 Internal Server Error`
 

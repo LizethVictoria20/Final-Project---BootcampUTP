@@ -4,7 +4,8 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import UserSchema from "../schemas/UserShema.js";
 import { authenticateJWT } from "../middleware/jwtMiddleware.js";
-
+import dotenv from 'dotenv';
+dotenv.config()
 const router = express.Router();
 
 router.post("/register", async (req, res) => {
@@ -38,6 +39,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -54,12 +56,17 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       { userId: user.user_id, email: user.email, admin: user.admin },
-      "12345",
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
     // Configurar la cookie
-    res.cookie("jwt", token, { httpOnly: true });
+    res.cookie("jwt", token, {
+      httpOnly: true,
+      secure: true, 
+      sameSite: 'Strict', 
+      overwrite: true,
+    });
 
     // Enviar la respuesta JSON con el token y otros datos
     res.json({
@@ -73,7 +80,6 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Error en el servidor" });
   }
 });
-
 router.get("/logout", authenticateJWT, (req, res) => {
   try {
     // Limpiar la cookie del token

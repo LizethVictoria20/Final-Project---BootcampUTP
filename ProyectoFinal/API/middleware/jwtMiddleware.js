@@ -12,7 +12,7 @@ export const authenticateJWT = async (req, res, next) => {
   }
 
   try {
-    const decoded = await verifyJwt(token, JWT_SECRET);
+    const decoded = await verifyJwt(token, process.env.JWT_SECRET);
     req.user = decoded; 
     next();
   } catch (error) {
@@ -26,3 +26,4 @@ export const authenticateJWT = async (req, res, next) => {
     }
   }
 };
+

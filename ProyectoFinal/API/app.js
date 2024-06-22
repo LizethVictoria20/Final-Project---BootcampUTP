@@ -1,12 +1,12 @@
 import sequelize from "./config/config.js";
-import { authenticateJWT } from './middleware/jwtMiddleware.js'; // Importamos el middleware JWT
+import { authenticateJWT } from "./middleware/jwtMiddleware.js";
 import usersRouter from "./routes/Users.routes.js";
 import productsRouter from "./routes/Products.routes.js";
 import categoriesRouter from "./routes/Categories.routes.js";
 import authRouter from "./routes/auth.Routes.js";
-import OrdersRouter from './routes/Orders.Routes.js';
-import CartsRoutes from './routes/Carts.Routes.js';
-import paymentRouter from './routes/payment.routes.js';
+import OrdersRouter from "./routes/Orders.Routes.js";
+import CartsRoutes from "./routes/Carts.Routes.js";
+import paymentRouter from "./routes/payment.routes.js";
 import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
@@ -31,17 +31,16 @@ app.use(cors({
 }));
 app.use(express.json());
 
-
 // Rutas de autenticación
-app.use('/api/auth', authRouter); 
-app.use('/api/products', productsRouter);
-app.use('/api/categories', categoriesRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/categories", categoriesRouter);
 
 // Rutas protegidas con JWT
-app.use('/api/users', authenticateJWT, usersRouter);
-app.use('/api/orders', authenticateJWT, OrdersRouter);
-app.use('/api/carts', authenticateJWT, CartsRoutes);
-app.use('/api/payment', authenticateJWT, paymentRouter);
+app.use("/api/payment", paymentRouter);
+app.use("/api/users", authenticateJWT, usersRouter);
+app.use("/api/orders", authenticateJWT, OrdersRouter);
+app.use("/api/carts", authenticateJWT, CartsRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

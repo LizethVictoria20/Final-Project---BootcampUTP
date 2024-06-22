@@ -1,6 +1,6 @@
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../../http"
+import api from "../../http";
 
 import { useState } from "react";
 import Navbar from "../Navbar";
@@ -18,13 +18,10 @@ function Login() {
     setError(null);
 
     try {
-      const response = await api.post(
-        "auth/login",
-        {
-          email: userEmail,
-          password: password,
-        }
-      );
+      const response = await api.post("auth/login", {
+        email: userEmail,
+        password: password,
+      });
       if (response.status === 200) {
         setIsLogged(true);
         console.log("Login successful");
@@ -32,7 +29,7 @@ function Login() {
         if (userRole === false) {
           navigate("/");
         } else if (userRole === true) {
-          navigate("/admin");
+          navigate("/perfil");
         }
         console.log(userRole);
       } else {

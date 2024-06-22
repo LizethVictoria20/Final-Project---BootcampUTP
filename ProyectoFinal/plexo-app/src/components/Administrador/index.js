@@ -33,7 +33,7 @@ function Admin() {
 
   const handleProductUpdated = () => {
     // Refresh the product list after an update
-    GetApiData(UrlProducts);
+    GetApiData(UrlProducts); 
   };
 
   return (

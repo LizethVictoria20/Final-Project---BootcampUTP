@@ -53,7 +53,8 @@ function Admin() {
               </div>
             </div>
             <div className="containerProducts_admin">
-              {productsData?.map((product) => (
+            hhh
+              {productsData && productsData?.map((product) => (
                 <div className="product_admin" key={product.product_id}>
                   <img
                     className="img-product_admin"

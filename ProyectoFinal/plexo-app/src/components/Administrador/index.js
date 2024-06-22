@@ -14,27 +14,25 @@ function Admin() {
   const handleDeleteClick = async (productId) => {
     await deleteProduct(productId);
     // Refresh the product list after deletion
-    GetApiData(UrlProducts);
+    GetApiData();
   };
 
   // get
   const [productsData, setProductsData] = useState([]);
-  const UrlProducts =
-    "https://final-project-bootcamputp.onrender.com/api/products";
 
-  const GetApiData = (url) => {
-    api.get(url).then((response) => {
+  const GetApiData = () => {
+    api.get("products").then((response) => {
       setProductsData(response.data);
     });
   };
 
   useEffect(() => {
-    GetApiData(UrlProducts);
+    GetApiData();
   }, []); // Added empty dependency array to run only on mount
 
   const handleProductUpdated = () => {
     // Refresh the product list after an update
-    GetApiData(UrlProducts);
+    GetApiData();
   };
 
   return (

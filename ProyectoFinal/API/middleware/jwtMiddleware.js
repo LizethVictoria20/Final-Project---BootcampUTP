@@ -26,3 +26,4 @@ export const authenticateJWT = async (req, res, next) => {
     }
   }
 };
+

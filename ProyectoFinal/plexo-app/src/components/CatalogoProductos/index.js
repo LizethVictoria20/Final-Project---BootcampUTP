@@ -3,6 +3,7 @@ import axios from "axios";
 import "./style.css";
 import Card from "../Card/index";
 import Navbar from "../Navbar/index";
+import Buscador from "../Buscador/index";
 
 const Catalogo = () => {
   const [products, setProducts] = useState([]);
@@ -47,7 +48,7 @@ const Catalogo = () => {
   return (
     <>
       <Navbar />
-
+      <Buscador />
       <div className="container text-center container-catalogo">
         <div className="row">
           <div className="col col-lg-2 container-products">
@@ -57,7 +58,7 @@ const Catalogo = () => {
                 onClick={() => handleCategoryChange("")}
               >
                 <div>
-                <p>All categories</p>
+                  <p>All categories</p>
                 </div>
               </button>
               {categories.map((categoryId) => (

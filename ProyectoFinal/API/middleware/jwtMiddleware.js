@@ -4,7 +4,7 @@ import { promisify } from 'util';
 const verifyJwt = promisify(jwt.verify);
 
 export const authenticateJWT = async (req, res, next) => {
-  const token = req.cookies.token;
+  const token = req.cookies.plexoCookie;
 
   if (!token) {
     return res.status(401).json({ message: 'No hay token proporcionado' });

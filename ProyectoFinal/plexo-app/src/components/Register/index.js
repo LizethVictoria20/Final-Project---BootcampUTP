@@ -12,10 +12,13 @@ function Register() {
   const [lastName, setLastName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   const postNewUser = async (event) => {
     event.preventDefault();
+    setError(null);
     // Confirmación de password
     if (userPassword !== confirmPassword) {
       alert("Las contraseñas no coinciden");
@@ -113,6 +116,7 @@ function Register() {
                 onChange={(event) => setConfirmPassword(event.target.value)}
               />
             </div>
+            {error && <div className="alert alert-danger">{error}</div>}
             {isRegister && (
               <div className="alert alert-success">Registro exitoso</div>
             )}

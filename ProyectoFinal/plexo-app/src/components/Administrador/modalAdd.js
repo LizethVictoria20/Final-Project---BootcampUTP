@@ -34,7 +34,7 @@ function ModalComponentAdd({ onProductAdded }) {
         onProductAdded(response);
       }
 
-      // Clear the form
+      // Reinicia los estados
       setName('');
       setPrice('');
       setDescription('');

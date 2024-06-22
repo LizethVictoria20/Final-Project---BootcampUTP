@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BiSolidPencil } from "react-icons/bi";
-import { updateProduct } from './AdminCrud'; // Asegúrate de que este archivo tenga la función updateProduct exportada correctamente
+import { updateProduct } from './AdminCrud';
 import './stylesheet.css';
 
 function ModalComponentEdit({ product, onProductUpdated }) {
@@ -12,7 +12,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
   const [stock, setStock] = useState('');
   const [category_id, setCategory_id] = useState('');
 
-  // Cuando se monta el componente, inicializamos el estado con los datos del producto si existe
+  // Cuando se monta el componente, inicializamos el estado con los datos del producto
   React.useEffect(() => {
     if (product) {
       console.log(product)
@@ -32,7 +32,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
     event.preventDefault();
 
     try {
-      const updatedProduct1 = {
+      const putProduct = {
         id: product.product_id,
         name,
         price: parseFloat(price),
@@ -41,14 +41,14 @@ function ModalComponentEdit({ product, onProductUpdated }) {
         stock: parseInt(stock, 10),
         category_id: parseInt(category_id, 10),
       };
-      console.log(updatedProduct1)
-      const response = await updateProduct(updatedProduct1);
+      console.log(putProduct)
+      const response = await updateProduct(putProduct);
 
       if (onProductUpdated) {
         onProductUpdated(response);
       }
 
-      // Clear the form
+      // reinicia los estados
       setName('');
       setPrice('');
       setDescription('');

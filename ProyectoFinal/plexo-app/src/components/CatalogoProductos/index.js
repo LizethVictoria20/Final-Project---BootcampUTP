@@ -10,7 +10,6 @@ const Catalogo = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
-    // Fetch products from the API
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
@@ -44,25 +43,26 @@ const Catalogo = () => {
     );
   };
 
+
   return (
     <>
       <Navbar />
 
-      <div className="container text-center container-catalogo">
+      <div className="container-fluid text-center container-catalogo">
         <div className="row">
-          <div className="col col-lg-2 container-products">
-            <div>
+          <div className="col-lg-2">
+            <div className="container-categories sticky-top">
               <button
-                className="container-categories_btn"
+                id="category_btn"
+                className="container-categories-btn btn mb-3"
                 onClick={() => handleCategoryChange("")}
               >
-                <div>
-                <p>All categories</p>
-                </div>
+                All categories
               </button>
               {categories.map((categoryId) => (
                 <button
-                  className="container-categories_btn d-flex flex-column"
+                  id="categories_btn"
+                  className={`container-categories-btn btn mb-3 ${selectedCategory === categoryId ? 'active' : ''}`}
                   key={categoryId}
                   onClick={() => handleCategoryChange(categoryId)}
                 >
@@ -72,8 +72,7 @@ const Catalogo = () => {
             </div>
           </div>
           <div className="col">
-            {" "}
-            <div className="container-products d-flex flex-wrap">
+            <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
                   <Card key={product.product_id} product={product} />

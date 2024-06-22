@@ -1,7 +1,7 @@
 import express from 'express';
 import User from '../models/User.js'
 import { isAdmin } from '../middleware/authMiddleware.js';
-import { authenticateJWT } from '../middleware/jwtMiddleware.js'; 
+import { authenticateJWT } from "../middleware/jwtMiddleware.js";
 
 const router = express.Router();
 

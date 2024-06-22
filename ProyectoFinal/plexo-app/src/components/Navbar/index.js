@@ -4,20 +4,10 @@ import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 
-import "./style.css";
-
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-white">
+    <nav className="navbar navbar-expand-lg bg-white navbar-main">
       <div className="container-fluid container-nav_bar">
-        <form className="search-form" role="search">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Enter your search..."
-            aria-label="Search"
-          />
-        </form>
         {/* Desplegable */}
         <button
           className="navbar-toggler"
@@ -30,9 +20,11 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <a href="/" className="col-7 d-flex justify-content-center align-items-center img-logo">
-          <img src={LogoPurple} alt="Logo" className="navbar-logo" />
-        </a>
+        <div className="col-7 d-flex align-items-center img-logo">
+          <Link to="/">
+            <img src={LogoPurple} alt="Logo" className="navbar-logo" />
+          </Link>
+        </div>
         <div
           className="collapse navbar-collapse justify-content-end"
           id="navbarSupportedContent"

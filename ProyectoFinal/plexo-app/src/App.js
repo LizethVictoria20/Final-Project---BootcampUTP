@@ -10,9 +10,8 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
-import NotFound from "./components/Error/NotFound";
-// import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess";
-
+import PasarelaPago from "./components/PasarelaPago";
+import Perfil from "./components/Perfil";
 function App() {
   return (
     <Router>

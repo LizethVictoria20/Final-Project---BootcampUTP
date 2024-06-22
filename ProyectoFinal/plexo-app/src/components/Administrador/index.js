@@ -37,7 +37,6 @@ function Admin() {
   return (
     <>
       <Navbar />
-      <div className="containerAll_admin">
         <div className="container_admin">
           <div className="containerElements_admin">
             <div className="productsAddSearch_admin">
@@ -76,7 +75,6 @@ function Admin() {
               ))}
             </div>
           </div>
-        </div>
       </div>
     </>
   );

@@ -60,10 +60,10 @@ router.post("/login", async (req, res) => {
     );
 
     // Configurar la cookie
-    res.cookie("jwt", token, {
+    res.cookie("token", token, {
       httpOnly: true,
       secure: true, 
-      sameSite: 'Strict', 
+      sameSite: 'lax', 
       overwrite: true,
     });
 
@@ -82,7 +82,7 @@ router.post("/login", async (req, res) => {
 router.get("/logout", authenticateJWT, (req, res) => {
   try {
     // Limpiar la cookie del token
-    res.clearCookie("jwt");
+    res.clearCookie("token");
 
     res.json({ message: "Logout exitoso" });
   } catch (error) {

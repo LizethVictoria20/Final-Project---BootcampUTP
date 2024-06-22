@@ -3,6 +3,7 @@ import axios from "axios";
 import "./style.css";
 import Card from "../Card/index";
 import Navbar from "../Navbar/index";
+import Buscador from "../Buscador/index";
 
 const Catalogo = () => {
   const [products, setProducts] = useState([]);

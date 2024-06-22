@@ -11,18 +11,24 @@ import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 
 // Configuración de CORS
-const corsOptions = {
-  origin: '*', // Cambia esto al dominio que quieres permitir
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Habilita el uso de cookies
-  allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-};
-
+const whitelist = ["http://localhost:3000", "https://plexoshop.vercel.app"]
 app.use(cookieParser());
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (whitelist.includes(origin)) {
+          callback(null, true);
+      } else {
+          callback(new Error("Not allowed by CORS"));
+      }
+  },
+  optionsSuccessStatus: 200,
+  credentials: true,
+  methods: ["GET", "PUT", "PATCH", "POST", "DELETE"]
+}));
 app.use(express.json());
 
 

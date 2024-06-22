@@ -1,6 +1,7 @@
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
-import Axios from "axios";
+import api from "../../http"
+
 import { useState } from "react";
 import Navbar from "../Navbar";
 
@@ -17,8 +18,8 @@ function Login() {
     setError(null);
 
     try {
-      const response = await Axios.post(
-        "https://final-project-bootcamputp.onrender.com/api/auth/login",
+      const response = await api.post(
+        "auth/login",
         {
           email: userEmail,
           password: password,

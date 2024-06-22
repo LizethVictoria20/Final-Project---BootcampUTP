@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import Navbar from '../Navbar'; // Asumiendo que tienes un componente Navbar
 import './styles.css'; // Asumiendo que tienes un archivo de estilos CSS
 
+
 // Componente para mostrar la información de un producto
 const Product = ({ product, index, increment, decrement }) => (
   <div className="product">
@@ -28,39 +29,6 @@ const Product = ({ product, index, increment, decrement }) => (
 
 const ShoppingCart = () => {
   const [products, setProducts] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(null);
-
-  // Efecto para simular el login y obtener el token
-  useEffect(() => {
-    const loginAndGetToken = async () => {
-      try {
-        const response = await axios.post('https://final-project-bootcamputp.onrender.com/api/auth/login', {
-          email: "liz@example.com",
-          password: "aguapanela987"
-        });
-        const token = response.data.token; // Asegúrate de extraer el token correctamente
-        Cookies.set('token', token);
-        setIsLoggedIn(true);
-
-        const userIdFromResponse = response.data.userId;
-        if (userIdFromResponse) {
-          setUserId(userIdFromResponse);
-          Cookies.set('user_id', userIdFromResponse);
-        } else {
-          console.error('User ID not provided in login response.');
-        }
-
-        // Llamar a las funciones para obtener productos y verificar/crear el carrito
-        fetchProducts(token);
-        checkOrCreateCart(token);
-      } catch (error) {
-        console.error('Error during login:', error);
-      }
-    };
-
-    loginAndGetToken();
-  }, []);
 
   // Función para obtener la lista de productos
   const fetchProducts = async (token) => {
@@ -72,44 +40,7 @@ const ShoppingCart = () => {
       console.error('Error fetching products:', error);
     }
   };
-
-  // Función para obtener el userId de las cookies
-  const getUserIdFromCookie = () => {
-    return Cookies.get('user_id');
-  };
-
-  // Función para verificar o crear un carrito para el usuario
-  const checkOrCreateCart = async (token) => {
-    try {
-      const userIdFromCookie = getUserIdFromCookie();
-      if (!userIdFromCookie) {
-        console.error('User ID not found in cookies.');
-        return;
-      }
-
-      const response = await axios.get('https://final-project-bootcamputp.onrender.com/api/carts', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      const userCart = response.data;
-      if (!userCart) {
-        const createCartResponse = await axios.post('https://final-project-bootcamputp.onrender.com/api/carts', {
-          userId: userIdFromCookie
-        }, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        console.log('Cart created:', createCartResponse.data);
-      } else {
-        console.log('Cart found:', userCart);
-      }
-    } catch (error) {
-      console.error('Error checking or creating cart:', error);
-    }
-  };
+  fetchProducts();
 
   // Funciones para incrementar y decrementar la cantidad de productos
   const incrementQuantity = (index) => {

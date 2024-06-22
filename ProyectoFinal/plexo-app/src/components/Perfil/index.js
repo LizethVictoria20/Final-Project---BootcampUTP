@@ -33,7 +33,7 @@ function Perfil() {
               <button className="btn btn-custom mb-2">
                 <MdAdminPanelSettings className="iconos" /> Account Settings
               </button>
-              <button className="btn btn-custom mb-2">
+              <button className="btn btn-custom mb-2 button-logo-logout">
                 <Link to="/" className="logo-logout">
                   <BiLogOut className="iconos" /> Logout
                 </Link>

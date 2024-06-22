@@ -11,8 +11,7 @@ import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
 import NotFound from "./components/Error/NotFound";
-import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess";
-
+// import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess";
 
 function App() {
   return (
@@ -30,7 +29,7 @@ function App() {
         <Route path="/shopping-card" element={<ShoppingCard />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/success" element={<PaymentSuccess />} />
+        {/* <Route path="/success" element={<PaymentSuccess />} /> */}
       </Routes>
     </Router>
   );

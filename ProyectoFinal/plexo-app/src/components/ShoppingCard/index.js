@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 import Navbar from "../Navbar"; // Asumiendo que tienes un componente Navbar
 import "./styles.css"; // Asumiendo que tienes un archivo de estilos CSS
 

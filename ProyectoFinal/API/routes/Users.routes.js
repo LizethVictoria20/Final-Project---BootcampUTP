@@ -5,7 +5,7 @@ import { authenticateJWT } from "../middleware/jwtMiddleware.js";
 
 const router = express.Router();
 
-router.get('/', authenticateJWT, async (req, res) => {
+router.get('/', authenticateJWT, isAdmin, async (req, res) => {
   try {
     const users = await User.findAll();
     res.json(users);

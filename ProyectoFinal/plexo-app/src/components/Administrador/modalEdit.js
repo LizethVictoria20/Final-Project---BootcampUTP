@@ -3,7 +3,7 @@ import { FaCirclePlus } from 'react-icons/fa6';
 import { updateProduct } from './AdminCrud'; // Asegúrate de que este archivo tenga la función updateProduct exportada correctamente
 import './stylesheet.css';
 
-function ModalComponentAdd({ product, onProductUpdated }) {
+function ModalComponentEdit({ product, onProductUpdated }) {
   const [show, setShow] = useState(false);
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
@@ -32,8 +32,8 @@ function ModalComponentAdd({ product, onProductUpdated }) {
     event.preventDefault();
 
     try {
-      const updatedProduct = {
-        id: product, // Necesitamos el ID del producto para la solicitud PUT
+      const updatedProduct1 = {
+        id: product.product_id,
         name,
         price: parseFloat(price),
         description,
@@ -41,8 +41,8 @@ function ModalComponentAdd({ product, onProductUpdated }) {
         stock: parseInt(stock, 10),
         category_id: parseInt(category_id, 10),
       };
-
-      const response = await updateProduct(updatedProduct);
+      console.log(updatedProduct1)
+      const response = await updateProduct(updatedProduct1);
 
       if (onProductUpdated) {
         onProductUpdated(response);
@@ -142,4 +142,4 @@ function ModalComponentAdd({ product, onProductUpdated }) {
   );
 }
 
-export default ModalComponentAdd;
+export default ModalComponentEdit;

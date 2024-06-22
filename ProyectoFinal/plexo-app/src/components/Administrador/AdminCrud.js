@@ -13,15 +13,17 @@ export const addProduct = async (productData) => {
     }
 };
 
-export const updateProduct = async (productId, productData) => {
+
+export const updateProduct = async (productData) => {
     try {
-        const response = await axios.put(`https://final-project-bootcamputp.onrender.com/api/products/?id=64`, productData);
+        const response = await axios.put(`${urlProduct}/${productData.id}`, productData);
         return response.data;
     } catch (error) {
-        console.error('Error actualizando producto:', error);
+        console.error('Error actualizando producto:', error.response ? error.response.data : error.message);
         throw error;
     }
 };
+
 
 export const fetchProducts = async () => {
     try {

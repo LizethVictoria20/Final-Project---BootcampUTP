@@ -7,15 +7,14 @@ import { IoSearchCircle } from "react-icons/io5";
 import ModalComponentAdd from "./modalAdd";
 import { DeleteProduct } from "./AdminCrud";
 
-
 function Admin() {
-
   const deleteProduct = DeleteProduct();
 
   const handleDeleteClick = async (productId) => {
     await deleteProduct(productId);
-  } ;
-
+    // Refresh the product list after deletion
+    GetApiData(UrlProducts);
+  };
 
   // get
   const [productsData, setProductsData] = useState([]);
@@ -24,28 +23,32 @@ function Admin() {
   const GetApiData = (url) => {
     axios.get(url).then((response) => {
       setProductsData(response.data);
-      console.log(productsData);
     });
   };
 
   useEffect(() => {
     GetApiData(UrlProducts);
-  });
+  }, []); // Added empty dependency array to run only on mount
+
+  const handleProductUpdated = () => {
+    // Refresh the product list after an update
+    GetApiData(UrlProducts);
+  };
 
   return (
     <>
       <Navbar />
       <div className="container mt-5">
         <div className="bg-light p-4 shadow rounded custom-container">
-          <div className="d-flex justify-content-space-between align-items-center mb-3"id="d-flex">
+          <div className="d-flex justify-content-space-between align-items-center mb-3" id="d-flex">
             <h1 className="">Productos</h1>
-            <div className="d-flex justify-content-between  custom1" >
-                <button >
-                  <ModalComponentAdd color="red" />
-                </button>
+            <div className="d-flex justify-content-between custom1">
+              <button>
+                <ModalComponentAdd color="red" onProductAdded={handleProductUpdated} />
+              </button>
               <div className="input-group">
                 <span className="input-group-text bg-primary border-0">
-                <IoSearchCircle  size="40px" color="white"/>
+                  <IoSearchCircle size="40px" color="white" />
                 </span>
                 <input type="search" className="form-control" placeholder="Buscar" />
               </div>
@@ -64,12 +67,12 @@ function Admin() {
                 </div>
                 <div className="d-flex">
                   <button className="btn btn-outline-primary me-2">
-                  <ModalComponentEdit />
+                    <ModalComponentEdit product={product} onProductUpdated={handleProductUpdated} />
                   </button>
-                  <button className="btn btn-outline-danger"onClick={() => handleDeleteClick(product.product_id)} >
+                  <button className="btn btn-outline-danger" onClick={() => handleDeleteClick(product.product_id)}>
                     Delete
                   </button>
-                </div>  
+                </div>
               </div>
             ))}
           </div>

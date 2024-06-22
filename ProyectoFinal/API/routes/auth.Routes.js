@@ -60,10 +60,10 @@ router.post("/login", async (req, res) => {
     );
 
     // Configurar la cookie
-    res.cookie("token", token, {
-      httpOnly: true,
+    res.cookie("plexoCookie", token, {
+      httpOnly: false,
       secure: true, 
-      sameSite: 'lax', 
+      sameSite: 'none', 
       overwrite: true,
     });
 
@@ -82,7 +82,7 @@ router.post("/login", async (req, res) => {
 router.get("/logout", authenticateJWT, (req, res) => {
   try {
     // Limpiar la cookie del token
-    res.clearCookie("token");
+    res.clearCookie("plexoCookie");
 
     res.json({ message: "Logout exitoso" });
   } catch (error) {

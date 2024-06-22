@@ -1,7 +1,6 @@
 import z from 'zod';
 
 const ProductSchema = z.object({
-  product_id: z.string().uuid('Invalid product ID'),
   name: z.string().min(3).max(100),
   description: z.string().min(10).max(1000).optional(),
   price: z.number().min(0.01),

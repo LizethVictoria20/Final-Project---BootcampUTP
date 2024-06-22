@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(404).json({ message: "Credenciales inválidas" });
+      return res.status(404).json({ message: "Usuario No Existente" });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
     );
 
     // Configurar la cookie
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("jwt", token, { httpOnly: true });
 
     // Enviar la respuesta JSON con el token y otros datos
     res.json({
@@ -77,10 +77,7 @@ router.post("/login", async (req, res) => {
 router.get("/logout", authenticateJWT, (req, res) => {
   try {
     // Limpiar la cookie del token
-    res.clearCookie("token");
-
-    // Opcional: También puedes limpiar cualquier información de sesión adicional que manejes en tu aplicación
-    req.session.destroy();
+    res.clearCookie("jwt");
 
     res.json({ message: "Logout exitoso" });
   } catch (error) {

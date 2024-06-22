@@ -7,7 +7,7 @@ import { authenticateJWT } from "../middleware/jwtMiddleware.js";
 import Category from "../models/Category.js";
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", authenticateJWT, async (req, res) => {
   try {
     const products = await Product.findAll();
     res.json(products);
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", authenticateJWT, async (req, res) => {
   try {
     // Validar los datos del producto con Zod
     const productData = ProductSchema.parse(req.body);
@@ -56,16 +56,23 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/", async (req, res) => {
+router.get("/:product_id", authenticateJWT, async (req, res) => {
+    const product_id = req.params.product_id;
+    const product = await Product.findByPk(product_id);
+    res.status(200).json({
+      product,
+    })
+})
+
+router.put("/:product_id", authenticateJWT, async (req, res) => {
   try {
-    // Verificar que el ID esté presente en el cuerpo de la solicitud
-    if (!req.body.product_id) {
+    const { product_id } = req.params
+    if (!product_id) {
       return res.status(400).json({ message: "Product ID is required" });
     }
 
     // Obtener los datos del cuerpo de la solicitud
     const {
-      product_id,
       name,
       description,
       price,
@@ -110,7 +117,7 @@ router.put("/", async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/", authenticateJWT, async (req, res) => {
   try {
     const { id } = req.query;
 

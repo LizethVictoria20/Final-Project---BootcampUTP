@@ -4,8 +4,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import UserSchema from "../schemas/UserShema.js";
 import { authenticateJWT } from "../middleware/jwtMiddleware.js";
-import dotenv from 'dotenv';
-dotenv.config()
+
 const router = express.Router();
 
 router.post("/register", async (req, res) => {

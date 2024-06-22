@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 
 const verifyJwt = promisify(jwt.verify);
-const JWT_SECRET = "12345"
 
 export const authenticateJWT = async (req, res, next) => {
   const token = req.cookies.jwt;

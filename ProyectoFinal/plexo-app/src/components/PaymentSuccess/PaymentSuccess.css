@@ -1,0 +1,62 @@
+#payment-success-container {
+  background-color: #131313; 
+  height: 100vh;
+  padding: 20px;
+}
+
+#payment-success-card {
+  max-width: 100%;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+}
+
+#exit-button {
+  color: #000;
+  font-size: 1rem;
+}
+
+#payment-success-logo {
+  width: 50%;
+  max-width: 600px;
+}
+
+#payment-success-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#payment-success-message1,
+#payment-success-message2 {
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  #payment-success-logo {
+    width: 75%;
+  }
+
+  #payment-success-title {
+    font-size: 1.25rem;
+  }
+
+  #payment-success-message1,
+  #payment-success-message2 {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  #payment-success-logo {
+    width: 90%;
+  }
+
+  #payment-success-title {
+    font-size: 1.1rem;
+  }
+
+  #payment-success-message1,
+  #payment-success-message2 {
+    font-size: 0.85rem;
+  }
+}

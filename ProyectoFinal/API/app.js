@@ -1,61 +1,49 @@
-import express from "express";
-import session from 'express-session';
-import cookieParser from "cookie-parser";
-import cors from "cors";
 import sequelize from "./config/config.js";
+import { authenticateJWT } from "./middleware/jwtMiddleware.js";
 import usersRouter from "./routes/Users.routes.js";
 import productsRouter from "./routes/Products.routes.js";
 import categoriesRouter from "./routes/Categories.routes.js";
 import authRouter from "./routes/auth.Routes.js";
-import { authenticateJWT } from './middleware/jwtMiddleware.js'; // Importamos el middleware JWT
-import OrdersRouter from './routes/Orders.Routes.js';
-import CartsRoutes from './routes/Carts.Routes.js';
-import paymentRouter from './routes/payment.routes.js';
-import path from 'path';
+import OrdersRouter from "./routes/Orders.Routes.js";
+import CartsRoutes from "./routes/Carts.Routes.js";
+import paymentRouter from "./routes/payment.routes.js";
+import cookieParser from "cookie-parser";
+import express from "express";
+import cors from "cors";
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT;
+console.log(PORT);
 
 // Configuración de CORS
-const corsOptions = {
-  origin: '*', // Cambia esto al dominio que quieres permitir
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Habilita el uso de cookies
-  allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-};
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // Permitir todas las solicitudes
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
-
-app.use(cors(corsOptions));
-app.use(express.json());
+const whitelist = ["http://localhost:3000", "https://plexoshop.vercel.app"];
 app.use(cookieParser());
-
 app.use(
-  session({
-    name: "user_sid",
-    secret: "your_secret_key",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 1200000,
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (whitelist.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
     },
+    optionsSuccessStatus: 200,
+    credentials: true,
+    methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
   })
 );
+app.use(express.json());
 
 // Rutas de autenticación
-app.use('/api/auth', authRouter); 
-app.use('/api/products', productsRouter);
-app.use('/api/categories', categoriesRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/products", productsRouter);
+app.use("/api/categories", categoriesRouter);
 
 // Rutas protegidas con JWT
-app.use('/api/users', authenticateJWT, usersRouter);
-app.use('/api/orders', authenticateJWT, OrdersRouter);
-app.use('/api/carts', authenticateJWT, CartsRoutes);
-app.use('/api/payment', paymentRouter);
-app.use(express.static(path.resolve('public')))
+app.use("/api/payment", paymentRouter);
+app.use("/api/users", authenticateJWT, usersRouter);
+app.use("/api/orders", authenticateJWT, OrdersRouter);
+app.use("/api/carts", authenticateJWT, CartsRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

@@ -29,6 +29,6 @@ const Order = sequelize.define(
     }
 );
 
-Order.belongsTo(User, { foreignKey: "user_id" });
+Order.belongsTo(User, { foreignKey: "user_id", onDelete: 'CASCADE' });
 
 export default Order;

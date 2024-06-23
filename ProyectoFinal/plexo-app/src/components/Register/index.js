@@ -3,6 +3,7 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../Navbar";
+import api from "../../http";
 
 function Register() {
   const [isRegister, setIsRegister] = useState(false);
@@ -45,22 +46,24 @@ function Register() {
     }
 
     try {
-      const response = await Axios.post(
-        "https://final-project-bootcamputp.onrender.com/api/auth/register",
-        {
-          username: userName,
-          email: userEmail,
-          password: userPassword,
-          first_name: firstName,
-          last_name: lastName,
-        }
-      );
+      const response = await api.post("auth/register", {
+        username: userName,
+        email: userEmail,
+        password: userPassword,
+        first_name: firstName,
+        last_name: lastName,
+      });
 
       if (response.status === 201 || response.status === 200) {
         setIsRegister(true);
         setTimeout(() => {
-          navigate("/admin");
-        }, 2000);
+          const userRole = response.data.admin;
+          if (userRole === false) {
+            navigate("/perfil");
+          } else if (userRole === true) {
+            navigate("/admin");
+          }
+        }, 1000);
       }
     } catch (err) {
       console.log(err);

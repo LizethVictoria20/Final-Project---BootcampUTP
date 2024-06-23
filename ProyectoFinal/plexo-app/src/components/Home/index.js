@@ -1,101 +1,52 @@
 import { Link } from 'react-router-dom'
 import Navbar from "../Navbar/index";
-import Headphone from '../../assets/images/headphones.png'
 import './style.css'
-import Balones from '../../assets/images/balones.png'
-import Controller from '../../assets/images/controller.png'
-import Xbox from '../../assets/images/xbox.png'
-import Jordan from '../../assets/images/air-jordan-.png'
-import BalonFutbol from '../../assets/images/balon-futbol.png'
+import Home1 from '../../assets/images/home1.png'
+import Home2 from '../../assets/images/home2.png'
+import Product from '../../assets/images/product.png'
+import Product1 from '../../assets/images/product1.png'
+import Product2 from '../../assets/images/product2.png'
+
 
 function Home() {
   return (
     <>
       <Navbar />
-        <div className="container-sm container-home rounded-4">
-          <p>Beats Solo</p> 
-          <h1>Wireless</h1>  
-          <h6 className='title-home'>Headphones</h6> 
-          <Link to='catalogo' className='btn btn-home text-white'>Shop by category</Link> 
-          <div className='containerImg'>
-            <img src={Headphone} alt="" />
-            </div>
+        <div className="container-sm container-home rounded-4 mb-4">
+        <Link to='catalogo'>
+         <img src={Home1} alt="" />
+         </Link>
         </div>
-        <div className='d-flex flex-row flex-wrap justify-content-center'>
-          <div className="morado">
-            <div className="container-fluid container-morado rounded-4">
-              <p>Beats Solo</p>
-              <h6>Wireless</h6>
-              <h6 className='title-morado'>Headphones</h6>
-              <br /><br />
-              <button className='btn btn-morado text-white'>Shop by category</button>
-              <div className='elecontainerImgc'>
-                <img src={Jordan} alt=""  />
-              </div>
+        <div>
+          <h1 className='text-center fw-bold mb-4'>Best Seller Products</h1>
+        </div>
+        <div className="container text-center container-best_seller d-flex flex-wrap justify-content-center">
+          <div className="row">
+          <div className="col">
+          <Link to='catalogo'>
+            <img src={Product} alt="" />
+            </Link>
+          </div>
+            <div className="col">
+            <Link to='catalogo'>
+            <img src={Product1} alt="" />
+            </Link>            </div>
+            <div className="col">
+            <Link to='catalogo'>
+            <img src={Product2} alt="" />
+            </Link>
+            </div>
+            <div className="col">
+            <Link to='catalogo'>
+            <img src={Product} alt="" />
+            </Link>
             </div>
           </div>
-
-          <div className="morado">
-            <div className="container-fluid container-morado rounded-4">
-              <p>Beats Solo</p>
-              <h6>Wireless</h6>
-              <h6 className='title-morado'>Headphones</h6>
-              <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
-              <div className='elecontainerImgc'>
-                <img src={Xbox} alt=""  />
-              </div>
-            </div>
-          </div>
-          <div className="morado-4">
-            <div className="container-fluid container-morado rounded-4">
-              <p>Beats Solo</p>
-              <h6>Wireless</h6>
-              <h6 className='title-morado'>Headphones</h6>
-              <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
-              <div className='elecontainerImgc-4'>
-                <img src={Controller} alt="" />
-              </div>
-            </div>
-          </div>
-          <div className="morado-4">
-            <div className="container-fluid container-morado rounded-4">
-              <p>Beats Solo</p>
-              <h6>Wireless</h6>
-              <h6 className='title-morado'>Headphones</h6>
-              <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
-              <div className='elecontainerImgc-4'>
-                <img src={Balones} alt="" />
-              </div>
-            </div>
-          </div>
-          <div className="morado-4">
-            <div className="container-fluid container-morado rounded-4">
-              <p>Beats Solo</p>
-              <h6>Wireless</h6>
-              <h6 className='title-morado'>Headphones</h6>
-              <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
-              <div className='elecontainerImgc-4'>
-                <img src={BalonFutbol} alt="" />
-              </div>
-            </div>
-          </div>
-          <div className="morado">
-            <div className="container-fluid container-morado rounded-4">
-              <p>Beats Solo</p>
-              <h6>Wireless</h6>
-              <h6 className='title-morado'>Headphones</h6>
-              <br /><br />
-              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
-              <div className='elecontainerImgc'>
-                <img src={BalonFutbol} alt="" />
-              </div>
-          </div>
-          </div>
-          
+        </div>
+        <div className="container-sm container-home rounded-4 mb-4">
+        <Link to="catalogo">
+         <img src={Home2} alt="" />
+         </Link>
         </div>
       </>
   );

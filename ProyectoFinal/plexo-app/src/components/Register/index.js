@@ -20,7 +20,8 @@ function Register() {
     const errors = {};
     if (!firstName.trim()) errors.firstName = "El nombre es obligatorio";
     if (!lastName.trim()) errors.lastName = "El apellido es obligatorio";
-    if (!userName.trim()) errors.userName = "El nombre de usuario es obligatorio";
+    if (!userName.trim())
+      errors.userName = "El nombre de usuario es obligatorio";
     if (!userEmail.trim()) {
       errors.userEmail = "El correo electrónico es obligatorio";
     } else if (!/\S+@\S+\.\S+/.test(userEmail)) {
@@ -28,8 +29,9 @@ function Register() {
     }
     if (!userPassword.trim()) {
       errors.userPassword = "La contraseña es obligatoria";
-    } else if (userPassword.length < 6) {
-      errors.userPassword = "La contraseña debe tener al menos 6 caracteres";
+    } else if (!/^(?=.*[0-9])[A-Za-z0-9]{6,}$/.test(userPassword)) {
+      errors.userPassword =
+        "The password must be at least 6 characters, contain at least one number, and have no special characters";
     }
     if (userPassword !== confirmPassword) {
       errors.confirmPassword = "Las contraseñas no coinciden";
@@ -46,13 +48,16 @@ function Register() {
     }
 
     try {
-      const response = await api.post("auth/register", {
-        username: userName,
-        email: userEmail,
-        password: userPassword,
-        first_name: firstName,
-        last_name: lastName,
-      });
+      const response = await Axios.post(
+        "https://final-project-bootcamputp.onrender.com/api/auth/register",
+        {
+          username: userName,
+          email: userEmail,
+          password: userPassword,
+          first_name: firstName,
+          last_name: lastName,
+        }
+      );
 
       if (response.status === 201 || response.status === 200) {
         setIsRegister(true);

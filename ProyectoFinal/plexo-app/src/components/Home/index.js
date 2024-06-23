@@ -1,11 +1,103 @@
+import { Link } from 'react-router-dom'
 import Navbar from "../Navbar/index";
+import Headphone from '../../assets/images/headphones.png'
+import './style.css'
+import Balones from '../../assets/images/balones.png'
+import Controller from '../../assets/images/controller.png'
+import Xbox from '../../assets/images/xbox.png'
+import Jordan from '../../assets/images/air-jordan-.png'
+import BalonFutbol from '../../assets/images/balon-futbol.png'
 
-function Home(params) {
+function Home() {
   return (
     <>
       <Navbar />
-      <h1>Home</h1>
-    </>
+        <div className="container-sm container-home rounded-4">
+          <p>Beats Solo</p> 
+          <h1>Wireless</h1>  
+          <h6 className='title-home'>Headphones</h6> 
+          <Link to='catalogo' className='btn btn-home text-white'>Shop by category</Link> 
+          <div className='containerImg'>
+            <img src={Headphone} alt="" />
+            </div>
+        </div>
+        <div className='d-flex flex-row flex-wrap justify-content-center'>
+          <div className="morado">
+            <div className="container-fluid container-morado rounded-4">
+              <p>Beats Solo</p>
+              <h6>Wireless</h6>
+              <h6 className='title-morado'>Headphones</h6>
+              <br /><br />
+              <button className='btn btn-morado text-white'>Shop by category</button>
+              <div className='elecontainerImgc'>
+                <img src={Jordan} alt=""  />
+              </div>
+            </div>
+          </div>
+
+          <div className="morado">
+            <div className="container-fluid container-morado rounded-4">
+              <p>Beats Solo</p>
+              <h6>Wireless</h6>
+              <h6 className='title-morado'>Headphones</h6>
+              <br /><br />
+              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <div className='elecontainerImgc'>
+                <img src={Xbox} alt=""  />
+              </div>
+            </div>
+          </div>
+          <div className="morado-4">
+            <div className="container-fluid container-morado rounded-4">
+              <p>Beats Solo</p>
+              <h6>Wireless</h6>
+              <h6 className='title-morado'>Headphones</h6>
+              <br /><br />
+              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <div className='elecontainerImgc-4'>
+                <img src={Controller} alt="" />
+              </div>
+            </div>
+          </div>
+          <div className="morado-4">
+            <div className="container-fluid container-morado rounded-4">
+              <p>Beats Solo</p>
+              <h6>Wireless</h6>
+              <h6 className='title-morado'>Headphones</h6>
+              <br /><br />
+              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <div className='elecontainerImgc-4'>
+                <img src={Balones} alt="" />
+              </div>
+            </div>
+          </div>
+          <div className="morado-4">
+            <div className="container-fluid container-morado rounded-4">
+              <p>Beats Solo</p>
+              <h6>Wireless</h6>
+              <h6 className='title-morado'>Headphones</h6>
+              <br /><br />
+              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <div className='elecontainerImgc-4'>
+                <img src={BalonFutbol} alt="" />
+              </div>
+            </div>
+          </div>
+          <div className="morado">
+            <div className="container-fluid container-morado rounded-4">
+              <p>Beats Solo</p>
+              <h6>Wireless</h6>
+              <h6 className='title-morado'>Headphones</h6>
+              <br /><br />
+              <Link to='catalogo' className='btn btn-morado text-white'>Shop by category</Link>
+              <div className='elecontainerImgc'>
+                <img src={BalonFutbol} alt="" />
+              </div>
+          </div>
+          </div>
+          
+        </div>
+      </>
   );
 }
 

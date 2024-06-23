@@ -1,8 +1,8 @@
-import Navbar from "../Navbar/index";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import { useState } from "react";
+import Navbar from "../Navbar";
 
 function Login() {
   const [userEmail, setuserEmail] = useState("");

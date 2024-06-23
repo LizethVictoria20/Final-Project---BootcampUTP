@@ -9,7 +9,11 @@ const Product = ({ product, index, increment, decrement }) => (
   <div className="product">
     <div className="product-info">
       <div className="product-image">
-        <img src={product.image_url} alt={product.name} />
+        <img
+          src={product.image_url}
+          alt={product.name}
+          className="img-shopping"
+        />
       </div>
       <div className="texto-producto">
         <h3>{product.name}</h3>

@@ -24,31 +24,16 @@ export const updateProduct = async (productData) => {
     }
 };
 
-
-export const fetchProducts = async () => {
-    try {
-        const response = await axios.get(urlProduct);
-        return response.data;
-    } catch (error) {
-        console.error('Error obteniendo productos:', error);
-        throw error;
-    }
-};
-
-
 export const DeleteProduct = () => {
 
     const handleDelete = async (productId) => {
       try {
-        // Realiza la solicitud DELETE
-        await axios.delete(`https://final-project-bootcamputp.onrender.com/api/products/?id=${productId}`);
-  
-
-      } catch (error) {
+        const response = await axios.delete(`https://final-project-bootcamputp.onrender.com/api/products/${productId}`);
+        console.log(response);
+    } catch (error) {
         console.error('Error deleting product:', error);
    
       }
     };
-  
     return handleDelete;
   };

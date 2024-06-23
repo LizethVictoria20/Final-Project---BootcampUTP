@@ -10,8 +10,10 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
+import PasarelaPago from "./components/PasarelaPago";
+import Perfil from "./components/Perfil";
 import NotFound from "./components/Error/NotFound";
-import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess";
+// import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess";
 import Setting from "./components/AccountSettings/AccountSettings";
 
 function App() {
@@ -28,9 +30,8 @@ function App() {
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/register" element={<Register />} />
         <Route path="/shopping-card" element={<ShoppingCard />} />
-        <Route path="/404" element={<NotFound />} />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/success" element={<PaymentSuccess />} />
+        {/* <Route path="/success" element={<PaymentSuccess />} /> */}
         <Route path="/setting" element={<Setting />} />
       </Routes>
     </Router>

@@ -8,6 +8,8 @@ import ModalComponentAdd from "./modalAdd";
 import { DeleteProduct } from "./AdminCrud";
 import { FaRegTrashAlt } from "react-icons/fa";
 import api from "../../http/index";
+import SearchProducts from "../Buscador"; // Importar el componente SearchProducts
+
 function Admin() {
   const deleteProduct = DeleteProduct();
 
@@ -19,11 +21,14 @@ function Admin() {
 
   // get
   const [productsData, setProductsData] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [search, setSearch] = useState("");
 
-  const GetApiData = () => {
-    api.get("products").then((response) => {
-      setProductsData(response.data);
-    });
+    const GetApiData = () => {
+      api.get("products").then((response) => {
+        setProductsData(response.data);
+        setFilteredProducts(response.data);  // También actualizar los productos filtrados
+      });
   };
 
   useEffect(() => {
@@ -35,13 +40,22 @@ function Admin() {
     GetApiData();
   };
 
+  const handleSearch = (e) => {
+    const terminoBusqueda = e.target.value;
+    setSearch(terminoBusqueda);
+    const resultadoBusqueda = productsData.filter((product) =>
+      product.name.toLowerCase().includes(terminoBusqueda.toLowerCase())
+    );
+    setFilteredProducts(resultadoBusqueda);
+  };
+
   return (
     <>
       <Navbar />
       <div className="container mt-5">
-        <div className="  p-4 shadow rounded containerAll_admin">
+        <div className="p-4 shadow rounded containerAll_admin">
           <div
-            className="d-flex justify-content-around align-items-center mb-3 "
+            className="d-flex justify-content-around align-items-center mb-3"
             id="d-flex"
           >
             <h1 className="h1_admin">Productos</h1>
@@ -50,24 +64,23 @@ function Admin() {
                 color="red"
                 onProductAdded={handleProductUpdated}
               />
-              <div className="input-group  ">
+              <div className="input-group">
                 <IoSearchCircle
                   size="40px"
                   color="white"
                   className="addItem_admin"
                 />
-                <input
-                  type="search"
-                  className=" searchBar_admin"
-                  placeholder="Buscar"
+                <SearchProducts
+                  products={productsData}
+                  setFilteredProducts={setFilteredProducts}
                 />
               </div>
             </div>
           </div>
           <div className="list-group">
-            {productsData.map((product) => (
+            {filteredProducts.map((product) => (
               <div
-                className="list-group-item d-flex justify-content-between align-items-center mb-2 custom-item .container_item productUp_admin"
+                className="list-group-item d-flex justify-content-between align-items-center mb-2 custom-item productUp_admin"
                 key={product.id}
               >
                 <div className="d-flex align-items-center">
@@ -91,7 +104,7 @@ function Admin() {
                     />
                   </button>
                   <button
-                    className="btn btn-outline-danger "
+                    className="btn btn-outline-danger"
                     onClick={() => handleDeleteClick(product.product_id)}
                   >
                     <FaRegTrashAlt />
@@ -105,4 +118,5 @@ function Admin() {
     </>
   );
 }
+
 export default Admin;

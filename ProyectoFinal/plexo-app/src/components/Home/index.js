@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Navbar from "../Navbar/index";
+import Navbar from '../Navbar/index'
 import Headphone from '../../assets/images/headphones.png'
 import './style.css'
 import Balones from '../../assets/images/balones.png'

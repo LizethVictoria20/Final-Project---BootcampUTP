@@ -61,10 +61,11 @@ router.post("/login", async (req, res) => {
 
     // Configurar la cookie
     res.cookie("plexoCookie", token, {
-      httpOnly: false,
+      httpOnly: true,
       secure: true, 
-      sameSite: 'none', 
-      overwrite: true,
+      sameSite: 'lax', 
+      path: '/', // Asegúrate de que la ruta coincida
+      overwrite: true
     });
 
     // Enviar la respuesta JSON con el token y otros datos
@@ -79,14 +80,34 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Error en el servidor" });
   }
 });
+
+
+// Eliminar la cookie
 router.get("/logout", authenticateJWT, (req, res) => {
   try {
     // Destruir la cookie del token estableciendo su tiempo de expiración en el pasado
-    res.cookie("plexoCookie", "", { expires: new Date(0) });
+    res.cookie("plexoCookie", "", { 
+      expires: new Date(0),
+      path: '/', // Asegúrate de que la ruta coincida
+      secure: true, // Si estás usando HTTPS
+      httpOnly: true, // Si la cookie es httpOnly
+      sameSite: 'lax' // Ajusta según tu configuración de sameSite
+    });
+    
+    // Eliminar la cookie
+    res.clearCookie("plexoCookie", { 
+      path: '/', // Asegúrate de que la ruta coincida
+      secure: true, // Si estás usando HTTPS
+      httpOnly: true, // Si la cookie es httpOnly
+      sameSite: 'lax' // Ajusta según tu configuración de sameSite
+    });
+
     res.json({ message: "Logout exitoso" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error en el servidor" });
   }
 });
+
+
 export default router;

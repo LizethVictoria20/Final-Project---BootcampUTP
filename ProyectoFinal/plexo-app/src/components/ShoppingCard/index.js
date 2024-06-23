@@ -3,11 +3,16 @@ import axios from "axios";
 // import Cookies from "js-cookie";
 import Navbar from "../Navbar"; // Asumiendo que tienes un componente Navbar
 import "./styles.css"; // Asumiendo que tienes un archivo de estilos CSS
+import api from "../../http";
 
 // Componente para mostrar la información de un producto
 const Product = ({ product, index, increment, decrement }) => (
   <div className="product">
     <div className="product-info">
+    <button onClick={async () => console.log(await api.get('/carts'))}>carts</button>
+    <button onClick={async () => console.log(await api.get('/users'))}>users</button>
+    <button onClick={async () => console.log(await api.get('/auth/logout'))}>logout</button>
+    <button onClick={async () => console.log(await api.get('/users/loginuser'))}>user.data</button>
       <div className="product-image">
         <img src={product.image_url} alt={product.name} />
       </div>

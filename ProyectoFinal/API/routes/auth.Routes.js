@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
     res.cookie("plexoCookie", token, {
       httpOnly: true,
       secure: true, 
-      sameSite: 'lax', 
+      sameSite: 'none', 
       path: '/', // Asegúrate de que la ruta coincida
       overwrite: true
     });
@@ -91,7 +91,7 @@ router.get("/logout", authenticateJWT, (req, res) => {
       path: '/', // Asegúrate de que la ruta coincida
       secure: true, // Si estás usando HTTPS
       httpOnly: true, // Si la cookie es httpOnly
-      sameSite: 'lax' // Ajusta según tu configuración de sameSite
+      sameSite: 'none' // Ajusta según tu configuración de sameSite
     });
     
     // Eliminar la cookie
@@ -99,7 +99,7 @@ router.get("/logout", authenticateJWT, (req, res) => {
       path: '/', // Asegúrate de que la ruta coincida
       secure: true, // Si estás usando HTTPS
       httpOnly: true, // Si la cookie es httpOnly
-      sameSite: 'lax' // Ajusta según tu configuración de sameSite
+      sameSite: 'none' // Ajusta según tu configuración de sameSite
     });
 
     res.json({ message: "Logout exitoso" });

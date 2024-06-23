@@ -12,8 +12,8 @@ import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
 import Perfil from "./components/Perfil";
 import NotFound from "./components/Error/NotFound";
-// import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess";
-// import Setting from "./components/AccountSettings/AccountSettings";
+import Shipping from "./components/Shipping";
+
 
 function App() {
   return (
@@ -30,9 +30,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/shopping-card" element={<ShoppingCard />} />
         <Route path="/*" element={<NotFound />} />
-        {/* <Route path="/success" element={<PaymentSuccess />} /> */}
-        {/* <Route path="/setting" element={<Setting />} /> */}
-        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/shipping" element={<Shipping />} />
       </Routes>
     </Router>
   );

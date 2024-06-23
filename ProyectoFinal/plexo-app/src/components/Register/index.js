@@ -34,7 +34,12 @@ function Register() {
       if (response.status === 201 || response.status === 200) {
         setIsRegister(true);
         setTimeout(() => {
-          navigate("/admin");
+          const userRole = response.data.admin;
+          if (userRole === false) {
+            navigate("/perfil");
+          } else if (userRole === true) {
+            navigate("/admin");
+          }
         }, 1000);
       }
     } catch (err) {

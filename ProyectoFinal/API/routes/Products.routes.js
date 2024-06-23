@@ -1,7 +1,9 @@
 import z from "zod";
 import express from "express";
+import sequelize from "../config/config.js";
 import Product from "../models/Product.js";
 import ProductSchema from "../schemas/ProductShema.js";
+import CartItem from '../models/CartItem.js';
 import { isAdmin } from "../middleware/authMiddleware.js";
 import { authenticateJWT } from "../middleware/jwtMiddleware.js";
 import Category from "../models/Category.js";
@@ -121,25 +123,31 @@ router.put("/:product_id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const { id } = req.params;
+    const productId = req.params.id;
 
-    if (!id || isNaN(Number(id))) {
-      return res
-        .status(400)
-        .json({ message: "Valid ID parameter is required" });
+    // Find all CartItems associated with the product
+    const cartItems = await CartItem.findAll({ where: { product_id: productId } });
+
+    if (!cartItems || cartItems.length === 0) {
+      // If no CartItems found, just delete the product
+      const rowsDeleted = await Product.destroy({ where: { product_id: productId } });
+
+      if (rowsDeleted === 0) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+
+      return res.json({ message: "Product deleted successfully" });
     }
 
-    const rowsDeleted = await Product.destroy({
-      where: { product_id: id },
+    // Delete all associated CartItems in a transaction
+    await sequelize.transaction(async (t) => {
+      await CartItem.destroy({ where: { product_id: productId }, transaction: t });
+      await Product.destroy({ where: { product_id: productId }, transaction: t });
     });
 
-    if (rowsDeleted === 0) {
-      return res.status(404).json({ message: "Product not found" });
-    }
-
-    res.json({ message: "Product deleted successfully" });
+    res.json({ message: "Product and associated CartItems deleted successfully" });
   } catch (err) {
-    console.error("Error deleting product:", err.message || err);
+    console.error("Error deleting product:", err);
     res.status(500).json({ message: "Internal server error" });
   }
 });

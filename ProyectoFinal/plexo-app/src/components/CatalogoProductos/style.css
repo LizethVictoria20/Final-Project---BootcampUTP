@@ -9,6 +9,12 @@
     padding: 0 15px;
 }
 
+@media (max-width: 767px) {
+    .container-products {
+        margin-left: 20px;
+    }
+}
+
 /* Estilos para el botón de categoría 'All categories' */
 #category_btn {
     color: #7429ba;
@@ -81,12 +87,23 @@
         margin-bottom: 2rem;
     }
 }
+@media (max-width: 767px) {
+    .container-categories {
+        margin-left: 32px;
+    }
+}
 
 /* Estilos adicionales para la barra de búsqueda */
 .search-bar {
     max-width: 500px;
     margin: 0 auto 20px;
     margin-bottom: 5rem;
+}
+
+@media (max-width: 767px) {
+    .search-bar {
+        margin-left: 20px; /* Ajusta este valor según tus necesidades */
+    }
 }
 
 @media (min-width: 768px) {

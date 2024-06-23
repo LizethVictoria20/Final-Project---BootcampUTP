@@ -12,18 +12,38 @@ function Register() {
   const [lastName, setLastName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  const validate = () => {
+    const errors = {};
+    if (!firstName.trim()) errors.firstName = "El nombre es obligatorio";
+    if (!lastName.trim()) errors.lastName = "El apellido es obligatorio";
+    if (!userName.trim()) errors.userName = "El nombre de usuario es obligatorio";
+    if (!userEmail.trim()) {
+      errors.userEmail = "El correo electrónico es obligatorio";
+    } else if (!/\S+@\S+\.\S+/.test(userEmail)) {
+      errors.userEmail = "El correo electrónico no es válido";
+    }
+    if (!userPassword.trim()) {
+      errors.userPassword = "La contraseña es obligatoria";
+    } else if (userPassword.length < 6) {
+      errors.userPassword = "La contraseña debe tener al menos 6 caracteres";
+    }
+    if (userPassword !== confirmPassword) {
+      errors.confirmPassword = "Las contraseñas no coinciden";
+    }
+    return errors;
+  };
 
   const postNewUser = async (event) => {
     event.preventDefault();
-    setError(null);
-    // Confirmación de password
-    if (userPassword !== confirmPassword) {
-      alert("Las contraseñas no coinciden");
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
+
     try {
       const response = await Axios.post(
         "https://final-project-bootcamputp.onrender.com/api/auth/register",
@@ -44,7 +64,7 @@ function Register() {
       }
     } catch (err) {
       console.log(err);
-      alert("Registro fallido");
+      window.alert("Registro fallido");
     }
   };
 
@@ -66,6 +86,9 @@ function Register() {
                 value={firstName}
                 onChange={(event) => setFirstName(event.target.value)}
               />
+              {errors.firstName && (
+                <div className="text-danger">{errors.firstName}</div>
+              )}
               <label className="form-label">Last Name</label>
               <input
                 type="text"
@@ -75,6 +98,9 @@ function Register() {
                 value={lastName}
                 onChange={(event) => setLastName(event.target.value)}
               />
+              {errors.lastName && (
+                <div className="text-danger">{errors.lastName}</div>
+              )}
               <label className="form-label">Username</label>
               <input
                 type="text"
@@ -84,6 +110,9 @@ function Register() {
                 value={userName}
                 onChange={(event) => setUserName(event.target.value)}
               />
+              {errors.userName && (
+                <div className="text-danger">{errors.userName}</div>
+              )}
               <label className="form-label">Email</label>
               <input
                 type="email"
@@ -93,6 +122,9 @@ function Register() {
                 value={userEmail}
                 onChange={(event) => setEmail(event.target.value)}
               />
+              {errors.userEmail && (
+                <div className="text-danger">{errors.userEmail}</div>
+              )}
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>
@@ -104,6 +136,9 @@ function Register() {
                 value={userPassword}
                 onChange={(event) => setUserPassword(event.target.value)}
               />
+              {errors.userPassword && (
+                <div className="text-danger">{errors.userPassword}</div>
+              )}
             </div>
             <div className="mb-3">
               <label className="form-label">Confirm Password</label>
@@ -115,8 +150,10 @@ function Register() {
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
               />
+              {errors.confirmPassword && (
+                <div className="text-danger">{errors.confirmPassword}</div>
+              )}
             </div>
-            {error && <div className="alert alert-danger">{error}</div>}
             {isRegister && (
               <div className="alert alert-success">Registro exitoso</div>
             )}

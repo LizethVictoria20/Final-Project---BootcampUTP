@@ -81,15 +81,15 @@ function Login() {
   return (
     <>
       <Navbar />
-      <div className="card card-container-login text-dark mx-auto">
+      <div className="card card-container-login mx-auto">
         <div className="card-body card-body-login">
           <h5 className="card-title">Welcome Back 👋🏻</h5>
-          <p className="card-text text-dark">
+          <p className="card-text">
             Today is a new day. It's your day. You shape it. Sign in to start
             managing your products.
           </p>
           <form onSubmit={PostData}>
-            <div className="mb-3 text-dark">
+            <div className="mb-3">
               <label className="form-label">Email</label>
               <input
                 type="email"

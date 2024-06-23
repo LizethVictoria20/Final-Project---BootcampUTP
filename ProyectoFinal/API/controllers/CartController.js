@@ -76,7 +76,6 @@ export const getCartItems = async (req, res) => {
     const cartId = cart.cart_id
     const items = await CartItem.findAll({
       where: { cart_id: cartId },
-      include: [Product],
     });
 
     const detailedItems = items.map((item) => ({
@@ -105,6 +104,54 @@ export const updateCartItem = async (req, res) => {
 
     await item.save();
     res.status(200).json(item);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+export const incrementCartItemQuantity = async (req, res) => {
+  try {
+    const { cartItemId } = req.body;
+    const cartItem = await CartItem.findByPk(cartItemId);
+
+    if (!cartItem) {
+      return res.status(404).json({ message: "Cart item not found" });
+    }
+
+    const product = await Product.findByPk(cartItem.product_id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    if (cartItem.quantity >= product.stock) {
+      return res.status(400).json({ message: "Not enough stock" });
+    }
+
+    cartItem.quantity += 1;
+    await cartItem.save();
+
+    res.status(200).json(cartItem);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const decrementCartItemQuantity = async (req, res) => {
+  try {
+    const { cartItemId } = req.body;
+    const cartItem = await CartItem.findByPk(cartItemId);
+
+    if (!cartItem) {
+      return res.status(404).json({ message: "Cart item not found" });
+    }
+
+    if (cartItem.quantity <=  1) {
+      return res.status(400).json({ message: "Quantity cannot be less than 1" });
+    }
+
+    cartItem.quantity -= 1;
+    await cartItem.save();
+
+    res.status(200).json(cartItem);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

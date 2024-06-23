@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/config.js";
+import Order from "./Order.js";
 import Product from "./Product.js";
 
 const OrderItem = sequelize.define(
@@ -33,6 +34,7 @@ const OrderItem = sequelize.define(
     }
 );
 
-OrderItem.belongsTo(Product, { foreignKey: "product_id" });
+OrderItem.belongsTo(Order, { foreignKey: "order_id", onDelete: 'CASCADE' });
+OrderItem.belongsTo(Product, { foreignKey: "product_id", onDelete: 'CASCADE' });
 
 export default OrderItem;

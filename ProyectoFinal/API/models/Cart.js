@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/config.js";
-import User from "./User.js";
+
 
 const Cart = sequelize.define(
   "Cart",
@@ -26,13 +26,12 @@ Cart.associate = (models) => {
     foreignKey: {
       allowNull: false,
     },
+    onDelete: "CASCADE", // Asegurando eliminación en cascada
   });
   Cart.hasMany(models.CartItem, {
     foreignKey: "cart_id",
-    onDelete: "CASCADE",
+    onDelete: "CASCADE", // Asegurando eliminación en cascada
   });
 };
-
-Cart.belongsTo(User, { foreignKey: "user_id" });
 
 export default Cart;

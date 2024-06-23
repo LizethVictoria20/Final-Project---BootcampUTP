@@ -1,27 +1,34 @@
 import express from "express";
-import dotenv from "dotenv";
 import Cart from "../models/Cart.js";
 import Product from "../models/Product.js";
 import Order from "../models/Order.js";
 import OrderItem from "../models/OrderItem.js";
 import CartItem from "../models/CartItem.js";
-import { openStripePaymentLink } from "../controllers/pCv2.js";
-dotenv.config();
+import { openStripePaymentLink } from "../controllers/paymentController.js";
+import bravo from "@getbrevo/brevo";
+import User from "../models/User.js";
+import { authenticateJWT } from "../middleware/jwtMiddleware.js";
 
-const paymentRouter = express.Router();
-paymentRouter.post("/create-checkout-session", openStripePaymentLink);
 
-paymentRouter.get("/success", async (req, res) => {
+const router = express.Router();
+
+const apiInstance = new bravo.TransactionalEmailsApi();
+apiInstance.setApiKey(
+  bravo.TransactionalEmailsApiApiKeys.apiKey,
+  process.env.BREVO_SECRET_KEY
+);
+
+router.post("/create-checkout-session", authenticateJWT, openStripePaymentLink);
+
+router.get("/success", async (req, res) => {
   try {
     const { totalPrice, userID } = req.query;
     if (!totalPrice || !userID) {
-      return res.status(400).json({ message: "Invalid request" });
+      return res.status(400).json({ message: "Solicitud inválida" });
     }
 
     const cart = await Cart.findOne({
-      where: {
-        user_id: userID,
-      },
+      where: { user_id: userID },
       raw: true,
     });
 
@@ -32,9 +39,7 @@ paymentRouter.get("/success", async (req, res) => {
     }
 
     const cartItems = await CartItem.findAll({
-      where: {
-        cart_id: cart.cart_id,
-      },
+      where: { cart_id: cart.cart_id },
       raw: true,
     });
 
@@ -50,12 +55,11 @@ paymentRouter.get("/success", async (req, res) => {
     );
 
     for (let i = 0; i < inventory.length; i++) {
-      if (inventory[i].quantity < cartItems[i].quantity) {
-        return res.status(400).json({ message: "Not enough stock" });
+      if (inventory[i].stock < cartItems[i].quantity) {
+        return res.status(400).json({ message: "No hay suficiente stock" });
       }
     }
 
-    // Crear la orden
     const order = await Order.create({
       user_id: userID,
       total: totalPrice,
@@ -71,31 +75,86 @@ paymentRouter.get("/success", async (req, res) => {
         });
       })
     );
+
     for (let i = 0; i < inventory.length; i++) {
+      const newStock = inventory[i].stock - cartItems[i].quantity;
+
       await Product.update(
-        { quantity: inventory[i].quantity - cartItems[i].quantity },
-        {
-          where: { product_id: cartItems[i].product_id },
-        }
+        { stock: newStock },
+        { where: { product_id: cartItems[i].product_id } }
       );
+
+      if (newStock < 10) {
+        const admins = await User.findAll({
+          where: { admin: 1 },
+          raw: true,
+        });
+
+        const product = await Product.findByPk(cartItems[i].product_id);
+
+        const sendSmtpEmail = new bravo.SendSmtpEmail();
+        sendSmtpEmail.subject = "Alerta: Bajo stock en un producto";
+        sendSmtpEmail.to = admins.map((admin) => ({
+          email: admin.email,
+          name: admin.first_name,
+        }));
+        sendSmtpEmail.htmlContent = `
+          <h1>Alerta: Bajo stock en un producto</h1>
+          <p>El producto ${product.name} tiene un stock bajo (${newStock} unidades).</p>
+          <p>Por favor, gestiona el inventario.</p>
+        `;
+        sendSmtpEmail.sender = {
+          name: "Plexo",
+          email: "jordanvalenciap@gmail.com",
+        };
+
+        await apiInstance.sendTransacEmail(sendSmtpEmail);
+      }
     }
 
-    await CartItem.destroy({
-      where: { cart_id: cart.cart_id },
-    });
+    await CartItem.destroy({ where: { cart_id: cart.cart_id } });
+
+    const user = await User.findByPk(userID);
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    let orderDetails = `<h2>Detalles de tu orden:</h2><ul>`;
+    for (let i = 0; i < cartItems.length; i++) {
+      orderDetails += `<li>Producto: ${inventory[i].name} - Cantidad: ${cartItems[i].quantity} - Precio: $${inventory[i].price}</li>`;
+    }
+    orderDetails += `</ul><p>Total: $${totalPrice}</p>`;
+
+    const sendSmtpEmail = new bravo.SendSmtpEmail();
+    sendSmtpEmail.subject = "Detalles de tu orden - Plexo";
+    sendSmtpEmail.to = [{ email: user.email, name: user.first_name }];
+    sendSmtpEmail.htmlContent = `
+      <h1>Hola ${user.first_name}, gracias por tu compra</h1>
+      <p>Tu pago ha sido procesado correctamente. Aqui están los detalles de tu orden:</p>
+      ${orderDetails}
+      <p>Gracias por elegirnos.</p>
+    `;
+    sendSmtpEmail.sender = {
+      name: "Plexo",
+      email: "jordanvalenciap@gmail.com",
+    };
+
+    const results = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log(results);
 
     return res.redirect(
-      `https://final-project-bootcamputp.onrender.com/success`
-    );
+      "https://final-project-bootcamputp.onrender.com/success"
+    ); //por modificar
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: "Error creating the order" });
+    return res.status(500).json({ message: "Error al crear la orden" });
   }
 });
 
-paymentRouter.get("/cancel", (req, res) => {
+router.get("/cancel", (req, res) => {
   res.status(200).json({ message: "Payment cancelled" });
   return res.redirect(`https://final-project-bootcamputp.onrender.com/cancel`);
 });
 
-export default paymentRouter;
+export default router;

@@ -1,6 +1,7 @@
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
-import Axios from "axios";
+import api from "../../http";
+
 import { useState } from "react";
 import Navbar from "../Navbar";
 
@@ -12,33 +13,65 @@ function Login() {
 
   const navigate = useNavigate();
 
+  const validate = () => {
+    const errors = {};
+    if (!userEmail) {
+      errors.email = 'El correo electrónico es obligatorio';
+    } else if (!/\S+@\S+\.\S+/.test(userEmail)) {
+      errors.email = 'El correo electrónico no es válido';
+    }
+
+    if (!password) {
+      errors.password = 'La contraseña es obligatoria';
+    } else if (password.length < 6) {
+      errors.password = 'La contraseña debe tener al menos 6 caracteres';
+    }
+
+    return errors;
+  };
+
   const PostData = async (event) => {
     event.preventDefault();
     setError(null);
 
-    try {
-      const response = await Axios.post(
-        "https://final-project-bootcamputp.onrender.com/api/auth/login",
-        {
-          email: userEmail,
-          password: password,
-        }
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setError(validationErrors);
+      window.alert(
+        Object.values(validationErrors).map((err) => err).join('\n')
       );
+      return;
+    }
+
+    try {
+      const response = await api.post("auth/login", {
+        email: userEmail,
+        password: password,
+      });
       if (response.status === 200) {
         setIsLogged(true);
+        setError(null);
         console.log("Login successful");
         const userRole = response.data.admin;
         if (userRole === false) {
-          navigate("/");
+          navigate("/perfil");
         } else if (userRole === true) {
           navigate("/admin");
         }
         console.log(userRole);
       } else {
         setIsLogged(false);
+        window.alert("Error desconocido al iniciar sesión");
       }
     } catch (err) {
       setIsLogged(false);
+      if (err.response && err.response.data && err.response.data.message) {
+        setError(err.response.data.message);
+        window.alert(err.response.data.message);
+      } else {
+        setError("Error al iniciar sesión. Por favor, intente de nuevo.");
+        window.alert("Error al iniciar sesión. Por favor, intente de nuevo.");
+      }
       console.error("Login failed: ", err);
     }
   };

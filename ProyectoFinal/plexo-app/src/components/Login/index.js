@@ -54,9 +54,9 @@ function Login() {
         console.log("Login successful");
         const userRole = response.data.admin;
         if (userRole === false) {
-          navigate("/");
-        } else if (userRole === true) {
           navigate("/perfil");
+        } else if (userRole === true) {
+          navigate("/admin");
         }
         console.log(userRole);
       } else {

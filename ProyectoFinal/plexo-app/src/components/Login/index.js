@@ -16,15 +16,15 @@ function Login() {
   const validate = () => {
     const errors = {};
     if (!userEmail) {
-      errors.email = 'El correo electrónico es obligatorio';
+      errors.email = "El correo electrónico es obligatorio";
     } else if (!/\S+@\S+\.\S+/.test(userEmail)) {
-      errors.email = 'El correo electrónico no es válido';
+      errors.email = "El correo electrónico no es válido";
     }
 
     if (!password) {
-      errors.password = 'La contraseña es obligatoria';
+      errors.password = "La contraseña es obligatoria";
     } else if (password.length < 6) {
-      errors.password = 'La contraseña debe tener al menos 6 caracteres';
+      errors.password = "La contraseña debe tener al menos 6 caracteres";
     }
 
     return errors;
@@ -38,7 +38,9 @@ function Login() {
     if (Object.keys(validationErrors).length > 0) {
       setError(validationErrors);
       window.alert(
-        Object.values(validationErrors).map((err) => err).join('\n')
+        Object.values(validationErrors)
+          .map((err) => err)
+          .join("\n")
       );
       return;
     }
@@ -82,12 +84,12 @@ function Login() {
       <div className="card card-container-login text-dark mx-auto">
         <div className="card-body card-body-login">
           <h5 className="card-title">Welcome Back 👋🏻</h5>
-          <p className="card-text">
+          <p className="card-text text-dark">
             Today is a new day. It's your day. You shape it. Sign in to start
             managing your products.
           </p>
           <form onSubmit={PostData}>
-            <div className="mb-3">
+            <div className="mb-3 text-dark">
               <label className="form-label">Email</label>
               <input
                 type="email"

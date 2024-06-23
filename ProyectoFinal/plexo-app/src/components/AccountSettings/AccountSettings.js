@@ -72,7 +72,7 @@ const AccountSettings = () => {
             <div className="input-wrapper d-flex align-items-center">
               <input
                 type="text"
-                className="form-control"
+                className="form-control-settings"
                 id="name"
                 value={formData.name}
                 onChange={handleChange}

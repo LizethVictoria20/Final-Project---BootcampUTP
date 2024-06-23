@@ -14,17 +14,16 @@
 }
 
 .containerImg {
-    position: absolute;
-    bottom: 11rem;
-    left: 40rem;
+    position:relative;
+    bottom: 22rem;
+    left: 34rem;
 }
 .containerImg img {
-    width: 70%;
+    width: 25%;
 }
 
 .title-home {
     font-size: 10rem;
-    text-align: center;
 }
 
 .btn-home {
@@ -137,20 +136,20 @@
 
 .elecontainerImgc {
     position: relative;
-    bottom: 14rem;
-    left: 8rem;
+    bottom: 10rem;
+    left: 7rem;
 }
 
 .elecontainerImgc-4 {
     position: relative;
-    bottom: 12rem;
+    bottom: 9rem;
     left: 13rem;
     transform: rotate(30deg);
 
 }
 .elecontainerImgc-4 img {
-    width: 36vh;
-    height: 21vh;
+    width: 30vh;
+    height: 20vh;
 
 
 }

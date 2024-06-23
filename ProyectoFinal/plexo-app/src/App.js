@@ -12,6 +12,7 @@ import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
 import PasarelaPago from "./components/PasarelaPago";
 import Perfil from "./components/Perfil";
+import NotFound from "./components/Error";
 function App() {
   return (
     <Router>
@@ -26,8 +27,9 @@ function App() {
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/register" element={<Register />} />
         <Route path="/shopping-card" element={<ShoppingCard />} />
-        <Route path="/404" element={<NotFound />} />
         <Route path="/*" element={<NotFound />} />
+        <Route path="/perfil" element={<Perfil />} />
+
         {/* <Route path="/success" element={<PaymentSuccess />} /> */}
       </Routes>
     </Router>

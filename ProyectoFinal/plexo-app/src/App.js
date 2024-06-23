@@ -10,7 +10,6 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
-import PasarelaPago from "./components/PasarelaPago";
 import Perfil from "./components/Perfil";
 import NotFound from "./components/Error/NotFound";
 // import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess";
@@ -33,6 +32,7 @@ function App() {
         <Route path="/*" element={<NotFound />} />
         {/* <Route path="/success" element={<PaymentSuccess />} /> */}
         <Route path="/setting" element={<Setting />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
     </Router>
   );

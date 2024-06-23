@@ -12,7 +12,7 @@ import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
 import NotFound from "./components/Error/NotFound";
 import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess";
-
+import Setting from "./components/AccountSettings/AccountSettings";
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
         <Route path="/404" element={<NotFound />} />
         <Route path="/*" element={<NotFound />} />
         <Route path="/success" element={<PaymentSuccess />} />
+        <Route path="/setting" element={<Setting />} />
       </Routes>
     </Router>
   );

@@ -7,7 +7,7 @@ const UserSchema = z.object({
   first_name: z.string().min(1).max(50),
   last_name: z.string().min(1).max(50),
   admin: z.boolean().default(false),
-  image: z.string().default(null)
+  image: z.string().default(null).optional()
 });
 
 export default UserSchema;

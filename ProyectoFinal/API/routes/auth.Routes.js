@@ -64,7 +64,6 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
       secure: true, 
       sameSite: 'none', 
-      path: '/', // Asegúrate de que la ruta coincida
       overwrite: true
     });
 
@@ -88,7 +87,6 @@ router.get("/logout", authenticateJWT, (req, res) => {
     // Destruir la cookie del token estableciendo su tiempo de expiración en el pasado
     res.cookie("plexoCookie", "", { 
       expires: new Date(0),
-      path: '/', // Asegúrate de que la ruta coincida
       secure: true, // Si estás usando HTTPS
       httpOnly: true, // Si la cookie es httpOnly
       sameSite: 'none' // Ajusta según tu configuración de sameSite
@@ -96,7 +94,6 @@ router.get("/logout", authenticateJWT, (req, res) => {
     
     // Eliminar la cookie
     res.clearCookie("plexoCookie", { 
-      path: '/', // Asegúrate de que la ruta coincida
       secure: true, // Si estás usando HTTPS
       httpOnly: true, // Si la cookie es httpOnly
       sameSite: 'none' // Ajusta según tu configuración de sameSite

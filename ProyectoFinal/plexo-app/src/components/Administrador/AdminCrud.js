@@ -28,8 +28,8 @@ export const DeleteProduct = () => {
 
     const handleDelete = async (productId) => {
       try {
-        // Realiza la solicitud DELETE
-        await axios.delete(`https://final-project-bootcamputp.onrender.com/api/products/?id=${productId}`);
+        const response = await axios.delete(`https://final-project-bootcamputp.onrender.com/api/products/${productId}`);
+        console.log(response);
     } catch (error) {
         console.error('Error deleting product:', error);
    

@@ -21,7 +21,7 @@
     color: #7429ba;
     font-weight: bold;
     text-align: center;
-    width: auto;
+    width: 100%;
 }
 
 /* Estilos al hacer hover sobre los botones de categorías */
@@ -54,28 +54,43 @@
     background: linear-gradient(135deg, rgb(255, 255, 255), rgb(255, 255, 255));
     border-radius: 50px;
     margin: 20px;
-    width: 100;
+    width: 100%;
     box-shadow: -5px -5px 11px #bebebe,
-    8px 8px 18px #7429ba;
+                8px 8px 18px #7429ba;
 }
 
 /* Media queries para pantallas pequeñas (teléfonos) */
-@media (min-width: 992px) {
-
+@media (max-width: 991px) {
     .container-catalogo {
         padding: 0;
     }
 
-    .container-categories_btn {
+    .container-categories-btn {
         width: auto;
         text-align: center;
     }
-    #categories_btn{
-        width: 100%;
+    
+    #categories_btn {
+        width: auto;
     }
+    
     .container-categories {
         margin: 10px auto;
         width: 90%;
         max-width: none;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Estilos adicionales para la barra de búsqueda */
+.search-bar {
+    max-width: 500px;
+    margin: 0 auto 20px;
+    margin-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+    .search-bar {
+        max-width: 600px;
     }
 }

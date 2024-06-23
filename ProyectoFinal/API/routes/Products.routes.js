@@ -57,16 +57,16 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/:product_id", async (req, res) => {
-    const product_id = req.params.product_id;
-    const product = await Product.findByPk(product_id);
-    res.status(200).json({
-      product,
-    })
-})
+  const product_id = req.params.product_id;
+  const product = await Product.findByPk(product_id);
+  res.status(200).json({
+    product,
+  });
+});
 
 router.put("/:product_id", async (req, res) => {
   try {
-    const { product_id } = req.params
+    const { product_id } = req.params;
     if (!product_id) {
       return res.status(400).json({ message: "Product ID is required" });
     }
@@ -78,7 +78,7 @@ router.put("/:product_id", async (req, res) => {
       price,
       stock,
       image_url,
-      category_id
+      category_id,
       // Agrega aquí otros campos si es necesario
     } = req.body;
 
@@ -89,7 +89,7 @@ router.put("/:product_id", async (req, res) => {
       price,
       stock,
       image_url,
-      category_id
+      category_id,
     };
 
     // Intentar actualizar el producto
@@ -105,7 +105,7 @@ router.put("/:product_id", async (req, res) => {
 
     // Devolver el producto actualizado
     const updatedProductData = await Product.findOne({
-      where: { product_id: product_id }
+      where: { product_id: product_id },
     });
 
     res.json(updatedProductData);
@@ -113,7 +113,9 @@ router.put("/:product_id", async (req, res) => {
     console.error(err);
 
     // Devolver un mensaje de error genérico
-    res.status(500).json({ message: "An error occurred while updating the product" });
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the product" });
   }
 });
 
@@ -121,8 +123,10 @@ router.delete("/", async (req, res) => {
   try {
     const { id } = req.query;
 
-    if (!id) {
-      return res.status(400).json({ message: "ID parameter is required" });
+    if (!id || isNaN(Number(id))) {
+      return res
+        .status(400)
+        .json({ message: "Valid ID parameter is required" });
     }
 
     const rowsDeleted = await Product.destroy({
@@ -135,7 +139,7 @@ router.delete("/", async (req, res) => {
 
     res.json({ message: "Product deleted successfully" });
   } catch (err) {
-    console.error("Error deleting product:", err);
+    console.error("Error deleting product:", err.message || err);
     res.status(500).json({ message: "Internal server error" });
   }
 });

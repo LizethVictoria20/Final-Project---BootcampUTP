@@ -40,14 +40,7 @@ function Admin() {
     GetApiData(UrlProducts); 
   };
 
-  const handleSearch = (e) => {
-    const terminoBusqueda = e.target.value;
-    setSearch(terminoBusqueda);
-    const resultadoBusqueda = productsData.filter((product) =>
-      product.name.toLowerCase().includes(terminoBusqueda.toLowerCase())
-    );
-    setFilteredProducts(resultadoBusqueda);
-  };
+
 
   return (
     <>

@@ -119,9 +119,9 @@ router.put("/:product_id", async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
-    const { id } = req.query;
+    const { id } = req.params;
 
     if (!id || isNaN(Number(id))) {
       return res

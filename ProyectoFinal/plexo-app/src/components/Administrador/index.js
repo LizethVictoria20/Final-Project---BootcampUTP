@@ -7,8 +7,8 @@ import { IoSearchCircle } from "react-icons/io5";
 import ModalComponentAdd from "./modalAdd";
 import { DeleteProduct } from "./AdminCrud";
 import { FaRegTrashAlt } from "react-icons/fa";
-import SearchProducts from "../Buscador";
 import api from "../../http/index";
+import SearchProducts from "../Buscador"; // Importar el componente SearchProducts
 
 function Admin() {
   const deleteProduct = DeleteProduct();
@@ -22,13 +22,13 @@ function Admin() {
   // get
   const [productsData, setProductsData] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const UrlProducts = "products";
+  const [search, setSearch] = useState("");
 
-  const GetApiData = () => {
-    api.get(UrlProducts).then((response) => {
-      setProductsData(response.data);
-      setFilteredProducts(response.data); // También actualizar los productos filtrados
-    });
+    const GetApiData = () => {
+      api.get("products").then((response) => {
+        setProductsData(response.data);
+        setFilteredProducts(response.data);  // También actualizar los productos filtrados
+      });
   };
 
   useEffect(() => {
@@ -37,7 +37,16 @@ function Admin() {
 
   const handleProductUpdated = () => {
     // Refresh the product list after an update
-    GetApiData(UrlProducts);
+    GetApiData();
+  };
+
+  const handleSearch = (e) => {
+    const terminoBusqueda = e.target.value;
+    setSearch(terminoBusqueda);
+    const resultadoBusqueda = productsData.filter((product) =>
+      product.name.toLowerCase().includes(terminoBusqueda.toLowerCase())
+    );
+    setFilteredProducts(resultadoBusqueda);
   };
 
   return (

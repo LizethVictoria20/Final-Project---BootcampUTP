@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./style.css";
 import Card from "../Card/index";
-import Navbar from "../Navbar";
+import Navbar from "../Navbar/index";
+import SearchProducts from "../Buscador/index"; // Asegúrate de que la ruta sea correcta
 
 const Catalogo = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
-    // Fetch products from the API
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
@@ -18,6 +19,7 @@ const Catalogo = () => {
         );
         const productsData = response.data;
         setProducts(productsData);
+        setFilteredProducts(productsData);
 
         const uniqueCategories = [
           ...new Set(productsData.map((product) => product.name.split(" ")[0])),
@@ -33,13 +35,21 @@ const Catalogo = () => {
 
   const handleCategoryChange = (categoryId) => {
     setSelectedCategory(categoryId);
+    if (categoryId) {
+      const filteredByCategory = products.filter(
+        (product) => product.name.split(" ")[0] === categoryId
+      );
+      setFilteredProducts(filteredByCategory);
+    } else {
+      setFilteredProducts(products);
+    }
   };
 
   const getFilteredProducts = () => {
     if (!selectedCategory) {
-      return products;
+      return filteredProducts;
     }
-    return products.filter(
+    return filteredProducts.filter(
       (product) => product.name.split(" ")[0] === selectedCategory
     );
   };
@@ -47,22 +57,21 @@ const Catalogo = () => {
   return (
     <>
       <Navbar />
-
-      <div className="container text-center container-catalogo">
+      <div className="container-fluid text-center container-catalogo">
         <div className="row">
-          <div className="col col-lg-2 container-products">
-            <div>
+          <div className="col-lg-2">
+            <div className="container-categories sticky-top">
               <button
-                className="container-categories_btn"
+                id="category_btn"
+                className="container-categories-btn btn mb-3"
                 onClick={() => handleCategoryChange("")}
               >
-                <div>
-                <p>All categories</p>
-                </div>
+                All categories
               </button>
               {categories.map((categoryId) => (
                 <button
-                  className="container-categories_btn d-flex flex-column"
+                  id="categories_btn"
+                  className={`container-categories-btn btn mb-3 ${selectedCategory === categoryId ? 'active' : ''}`}
                   key={categoryId}
                   onClick={() => handleCategoryChange(categoryId)}
                 >
@@ -72,11 +81,11 @@ const Catalogo = () => {
             </div>
           </div>
           <div className="col">
-            {" "}
-            <div className="container-products d-flex flex-wrap">
+            <SearchProducts setFilteredProducts={setFilteredProducts} products={products} />
+            <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
-                  <Card key={product.product_id} product={product} />
+                  <Card key={product.product_id} product={product} /*guardarProducto={guardarProducto}*/ />
                 ))
               ) : (
                 <p>No products found</p>
@@ -90,3 +99,11 @@ const Catalogo = () => {
 };
 
 export default Catalogo;
+
+
+  // const [productIds, setProductIds] = useState([]);
+
+  // const guardarProducto = (id) => {
+  //   setProductIds((prevProductIds) => [...prevProductIds, id]);
+  //   console.log("array id", productIds )
+  // };

@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import Cart from "../models/Cart.js";
 import CartItem from "../models/CartItem.js";
 import Product from "../models/Product.js";
@@ -92,18 +93,22 @@ export const getCartItems = async (req, res) => {
     const cartId = cart.cart_id;
     const items = await CartItem.findAll({
       where: { cart_id: cartId },
-      include: [{ model: Product, attributes: ["name"] }],
     });
 
     if (items.length === 0) {
       return res.status(404).json({ error: "No items found in the cart" });
     }
 
-    const detailedItems = items.map((item) => ({
-      cart_item_id: item.cart_item_id,
-      product_name: item.Product ? item.Product.name : "Unknown Product",
-      quantity: item.quantity,
-    }));
+    const detailedItems = await Promise.all(
+      items.map(async (item) => {
+        const product = await Product.findOne({ where: { product_id: item.product_id } });
+        return {
+          cart_item_id: item.cart_item_id,
+          product_name: product ? product.name : "Unknown Product",
+          quantity: item.quantity,
+        };
+      })
+    );
 
     res.status(200).json(detailedItems);
   } catch (error) {

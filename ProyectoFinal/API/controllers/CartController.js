@@ -38,12 +38,17 @@ export const getCartByUserId = async (req, res) => {
 
 export const addCartItem = async (req, res) => {
   try {
-    const { cartId, productName, quantity } = req.body;
-    console.log(cartId, productName, quantity);
-    const cart = await Cart.findByPk(cartId);
-    if (!cart) {
-      return res.status(404).json({ message: "Cart not found" });
+    const userId = req.user.userId;
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
     }
+
+    const cart = await Cart.findOne({ where: { user_id: userId } });
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not found for this user" });
+    }
+
+    const { productName, quantity } = req.body;
     if (!productName) {
       return res.status(400).json({ message: "Product name is required" });
     }
@@ -52,6 +57,7 @@ export const addCartItem = async (req, res) => {
         .status(400)
         .json({ message: "Quantity should be greater than 0" });
     }
+
     const product = await Product.findOne({ where: { name: productName } });
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
@@ -61,7 +67,7 @@ export const addCartItem = async (req, res) => {
     }
 
     const newItem = await CartItem.create({
-      cart_id: cartId,
+      cart_id: cart.cart_id,
       product_id: product.product_id,
       quantity,
     });

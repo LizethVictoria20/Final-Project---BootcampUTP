@@ -7,14 +7,13 @@ import { IoSearchCircle } from "react-icons/io5";
 import ModalComponentAdd from "./modalAdd";
 import { DeleteProduct } from "./AdminCrud";
 import { FaRegTrashAlt } from "react-icons/fa";
-<<<<<<< HEAD
+import SearchProducts from "../Buscador";
 import api from "../../http/index";
-=======
-import SearchProducts from "../Buscador";  // Importar el componente SearchProducts
 
->>>>>>> bd1d66d617ee89dc54330d82ce5dca4fbf529412
 function Admin() {
   const deleteProduct = DeleteProduct();
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [search, setSearch] = useState("");
 
   const handleDeleteClick = async (productId) => {
     await deleteProduct(productId);
@@ -24,17 +23,11 @@ function Admin() {
 
   // get
   const [productsData, setProductsData] = useState([]);
-<<<<<<< HEAD
-=======
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [search, setSearch] = useState("");
-  const UrlProducts = 'https://final-project-bootcamputp.onrender.com/api/products';
->>>>>>> bd1d66d617ee89dc54330d82ce5dca4fbf529412
 
   const GetApiData = () => {
     api.get("products").then((response) => {
       setProductsData(response.data);
-      setFilteredProducts(response.data);  // También actualizar los productos filtrados
+      setFilteredProducts(response.data); // También actualizar los productos filtrados
     });
   };
 
@@ -44,30 +37,16 @@ function Admin() {
 
   const handleProductUpdated = () => {
     // Refresh the product list after an update
-<<<<<<< HEAD
     GetApiData();
-=======
-    GetApiData(UrlProducts); 
-  };
-
-  const handleSearch = (e) => {
-    const terminoBusqueda = e.target.value;
-    setSearch(terminoBusqueda);
-    const resultadoBusqueda = productsData.filter((product) =>
-      product.name.toLowerCase().includes(terminoBusqueda.toLowerCase())
-    );
-    setFilteredProducts(resultadoBusqueda);
->>>>>>> bd1d66d617ee89dc54330d82ce5dca4fbf529412
   };
 
   return (
     <>
       <Navbar />
       <div className="container mt-5">
-<<<<<<< HEAD
-        <div className="  p-4 shadow rounded containerAll_admin">
+        <div className="p-4 shadow rounded containerAll_admin">
           <div
-            className="d-flex justify-content-around align-items-center mb-3 "
+            className="d-flex justify-content-around align-items-center mb-3"
             id="d-flex"
           >
             <h1 className="h1_admin">Productos</h1>
@@ -76,43 +55,25 @@ function Admin() {
                 color="red"
                 onProductAdded={handleProductUpdated}
               />
-              <div className="input-group  ">
+              <div className="input-group">
                 <IoSearchCircle
                   size="40px"
                   color="white"
                   className="addItem_admin"
                 />
-                <input
-                  type="search"
-                  className=" searchBar_admin"
-                  placeholder="Buscar"
-=======
-        <div className="p-4 shadow rounded containerAll_admin">
-          <div className="d-flex justify-content-around align-items-center mb-3" id="d-flex">
-            <h1 className="h1_admin">Productos</h1>
-            <div className="d-flex justify-content-between custom1 productsAddSearch_admin">              
-              <ModalComponentAdd color="red" onProductAdded={handleProductUpdated} />
-              <div className="input-group">
-                <IoSearchCircle size="40px" color="white" className="addItem_admin" />
-                <SearchProducts 
+                <SearchProducts
                   products={productsData}
                   setFilteredProducts={setFilteredProducts}
->>>>>>> bd1d66d617ee89dc54330d82ce5dca4fbf529412
                 />
               </div>
             </div>
           </div>
           <div className="list-group">
-<<<<<<< HEAD
-            {productsData.map((product) => (
+            {filteredProducts.map((product) => (
               <div
-                className="list-group-item d-flex justify-content-between align-items-center mb-2 custom-item .container_item productUp_admin"
+                className="list-group-item d-flex justify-content-between align-items-center mb-2 custom-item productUp_admin"
                 key={product.id}
               >
-=======
-            {filteredProducts.map(product => (
-              <div className="list-group-item d-flex justify-content-between align-items-center mb-2 custom-item productUp_admin" key={product.id}>
->>>>>>> bd1d66d617ee89dc54330d82ce5dca4fbf529412
                 <div className="d-flex align-items-center">
                   <img
                     src={product.image_url}
@@ -133,14 +94,10 @@ function Admin() {
                       onProductUpdated={handleProductUpdated}
                     />
                   </button>
-<<<<<<< HEAD
                   <button
                     className="btn btn-outline-danger "
                     onClick={() => handleDeleteClick(product.product_id)}
                   >
-=======
-                  <button className="btn btn-outline-danger" onClick={() => handleDeleteClick(product.product_id)}>
->>>>>>> bd1d66d617ee89dc54330d82ce5dca4fbf529412
                     <FaRegTrashAlt />
                   </button>
                 </div>
@@ -152,8 +109,4 @@ function Admin() {
     </>
   );
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> bd1d66d617ee89dc54330d82ce5dca4fbf529412
 export default Admin;

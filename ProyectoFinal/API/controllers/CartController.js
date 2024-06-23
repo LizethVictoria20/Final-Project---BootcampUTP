@@ -44,11 +44,13 @@ export const addCartItem = async (req, res) => {
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }
-    if(!productName){
+    if (!productName) {
       return res.status(400).json({ message: "Product name is required" });
     }
-    if(quantity <= 0 || !quantity){
-      return res.status(400).json({ message: "Quantity should be greater than 0"})
+    if (quantity <= 0 || !quantity) {
+      return res
+        .status(400)
+        .json({ message: "Quantity should be greater than 0" });
     }
     const product = await Product.findOne({ where: { name: productName } });
     if (!product) {
@@ -71,16 +73,29 @@ export const addCartItem = async (req, res) => {
 };
 export const getCartItems = async (req, res) => {
   try {
-    const userId  = req.user.userId;
+    const userId = req.user.userId;
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
     const cart = await Cart.findOne({ where: { user_id: userId } });
-    const cartId = cart.cart_id
+    if (!cart) {
+      return res.status(404).json({ error: "Cart not found for this user" });
+    }
+
+    const cartId = cart.cart_id;
     const items = await CartItem.findAll({
       where: { cart_id: cartId },
+      include: [{ model: Product, attributes: ["name"] }],
     });
+
+    if (items.length === 0) {
+      return res.status(404).json({ error: "No items found in the cart" });
+    }
 
     const detailedItems = items.map((item) => ({
       cart_item_id: item.cart_item_id,
-      product_name: item.Product.name,
+      product_name: item.Product ? item.Product.name : "Unknown Product",
       quantity: item.quantity,
     }));
 
@@ -89,12 +104,10 @@ export const getCartItems = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 export const updateCartItem = async (req, res) => {
   try {
     const { itemId, quantity } = req.body;
     const item = await CartItem.findByPk(itemId);
-
 
     if (!item) {
       return res.status(404).json({ message: "Cart item not found" });
@@ -144,8 +157,10 @@ export const decrementCartItemQuantity = async (req, res) => {
       return res.status(404).json({ message: "Cart item not found" });
     }
 
-    if (cartItem.quantity <=  1) {
-      return res.status(400).json({ message: "Quantity cannot be less than 1" });
+    if (cartItem.quantity <= 1) {
+      return res
+        .status(400)
+        .json({ message: "Quantity cannot be less than 1" });
     }
 
     cartItem.quantity -= 1;

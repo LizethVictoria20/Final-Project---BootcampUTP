@@ -12,8 +12,6 @@ import api from "../../http/index";
 
 function Admin() {
   const deleteProduct = DeleteProduct();
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [search, setSearch] = useState("");
 
   const handleDeleteClick = async (productId) => {
     await deleteProduct(productId);
@@ -23,9 +21,11 @@ function Admin() {
 
   // get
   const [productsData, setProductsData] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const UrlProducts = "products";
 
   const GetApiData = () => {
-    api.get("products").then((response) => {
+    api.get(UrlProducts).then((response) => {
       setProductsData(response.data);
       setFilteredProducts(response.data); // También actualizar los productos filtrados
     });
@@ -37,7 +37,7 @@ function Admin() {
 
   const handleProductUpdated = () => {
     // Refresh the product list after an update
-    GetApiData();
+    GetApiData(UrlProducts);
   };
 
   return (
@@ -95,7 +95,7 @@ function Admin() {
                     />
                   </button>
                   <button
-                    className="btn btn-outline-danger "
+                    className="btn btn-outline-danger"
                     onClick={() => handleDeleteClick(product.product_id)}
                   >
                     <FaRegTrashAlt />
@@ -109,4 +109,5 @@ function Admin() {
     </>
   );
 }
+
 export default Admin;

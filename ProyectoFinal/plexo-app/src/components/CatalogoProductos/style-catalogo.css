@@ -66,8 +66,9 @@
     border-radius: 50px;
     margin: 20px;
     width: 100%;
-    box-shadow: -5px -5px 11px #bebebe,
-                8px 8px 18px #7429ba;
+    box-shadow: 10px 9px 35px -14px rgba(195,179,209,1);
+
+
 }
 
 /* Media queries para pantallas pequeñas (teléfonos) */

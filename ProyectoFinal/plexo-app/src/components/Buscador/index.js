@@ -20,7 +20,7 @@ function SearchProducts({ setFilteredProducts, products }) {
     <div>
       <form className="search-form" role="search">
         <input
-          className="form-control me-2"
+          className="form-control me-2 search"
           type="search"
           placeholder="Enter your search..."
           aria-label="Search"

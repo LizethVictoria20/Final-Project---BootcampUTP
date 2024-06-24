@@ -12,7 +12,8 @@ function ProductoDescripcion() {
         `https://final-project-bootcamputp.onrender.com/api/products/${product_id}`
       )
       .then((response) => {
-        setProducto(response.data);
+        console.log(response.data.product)
+        setProducto(response.data.product);
       })
       .catch((error) => {
         console.error("Error fetching producto:", error);

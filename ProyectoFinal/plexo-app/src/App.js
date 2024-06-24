@@ -16,7 +16,6 @@ import Shipping from "./components/Shipping";
 import Setting from "./components/AccountSettings/AccountSettings";
 import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess.js";
 import PaymentFailed from "./components/PaymentFailed/PaymentFailed.js";
-import Product from "./components/Products/index";
 import ProductoDescripcion from "./components/Products/ProductoDescripcion";
 // import Product from "./components/Products";
 function App() {
@@ -39,13 +38,7 @@ function App() {
         <Route path="/setting" element={<Setting />} />
         <Route path="/success" element={<PaymentSuccess />} />
         <Route path="/cancel" element={<PaymentFailed />} />
-        <Route path="/product" element={<Product />} />
-        <Route exact path="/product" element={Product} />
-        <Route
-          exact
-          path="/product/:product_id"
-          element={ProductoDescripcion}
-        />
+        <Route path="/product/:product_id" element={<ProductoDescripcion />} />
       </Routes>
     </Router>
   );

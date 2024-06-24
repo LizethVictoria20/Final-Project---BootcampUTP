@@ -153,6 +153,18 @@
   margin-left: -18px; 
 }
 
+.container-form {
+  display: flex;
+  flex-direction: column;
+}
+.form-info {
+  width: 129%;
+  box-shadow: 6px 2px 26px -3px rgba(0, 0, 0, 0.75);
+  height: 2rem;
+  border-radius: 1rem;
+  margin: .5rem;
+}
+
 /* MEDIA QUERY */
 @media (max-width: 768px) {
   .form-group input {

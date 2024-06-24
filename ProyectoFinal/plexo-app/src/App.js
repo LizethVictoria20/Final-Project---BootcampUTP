@@ -14,7 +14,6 @@ import Perfil from "./components/Perfil";
 import NotFound from "./components/Error/NotFound";
 import Shipping from "./components/Shipping";
 
-
 function App() {
   return (
     <Router>
@@ -31,6 +30,7 @@ function App() {
         <Route path="/shopping-card" element={<ShoppingCard />} />
         <Route path="/*" element={<NotFound />} />
         <Route path="/shipping" element={<Shipping />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
     </Router>
   );

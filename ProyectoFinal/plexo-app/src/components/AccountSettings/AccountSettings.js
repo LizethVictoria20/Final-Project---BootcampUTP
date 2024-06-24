@@ -9,6 +9,9 @@ import updateUser from "./updateUser.js";
 const AccountSettings = () => {
   const [user, setUser] = useState(null);
   const [editableField, setEditableField] = useState(null);
+  const [profileImage, setProfileImage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -17,9 +20,7 @@ const AccountSettings = () => {
     password: "",
     profileImageUrl: "",
   });
-  const [profileImage, setProfileImage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState('');
+
 
 
   const GetUser = () => {
@@ -62,9 +63,11 @@ const AccountSettings = () => {
   const handleSave = async () => {
     if (!formData.password) {
       setErrorMessage("Please enter a password.");
+      setSuccessMessage(''); 
       return;
-    }
 
+    }
+    setErrorMessage('');
     setEditableField(null);
 
     const updatedUser = {
@@ -81,11 +84,14 @@ const AccountSettings = () => {
       if (response.data) {
         setUser(response.data);
         setProfileImage(response.data.image || "");
-        setSuccessMessage("Información actualizada exitosamente");
+        setSuccessMessage("Changes saved successfully!");
       }
     } catch (error) {
       console.error("Error updating user:", error);
-      alert("No se pudo actualizar la información");
+      alert("Information don't update")
+      setErrorMessage("There was an error saving the data.");
+      setSuccessMessage('');
+
     }
   };
 
@@ -239,6 +245,7 @@ const AccountSettings = () => {
           </button>
         </form>
         {errorMessage && <div style={{ color: 'red' }}>{errorMessage}</div>}
+        {successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}
       </div>
     </div>
   );

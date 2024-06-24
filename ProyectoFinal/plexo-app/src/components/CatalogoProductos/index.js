@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./style-catalgo.css";
+import "./style-catalogo.css";
 import Card from "../Card/index";
 import Navbar from "../Navbar/index";
 import SearchProducts from "../Buscador/index";
- // Asegúrate de que la ruta sea correcta
+// Asegúrate de que la ruta sea correcta
 
 const Catalogo = () => {
   const [products, setProducts] = useState([]);
@@ -72,7 +72,9 @@ const Catalogo = () => {
               {categories.map((categoryId) => (
                 <button
                   id="categories_btn"
-                  className={`container-categories-btn btn mb-3 ${selectedCategory === categoryId ? 'active' : ''}`}
+                  className={`container-categories-btn btn mb-3 ${
+                    selectedCategory === categoryId ? "active" : ""
+                  }`}
                   key={categoryId}
                   onClick={() => handleCategoryChange(categoryId)}
                 >
@@ -83,7 +85,10 @@ const Catalogo = () => {
           </div>
           <div className="col">
             <div className="search-bar">
-              <SearchProducts setFilteredProducts={setFilteredProducts} products={products} />
+              <SearchProducts
+                setFilteredProducts={setFilteredProducts}
+                products={products}
+              />
             </div>
             <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (
@@ -103,11 +108,9 @@ const Catalogo = () => {
 
 export default Catalogo;
 
+// const [productIds, setProductIds] = useState([]);
 
-
-  // const [productIds, setProductIds] = useState([]);
-
-  // const guardarProducto = (id) => {
-  //   setProductIds((prevProductIds) => [...prevProductIds, id]);
-  //   console.log("array id", productIds )
-  // };
+// const guardarProducto = (id) => {
+//   setProductIds((prevProductIds) => [...prevProductIds, id]);
+//   console.log("array id", productIds )
+// };

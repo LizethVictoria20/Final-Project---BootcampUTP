@@ -26,12 +26,14 @@ const ShoppingCart = () => {
         if (cartId) {
           await fetchCartItems(setProducts, navigate);
         } else {
-          alert('No se pudo obtener el carrito. Redirigiendo a la página de inicio.');
-          navigate('/');
+          alert("No se pudo obtener el carrito. Debes registrarte.");
+          navigate("/");
         }
       } catch (error) {
         console.error("Error al obtener los datos del carrito:", error);
-        alert("Hubo un problema al cargar los datos del carrito. Por favor, intenta de nuevo más tarde.");
+        alert(
+          "Hubo un problema al cargar los datos del carrito. Por favor, intenta de nuevo más tarde."
+        );
       }
     };
 
@@ -40,25 +42,33 @@ const ShoppingCart = () => {
 
   const increment = async (productId) => {
     try {
-      const index = products.findIndex((product) => product.product_id === productId);
+      const index = products.findIndex(
+        (product) => product.product_id === productId
+      );
       if (index !== -1) {
         await incrementQuantityAPI(productId, products, setProducts, index);
       }
     } catch (error) {
       console.error("Error al incrementar la cantidad del producto:", error);
-      alert("Hubo un problema al incrementar la cantidad del producto. Por favor, intenta de nuevo más tarde.");
+      alert(
+        "Hubo un problema al incrementar la cantidad del producto. Por favor, intenta de nuevo más tarde."
+      );
     }
   };
 
   const decrement = async (productId) => {
     try {
-      const index = products.findIndex((product) => product.product_id === productId);
+      const index = products.findIndex(
+        (product) => product.product_id === productId
+      );
       if (index !== -1) {
         await decrementQuantityAPI(productId, products, setProducts, index);
       }
     } catch (error) {
       console.error("Error al decrementar la cantidad del producto:", error);
-      alert("Hubo un problema al decrementar la cantidad del producto. Por favor, intenta de nuevo más tarde.");
+      alert(
+        "Hubo un problema al decrementar la cantidad del producto. Por favor, intenta de nuevo más tarde."
+      );
     }
   };
 
@@ -67,18 +77,20 @@ const ShoppingCart = () => {
       await deleteProductAPI(cartItemId, products, setProducts, index);
     } catch (error) {
       console.error("Error al eliminar el producto del carrito:", error);
-      alert("Hubo un problema al eliminar el producto del carrito. Por favor, intenta de nuevo más tarde.");
+      alert(
+        "Hubo un problema al eliminar el producto del carrito. Por favor, intenta de nuevo más tarde."
+      );
     }
   };
 
   async function handleClick() {
     try {
-      const response = await api.post('payment/create-checkout-session');
+      const response = await api.post("payment/create-checkout-session");
       const { url } = response.data;
       console.log(url);
       window.location.href = url;
     } catch (error) {
-      console.error('Error creating checkout session:', error);
+      console.error("Error creating checkout session:", error);
     }
   }
 

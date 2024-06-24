@@ -8,7 +8,7 @@ import Navbar from "../Navbar/index";
 import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
-import "./style.css";
+import "./style-perfil.css";
 
 function Perfil() {
   return (

@@ -1,30 +1,55 @@
+import { Link } from "react-router-dom";
 import Navbar from "../Navbar/index";
-import Headphone from '../../assets/images/headphones.png'
-import './style.css'
-import Clothes from '../../assets/images/clothes.png'
-import Sport from '../../assets/images/sport.png'
-import Gaming from '../../assets/images/gaming.png'
+import "./style-home.css";
+import Home1 from "../../assets/images/home1.png";
+import Home2 from "../../assets/images/home2.png";
+import Product from "../../assets/images/product.png";
+import Product1 from "../../assets/images/product1.png";
+import Product2 from "../../assets/images/product2.png";
 
-function Home(params) {
+function Home() {
   return (
     <>
       <Navbar />
-      <div className="category">
-      <h3>Category</h3>
-        <button> <img src={Clothes} alt="clothes"/> clothes </button> <br/>
-        <button> <img src={Sport} alt="sport"/> sport </button><br/>
-        <button> <img src={Gaming} alt="gaming"/> Clothes </button><br/>
+      <div className="container-sm container-home rounded-4 mb-4">
+        <Link to="catalogo">
+          <img src={Home1} alt="" />
+        </Link>
       </div>
-      <div className="container-sm container-home rounded-4">
-        <p>Beats Solo</p> 
-        <h1>Wireless</h1>  
-        <h1 className='title-home'>Headphones</h1> 
-        <button className='btn btn-home text-white'>Shop by category</button> 
-        <div className='containerImg'>
-          <img src={Headphone} alt="" />
-        </div>  
+      <div>
+        <h1 className="text-center fw-bold mb-4 text-white">
+          Best Seller Products
+        </h1>
       </div>
-
+      <div className="container text-center container-best_seller d-flex flex-wrap justify-content-center">
+        <div className="row">
+          <div className="col col-catalogo">
+            <Link to="catalogo">
+              <img src={Product} alt="" />
+            </Link>
+          </div>
+          <div className="col col-catalogo">
+            <Link to="catalogo">
+              <img src={Product1} alt="" />
+            </Link>{" "}
+          </div>
+          <div className="col col-catalogo">
+            <Link to="catalogo">
+              <img src={Product2} alt="" />
+            </Link>
+          </div>
+          <div className="col col-catalogo">
+            <Link to="catalogo">
+              <img src={Product} alt="" />
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="container-sm container-home rounded-4 mb-4">
+        <Link to="catalogo">
+          <img src={Home2} alt="" />
+        </Link>
+      </div>
     </>
   );
 }

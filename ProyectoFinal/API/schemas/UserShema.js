@@ -6,7 +6,8 @@ const UserSchema = z.object({
   password: z.string().min(8).regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/),
   first_name: z.string().min(1).max(50),
   last_name: z.string().min(1).max(50),
-  admin: z.boolean().default(false)
+  admin: z.boolean().default(false),
+  image: z.string().default(null).optional()
 });
 
 export default UserSchema;

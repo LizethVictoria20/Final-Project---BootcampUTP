@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
@@ -11,8 +10,11 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import ShoppingCard from "./components/ShoppingCard";
-import PasarelaPago from "./components/PasarelaPago";
 import Perfil from "./components/Perfil";
+import NotFound from "./components/Error/NotFound";
+import Shipping from "./components/Shipping";
+
+
 function App() {
   return (
     <Router>
@@ -27,8 +29,8 @@ function App() {
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/register" element={<Register />} />
         <Route path="/shopping-card" element={<ShoppingCard />} />
-        <Route path="/pago" element={<PasarelaPago />} />
-        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/*" element={<NotFound />} />
+        <Route path="/shipping" element={<Shipping />} />
       </Routes>
     </Router>
   );

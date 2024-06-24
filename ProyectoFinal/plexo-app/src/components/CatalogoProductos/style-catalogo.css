@@ -1,0 +1,113 @@
+/* Estilos para el contenedor del catálogo */
+.container-catalogo {
+    margin-top: 7rem;
+    padding: 0 15px;
+}
+
+/* Estilos para el contenedor de productos */
+.container-products {
+    padding: 0 15px;
+}
+
+@media (max-width: 767px) {
+    .container-products {
+        margin-left: 20px;
+    }
+}
+
+/* Estilos para el botón de categoría 'All categories' */
+#category_btn {
+    color: #7429ba;
+    text-align: center;
+    width: 100%;
+}
+
+/* Estilos para los botones de categorías */
+#categories_btn {
+    color: #7429ba;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+/* Estilos al hacer hover sobre los botones de categorías */
+#categories_btn:hover {
+    background-color: #7429ba;
+    color: white;
+    border-radius: 1rem;
+}
+
+/* Media queries para pantallas grandes */
+@media (min-width: 992px) {
+    .container-catalogo {
+        padding: 0;
+    }
+
+    .container-categories-btn {
+        width: auto;
+        text-align: center;
+    }
+
+    #categories_btn {
+        width: 100%;
+    }
+}
+
+/* Contenedor principal de categorías */
+.container-categories {
+    position: relative;
+    padding: 20px;
+    background: linear-gradient(135deg, rgb(255, 255, 255), rgb(255, 255, 255));
+    border-radius: 50px;
+    margin: 20px;
+    width: 100%;
+    box-shadow: -5px -5px 11px #bebebe,
+                8px 8px 18px #7429ba;
+}
+
+/* Media queries para pantallas pequeñas (teléfonos) */
+@media (max-width: 991px) {
+    .container-catalogo {
+        padding: 0;
+    }
+
+    .container-categories-btn {
+        width: auto;
+        text-align: center;
+    }
+    
+    #categories_btn {
+        width: auto;
+    }
+    
+    .container-categories {
+        margin: 10px auto;
+        width: 90%;
+        max-width: none;
+        margin-bottom: 2rem;
+    }
+}
+@media (max-width: 767px) {
+    .container-categories {
+        margin-left: 32px;
+    }
+}
+
+/* Estilos adicionales para la barra de búsqueda */
+.search-bar {
+    max-width: 500px;
+    margin: 0 auto 20px;
+    margin-bottom: 5rem;
+}
+
+@media (max-width: 767px) {
+    .search-bar {
+        margin-left: 20px; /* Ajusta este valor según tus necesidades */
+    }
+}
+
+@media (min-width: 768px) {
+    .search-bar {
+        max-width: 600px;
+    }
+}

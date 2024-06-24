@@ -27,7 +27,6 @@ function Card({ product , guardarProducto}) {
           <p className="card-text">${product.price}</p>
           <div className="d-flex justify-content-between icon-container">
           <FaCirclePlus fontSize="1.9em" onClick={() => guardarProducto(product.product_id) } />
-            <CiHeart color="#7429ba" fontSize="2em" />
           </div>
         </div>
       </div>

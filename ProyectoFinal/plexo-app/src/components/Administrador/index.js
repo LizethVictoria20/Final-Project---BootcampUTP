@@ -54,17 +54,14 @@ function Admin() {
       <Navbar />
       <div className="container mt-5">
         <div className="p-4 shadow rounded containerAll_admin">
-          <div
-            className="d-flex justify-content-around align-items-center mb-3"
-            id="d-flex"
-          >
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
             <h1 className="h1_admin">Productos</h1>
-            <div className="d-flex justify-content-between custom1 productsAddSearch_admin">
+            <div className="d-flex flex-column flex-md-row align-items-center gap-3">
               <ModalComponentAdd
                 color="red"
                 onProductAdded={handleProductUpdated}
               />
-              <div className="input-group">
+              <div className="d-flex align-items-center">
                 <IoSearchCircle
                   size="40px"
                   color="white"
@@ -80,17 +77,17 @@ function Admin() {
           <div className="list-group">
             {filteredProducts.map((product) => (
               <div
-                className="list-group-item d-flex justify-content-between align-items-center mb-2 custom-item productUp_admin"
+                className="list-group-item d-flex justify-content-between align-items-center mb-2 custom-item productUp_admin flex-column flex-md-row"
                 key={product.id}
               >
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center mb-2 mb-md-0">
                   <img
                     src={product.image_url}
                     alt="product"
                     className="rounded-circle me-3"
                     style={{ width: "50px", height: "50px" }}
                   />
-                  <div className="d-grid template-columns-3fr product_admin">
+                  <div className="d-grid gap-2">
                     <h5 className="mb-1">{product.name}</h5>
                     <small>${product.price}</small>
                     <p className="mb-1">{product.description}</p>

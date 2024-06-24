@@ -17,6 +17,6 @@ router.get("/",authenticateJWT, getCartByUserId); // Listo
 router.post("/items",authenticateJWT, addCartItem); // Listo
 router.get("/items",authenticateJWT, getCartItems); //Listo
 router.put("/items",authenticateJWT, updateCartItem); // Listo
-router.patch("/add", authenticateJWT, incrementCartItemQuantity)
-router.patch("/minus", authenticateJWT, decrementCartItemQuantity)
+router.patch("/items/add", authenticateJWT, incrementCartItemQuantity)
+router.patch("/items/minus", authenticateJWT, decrementCartItemQuantity)
 export default router;

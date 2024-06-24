@@ -14,8 +14,8 @@ import Perfil from "./components/Perfil";
 import NotFound from "./components/Error/NotFound";
 import Shipping from "./components/Shipping";
 import Setting from "./components/AccountSettings/AccountSettings";
-import PaymentSuccess from './components/PaymentSuccess/PaymentSuccess.js';
-import PaymentFailed from './components/PaymentFailed/PaymentFailed.js';
+import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess.js";
+import PaymentFailed from "./components/PaymentFailed/PaymentFailed.js";
 function App() {
   return (
     <Router>

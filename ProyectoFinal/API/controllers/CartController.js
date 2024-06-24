@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import Cart from "../models/Cart.js";
 import CartItem from "../models/CartItem.js";
 import Product from "../models/Product.js";
@@ -54,9 +53,7 @@ export const addCartItem = async (req, res) => {
       return res.status(400).json({ message: "Product name is required" });
     }
     if (quantity <= 0 || !quantity) {
-      return res
-        .status(400)
-        .json({ message: "Quantity should be greater than 0" });
+      return res.status(400).json({ message: "Quantity should be greater than 0" });
     }
 
     const product = await Product.findOne({ where: { name: productName } });
@@ -65,6 +62,24 @@ export const addCartItem = async (req, res) => {
     }
     if (product.stock < quantity) {
       return res.status(400).json({ message: "Not enough stock" });
+    }
+
+    const existingItem = await CartItem.findOne({
+      where: {
+        cart_id: cart.cart_id,
+        product_id: product.product_id,
+      },
+    });
+
+    if (existingItem) {
+      const updatedQuantity = existingItem.quantity + quantity;
+      if (product.stock < updatedQuantity) {
+        return res.status(400).json({ message: "Not enough stock" });
+      }
+
+      existingItem.quantity = updatedQuantity;
+      await existingItem.save();
+      return res.status(200).json(existingItem);
     }
 
     const newItem = await CartItem.create({
@@ -104,8 +119,8 @@ export const getCartItems = async (req, res) => {
         const product = await Product.findOne({ where: { product_id: item.product_id } });
         return {
           cart_item_id: item.cart_item_id,
-          product_name: product ? product.name : "Unknown Product",
           quantity: item.quantity,
+          product: product
         };
       })
     );
@@ -178,6 +193,24 @@ export const decrementCartItemQuantity = async (req, res) => {
     await cartItem.save();
 
     res.status(200).json(cartItem);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+export const deleteCartItem = async (req, res) => {
+  try {
+    const { cartItemId } = req.body;
+    if(!cartItem){
+      return res.status(404).json({ message: "Cart required" });
+    }
+    const cartItem = await CartItem.findByPk(cartItemId);
+
+    if (!cartItem) {
+      return res.status(404).json({ message: "Cart item not found" });
+    }
+
+    await cartItem.destroy();
+    res.status(200).json({ message: "Cart item deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

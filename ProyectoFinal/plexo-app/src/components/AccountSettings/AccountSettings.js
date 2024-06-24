@@ -7,7 +7,7 @@ import api from "../../http/index";
 import updateUser from './updateUser.js';
 
 const AccountSettings = () => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [editableField, setEditableField] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -18,19 +18,22 @@ const AccountSettings = () => {
     profileImageUrl: ''
   });
   const [profileImage, setProfileImage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const GetUser = () => {
     api.get("users/loginuser").then((response) => {
-      setUser(response.data);
-      setFormData({
-        name: response.data.first_name,
-        lastname: response.data.last_name,
-        mail: response.data.email,
-        username: response.data.username,
-        password: '',
-        profileImageUrl: response.data.image || ''
-      });
-      setProfileImage(response.data.image || '');
+      if (response.data) {
+        setUser(response.data);
+        setFormData({
+          name: response.data.first_name || '',
+          lastname: response.data.last_name || '',
+          mail: response.data.email || '',
+          username: response.data.username || '',
+          password: '',
+          profileImageUrl: response.data.image || ''
+        });
+        setProfileImage(response.data.image || '');
+      }
     }).catch(error => {
       console.error("Error fetching user:", error);
     });
@@ -52,6 +55,7 @@ const AccountSettings = () => {
   };
 
   const handleSave = async () => {
+    
     if (!formData.password) {
       alert("Please enter a password.");
       return;
@@ -65,19 +69,22 @@ const AccountSettings = () => {
       last_name: formData.lastname,
       email: formData.mail,
       password: formData.password,
-      image: formData.profileImageUrl // Aquí se debe enviar la URL del input de imagen
+      image: formData.profileImageUrl
     };
 
     try {
       const response = await updateUser(updatedUser);
-      setUser(response.data);
-      setProfileImage(response.data.image || '');
-      alert("Información actualizada exitosamente");
+      if (response.data) {
+        setUser(response.data);
+        setProfileImage(response.data.image || '');
+        setSuccessMessage("Información actualizada exitosamente");
+      }
     } catch (error) {
       console.error('Error updating user:', error);
       alert("No se pudo actualizar la información");
     }
   };
+  
 
   return (
     <div className="account-settings-wrapper d-flex justify-content-center align-items-center min-vh-100">
@@ -86,6 +93,12 @@ const AccountSettings = () => {
           <IoShieldCheckmarkSharp className='settingsshield' fontSize='2em' />
           <h2 className="account-settings-title mb-0">Account Settings</h2>
         </div>
+
+        {successMessage && (
+          <div className="alert alert-success" role="alert">
+            {successMessage}
+          </div>
+        )}
 
         <div className="profile-picture-container position-relative mb-3">
           <img
@@ -119,7 +132,7 @@ const AccountSettings = () => {
                 value={formData.name}
                 onChange={handleChange}
                 disabled={editableField !== 'name'}
-                placeholder={user.first_name}
+                placeholder={user ? user.first_name : ''}
               />
               <MdModeEditOutline className="edit-icon ms-2" onClick={() => handleEditClick('name')} color='#7429BA' fontSize='1.5em' />
             </div>
@@ -134,7 +147,7 @@ const AccountSettings = () => {
                 value={formData.lastname}
                 onChange={handleChange}
                 disabled={editableField !== 'lastname'}
-                placeholder={user.last_name}
+                placeholder={user ? user.last_name : ''}
               />
               <MdModeEditOutline className="edit-icon ms-2" onClick={() => handleEditClick('lastname')} color='#7429BA' fontSize='1.5em' />
             </div>
@@ -149,7 +162,7 @@ const AccountSettings = () => {
                 value={formData.username}
                 onChange={handleChange}
                 disabled={editableField !== 'username'}
-                placeholder={user.username}
+                placeholder={user ? user.username : ''}
               />
               <MdModeEditOutline className="edit-icon ms-2" onClick={() => handleEditClick('username')} color='#7429BA' fontSize='1.5em' />
             </div>
@@ -164,7 +177,7 @@ const AccountSettings = () => {
                 value={formData.mail}
                 onChange={handleChange}
                 disabled={editableField !== 'mail'}
-                placeholder={user.email}
+                placeholder={user ? user.email : ''}
               />
               <MdModeEditOutline className="edit-icon ms-2" onClick={() => handleEditClick('mail')} color='#7429BA' fontSize='1.5em' />
             </div>

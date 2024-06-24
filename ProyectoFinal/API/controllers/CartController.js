@@ -119,8 +119,7 @@ export const getCartItems = async (req, res) => {
         const product = await Product.findOne({ where: { product_id: item.product_id } });
         return {
           cart_item_id: item.cart_item_id,
-          product_name: product ? product.name : "Unknown Product",
-          quantity: item.quantity,
+          product: product
         };
       })
     );

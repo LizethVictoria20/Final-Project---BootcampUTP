@@ -9,6 +9,7 @@ const PaymentSuccess = () => {
     useEffect(() => {
       const timeoutId = setTimeout(() => {
         navigate('/');
+        console.log('pa fuera');
       }, 60000);
   
       return () => clearTimeout(timeoutId);

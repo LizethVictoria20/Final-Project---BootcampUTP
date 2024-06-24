@@ -12,7 +12,7 @@ function Card({ product }) {
   };
 
   return (
-    <div className="col-sm-6 col-md-4 col-lg-3">
+    <div className=" container-general-card">
       <div className="card card-container rounded-5 mb-4 w-75">
         <img
           src={product.image_url}

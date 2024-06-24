@@ -4,6 +4,7 @@ import Card from "../Card/index";
 import api from "../../http/index.js";
 import Navbar from "../Navbar/index";
 import SearchProducts from "../Buscador/index";
+import { Link } from "react-router-dom";
 
 const Catalogo = () => {
   const [products, setProducts] = useState([]);
@@ -89,7 +90,9 @@ const Catalogo = () => {
             <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
-                  <Card key={product.product_id} product={product} />
+                  <Link to={`/product/${product.product_id}`} className='container-general-card'>
+                    <Card key={product.product_id} product={product} />
+                  </Link>
                 ))
               ) : (
                 <p className="text-light">No products found</p>

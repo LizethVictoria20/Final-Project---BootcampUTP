@@ -18,23 +18,22 @@ function Register() {
 
   const validate = () => {
     const errors = {};
-    if (!firstName.trim()) errors.firstName = "El nombre es obligatorio";
-    if (!lastName.trim()) errors.lastName = "El apellido es obligatorio";
-    if (!userName.trim())
-      errors.userName = "El nombre de usuario es obligatorio";
+    if (!firstName.trim()) errors.firstName = "Name is mandatory";
+    if (!lastName.trim()) errors.lastName = "Last name is mandatory";
+    if (!userName.trim()) errors.userName = "Username is mandatory";
     if (!userEmail.trim()) {
-      errors.userEmail = "El correo electrónico es obligatorio";
+      errors.userEmail = "Email is mandatory";
     } else if (!/\S+@\S+\.\S+/.test(userEmail)) {
-      errors.userEmail = "El correo electrónico no es válido";
+      errors.userEmail = "Email isn't correct";
     }
     if (!userPassword.trim()) {
-      errors.userPassword = "La contraseña es obligatoria";
+      errors.userPassword = "Password isn't correct";
     } else if (!/^(?=.*[0-9])[A-Za-z0-9]{6,}$/.test(userPassword)) {
       errors.userPassword =
         "The password must be at least 6 characters, contain at least one number, and have no special characters";
     }
     if (userPassword !== confirmPassword) {
-      errors.confirmPassword = "Las contraseñas no coinciden";
+      errors.confirmPassword = "Password don't match";
     }
     return errors;
   };
@@ -72,7 +71,7 @@ function Register() {
       }
     } catch (err) {
       console.log(err);
-      window.alert("Registro fallido");
+      window.alert("Register failed");
     }
   };
 

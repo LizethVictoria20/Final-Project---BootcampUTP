@@ -57,11 +57,11 @@ const Catalogo = () => {
       <Navbar />
       <div className="container-fluid text-center container-catalogo">
         <div className="row">
-          <div className="col-lg-2 col-md-3 mb-4">
-            <div className="container-categories sobelo">
+          <div className="col-lg-2 col-md-3 mb-4 text-black">
+            <div className="container-categories d-flex flex-column ">
               <button
                 id="category_btn"
-                className="container-categories-btn btn mb-3"
+                className="container-categories-btn btn mb-3 text-black button-cateries"
                 onClick={() => handleCategoryChange("")}
               >
                 All categories
@@ -69,7 +69,7 @@ const Catalogo = () => {
               {categories.map((category) => (
                 <button
                   id={`category_${category.category_id}`}
-                  className={`container-categories-btn btn mb-3 ${
+                  className={`container-categories-btn btn mb-3 text-black button-cateries ${
                     selectedCategory === category.category_id ? "active" : ""
                   }`}
                   key={category.category_id}
@@ -90,7 +90,10 @@ const Catalogo = () => {
             <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
-                  <Link to={`/product/${product.product_id}`} className='container-general-card'>
+                  <Link
+                    to={`/product/${product.product_id}`}
+                    className="container-general-card"
+                  >
                     <Card key={product.product_id} product={product} />
                   </Link>
                 ))

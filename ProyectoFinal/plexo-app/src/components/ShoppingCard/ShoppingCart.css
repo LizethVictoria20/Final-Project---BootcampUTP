@@ -15,7 +15,6 @@ body {
   gap: 20px; /* Espacio entre los elementos del contenedor */
 }
 
-/* Ajustes de diseño para pantallas más grandes */
 @media (min-width: 768px) {
   .cart-container {
     flex-direction: row;
@@ -29,7 +28,8 @@ body {
 
 @media (min-width: 768px) {
   .products-container {
-    width: 70%; /* El contenedor de productos ocupa el 70% del ancho en pantallas grandes */
+    width: 100%; /* El contenedor de productos ocupa el 100% del ancho en pantallas grandes */
+    margin-right: 40px;
   }
 }
 
@@ -105,6 +105,9 @@ body {
   gap: 10px;
   margin-top: 10px;
 }
+.product-controls span{
+  color: #fff;
+}
 
 @media (min-width: 768px) {
   .product-controls {
@@ -151,7 +154,7 @@ body {
 
 @media (min-width: 768px) {
   .summary {
-    width: 25%; /* El resumen ocupa el 25% del ancho en pantallas grandes */
+    width: 100%; /* El resumen ocupa el 100% del ancho en pantallas grandes */
   }
 }
 

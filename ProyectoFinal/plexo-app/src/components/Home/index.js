@@ -23,22 +23,22 @@ function Home() {
       </div>
       <div className="container text-center container-best_seller d-flex flex-wrap justify-content-center">
         <div className="row">
-          <div className="col">
+          <div className="col col-catalogo">
             <Link to="catalogo">
               <img src={Product} alt="" />
             </Link>
           </div>
-          <div className="col">
+          <div className="col col-catalogo">
             <Link to="catalogo">
               <img src={Product1} alt="" />
             </Link>{" "}
           </div>
-          <div className="col">
+          <div className="col col-catalogo">
             <Link to="catalogo">
               <img src={Product2} alt="" />
             </Link>
           </div>
-          <div className="col">
+          <div className="col col-catalogo">
             <Link to="catalogo">
               <img src={Product} alt="" />
             </Link>

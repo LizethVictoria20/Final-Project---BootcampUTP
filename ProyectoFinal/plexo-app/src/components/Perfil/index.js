@@ -5,7 +5,7 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { BiSupport } from "react-icons/bi";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import Navbar from "../Navbar/index";
-import "./style.css";
+import "./style-perfil.css";
 
 function Perfil() {
   return (

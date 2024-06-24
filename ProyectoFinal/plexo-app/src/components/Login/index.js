@@ -1,4 +1,4 @@
-import "./style.css";
+import "./style-login.css";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../http";
 

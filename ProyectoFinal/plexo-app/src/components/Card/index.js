@@ -1,6 +1,6 @@
 import React from "react";
 import { CiHeart } from "react-icons/ci";
-import "./style.css";
+import "./style-card.css";
 import { FaCirclePlus } from "react-icons/fa6";
 
 

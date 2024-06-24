@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar/index";
-import "./style.css";
+import "./style-home.css";
 import Home1 from "../../assets/images/home1.png";
 import Home2 from "../../assets/images/home2.png";
 import Product from "../../assets/images/product.png";

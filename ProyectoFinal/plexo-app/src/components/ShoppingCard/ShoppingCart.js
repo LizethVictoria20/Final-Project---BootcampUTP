@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../http";
 import Navbar from "../Navbar";
 import Product from "./Product";
 import "./ShoppingCart.css";
 import {
   fetchCartId,
   fetchCartItems,
-  incrementQuantity,
-  decrementQuantity,
-  calculateTotal
+  incrementQuantity as incrementQuantityAPI,
+  decrementQuantity as decrementQuantityAPI,
+  deleteProduct as deleteProductAPI,
+  calculateTotal,
 } from "./api";
 
+/**
+ * Componente principal del carrito de compras.
+ *
+ * @returns {JSX.Element} Un elemento JSX que representa el carrito de compras.
+ */
 const ShoppingCart = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
@@ -19,36 +24,89 @@ const ShoppingCart = () => {
   const { subtotal, tax, total } = calculateTotal(products);
 
   useEffect(() => {
+    /**
+     * Función para obtener y cargar los datos del carrito.
+     */
     const fetchCartData = async () => {
-      const cartId = await fetchCartId();
-      if (cartId) {
-        await fetchCartItems(setProducts, navigate);
-      } else {
-        alert('No se pudo obtener el carrito. Redirigiendo a la página de inicio.');
-        navigate('/*'); // Redirige a la página de error
+      try {
+        const cartId = await fetchCartId();
+        if (cartId) {
+          await fetchCartItems(setProducts, navigate);
+        } else {
+          alert('No se pudo obtener el carrito. Redirigiendo a la página de inicio.');
+          navigate('/'); // Redirige a la página de inicio
+        }
+      } catch (error) {
+        console.error("Error al obtener los datos del carrito:", error);
+        alert("Hubo un problema al cargar los datos del carrito. Por favor, intenta de nuevo más tarde.");
       }
     };
 
     fetchCartData();
   }, [navigate]);
 
+  /**
+   * Función para incrementar la cantidad de un producto.
+   *
+   * @param {string} productId - ID del producto a incrementar.
+   */
+  const increment = async (productId) => {
+    try {
+      const index = products.findIndex((product) => product.product_id === productId);
+      if (index !== -1) {
+        await incrementQuantityAPI(productId, products, setProducts, index);
+      }
+    } catch (error) {
+      console.error("Error al incrementar la cantidad del producto:", error);
+      alert("Hubo un problema al incrementar la cantidad del producto. Por favor, intenta de nuevo más tarde.");
+    }
+  };
+
+  /**
+   * Función para decrementar la cantidad de un producto.
+   *
+   * @param {string} productId - ID del producto a decrementar.
+   */
+  const decrement = async (productId) => {
+    try {
+      const index = products.findIndex((product) => product.product_id === productId);
+      if (index !== -1) {
+        await decrementQuantityAPI(productId, products, setProducts, index);
+      }
+    } catch (error) {
+      console.error("Error al decrementar la cantidad del producto:", error);
+      alert("Hubo un problema al decrementar la cantidad del producto. Por favor, intenta de nuevo más tarde.");
+    }
+  };
+
+  /**
+   * Función para eliminar un producto del carrito.
+   *
+   * @param {string} cartItemId - ID del artículo en el carrito.
+   * @param {number} index - Índice del producto a eliminar.
+   */
+  const deleteProduct = async (cartItemId, index) => {
+    try {
+      await deleteProductAPI(cartItemId, products, setProducts, index);
+    } catch (error) {
+      console.error("Error al eliminar el producto del carrito:", error);
+      alert("Hubo un problema al eliminar el producto del carrito. Por favor, intenta de nuevo más tarde.");
+    }
+  };
+
   return (
     <>
       <Navbar />
-      <button onClick={async () => console.log(await api.get('/carts'))}>carts</button>
-      <button onClick={async () => console.log(await api.get('/users'))}>users</button>
-      <button onClick={async () => console.log(await api.get('/auth/logout'))}>logout</button>
-      <button onClick={async () => console.log(await api.get('/users/loginuser'))}>user.data</button>
-      <button onClick={async () => console.log(await api.get('/carts/items'))}>carts.items</button>
-
       <div className="cart-container d-flex justify-content-between">
         <div className="products-container">
-          {products.map((product) => (
+          {products.map((product, index) => (
             <Product
               key={product.product_id}
               product={product}
-              increment={() => incrementQuantity(product.product_id, products, setProducts)}
-              decrement={() => decrementQuantity(product.product_id, products, setProducts)}
+              index={index}
+              increment={() => increment(product.product_id)}
+              decrement={() => decrement(product.product_id)}
+              deleteProduct={() => deleteProduct(product.cartItemId, index)}
             />
           ))}
         </div>
@@ -61,13 +119,13 @@ const ShoppingCart = () => {
           <p>Impuesto 19%: ${tax.toFixed(2)}</p>
           <p>Envío: GRATIS</p>
           <p>Total: ${total.toFixed(2)}</p>
-            <button className="confirm-button">
-              <span className="span1"></span>
-              <span className="span2"></span>
-              <span className="span3"></span>
-              <span className="span4"></span>
-              CONFIRMAR COMPRA
-            </button>
+          <button className="confirm-button">
+            <span className="span1"></span>
+            <span className="span2"></span>
+            <span className="span3"></span>
+            <span className="span4"></span>
+            CONFIRMAR COMPRA
+          </button>
         </div>
       </div>
     </>

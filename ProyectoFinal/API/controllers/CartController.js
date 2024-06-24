@@ -53,7 +53,9 @@ export const addCartItem = async (req, res) => {
       return res.status(400).json({ message: "Product name is required" });
     }
     if (quantity <= 0 || !quantity) {
-      return res.status(400).json({ message: "Quantity should be greater than 0" });
+      return res
+        .status(400)
+        .json({ message: "Quantity should be greater than 0" });
     }
 
     const product = await Product.findOne({ where: { name: productName } });
@@ -116,11 +118,13 @@ export const getCartItems = async (req, res) => {
 
     const detailedItems = await Promise.all(
       items.map(async (item) => {
-        const product = await Product.findOne({ where: { product_id: item.product_id } });
+        const product = await Product.findOne({
+          where: { product_id: item.product_id },
+        });
         return {
           cart_item_id: item.cart_item_id,
           quantity: item.quantity,
-          product: product
+          product: product,
         };
       })
     );
@@ -200,9 +204,11 @@ export const decrementCartItemQuantity = async (req, res) => {
 export const deleteCartItem = async (req, res) => {
   try {
     const { cartItemId } = req.body;
-    if(!cartItem){
-      return res.status(404).json({ message: "Cart required" });
+
+    if (!cartItemId) {
+      return res.status(404).json({ message: "Cart item ID is required" });
     }
+
     const cartItem = await CartItem.findByPk(cartItemId);
 
     if (!cartItem) {

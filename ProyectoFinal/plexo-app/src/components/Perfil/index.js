@@ -62,7 +62,7 @@ function Perfil() {
               </Link>
             </button>
             <button className="btn btn-custom mb-2 button-logo-accountsettings">
-              <Link to="/accountsettings" className="logo-accountsettings">
+              <Link to="/setting" className="logo-accountsettings">
                 <MdAdminPanelSettings className="iconos" /> Account Settings
               </Link>
             </button>
@@ -76,7 +76,6 @@ function Perfil() {
             <div className="profile-section profile-form">
               <form className="container-form">
                 <div className="form-group form-info">
-                  
                   <div>{user.first_name}</div>
                 </div>
                 <div className="form-group form-info">

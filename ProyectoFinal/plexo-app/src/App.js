@@ -13,6 +13,7 @@ import ShoppingCard from "./components/ShoppingCard";
 import Perfil from "./components/Perfil";
 import NotFound from "./components/Error/NotFound";
 import Shipping from "./components/Shipping";
+import Setting from "./components/AccountSettings/AccountSettings";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/*" element={<NotFound />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/perfil" element={<Perfil />} />
+        <Route path="/setting" element={<Setting />} />
       </Routes>
     </Router>
   );

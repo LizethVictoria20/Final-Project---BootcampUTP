@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import Navbar from "../Navbar/index";
 import api from "../../http/index";
-
 import "./style-perfil.css";
+
 function Perfil() {
   const [user, setUser] = useState({});
   const [formData, setFormData] = useState({
@@ -72,24 +72,28 @@ function Perfil() {
               </Link>
             </button>
           </div>
-          <div className="col-md-8 col-sm-12">
+          <div className="col-md-8 ">
             <div className="profile-section profile-form">
               <form className="container-form">
                 <div className="form-group form-info">
-                  
-                  <div>{user.first_name}</div>
+                  <label className="label-custom">Name</label>
+                  <div className="form-value">{user.first_name}</div>
                 </div>
                 <div className="form-group form-info">
-                  <div>{user.last_name}</div>
+                  <label className="label-custom">Last Name</label>
+                  <div className="form-value">{user.last_name}</div>
                 </div>
                 <div className="form-group form-info">
-                  <div>{user.username}</div>
+                  <label className="label-custom">Username</label>
+                  <div className="form-value">{user.username}</div>
                 </div>
                 <div className="form-group form-info">
-                  <div>{user.email}</div>
+                  <label className="label-custom">Email</label>
+                  <div className="form-value">{user.email}</div>
                 </div>
                 <div className="form-group form-info">
-                  <div>***********</div>
+                  <label className="label-custom">Password</label>
+                  <div className="form-value">***********</div>
                 </div>
               </form>
             </div>

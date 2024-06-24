@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./style-catalogo.css";
 import Card from "../Card/index";
+import api from "../../http/index.js";
 import Navbar from "../Navbar/index";
 import SearchProducts from "../Buscador/index";
-// Asegúrate de que la ruta sea correcta
 
 const Catalogo = () => {
   const [products, setProducts] = useState([]);
@@ -15,16 +14,13 @@ const Catalogo = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(
-          "https://final-project-bootcamputp.onrender.com/api/products"
-        );
+        const response = await api.get("products");
         const productsData = response.data;
         setProducts(productsData);
         setFilteredProducts(productsData);
 
-        const uniqueCategories = [
-          ...new Set(productsData.map((product) => product.name.split(" ")[0])),
-        ];
+        const responseCategories = await api.get("categories");
+        const uniqueCategories = responseCategories.data;
         setCategories(uniqueCategories);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -38,7 +34,7 @@ const Catalogo = () => {
     setSelectedCategory(categoryId);
     if (categoryId) {
       const filteredByCategory = products.filter(
-        (product) => product.name.split(" ")[0] === categoryId
+        (product) => product.category_id === categoryId
       );
       setFilteredProducts(filteredByCategory);
     } else {
@@ -51,7 +47,7 @@ const Catalogo = () => {
       return filteredProducts;
     }
     return filteredProducts.filter(
-      (product) => product.name.split(" ")[0] === selectedCategory
+      (product) => product.category_id === selectedCategory
     );
   };
 
@@ -61,7 +57,7 @@ const Catalogo = () => {
       <div className="container-fluid text-center container-catalogo">
         <div className="row">
           <div className="col-lg-2 col-md-3 mb-4">
-            <div className="container-categories sticky-top">
+            <div className="container-categories sobelo">
               <button
                 id="category_btn"
                 className="container-categories-btn btn mb-3"
@@ -69,16 +65,16 @@ const Catalogo = () => {
               >
                 All categories
               </button>
-              {categories.map((categoryId) => (
+              {categories.map((category) => (
                 <button
-                  id="categories_btn"
+                  id={`category_${category.category_id}`}
                   className={`container-categories-btn btn mb-3 ${
-                    selectedCategory === categoryId ? "active" : ""
+                    selectedCategory === category.category_id ? "active" : ""
                   }`}
-                  key={categoryId}
-                  onClick={() => handleCategoryChange(categoryId)}
+                  key={category.category_id}
+                  onClick={() => handleCategoryChange(category.category_id)}
                 >
-                  {categoryId}
+                  {category.name}
                 </button>
               ))}
             </div>
@@ -96,7 +92,7 @@ const Catalogo = () => {
                   <Card key={product.product_id} product={product} />
                 ))
               ) : (
-                <p>No products found</p>
+                <p className="text-light">No products found</p>
               )}
             </div>
           </div>
@@ -107,10 +103,3 @@ const Catalogo = () => {
 };
 
 export default Catalogo;
-
-// const [productIds, setProductIds] = useState([]);
-
-// const guardarProducto = (id) => {
-//   setProductIds((prevProductIds) => [...prevProductIds, id]);
-//   console.log("array id", productIds )
-// };

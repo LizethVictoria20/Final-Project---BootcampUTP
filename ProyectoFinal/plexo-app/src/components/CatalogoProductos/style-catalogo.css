@@ -21,7 +21,10 @@
     text-align: center;
     width: 100%;
 }
-
+.sobelo{
+    display: flex;
+    flex-direction: column;
+}
 /* Estilos para los botones de categorías */
 #categories_btn {
     color: #7429ba;
@@ -29,7 +32,9 @@
     text-align: center;
     width: 100%;
 }
-
+.col:hover {
+    transform: none!important;
+}
 /* Estilos al hacer hover sobre los botones de categorías */
 #categories_btn:hover {
     background-color: #7429ba;

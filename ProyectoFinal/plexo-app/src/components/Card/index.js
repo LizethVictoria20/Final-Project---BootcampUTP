@@ -1,21 +1,18 @@
-import React from "react";
-import { CiHeart } from "react-icons/ci";
+import React, { useState } from "react";
+import api from "../../http/index.js";
 import "./style-card.css";
-import { FaCirclePlus } from "react-icons/fa6";
+import { FaPlusCircle } from "react-icons/fa";
 
+function Card({ product }) {
+  const [display, setDisplay] = useState("block"); // Estado inicial puede ser "block", "none" o "inline-block"
 
-function Card({ product , guardarProducto}) {
-  
-  // const [productIds, setProductIds] = useState([]);
-
-  // const guardarProducto = (id) => {
-  //   // Actualiza el estado para incluir el nuevo ID
-  //   setProductIds((prevProductIds) => [...prevProductIds, id]);
-  //   console.log("IDs guardados:", productIds);
-  // };
+  const handleAddToCart = () => {
+    api.post("carts/items", { productName: product.name, quantity: 1 });
+    setDisplay("none"); // Cambia a "none" para ocultar el ícono de más después de hacer clic
+  };
 
   return (
-    <div className="col-sm-6 col-md-4 col-lg-3" key={product.product_id}>
+    <div className="col-sm-6 col-md-4 col-lg-3">
       <div className="card card-container rounded-5 mb-4 w-75">
         <img
           src={product.image_url}
@@ -26,12 +23,16 @@ function Card({ product , guardarProducto}) {
           <h5 className="card-title">{product.name}</h5>
           <p className="card-text">${product.price}</p>
           <div className="d-flex justify-content-center icon-container">
-          <FaCirclePlus fontSize="1.9em" onClick={() => guardarProducto(product.product_id) } />
+            <FaPlusCircle
+              fontSize="1.9em"
+              style={{ cursor: "pointer", display: display }}
+              onClick={handleAddToCart}
+            />
           </div>
         </div>
       </div>
     </div>
   );
-  
 }
+
 export default Card;

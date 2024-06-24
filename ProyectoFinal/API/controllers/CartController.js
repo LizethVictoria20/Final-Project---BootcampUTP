@@ -197,3 +197,21 @@ export const decrementCartItemQuantity = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+export const deleteCartItem = async (req, res) => {
+  try {
+    const { cartItemId } = req.body;
+    if(!cartItem){
+      return res.status(404).json({ message: "Cart required" });
+    }
+    const cartItem = await CartItem.findByPk(cartItemId);
+
+    if (!cartItem) {
+      return res.status(404).json({ message: "Cart item not found" });
+    }
+
+    await cartItem.destroy();
+    res.status(200).json({ message: "Cart item deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

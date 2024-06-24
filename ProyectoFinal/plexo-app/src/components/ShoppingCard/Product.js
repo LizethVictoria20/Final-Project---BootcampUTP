@@ -22,7 +22,7 @@ const Product = ({ product, increment, decrement, deleteProduct, index }) => (
           className="img-shopping"
         />
       </div>
-      <div className="texto-producto">
+      <div className="texto-producto text-light">
         <h3>{product.name}</h3>
         <p>Descripción: {product.description}</p>
         <p>Precio: ${product.price}</p>

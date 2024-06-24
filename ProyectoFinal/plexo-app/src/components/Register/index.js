@@ -3,7 +3,6 @@ import "./style-register.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../Navbar";
-import api from "../../http";
 
 function Register() {
   const [isRegister, setIsRegister] = useState(false);

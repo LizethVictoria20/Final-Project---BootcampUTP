@@ -9,7 +9,7 @@ import Gmail from "./components/Gmail";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
-import ShoppingCard from "./components/ShoppingCard";
+import ShoppingCart from "./components/ShoppingCard/ShoppingCart";
 import Perfil from "./components/Perfil";
 import NotFound from "./components/Error/NotFound";
 import Shipping from "./components/Shipping";
@@ -27,7 +27,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/navbar" element={<Navbar />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/shopping-card" element={<ShoppingCard />} />
+        <Route path="/shopping-card" element={<ShoppingCart />} />
         <Route path="/*" element={<NotFound />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/perfil" element={<Perfil />} />

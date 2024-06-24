@@ -9,6 +9,10 @@
     padding: 0 15px;
 }
 
+.container-general-card a {
+    text-decoration: none;
+}
+
 @media (max-width: 767px) {
     .container-products {
         margin-left: 20px;

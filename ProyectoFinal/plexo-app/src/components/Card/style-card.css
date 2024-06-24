@@ -19,6 +19,11 @@
 
 }
 
+.container-general-card {
+    width: 17rem;
+    text-decoration: none;
+}
+
 .card-body {
     text-align: left;
     padding-left: 20%;

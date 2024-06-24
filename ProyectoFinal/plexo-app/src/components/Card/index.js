@@ -25,9 +25,8 @@ function Card({ product , guardarProducto}) {
         <div className="card-body text-dark">
           <h5 className="card-title">{product.name}</h5>
           <p className="card-text">${product.price}</p>
-          <div className="d-flex justify-content-between icon-container">
+          <div className="d-flex justify-content-center icon-container">
           <FaCirclePlus fontSize="1.9em" onClick={() => guardarProducto(product.product_id) } />
-            <CiHeart color="#7429ba" fontSize="2em" />
           </div>
         </div>
       </div>

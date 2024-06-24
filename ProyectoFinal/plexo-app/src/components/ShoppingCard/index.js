@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-// import Cookies from "js-cookie";
-import Navbar from "../Navbar"; // Asumiendo que tienes un componente Navbar
-import "./styles.css"; // Asumiendo que tienes un archivo de estilos CSS
+import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar";
+import "./styles.css";
 import api from "../../http";
 
 // Componente para mostrar la información de un producto
-const Product = ({ product, index, increment, decrement }) => (
+const Product = ({ product, increment, decrement }) => (
   <div className="product">
     <div className="product-info">
-    <button onClick={async () => console.log(await api.get('/carts'))}>carts</button>
-    <button onClick={async () => console.log(await api.get('/users'))}>users</button>
-    <button onClick={async () => console.log(await api.get('/auth/logout'))}>logout</button>
-    <button onClick={async () => console.log(await api.get('/users/loginuser'))}>user.data</button>
       <div className="product-image">
         <img
           src={product.image_url}
@@ -28,50 +23,93 @@ const Product = ({ product, index, increment, decrement }) => (
       </div>
     </div>
     <div className="product-controls">
-      <button onClick={() => decrement(index)}>-</button>
+      <button onClick={() => decrement(product.product_id)}>-</button>
       <span>{product.quantity}</span>
-      <button onClick={() => increment(index)}>+</button>
+      <button onClick={() => increment(product.product_id)}>+</button>
     </div>
   </div>
 );
 
 const ShoppingCart = () => {
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
-  // Función para obtener la lista de productos
-  const fetchProducts = async (token) => {
+  // Función para obtener el cartId y userId
+  const fetchCartId = async () => {
     try {
-      const response = await axios.get(
-        "https://final-project-bootcamputp.onrender.com/api/products"
-      );
-      const productsWithQuantity = response.data.map((product) => ({
-        ...product,
-        quantity: 1,
-      }));
-      setProducts(productsWithQuantity);
+      const response = await api.get('/carts');
+      const cartData = response.data;
+
+      if (cartData && cartData.cart_id) {
+        return cartData.cart_id;
+      } else {
+        throw new Error("Invalid cart data");
+      }
     } catch (error) {
-      console.error("Error fetching products:", error);
+      console.error("Error fetching cart ID:", error);
     }
   };
-  fetchProducts();
 
-  // Funciones para incrementar y decrementar la cantidad de productos
-  const incrementQuantity = (index) => {
-    const newProducts = [...products];
-    newProducts[index].quantity += 1;
-    setProducts(newProducts);
+  // Función para obtener la lista de productos usando el cartId
+  const fetchCartItems = async () => {
+    try {
+      const response = await api.get('/carts/items');
+      const cartItemsData = response.data;
+
+      const items = cartItemsData.map(item => ({
+        ...item.product,
+        quantity: item.quantity
+      }));
+      setProducts(items);
+
+      if (items.length === 0) {
+        alert('El carrito está vacío. Redirigiendo a la página de inicio.');
+        navigate('/*'); // Redirige a la página de error
+      }
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
   };
 
-  const decrementQuantity = (index) => {
-    const newProducts = [...products];
-    if (newProducts[index].quantity > 1) {
-      newProducts[index].quantity -= 1;
-      setProducts(newProducts);
+  // Funciones para incrementar y decrementar la cantidad de productos
+  const incrementQuantity = async (productId) => {
+    const newProducts = products.map(product => {
+      if (product.product_id === productId) {
+        return { ...product, quantity: product.quantity + 1 };
+      }
+      return product;
+    });
+    setProducts(newProducts);
+
+    try {
+      await api.post('/carts/increment', { productId });
+    } catch (error) {
+      console.error("Error incrementing quantity:", error);
+    }
+  };
+
+  const decrementQuantity = async (productId) => {
+    const newProducts = products.map(product => {
+      if (product.product_id === productId && product.quantity > 1) {
+        return { ...product, quantity: product.quantity - 1 };
+      }
+      return product;
+    });
+    setProducts(newProducts);
+
+    try {
+      await api.post('/carts/decrement', { productId });
+    } catch (error) {
+      console.error("Error decrementing quantity:", error);
     }
   };
 
   // Función para calcular el total del carrito
   const calculateTotal = () => {
+    if (!products.length) {
+      return { subtotal: 0, tax: 0, total: 0 };
+    }
+
     const subtotal = products.reduce(
       (acc, product) => acc + parseFloat(product.price) * product.quantity,
       0
@@ -83,16 +121,36 @@ const ShoppingCart = () => {
 
   const { subtotal, tax, total } = calculateTotal();
 
+  // useEffect para cargar el carrito del usuario al montar el componente
+  useEffect(() => {
+    const fetchCartData = async () => {
+      const cartId = await fetchCartId();
+      if (cartId) {
+        await fetchCartItems();
+      } else {
+        alert('No se pudo obtener el carrito. Redirigiendo a la página de inicio.');
+        navigate('/*'); // Redirige a la página de error
+      }
+    };
+
+    fetchCartData();
+  }, []);
+
   return (
     <>
       <Navbar />
+      <button onClick={async () => console.log(await api.get('/carts'))}>carts</button>
+      <button onClick={async () => console.log(await api.get('/users'))}>users</button>
+      <button onClick={async () => console.log(await api.get('/auth/logout'))}>logout</button>
+      <button onClick={async () => console.log(await api.get('/users/loginuser'))}>user.data</button>
+      <button onClick={async () => console.log(await api.get('/carts/items'))}>carts.items</button>
+
       <div className="cart-container d-flex justify-content-between">
         <div className="products-container">
-          {products.map((product, index) => (
+          {products.map((product) => (
             <Product
-              key={index}
+              key={product.product_id}
               product={product}
-              index={index}
               increment={incrementQuantity}
               decrement={decrementQuantity}
             />

@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdModeEditOutline } from "react-icons/md";
 import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AccountSettings.css';
+import api from "../../http/index";
+import updateUser from './UpdateAccount';
 
 const AccountSettings = () => {
+  const [user, setUser] = useState({});
   const [editableField, setEditableField] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -15,6 +18,25 @@ const AccountSettings = () => {
   });
   const [profileImage, setProfileImage] = useState('https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg');
 
+  const GetUser = () => {
+    api.get("users/loginuser").then((response) => {
+      setUser(response.data);
+      setFormData({
+        name: response.data.first_name,
+        lastname: response.data.last_name,
+        mail: response.data.email,
+        username: response.data.username,
+        password: ''
+      });
+    }).catch(error => {
+      console.error("Error fetching user:", error);
+    });
+  };
+
+  useEffect(() => {
+    GetUser();
+  }, []);
+  
   const handleEditClick = (field) => {
     setEditableField(field);
   };
@@ -26,9 +48,23 @@ const AccountSettings = () => {
     });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setEditableField(null);
-    console.log('Saved data:', formData);
+    const updatedUser = {
+      first_name: formData.name,
+      last_name: formData.lastname,
+      email: formData.mail,
+      username: formData.username,
+      password: formData.password || user.password  // Keep existing password if not changed
+    };
+    try {
+      const response = await updateUser(updatedUser);
+      setUser(response);
+      alert("Información actualizada exitosamente");
+    } catch (error) {
+      console.error('Error updating user:', error);
+      alert("No se pudo actualizar la información");
+    }
   };
 
   const handleImageChange = (e) => {
@@ -77,7 +113,7 @@ const AccountSettings = () => {
                 value={formData.name}
                 onChange={handleChange}
                 disabled={editableField !== 'name'}
-                placeholder="Name"
+                placeholder={user.first_name}
               />
               <MdModeEditOutline className="edit-icon ms-2" onClick={() => handleEditClick('name')} color='#7429BA' fontSize='1.5em' />
             </div>
@@ -92,7 +128,7 @@ const AccountSettings = () => {
                 value={formData.lastname}
                 onChange={handleChange}
                 disabled={editableField !== 'lastname'}
-                placeholder="Last Name"
+                placeholder={user.last_name}
               />
               <MdModeEditOutline className="edit-icon ms-2" onClick={() => handleEditClick('lastname')} color='#7429BA' fontSize='1.5em' />
             </div>
@@ -107,7 +143,7 @@ const AccountSettings = () => {
                 value={formData.username}
                 onChange={handleChange}
                 disabled={editableField !== 'username'}
-                placeholder="User Name"
+                placeholder={user.username}
               />
               <MdModeEditOutline className="edit-icon ms-2" onClick={() => handleEditClick('username')} color='#7429BA' fontSize='1.5em' />
             </div>
@@ -122,7 +158,7 @@ const AccountSettings = () => {
                 value={formData.mail}
                 onChange={handleChange}
                 disabled={editableField !== 'mail'}
-                placeholder="plexostore@examplo.com"
+                placeholder={user.email}
               />
               <MdModeEditOutline className="edit-icon ms-2" onClick={() => handleEditClick('mail')} color='#7429BA' fontSize='1.5em' />
             </div>

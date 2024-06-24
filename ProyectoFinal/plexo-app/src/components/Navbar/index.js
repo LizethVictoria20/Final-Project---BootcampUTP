@@ -2,7 +2,7 @@ import LogoPurple from "../../assets/images/logo-purple.jpeg";
 import { FaShoppingBag } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import "./style.css";
+import "./style-navbar.css";
 
 function Navbar() {
   return (

@@ -1,86 +1,94 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { FaHeart } from "react-icons/fa";
 import { GiShoppingBag } from "react-icons/gi";
 import { MdAdminPanelSettings } from "react-icons/md";
-import { BiSupport } from "react-icons/bi";
-import { FaShoppingCart, FaUser } from "react-icons/fa";
+import { BiLogOut } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import { MdAccountCircle } from "react-icons/md";
 import Navbar from "../Navbar/index";
-import "./style.css";
+import api from "../../http/index";
 
+import "./style-perfil.css";
 function Perfil() {
+  const [user, setUser] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    lastname: "",
+    mail: "",
+    username: "",
+    password: "",
+  });
+
+  const GetUser = () => {
+    api
+      .get("users/loginuser")
+      .then((response) => {
+        setUser(response.data);
+        setFormData({
+          name: response.data.first_name,
+          lastname: response.data.last_name,
+          mail: response.data.email,
+          username: response.data.username,
+          password: "",
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching user:", error);
+      });
+  };
+
+  useEffect(() => {
+    GetUser();
+  }, []);
+
   return (
     <div>
-    <Navbar/>
-      {/* Profile Content */}
+      <Navbar />
       <div className="profile-container">
         <div className="myprofile-header">
-          {/* <img src="https://via.placeholder.com/100" alt="Profile Picture" /> */}
-          <h2>My Profile</h2>
+          <h2>
+            <MdAccountCircle color="#7429BA" fontSize="1em" />
+            My Profile
+          </h2>
         </div>
-
         <div className="row">
-          <div className="col-md-4">
-            <div className="profile-section">
-              <button className="btn btn-custom mb-2">
-                <FaHeart className="dos" /> My Favourites
-              </button>
-              <button className="btn btn-custom mb-2">
-                <GiShoppingBag className="dos" /> My Shopping
-              </button>
-              <button className="btn btn-custom mb-2">
+          <div className="col-md-4 col-sm-12 button-container">
+            <button className="btn btn-custom mb-2">
+              <FaHeart className="iconos" /> My Favourites
+            </button>
+            <button className="btn btn-custom mb-2 button-logomyshipping">
+              <Link to="/myshipping" className="logo-myshipping">
+                <GiShoppingBag className="iconos" /> My Shopping
+              </Link>
+            </button>
+            <button className="btn btn-custom mb-2 button-logo-accountsettings">
+              <Link to="/setting" className="logo-accountsettings">
                 <MdAdminPanelSettings className="iconos" /> Account Settings
-              </button>
-              <button className="btn btn-custom mb-2">
-                <BiSupport className="iconos" /> Technical Support
-              </button>
-            </div>
+              </Link>
+            </button>
+            <button className="btn btn-custom mb-2 button-logo-logout">
+              <Link to="/" className="logo-logout">
+                <BiLogOut className="iconos" /> Logout
+              </Link>
+            </button>
           </div>
-          <div className="col-md-8">
+          <div className="col-md-8 col-sm-12">
             <div className="profile-section profile-form">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="name" className="label-custom">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    placeholder="Name"
-                  />
+              <form className="container-form">
+                <div className="form-group form-info">
+                  <div>{user.first_name}</div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="username" className="label-custom">
-                    User Name
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder="User Name"
-                  />
+                <div className="form-group form-info">
+                  <div>{user.last_name}</div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="address" className="label-custom">
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="address"
-                    placeholder="Example Address, #00 - 0, Country"
-                  />
+                <div className="form-group form-info">
+                  <div>{user.username}</div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="contact" className="label-custom">
-                    Contact Number
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="contact"
-                    placeholder="+0 000 000 000"
-                  />
+                <div className="form-group form-info">
+                  <div>{user.email}</div>
+                </div>
+                <div className="form-group form-info">
+                  <div>***********</div>
                 </div>
               </form>
             </div>

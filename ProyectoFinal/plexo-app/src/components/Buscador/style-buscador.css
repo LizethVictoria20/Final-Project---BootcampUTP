@@ -1,0 +1,8 @@
+.search-form input {
+    background-color: #e1e1e1;
+    border: none;
+    width: 20rem;
+}
+.search {
+    box-shadow: inset 10px 9px 35px -18px rgba(60,40,77,1);
+}

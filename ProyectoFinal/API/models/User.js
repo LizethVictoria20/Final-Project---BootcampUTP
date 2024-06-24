@@ -23,7 +23,6 @@ const User = sequelize.define('User', {
       allowNull: false,
       validate: {
         isStrongPassword(value) {
-          // Validación personalizada para asegurar que la contraseña cumpla con los requerimientos
           if (!/\d/.test(value) || !/[a-zA-Z]/.test(value) || value.length < 8) {
             throw new Error('La contraseña debe contener al menos 8 caracteres, incluyendo al menos un número y una letra.');
           }
@@ -37,6 +36,16 @@ const User = sequelize.define('User', {
     last_name: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: null
     }
   }, {
     timestamps: false,

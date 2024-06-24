@@ -1,4 +1,4 @@
-import Navbar from "../Navbar/index";
+import Navbar from "../Navbar";
 
 function Gmail() {
   return (

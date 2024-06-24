@@ -6,38 +6,28 @@ import Cart from "../models/Cart.js";
 dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
 export const openStripePaymentLink = async (req, res) => {
   try {
-    const user_id = req.user.userId;
-    if(!user_id){
-      return res.status(401).json({message: "Unauthorized"})
+    const userId = req.user.userId;
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized" });
     }
-    //quiero que por el user_id me busque el cart_id
-    const cart_id = await Cart.findOne({ where: { user_id } });
-    if (!cart_id) {
+
+    // Buscar el cart_id asociado con el userId
+    const cart = await Cart.findOne({ where: { user_id: userId } });
+    if (!cart) {
       return res.status(400).json({ message: "Cart Not found" });
     }
 
-    const url =
-      process.env.NODE_ENV === "production"
-        ? process.env.PROD_URL
-        : process.env.DEV_URL;
+    const cartId = cart.cart_id;
 
     const cartItems = await CartItem.findAll({
-      where: { cart_id: cart_id },
+      where: { cart_id: cartId },
     });
 
     if (!cartItems.length) {
       return res.status(404).json({ message: "Cart items not found" });
     }
-
-    const cart = await Cart.findByPk(cart_id);
-    if (!cart) {
-      return res.status(404).json({ error: "Cart not found" });
-    }
-
-    const userID = cart.user_id;
 
     const results = await Promise.all(
       cartItems.map(async (cartItem) => {
@@ -63,35 +53,37 @@ export const openStripePaymentLink = async (req, res) => {
             images: [result.product.image_url],
           },
           currency: "usd",
-          unit_amount: result.product.price * 100,
+          unit_amount: result.product.price * 100, // Asegúrate de que el precio esté en centavos
         },
         quantity: result.quantity,
       }));
+
+    if (lineItems.length === 0) {
+      return res.status(400).json({ message: "No valid products found" });
+    }
 
     const totalPrice = lineItems.reduce(
       (total, item) => total + item.price_data.unit_amount * item.quantity,
       0
     );
 
-    if (lineItems.length === 0) {
-      return res.status(400).json({ message: "No valid products found" });
-    }
+    const url =
+      process.env.NODE_ENV === "production"
+        ? process.env.PROD_URL
+        : process.env.DEV_URL;
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
+      payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: `${url}/api/payment/success/?totalPrice=${
-        totalPrice / 100
-      }&userID=${userID}`,
+      success_url: `${url}/api/payment/success/?totalPrice=${totalPrice / 100}&userID=${userId}`,
       cancel_url: `${url}/api/payment/cancel`,
     });
 
     return res.json({ url: session.url });
   } catch (error) {
     console.error(error);
-    return res
-      .status(500)
-      .json({ error: "An error occurred while creating the payment session" });
+    return res.status(500).json({ error: "An error occurred while creating the payment session" });
   }
 };
+

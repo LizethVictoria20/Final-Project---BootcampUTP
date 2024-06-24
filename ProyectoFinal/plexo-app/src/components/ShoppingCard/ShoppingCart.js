@@ -98,6 +98,7 @@ const ShoppingCart = () => {
     try {
       const response = await api.post('payment/create-checkout-session');
       const { url } = response.data;
+      console.log(url);
       window.location.href = url; 
     } catch (error) {
       console.error('Error creating checkout session:', error);

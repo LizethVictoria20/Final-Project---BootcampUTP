@@ -55,7 +55,7 @@ const AccountSettings = () => {
   };
 
   const handleSave = async () => {
-    window.location.reload()
+    
     if (!formData.password) {
       alert("Please enter a password.");
       return;

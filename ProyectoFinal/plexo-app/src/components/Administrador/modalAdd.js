@@ -60,11 +60,10 @@ function ModalComponentAdd({ onProductAdded }) {
               <h5 className="modal-title text-black">New Product</h5>
               <button type="button" className="close-button" onClick={handleClose}>&times;</button>
             </div>
-            <div className="modal-body  ">
-              
+            <div className="modal-body">
               <form onSubmit={handleSubmit}>
                 <div className="d-flex flex-column align-items-center">
-                  <div className="mb-3 ">
+                  <div className="mb-3 w-100">
                     <input
                       type="text"
                       className="form-control"
@@ -74,7 +73,7 @@ function ModalComponentAdd({ onProductAdded }) {
                       required
                     />
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-3 w-100">
                     <input
                       type="text"
                       className="form-control"
@@ -84,7 +83,7 @@ function ModalComponentAdd({ onProductAdded }) {
                       required
                     />
                   </div>
-                  <div className="mb-3 d-flex gap-2">
+                  <div className="mb-3 w-100">
                     <input
                       type="number"
                       className="form-control"
@@ -94,7 +93,7 @@ function ModalComponentAdd({ onProductAdded }) {
                       required
                     />
                   </div>
-                  <div className="mb-3 d-flex gap-2 inputStyle_admin">
+                  <div className="mb-3 w-100">
                     <input
                       type="number"
                       className="form-control"
@@ -104,7 +103,7 @@ function ModalComponentAdd({ onProductAdded }) {
                       required
                     />
                   </div>
-                  <div className="mb-3 d-flex gap-2">
+                  <div className="mb-3 w-100">
                     <input
                       type="number"
                       className="form-control"
@@ -113,9 +112,8 @@ function ModalComponentAdd({ onProductAdded }) {
                       onChange={(e) => setCategory_id(e.target.value)}
                       required
                     />
-                    
                   </div>
-                  <div className="mb-3 d-flex gap-2">
+                  <div className="mb-3 w-100">
                     <input
                       type="text"
                       className="form-control"
@@ -125,7 +123,7 @@ function ModalComponentAdd({ onProductAdded }) {
                       required
                     />
                   </div>
-                  <button type="submit" className=" btn btn-primary btn-purple text-white">Agregar Producto</button>
+                  <button type="submit" className="btn btn-primary btn-purple text-white">Agregar Producto</button>
                 </div>
               </form>
             </div>

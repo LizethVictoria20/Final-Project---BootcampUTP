@@ -63,10 +63,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
 
   return (
     <>
-      
-        <BiSolidPencil size="30px" onClick={handleShow} className='btnEdit_admin'/>
-      
-
+      <BiSolidPencil size="30px" onClick={handleShow} className='btnEdit_admin'/>
       {show && (
         <div className="modal-backdrop">
           <div className="custom-modal">
@@ -77,7 +74,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
             <div className="modal-body">
               <form onSubmit={handleSubmit}>
                 <div className="d-flex flex-column align-items-center">
-                  <div className="mb-3 text-center">
+                  <div className="mb-3 w-100 text-center">
                     <input
                       type="text"
                       className="form-control"
@@ -86,7 +83,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
                       onChange={(e) => setImage_url(e.target.value)}
                     />
                   </div>
-                  <div className="mb-3">
+                  <div className="mb-3 w-100">
                     <input
                       type="text"
                       className="form-control"
@@ -95,7 +92,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
                       onChange={(e) => setName(e.target.value)}
                     />
                   </div>
-                  <div className="mb-3 d-flex gap-2">
+                  <div className="mb-3 w-100">
                     <input
                       type="number"
                       className="form-control"
@@ -104,7 +101,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
                       onChange={(e) => setPrice(e.target.value)}
                     />
                   </div>
-                  <div className="mb-3 d-flex gap-2">
+                  <div className="mb-3 w-100">
                     <input
                       type="number"
                       className="form-control"
@@ -113,22 +110,22 @@ function ModalComponentEdit({ product, onProductUpdated }) {
                       onChange={(e) => setStock(e.target.value)}
                     />
                   </div>
-                  <div className="mb-3 d-flex gap-2">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Descripción"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                    />
-                  </div>
-                  <div className="mb-3 d-flex gap-2">
+                  <div className="mb-3 w-100">
                     <input
                       type="number"
                       className="form-control"
                       placeholder="Categoría"
                       value={category_id}
                       onChange={(e) => setCategory_id(e.target.value)}
+                    />
+                  </div>
+                  <div className="mb-3 w-100">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Descripción"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                     />
                   </div>
                   <button type="submit" className="btn btn-primary">Actualizar Producto</button>

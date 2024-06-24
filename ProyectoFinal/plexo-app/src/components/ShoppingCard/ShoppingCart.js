@@ -11,6 +11,7 @@ import {
   deleteProduct as deleteProductAPI,
   calculateTotal,
 } from "./api";
+import api from "../../http";
 
 /**
  * Componente principal del carrito de compras.
@@ -93,7 +94,15 @@ const ShoppingCart = () => {
       alert("Hubo un problema al eliminar el producto del carrito. Por favor, intenta de nuevo más tarde.");
     }
   };
-
+  async function handleClick() {
+    try {
+      const response = await api.post('payment/create-checkout-session');
+      const { url } = response.data;
+      window.location.href = url; 
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+    }
+  }
   return (
     <>
       <Navbar />
@@ -119,7 +128,7 @@ const ShoppingCart = () => {
           <p>Impuesto 19%: ${tax.toFixed(2)}</p>
           <p>Envío: GRATIS</p>
           <p>Total: ${total.toFixed(2)}</p>
-          <button className="confirm-button">
+          <button className="confirm-button" onClick={handleClick}>
             <span className="span1"></span>
             <span className="span2"></span>
             <span className="span3"></span>

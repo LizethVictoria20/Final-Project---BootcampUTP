@@ -9,9 +9,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export const openStripePaymentLink = async (req, res) => {
   try {
-    const { cart_id } = req.body;
+    const user_id = req.user.userId;
+    if(!user_id){
+      return res.status(401).json({message: "Unauthorized"})
+    }
+    //quiero que por el user_id me busque el cart_id
+    const cart_id = await Cart.findOne({ where: { user_id } });
     if (!cart_id) {
-      return res.status(400).json({ message: "Cart ID is required" });
+      return res.status(400).json({ message: "Cart Not found" });
     }
 
     const url =

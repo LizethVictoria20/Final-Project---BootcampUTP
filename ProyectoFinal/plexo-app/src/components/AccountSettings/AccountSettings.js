@@ -14,9 +14,10 @@ const AccountSettings = () => {
     lastname: '',
     mail: '',
     username: '',
-    password: ''
+    password: '',
+    profileImageUrl: ''
   });
-  const [profileImage, setProfileImage] = useState('https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg');
+  const [profileImage, setProfileImage] = useState('');
 
   const GetUser = () => {
     api.get("users/loginuser").then((response) => {
@@ -26,8 +27,10 @@ const AccountSettings = () => {
         lastname: response.data.last_name,
         mail: response.data.email,
         username: response.data.username,
-        password: ''
+        password: '',
+        profileImageUrl: response.data.image || ''
       });
+      setProfileImage(response.data.image || '');
     }).catch(error => {
       console.error("Error fetching user:", error);
     });
@@ -36,7 +39,7 @@ const AccountSettings = () => {
   useEffect(() => {
     GetUser();
   }, []);
-  
+
   const handleEditClick = (field) => {
     setEditableField(field);
   };
@@ -55,30 +58,24 @@ const AccountSettings = () => {
     }
 
     setEditableField(null);
+
     const updatedUser = {
       username: formData.username,
       first_name: formData.name,
       last_name: formData.lastname,
       email: formData.mail,
-      password: formData.password
+      password: formData.password,
+      image: formData.profileImageUrl // Aquí se debe enviar la URL del input de imagen
     };
+
     try {
       const response = await updateUser(updatedUser);
-      setUser(response);
+      setUser(response.data);
+      setProfileImage(response.data.image || '');
       alert("Información actualizada exitosamente");
     } catch (error) {
       console.error('Error updating user:', error);
       alert("No se pudo actualizar la información");
-    }
-  };
-
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setProfileImage(event.target.result);
-      };
-      reader.readAsDataURL(e.target.files[0]);
     }
   };
 
@@ -89,25 +86,29 @@ const AccountSettings = () => {
           <IoShieldCheckmarkSharp className='settingsshield' fontSize='2em' />
           <h2 className="account-settings-title mb-0">Account Settings</h2>
         </div>
-        
+
         <div className="profile-picture-container position-relative mb-3">
           <img
             src={profileImage}
             alt="Profile"
             className="profile-picture rounded-circle border border-primary"
           />
-          <label htmlFor="upload-image" className="upload-icon position-absolute top-0 end-0">
+          <label htmlFor="profileImageUrl" className="upload-icon position-absolute top-0 end-0">
             <MdModeEditOutline color='#7429BA' fontSize='1.5em' />
           </label>
-          <input
-            type="file"
-            id="upload-image"
-            accept="image/*"
-            style={{ display: 'none' }}
-            onChange={handleImageChange}
-          />
         </div>
         <form className="account-settings-form">
+          <div className="form-group mb-3">
+            <label htmlFor="profileImageUrl">Profile Image URL</label>
+            <input
+              type="text"
+              className="form-control"
+              id="profileImageUrl"
+              value={formData.profileImageUrl}
+              onChange={handleChange}
+              placeholder="Enter image URL"
+            />
+          </div>
           <div className="form-group mb-3">
             <label htmlFor="name">Name</label>
             <div className="input-wrapper d-flex align-items-center">

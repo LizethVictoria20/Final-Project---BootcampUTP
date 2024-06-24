@@ -1,11 +1,12 @@
-import Axios from 'axios';
+import api from '../../http/index.js';
 
 const updateUser = async (userData) => {
   try {
-    const response = await Axios.put(
-      `https://final-project-bootcamputp.onrender.com/api/users/${userData.id}`,
+    console.log(userData)
+    const response = await api.put('users/',
       userData
     );
+    console.log(response)
     return response.data;
   } catch (error) {
     throw new Error('Error updating user:', error);

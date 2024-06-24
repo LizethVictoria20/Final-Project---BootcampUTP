@@ -4,7 +4,7 @@ import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AccountSettings.css';
 import api from "../../http/index";
-import updateUser from './UpdateAccount';
+import updateUser from './updateUser.js';
 
 const AccountSettings = () => {
   const [user, setUser] = useState({});
@@ -49,13 +49,18 @@ const AccountSettings = () => {
   };
 
   const handleSave = async () => {
+    if (!formData.password) {
+      alert("Please enter a password.");
+      return;
+    }
+
     setEditableField(null);
     const updatedUser = {
+      username: formData.username,
       first_name: formData.name,
       last_name: formData.lastname,
       email: formData.mail,
-      username: formData.username,
-      password: formData.password || user.password  // Keep existing password if not changed
+      password: formData.password
     };
     try {
       const response = await updateUser(updatedUser);
@@ -174,8 +179,9 @@ const AccountSettings = () => {
                 onChange={handleChange}
                 disabled={editableField !== 'password'}
                 placeholder="***********"
+                required
               />
-              <MdModeEditOutline className="edit-icon ms-2" onClick={() => handleEditClick('password')} color='#7429BA' fontSize='1.5em' />
+              <MdModeEditOutline className="edit-icon ms-2" onClick={() => handleEditClick('password')} color='#7429BA' fontSize='1.5em'/>
             </div>
           </div>
           <button type="button" className="btn save-button w-100" onClick={handleSave}>Save</button>

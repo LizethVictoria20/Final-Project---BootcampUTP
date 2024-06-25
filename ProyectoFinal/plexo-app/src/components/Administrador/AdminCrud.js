@@ -29,18 +29,10 @@ export const updateProduct = async (productData) => {
 };
 
 export const DeleteProduct = () => {
-<<<<<<< HEAD
   const handleDelete = async (productId) => {
     try {
       const response = await api.delete(`${api}products/${productId}`);
       console.log(response);
-=======
-
-    const handleDelete = async (productId) => {
-      try {
-        const response = await axios.delete(`${urlProduct}/${productId}`);
-        console.log(response);
->>>>>>> 5eb0d4242388a7181cf2f23c46de9717143b7114
     } catch (error) {
       console.error("Error deleting product:", error);
     }

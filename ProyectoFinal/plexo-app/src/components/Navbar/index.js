@@ -6,7 +6,7 @@ import "./style-navbar.css";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top custom-navbar">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white custom-navbar">
       <div className="container-fluid custom-container-nav_bar">
         <div className="d-flex align-items-center custom-img-logo">
           <Link to="/">
@@ -16,12 +16,12 @@ function Navbar() {
         <div className="navbar-nav ms-auto custom-items-navbar">
           <li className="nav-item">
             <Link className="nav-link custom-nav-link" to="/shopping-card">
-              <FaShoppingBag className="custom-menu-icon" color="#7429BA"/>
+              <FaShoppingBag className="custom-menu-icon" color="#7429BA" />
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link custom-nav-link" to="/login">
-              <FaUserCircle className="custom-menu-icon" color="#7429BA"/>
+              <FaUserCircle className="custom-menu-icon" color="#7429BA" />
             </Link>
           </li>
         </div>

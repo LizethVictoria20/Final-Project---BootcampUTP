@@ -24,7 +24,7 @@
     text-align: center;
 }
 .button-sign_in {
-    background-color: #7429ba;
+    background-color: #7429ba !important;
     width: 100%;
 }
 
@@ -32,15 +32,24 @@
     background-color: #9c70c4;
 }
 
+.card-container-login .card-title, 
+.card-container-login .card-text, 
+.card-container-login .form-label,
+.card-container-login .form-text {
+    color: #121212 !important;
+}
+
+
+
 hr {
     color: white;
 }
 .nav-link-login {
-    color:white;
+    color:#121212 !important;
     text-decoration: none;
 }
 .nav-link-login:hover {
-    color: #9c70c4;
+    color: #9c70c4 !important;
 }
 
 .nav-link-login span {

@@ -11,7 +11,7 @@ function Home() {
   return (
     <>
       <Navbar />
-      <div className="container-sm container-home rounded-4 mb-4">
+      <div className="container-sm container-home1 rounded-4 mb-4">
         <Link to="catalogo">
           <img src={Home1} alt="" />
         </Link>

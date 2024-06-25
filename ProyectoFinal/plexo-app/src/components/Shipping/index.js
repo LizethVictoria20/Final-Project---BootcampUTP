@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'; 
+import React, { useEffect, useState } from "react";
+import api from "../../http/index";
 
 function UserProfile({ userId }) {
   const [history, setHistory] = useState([]);
@@ -7,10 +7,10 @@ function UserProfile({ userId }) {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await axios.get(`/api/history/${userId}`);
+        const response = await api.get(`/api/history/${userId}`);
         setHistory(response.data);
       } catch (error) {
-        console.error('Error fetching history:', error);
+        console.error("Error fetching history:", error);
       }
     };
 

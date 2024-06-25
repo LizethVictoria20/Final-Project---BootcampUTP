@@ -1,5 +1,7 @@
 .card-container {
     padding-top: 11%;
+    box-shadow: 10px 9px 35px -14px rgba(195,179,209,1);
+
 }
 .container-image {
     width: 17rem;
@@ -15,6 +17,11 @@
     object-fit: cover;
 
 
+}
+
+.container-general-card {
+    width: 17rem;
+    text-decoration: none;
 }
 
 .card-body {

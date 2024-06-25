@@ -3,10 +3,16 @@
     margin-top: 7rem;
     padding: 0 15px;
 }
-
+.button-cateries {
+    color: black;
+}
 /* Estilos para el contenedor de productos */
 .container-products {
     padding: 0 15px;
+}
+
+.container-general-card a {
+    text-decoration: none;
 }
 
 @media (max-width: 767px) {
@@ -21,7 +27,10 @@
     text-align: center;
     width: 100%;
 }
-
+.sobelo{
+    display: flex;
+    flex-direction: column;
+}
 /* Estilos para los botones de categorías */
 #categories_btn {
     color: #7429ba;
@@ -29,11 +38,12 @@
     text-align: center;
     width: 100%;
 }
-
+.col:hover {
+    transform: none!important;
+}
 /* Estilos al hacer hover sobre los botones de categorías */
 #categories_btn:hover {
     background-color: #7429ba;
-    color: white;
     border-radius: 1rem;
 }
 
@@ -60,9 +70,10 @@
     background: linear-gradient(135deg, rgb(255, 255, 255), rgb(255, 255, 255));
     border-radius: 50px;
     margin: 20px;
-    width: 100%;
-    box-shadow: -5px -5px 11px #bebebe,
-                8px 8px 18px #7429ba;
+    width: auto;
+    box-shadow: 10px 9px 35px -14px rgba(195,179,209,1);
+
+
 }
 
 /* Media queries para pantallas pequeñas (teléfonos) */

@@ -53,21 +53,26 @@ function Perfil() {
         </div>
         <div className="row">
           <div className="col-md-4 col-sm-12 button-container">
-            <button className="btn btn-custom mb-2">
-              <FaHeart className="iconos" /> My Favourites
+            <button className="btn-custom mb-2 bg-white button-perfil">
+              <Link to="/">
+                <FaHeart className="iconos" /> My Favourites
+              </Link>
             </button>
-            <button className="btn btn-custom mb-2 button-logomyshipping">
-              <Link to="/myshipping" className="logo-myshipping">
+
+            <button className="btn-custom mb-2 bg-white button-perfil">
+              <Link to="/shopping-card">
                 <GiShoppingBag className="iconos" /> My Shopping
               </Link>
             </button>
-            <button className="btn btn-custom mb-2 button-logo-accountsettings">
-              <Link to="/accountsettings" className="logo-accountsettings">
+
+            <button className="btn-custom mb-2 bg-white button-perfil">
+              <Link to="/setting">
                 <MdAdminPanelSettings className="iconos" /> Account Settings
               </Link>
             </button>
-            <button className="btn btn-custom mb-2 button-logo-logout">
-              <Link to="/" className="logo-logout">
+
+            <button className="btn-custom mb-2 bg-white button-perfil">
+              <Link to="/">
                 <BiLogOut className="iconos" /> Logout
               </Link>
             </button>

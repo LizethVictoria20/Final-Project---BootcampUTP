@@ -1,0 +1,40 @@
+.card-container {
+    padding-top: 11%;
+    box-shadow: 10px 9px 35px -14px rgba(195,179,209,1);
+
+}
+.container-image {
+    width: 17rem;
+}
+
+.card-container img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    height: 200px;
+    width: 96%;
+    object-fit: cover;
+
+
+}
+
+.container-general-card {
+    width: 17rem;
+    text-decoration: none;
+}
+
+.card-body {
+    text-align: left;
+    padding-left: 20%;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+@media (min-width: 992px) { 
+
+}

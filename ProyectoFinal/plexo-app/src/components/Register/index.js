@@ -1,5 +1,5 @@
 import Axios from "axios";
-import "./style.css";
+import "./style-register.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Navbar from "../Navbar";
@@ -17,21 +17,22 @@ function Register() {
 
   const validate = () => {
     const errors = {};
-    if (!firstName.trim()) errors.firstName = "El nombre es obligatorio";
-    if (!lastName.trim()) errors.lastName = "El apellido es obligatorio";
-    if (!userName.trim()) errors.userName = "El nombre de usuario es obligatorio";
+    if (!firstName.trim()) errors.firstName = "Name is mandatory";
+    if (!lastName.trim()) errors.lastName = "Last name is mandatory";
+    if (!userName.trim()) errors.userName = "Username is mandatory";
     if (!userEmail.trim()) {
-      errors.userEmail = "El correo electrónico es obligatorio";
+      errors.userEmail = "Email is mandatory";
     } else if (!/\S+@\S+\.\S+/.test(userEmail)) {
-      errors.userEmail = "El correo electrónico no es válido";
+      errors.userEmail = "Email isn't correct";
     }
     if (!userPassword.trim()) {
-      errors.userPassword = "La contraseña es obligatoria";
-    } else if (userPassword.length < 6) {
-      errors.userPassword = "La contraseña debe tener al menos 6 caracteres";
+      errors.userPassword = "Password isn't correct";
+    } else if (!/^(?=.*[0-9])[A-Za-z0-9]{8,}$/.test(userPassword)) {
+      errors.userPassword =
+        "The password must be at least 6 characters, contain at least one number, and have no special characters";
     }
     if (userPassword !== confirmPassword) {
-      errors.confirmPassword = "Las contraseñas no coinciden";
+      errors.confirmPassword = "Password don't match";
     }
     return errors;
   };
@@ -46,7 +47,7 @@ function Register() {
 
     try {
       const response = await Axios.post(
-        "https://final-project-bootcamputp.onrender.com/api/auth/register",
+        "https://backendtienda-9e0n.onrender.com/api/auth/register",
         {
           username: userName,
           email: userEmail,
@@ -59,12 +60,17 @@ function Register() {
       if (response.status === 201 || response.status === 200) {
         setIsRegister(true);
         setTimeout(() => {
-          navigate("/admin");
-        }, 2000);
+          const userRole = response.data.admin;
+          if (userRole === false) {
+            navigate("/perfil");
+          } else if (userRole === true) {
+            navigate("/admin");
+          }
+        }, 1000);
       }
     } catch (err) {
       console.log(err);
-      window.alert("Registro fallido");
+      window.alert("Register failed");
     }
   };
 

@@ -1,0 +1,184 @@
+.sol {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container-home {
+    margin-top: 4rem;
+
+}
+.container-home1 {
+    margin-top: 9rem;
+
+}
+
+.container-home img, .container-home1 img{
+    width: 100%;
+}
+
+.containerImg {
+    position:relative;
+    bottom: 22rem;
+    left: 34rem;
+}
+.containerImg img {
+    width: 25%;
+}
+
+.title-home {
+    font-size: 10rem;
+}
+
+.btn-home {
+    background-color: #7429ba;
+    width: 20%;
+}
+
+.btn-home:hover {
+    background-color: #9c70c4;
+}
+
+.morado-4 {
+    width: 74vh;
+    border: solid 20px rgb(255, 255, 255);
+    background-image: linear-gradient(to bottom, #7429ba, #7c39bc, #8446be, #8c53c0, #9360c2, #9869c2, #9d72c2, #a17bc2, #a483c1, #a78cbf, #aa94be, #ad9cbc);    color: white;
+    padding: 1rem;
+    display: grid;
+    margin: 2%;
+    grid-template-columns:repeat(3, 1fr);
+    gap: 10px;
+    height: 40vh;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5%;
+}
+.btn-morado-big {
+    background-color: #9c70c4;
+}
+
+.btn-morado-big:hover {
+    background-color: #a3a3a3;
+}
+
+.elecontainerImgc img {
+    width: 22vh;
+    height: 15vh;
+}
+
+@media (max-width: 1199.98px) {
+    .title-home {
+        font-size: 7rem;
+    }
+    .containerImg img {
+        width: 45%;
+    }
+    .containerImg {
+        bottom: 18rem;
+        left: 10rem;
+    }
+    .container-home {
+        height: 60%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .title-home {
+        font-size: 5rem;
+    }
+    .btn-home {
+        width: 20rem;
+        align-self: center;
+    }
+    .container-home {
+        height: 50%;
+    }
+}
+
+@media (max-width: 383.98px) {
+    .containerImg {
+        bottom: 9rem;
+        left: 7rem;
+    }
+}
+
+.category {
+    border: 2px solid #7429ba;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+}
+
+.category button {
+    margin: 5px;
+    border-radius: 15%;
+    background-color: #131313;
+    color: #7429ba;
+}
+
+.category button:hover {
+    background-color: #7429ba;
+    color: white;
+}
+.col-catalogo {
+    transition: transform 0.5s ease;
+
+}
+.col:hover {
+    transform: scale(1.1, 1.1);
+    
+}
+.col-catalogo img {
+    width: 84%;
+
+}
+
+.row {
+    width: 100%;
+}
+
+.morado {
+    width: 46%;
+}
+
+.container-product {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.morado img {
+    width: 49%;
+
+}
+
+.elecontainerImgc {
+    position: relative;
+    bottom: 10rem;
+    left: 7rem;
+}
+
+.elecontainerImgc-4 {
+    position: relative;
+    bottom: 9rem;
+    left: 13rem;
+    transform: rotate(30deg);
+
+}
+.elecontainerImgc-4 img {
+    width: 30vh;
+    height: 20vh;
+
+
+}
+
+.title-morado {
+    font-size: 5vh;
+    align-self: center;
+}
+
+.btn-morado {
+    background-color: #7429ba;
+    width: 80%;
+}
+.btn-morado:hover {
+    background-color: #9c70c4;
+}

@@ -16,6 +16,19 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const category = await Category.findByPk(req.params.id);
+    if (!category) {
+      return res.status(404).json({ message: 'Category not found' });
+      }
+      res.json(category);
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server Error' });
+        }
+})
+
 router.post("/", authenticateJWT, isAdmin, async (req, res) => {
   // Protegemos la ruta con authenticateJWT
   try {

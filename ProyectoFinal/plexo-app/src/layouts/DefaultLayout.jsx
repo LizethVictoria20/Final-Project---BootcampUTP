@@ -1,12 +1,12 @@
-import Navbar from "../components/Navbar"
 
-const DefaultLayout = ({children}) => {
+
+const AuthLayout = ({children}) => {
+    useEffect
+
+
     return (
-        <>
-        <Navbar />
             {children}
-        </>
     )
 }
 
-export default DefaultLayout;
+export default AuthLayout;

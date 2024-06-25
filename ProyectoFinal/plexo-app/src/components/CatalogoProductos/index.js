@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./style.css";
+import "./style-catalogo.css";
 import Card from "../Card/index";
-import Navbar from "../Navbar";
+import api from "../../http/index.js";
+import Navbar from "../Navbar/index";
+import SearchProducts from "../Buscador/index";
+import { Link } from "react-router-dom";
 
 const Catalogo = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
-    // Fetch products from the API
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(
-          "https://final-project-bootcamputp.onrender.com/api/products"
-        );
+        const response = await api.get("products");
         const productsData = response.data;
         setProducts(productsData);
+        setFilteredProducts(productsData);
 
-        const uniqueCategories = [
-          ...new Set(productsData.map((product) => product.name.split(" ")[0])),
-        ];
+        const responseCategories = await api.get("categories");
+        const uniqueCategories = responseCategories.data;
         setCategories(uniqueCategories);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -33,53 +33,72 @@ const Catalogo = () => {
 
   const handleCategoryChange = (categoryId) => {
     setSelectedCategory(categoryId);
+    if (categoryId) {
+      const filteredByCategory = products.filter(
+        (product) => product.category_id === categoryId
+      );
+      setFilteredProducts(filteredByCategory);
+    } else {
+      setFilteredProducts(products);
+    }
   };
 
   const getFilteredProducts = () => {
     if (!selectedCategory) {
-      return products;
+      return filteredProducts;
     }
-    return products.filter(
-      (product) => product.name.split(" ")[0] === selectedCategory
+    return filteredProducts.filter(
+      (product) => product.category_id === selectedCategory
     );
   };
 
   return (
     <>
       <Navbar />
-
-      <div className="container text-center container-catalogo">
+      <div className="container-fluid text-center container-catalogo">
         <div className="row">
-          <div className="col col-lg-2 container-products">
-            <div>
+          <div className="col-lg-2 col-md-3 mb-4 text-black">
+            <div className="container-categories d-flex flex-column ">
               <button
-                className="container-categories_btn"
+                id="category_btn"
+                className="container-categories-btn btn mb-3 text-black button-cateries"
                 onClick={() => handleCategoryChange("")}
               >
-                <div>
-                <p>All categories</p>
-                </div>
+                All categories
               </button>
-              {categories.map((categoryId) => (
+              {categories.map((category) => (
                 <button
-                  className="container-categories_btn d-flex flex-column"
-                  key={categoryId}
-                  onClick={() => handleCategoryChange(categoryId)}
+                  id={`category_${category.category_id}`}
+                  className={`container-categories-btn btn mb-3 text-black button-cateries ${
+                    selectedCategory === category.category_id ? "active" : ""
+                  }`}
+                  key={category.category_id}
+                  onClick={() => handleCategoryChange(category.category_id)}
                 >
-                  {categoryId}
+                  {category.name}
                 </button>
               ))}
             </div>
           </div>
           <div className="col">
-            {" "}
-            <div className="container-products d-flex flex-wrap">
+            <div className="search-bar">
+              <SearchProducts
+                setFilteredProducts={setFilteredProducts}
+                products={products}
+              />
+            </div>
+            <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
-                  <Card key={product.product_id} product={product} />
+                  <Link
+                    to={`/product/${product.product_id}`}
+                    className="container-general-card"
+                  >
+                    <Card key={product.product_id} product={product} />
+                  </Link>
                 ))
               ) : (
-                <p>No products found</p>
+                <p className="text-light">No products found</p>
               )}
             </div>
           </div>

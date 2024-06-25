@@ -17,7 +17,8 @@ import Setting from "./components/AccountSettings/AccountSettings";
 import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess.js";
 import PaymentFailed from "./components/PaymentFailed/PaymentFailed.js";
 import ProductoDescripcion from "./components/Products/ProductoDescripcion";
-// import Product from "./components/Products";
+import Historial from "./components/Historial/index.js";
+
 function App() {
   return (
     <Router>
@@ -39,6 +40,7 @@ function App() {
         <Route path="/success" element={<PaymentSuccess />} />
         <Route path="/cancel" element={<PaymentFailed />} />
         <Route path="/product/:product_id" element={<ProductoDescripcion />} />
+        <Route path="/historial" element={<Historial />} />
       </Routes>
     </Router>
   );

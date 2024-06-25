@@ -43,6 +43,7 @@
   .account-settings-form .form-group {
     position: relative;
     margin-bottom: 20px;
+    overflow: hidden;
   }
   
   .input-wrapper {

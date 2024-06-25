@@ -144,8 +144,8 @@ router.get("/success", async (req, res) => {
     console.log(results);
 
     return res.redirect(
-      "https://final-project-bootcamputp.onrender.com/success"
-    ); //por modificar
+      "https://plexoshop.vercel.app/success"
+    ); 
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Error al crear la orden" });
@@ -154,7 +154,7 @@ router.get("/success", async (req, res) => {
 
 router.get("/cancel", (req, res) => {
   res.status(200).json({ message: "Payment cancelled" });
-  return res.redirect(`https://final-project-bootcamputp.onrender.com/cancel`);
+  return res.redirect(`https://plexoshop.vercel.app/cancel`);
 });
 
 export default router;

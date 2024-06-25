@@ -1,0 +1,269 @@
+/* Estilos generales para el cuerpo */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212; /* Fondo oscuro para todo el sitio */
+  color: #fff; /* Texto blanco para buen contraste con el fondo oscuro */
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal del carrito de compras */
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px; /* Espacio entre los elementos del contenedor */
+}
+
+@media (min-width: 768px) {
+  .cart-container {
+    flex-direction: row;
+  }
+}
+
+/* Contenedor de productos */
+.products-container {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .products-container {
+    width: 100%; /* El contenedor de productos ocupa el 100% del ancho en pantallas grandes */
+    margin-right: 40px;
+  }
+}
+
+/* Estilos para cada producto individual */
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2b2b2b; /* Fondo gris oscuro para cada producto */
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 3rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  justify-content: space-between;
+}
+
+.product:hover {
+  transform: scale(1.02); /* Efecto de agrandamiento al pasar el mouse */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2); /* Sombra alrededor del producto */
+}
+
+@media (min-width: 768px) {
+  .product {
+    flex-direction: row;
+  }
+}
+
+/* Información del producto */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+}
+
+@media (min-width: 768px) {
+  .product-info {
+    flex-direction: row;
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+/* Imagen del producto */
+.product-image {
+  width: auto;
+  height: 20vh;
+  background-color: #ccc; /* Color de fondo gris claro para la imagen */
+  border-radius: 20%;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .product-image {
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+}
+
+/* Texto del producto */
+.texto-producto {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espacio entre los elementos de texto */
+}
+
+/* Controles del producto (incrementar y decrementar cantidad) */
+.product-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.product-controls span{
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .product-controls {
+    justify-content: flex-end;
+  }
+}
+
+/* Botones para incrementar y decrementar cantidad */
+.product-controls button {
+  background-color: #6a1b9a; /* Fondo morado oscuro */
+  color: #fff; /* Texto blanco */
+  border: none;
+  padding: 8px 12px;
+  margin: 0 5px;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-controls button:hover {
+  background-color: #8e24aa; /* Fondo morado más claro al pasar el mouse */
+}
+
+/* Precio del producto */
+.product-price {
+  margin: 0;
+}
+
+/* Resumen del carrito */
+.summary {
+  background-color: #6f1ca3d6; /* Fondo morado oscuro */
+  box-shadow: 0 0 15px 3px #6f1ca3d6; /* Sombra alrededor del resumen */
+  border-radius: 3rem;
+  padding: 30px 20px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2rem;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  gap: 20px; /* Espacio entre los elementos del resumen */
+}
+
+@media (min-width: 768px) {
+  .summary {
+    width: 100%; /* El resumen ocupa el 100% del ancho en pantallas grandes */
+  }
+}
+
+.summary p {
+  margin: 10px 0;
+  color: #f5e6ff; /* Texto morado claro */
+  font-size: 1.3rem;
+}
+
+/* Botón de confirmar compra */
+.confirm-button {
+  background-color: #fff; /* Fondo blanco */
+  color: #8200befe; /* Texto morado oscuro */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.confirm-button:hover {
+  background-color: #9d00ff; /* Fondo morado más claro al pasar el mouse */
+  color: #fff; /* Texto blanco */
+  box-shadow: 0 0 10px #9d00ff, 0 0 30px, 0 0 60px #9d00ff; /* Efecto de sombra al pasar el mouse */
+}
+
+.confirm-button span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Animaciones del botón de confirmar compra */
+.span1, .span2, .span3, .span4 {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, #9d00ff);
+}
+
+.span1 {
+  top: -3px;
+  left: -100%;
+  width: 100%;
+  height: 3px;
+}
+
+.confirm-button:hover .span1 {
+  left: 100%;
+  transition: 0.5s;
+  transition-delay: 0.5s;
+}
+
+.span2 {
+  top: -100%;
+  right: 0%;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, #9d00ff);
+}
+
+.confirm-button:hover .span2 {
+  top: 100%;
+  transition: 0.5s;
+  transition-delay: 0.5s;
+}
+
+.span3 {
+  bottom: -3px;
+  right: -100%;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(270deg, transparent, #9d00ff);
+}
+
+.confirm-button:hover .span3 {
+  right: 100%;
+  transition: 0.5s;
+  transition-delay: 0.5s;
+}
+
+.span4 {
+  bottom: -100%;
+  left: 0%;
+  width: 2px;
+  background: linear-gradient(0deg, transparent, #9d00ff);
+}
+
+.confirm-button:hover .span4 {
+  bottom: 100%;
+  transition: 0.5s;
+  transition-delay: 0.5s;
+}
+
+/* Imagen del producto en el carrito */
+.img-shopping {
+  max-width: 250px;
+  max-height: 250px;
+  border-radius: 20%;
+  padding-bottom: 100px;
+  transition: transform 0.3s;
+}
+
+.img-shopping:hover {
+  transform: scale(1.05); /* Efecto de agrandamiento al pasar el mouse */
+}

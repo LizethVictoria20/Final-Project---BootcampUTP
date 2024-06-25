@@ -1,0 +1,63 @@
+#payment-failed-container {
+    background-color: #131313; 
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  #payment-failed-card {
+    max-width: 100%;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+  }
+  
+  #exit-button {
+    color: #000;
+    font-size: 1rem;
+  }
+  
+  #PlexoStore-logo {
+    width: 50%;
+    max-width: 600px;
+  }
+  
+  #payment-failed-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  #payment-failed-message1,
+  #payment-failed-message2 {
+    font-size: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    #payment-failed-logo {
+      width: 75%;
+    }
+  
+    #payment-failed-title {
+      font-size: 1.25rem;
+    }
+  
+    #payment-failed-message1,
+    #payment-failed-message2 {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    #PlexoStore-logo {
+      width: 90%;
+    }
+  
+    #payment-failed-title {
+      font-size: 1.1rem;
+    }
+  
+    #payment-failed-message1,
+    #payment-failed-message2 {
+      font-size: 0.85rem;
+    }
+  }
+  

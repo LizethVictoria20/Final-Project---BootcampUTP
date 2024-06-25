@@ -6,7 +6,7 @@ import "./style-navbar.css";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white fixed-top custom-navbar">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white custom-navbar">
       <div className="container-fluid custom-container-nav_bar">
         <div className="d-flex align-items-center custom-img-logo">
           <Link to="/">

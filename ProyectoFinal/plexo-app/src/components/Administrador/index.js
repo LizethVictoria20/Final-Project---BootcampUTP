@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Navbar from "../Navbar/index";
-import axios from "axios";
 import ModalComponentEdit from "./modalEdit";
 import "./stylesheet.css";
 import { IoSearchCircle } from "react-icons/io5";

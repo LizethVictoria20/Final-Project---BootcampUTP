@@ -11,7 +11,7 @@ const ProductFilter = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "https://final-project-bootcamputp.onrender.com/api/products"
+          "https://backendtienda-9e0n.onrender.com/api/products"
         );
         const productsData = response.data;
         setProducts(productsData);

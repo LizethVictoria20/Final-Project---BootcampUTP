@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const urlProduct = 'https://final-project-bootcamputp.onrender.com/api/products';
+const urlProduct = 'https://backendtienda-9e0n.onrender.com/api/products';
 
 export const addProduct = async (productData) => {
     try {
@@ -28,7 +28,7 @@ export const DeleteProduct = () => {
 
     const handleDelete = async (productId) => {
       try {
-        const response = await axios.delete(`https://final-project-bootcamputp.onrender.com/api/products/${productId}`);
+        const response = await axios.delete(`${urlProduct}/${productId}`);
         console.log(response);
     } catch (error) {
         console.error('Error deleting product:', error);

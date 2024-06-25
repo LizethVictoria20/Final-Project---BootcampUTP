@@ -27,7 +27,7 @@ function Register() {
     }
     if (!userPassword.trim()) {
       errors.userPassword = "Password isn't correct";
-    } else if (!/^(?=.*[0-9])[A-Za-z0-9]{6,}$/.test(userPassword)) {
+    } else if (!/^(?=.*[0-9])[A-Za-z0-9]{8,}$/.test(userPassword)) {
       errors.userPassword =
         "The password must be at least 6 characters, contain at least one number, and have no special characters";
     }
@@ -47,7 +47,7 @@ function Register() {
 
     try {
       const response = await Axios.post(
-        "https://final-project-bootcamputp.onrender.com/api/auth/register",
+        "https://backendtienda-9e0n.onrender.com/api/auth/register",
         {
           username: userName,
           email: userEmail,

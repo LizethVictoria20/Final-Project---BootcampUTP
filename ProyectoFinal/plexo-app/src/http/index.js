@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://final-project-bootcamputp.onrender.com/api/",
+  baseURL: "https://backendtienda-9e0n.onrender.com/api/",
   headers: {
         "Access-Control-Allow-Methods": "GET, PUT, POST, DELETE",
         'Access-Control-Allow-Origin': '*',

@@ -10,7 +10,7 @@ function ProductoDescripcion() {
   useEffect(() => {
     axios
       .get(
-        `https://final-project-bootcamputp.onrender.com/api/products/${product_id}`
+        `https://backendtienda-9e0n.onrender.com/api/products/${product_id}`
       )
       .then((response) => {
         console.log(response.data.product);

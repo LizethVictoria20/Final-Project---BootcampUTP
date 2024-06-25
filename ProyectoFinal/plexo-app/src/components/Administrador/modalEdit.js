@@ -13,7 +13,6 @@ function ModalComponentEdit({ product, onProductUpdated }) {
   const [category_id, setCategory_id] = useState('');
   const [errors, setErrors] = useState({});
 
-  // Cuando se monta el componente, inicializamos el estado con los datos del producto
   React.useEffect(() => {
     if (product) {
       console.log(product)

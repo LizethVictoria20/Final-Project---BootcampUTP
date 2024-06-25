@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../http/index";
 import { useParams } from "react-router-dom";
 import Navbar from "../Navbar";
 import "./style-product.css";
@@ -8,10 +8,8 @@ function ProductoDescripcion() {
   const [producto, setProducto] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://final-project-bootcamputp.onrender.com/api/products/${product_id}`
-      )
+    api
+      .get(`products/${product_id}`)
       .then((response) => {
         console.log(response.data.product);
         setProducto(response.data.product);

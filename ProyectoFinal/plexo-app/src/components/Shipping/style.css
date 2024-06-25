@@ -1,0 +1,49 @@
+.user-profile {
+    margin: 3rem;
+    color: #7429ba;
+  }
+  
+  .user-profile h1 {
+    text-align: center;
+    font-size: 3rem;
+  }
+  
+  .user-profile h2 {
+    font-size: 2rem;
+  }
+  
+  .user-profile ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-profile ul li {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: solid 2px #7429ba;
+    background-color: #a3a3a3;
+    color: #7429ba;
+  }
+  
+  .user-profile ul li span {
+    font-weight: bold;
+  }
+  
+  @media (max-width: 767.98px) {
+    .user-profile {
+      margin: 1rem;
+    }
+  
+    .user-profile h1 {
+      font-size: 2.5rem;
+    }
+  
+    .user-profile h2 {
+      font-size: 1.5rem;
+    }
+  
+    .user-profile ul li {
+      font-size: 0.75rem;
+    }
+  }
+  

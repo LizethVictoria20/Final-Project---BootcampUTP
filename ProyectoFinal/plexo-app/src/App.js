@@ -19,6 +19,7 @@ import PaymentFailed from "./components/PaymentFailed/PaymentFailed.js";
 import ProductoDescripcion from "./components/Products/ProductoDescripcion";
 import Historial from "./components/Historial/index.js";
 
+// import Product from "./components/Products";
 function App() {
   return (
     <Router>

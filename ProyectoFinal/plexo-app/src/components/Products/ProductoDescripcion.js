@@ -7,6 +7,7 @@ import { FaPlusCircle } from "react-icons/fa";
 function ProductoDescripcion() {
   const { product_id } = useParams();
   const [producto, setProducto] = useState(null);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     api
@@ -22,7 +23,16 @@ function ProductoDescripcion() {
 
   if (!producto) return <div>Loading...</div>;
   const handleAddToCart = () => {
-    api.post("carts/items", { productName: producto.name, quantity: 1 });
+    api.post("carts/items", { productName: producto.name, quantity: 1 })
+      .then(() => {
+        setShowMessage(true);
+        setTimeout(() => {
+          setShowMessage(false);
+        }, 2000); // Ocultar el mensaje después de 3 segundos
+      })
+      .catch((error) => {
+        console.error("Error adding product to cart:", error);
+      });
   };
   return (
     <>
@@ -57,6 +67,11 @@ function ProductoDescripcion() {
                 />
                 <p className="text-black">Agregar al carrito</p>
               </div>
+              {
+                showMessage && (
+                  <div className="alert alert-success mt-3 text-black">Producto agregado</div>
+                )
+              }
             </div>
           </div>
         </div>

@@ -1,16 +1,16 @@
-import "./style-login.css";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../../http";
-
-import { useState } from "react";
+import { UserContext } from "../ContextUser/context-user";
 import Navbar from "../Navbar";
+import api from "../../http";
+import "./style-login.css";
 
 function Login() {
-  const [userEmail, setuserEmail] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogged, setIsLogged] = useState(false);
   const [error, setError] = useState(null);
-
+  const { login } = useContext(UserContext); // Obtener la función login del contexto
   const navigate = useNavigate();
 
   const validate = () => {
@@ -50,17 +50,20 @@ function Login() {
         email: userEmail,
         password: password,
       });
+
       if (response.status === 200) {
         setIsLogged(true);
         setError(null);
         console.log("Login successful");
+
         const userRole = response.data.admin;
+        login(response.data, userRole);
+
         if (userRole === false) {
           navigate("/perfil");
         } else if (userRole === true) {
           navigate("/admin");
         }
-        console.log(userRole);
       } else {
         setIsLogged(false);
         window.alert("Error desconocido al iniciar sesión");
@@ -98,12 +101,13 @@ function Login() {
                 aria-describedby="emailHelp"
                 placeholder="example@plexo.com"
                 value={userEmail}
-                onChange={(e) => setuserEmail(e.target.value)}
+                onChange={(e) => setUserEmail(e.target.value)}
                 required
               />
               <div id="emailHelp" className="form-text">
                 We'll never share your email with anyone else.
               </div>
+              {error && <div className="alert alert-danger">{error}</div>}
             </div>
             <div className="mb-3">
               <label className="form-label">Password</label>

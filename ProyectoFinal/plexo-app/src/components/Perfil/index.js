@@ -54,26 +54,20 @@ function Perfil() {
         <div className="row">
           <div className="col-md-4 col-sm-12 button-container">
             <button className="btn-custom mb-2 bg-white button-perfil">
-              <Link to="/">
-                <FaHeart className="iconos" /> My Favourites
-              </Link>
-            </button>
-
-            <button className="btn-custom mb-2 bg-white button-perfil">
-              <Link to="/shopping-card">
-                <GiShoppingBag className="iconos" /> My Shopping
+              <Link to="/myshopping">
+                <GiShoppingBag className="iconos" color="#7429BA"/> My Shopping
               </Link>
             </button>
 
             <button className="btn-custom mb-2 bg-white button-perfil">
               <Link to="/setting">
-                <MdAdminPanelSettings className="iconos" /> Account Settings
+                <MdAdminPanelSettings className="iconos" color="#7429BA" /> Account Settings
               </Link>
             </button>
 
             <button className="btn-custom mb-2 bg-white button-perfil">
               <Link to="/">
-                <BiLogOut className="iconos" /> Logout
+                <BiLogOut className="iconos" color="#7429BA"/> Logout
               </Link>
             </button>
           </div>
@@ -81,23 +75,23 @@ function Perfil() {
             <div className="profile-section profile-form">
               <form className="container-form">
                 <div className="form-group form-info">
-                  <label className="label-custom">Name</label>
+                  <label className="label-custom"><b>Name: </b></label>
                   <div className="form-value">{user.first_name}</div>
                 </div>
                 <div className="form-group form-info">
-                  <label className="label-custom">Last Name</label>
+                  <label className="label-custom"><b>Last Name:</b></label>
                   <div className="form-value">{user.last_name}</div>
                 </div>
                 <div className="form-group form-info">
-                  <label className="label-custom">Username</label>
+                  <label className="label-custom"><b>Username:</b></label>
                   <div className="form-value">{user.username}</div>
                 </div>
                 <div className="form-group form-info">
-                  <label className="label-custom">Email</label>
+                  <label className="label-custom"><b>Email:</b></label>
                   <div className="form-value">{user.email}</div>
                 </div>
                 <div className="form-group form-info">
-                  <label className="label-custom">Password</label>
+                  <label className="label-custom"><b>Password:</b></label>
                   <div className="form-value">***********</div>
                 </div>
               </form>

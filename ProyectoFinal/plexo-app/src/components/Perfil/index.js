@@ -42,8 +42,7 @@ function Perfil() {
   }, []);
 
   return (
-    <div>
-      <Navbar />
+    <>
       <div className="profile-container">
         <div className="myprofile-header">
           <h2>
@@ -99,7 +98,7 @@ function Perfil() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

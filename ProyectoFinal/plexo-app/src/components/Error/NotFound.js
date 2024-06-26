@@ -1,10 +1,8 @@
 import React from "react";
-import Navbar from "../Navbar";
 
 const NotFound = () => {
   return (
     <>
-      <Navbar />
       <div className="text-center" style={{ paddingTop: "50px" }}>
         <div>
           <img

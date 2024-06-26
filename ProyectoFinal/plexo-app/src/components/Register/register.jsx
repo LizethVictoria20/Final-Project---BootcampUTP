@@ -1,7 +1,6 @@
 import "./style-register.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import Navbar from "../Navbar/index.js";
 import { UserContext } from "../ContextUser/context-user.jsx";
 import api from "../../http/index.js";
 
@@ -76,7 +75,6 @@ function Register() {
 
   return (
     <>
-      <Navbar />
       <div className="card card-container-login text-dark mx-auto">
         <div className="card-body card-body-login">
           <h5 className="card-title">Welcome 👋🏻</h5>

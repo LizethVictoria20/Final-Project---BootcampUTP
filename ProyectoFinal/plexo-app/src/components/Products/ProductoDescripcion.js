@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../../http/index";
 import { useParams } from "react-router-dom";
-import Navbar from "../Navbar";
 import "./style-product.css";
 function ProductoDescripcion() {
   const { product_id } = useParams();
@@ -23,7 +22,6 @@ function ProductoDescripcion() {
 
   return (
     <>
-      <Navbar />
       <div className="container container-productos">
         <div className="row mb-4">
           <div className="col-md-6 ">

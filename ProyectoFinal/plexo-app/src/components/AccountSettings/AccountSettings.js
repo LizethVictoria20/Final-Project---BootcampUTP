@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./AccountSettings.css";
 import api from "../../http/index";
 import updateUser from "./updateUser.js";
-import Navbar from "../Navbar/index.js";
 
 const EditableField = ({
   id,

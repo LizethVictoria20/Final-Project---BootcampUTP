@@ -5,7 +5,6 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
-import Navbar from "../Navbar/index";
 import api from "../../http/index";
 
 import "./style-perfil.css";
@@ -43,7 +42,6 @@ function Perfil() {
 
   return (
     <div>
-      <Navbar />
       <div className="profile-container">
         <div className="myprofile-header">
           <h2>

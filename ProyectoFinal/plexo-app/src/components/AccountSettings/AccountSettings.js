@@ -131,7 +131,6 @@ const AccountSettings = () => {
 
   return (
     <>
-      <Navbar />
       <div className="account-settings-wrapper d-flex justify-content-center align-items-center min-vh-100">
         <div className="account-settings-container p-4 bg-white rounded shadow">
           <div className="title-container d-flex align-items-center justify-content-center mb-3">

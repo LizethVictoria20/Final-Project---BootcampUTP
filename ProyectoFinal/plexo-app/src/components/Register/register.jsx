@@ -1,9 +1,10 @@
 import Axios from "axios";
 import "./style-register.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import Navbar from "../Navbar";
-
+import { useState, useContext } from "react";
+import Navbar from "../Navbar/index.js";
+import { UserContext } from "../ContextUser/context-user.jsx";
+import api from "../../http/index.js";
 function Register() {
   const [isRegister, setIsRegister] = useState(false);
   const [userName, setUserName] = useState("");
@@ -14,6 +15,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { register } = useContext(UserContext);
 
   const validate = () => {
     const errors = {};
@@ -46,19 +48,17 @@ function Register() {
     }
 
     try {
-      const response = await Axios.post(
-        "https://final-project-bootcamputp.onrender.com/api/auth/register",
-        {
-          username: userName,
-          email: userEmail,
-          password: userPassword,
-          first_name: firstName,
-          last_name: lastName,
-        }
-      );
+      const response = await api.post("auth/register", {
+        username: userName,
+        email: userEmail,
+        password: userPassword,
+        first_name: firstName,
+        last_name: lastName,
+      });
 
       if (response.status === 201 || response.status === 200) {
         setIsRegister(true);
+        register(response.data);
         setTimeout(() => {
           const userRole = response.data.admin;
           if (userRole === false) {

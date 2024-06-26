@@ -3,7 +3,7 @@ import ModalComponentEdit from "./modalEdit";
 import "./stylesheet.css";
 import { IoSearchCircle } from "react-icons/io5";
 import ModalComponentAdd from "./modalAdd";
-import { DeleteProduct, updateProduct } from "./AdminCrud";
+import { DeleteProduct } from "./AdminCrud";
 import { FaRegTrashAlt } from "react-icons/fa";
 import api from "../../http/index";
 
@@ -15,20 +15,22 @@ function Admin() {
   const [search, setSearch] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [showProducts, setShowProducts] = useState(true); // State to control what is shown
+  const [selectedProduct, setSelectedProduct] = useState(null); // State to hold the selected product
 
   const GetApiData = async () => {
     try {
-      const response = await api.get("products");
+      const response = await api.get(showProducts ? "products" : "users"); // Change URL based on showProducts
       setProductsData(response.data);
       setFilteredProducts(response.data);
     } catch (error) {
-      setErrorMessage("Error fetching products: " + error.response.data.message);
+      setErrorMessage("Error fetching data: " + error.response.data.message);
     }
   };
 
   useEffect(() => {
     GetApiData();
-  }, []);
+  }, [showProducts]); // Update data when showProducts changes
 
   const handleProductUpdated = async () => {
     try {
@@ -52,8 +54,8 @@ function Admin() {
   const handleSearch = (e) => {
     const searchTerm = e.target.value.toLowerCase();
     setSearch(searchTerm);
-    const filteredResults = productsData.filter((product) =>
-      product.name.toLowerCase().includes(searchTerm)
+    const filteredResults = productsData.filter((data) =>
+      data.name.toLowerCase().includes(searchTerm)
     );
     setFilteredProducts(filteredResults);
   };
@@ -69,57 +71,123 @@ function Admin() {
       console.log(error);
       if (error.response.status === 400) {
         await GetApiData();
-        return setSuccessMessage("Product added successfully");
-      }else{
+        setSuccessMessage("Product added successfully");
+      } else {
         setErrorMessage("Error adding product: " + error.response.data.message);
       }
     }
+  };
+
+  const handleShowProducts = () => {
+    setShowProducts(true);
+  };
+
+  const handleShowUsers = () => {
+    setShowProducts(false);
+  };
+
+  const handleEditClick = (product) => {
+    setSelectedProduct(product); // Set the selected product
   };
 
   return (
     <div className="container mt-5">
       <div className="p-4 shadow rounded containerAll_admin">
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
-          <h1 className="h1_admin">Productos</h1>
+          <h1 className="h1_admin">
+            {showProducts ? "Products" : "Users"}
+          </h1>
           <div className="d-flex flex-column flex-md-row align-items-center gap-3">
             <ModalComponentAdd color="red" onProductAdded={handleAddProduct} />
             <div className="d-flex align-items-center">
-              <IoSearchCircle size="40px" color="white" className="addItem_admin" />
+              <IoSearchCircle
+                size="40px"
+                color="white"
+                className="addItem_admin"
+              />
               <input
                 type="text"
                 className="form-control"
-                placeholder="Buscar..."
+                placeholder="Search..."
                 onChange={handleSearch}
               />
             </div>
+            <div className="btn-group" role="group" aria-label="Basic example">
+              <button
+                type="button"
+                className={`btn ${
+                  showProducts ? "btn-primary" : "btn-secondary"
+                }`}
+                onClick={handleShowProducts}
+              >
+                Products
+              </button>
+              <button
+                type="button"
+                className={`btn ${
+                  showProducts ? "btn-secondary" : "btn-primary"
+                }`}
+                onClick={handleShowUsers}
+              >
+                Users
+              </button>
+            </div>
           </div>
         </div>
-        {successMessage && <div className="alert alert-success">{successMessage}</div>}
-        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+        {successMessage && (
+          <div className="alert alert-success">{successMessage}</div>
+        )}
+        {errorMessage && (
+          <div className="alert alert-danger">{errorMessage}</div>
+        )}
         <div className="list-group">
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((data) => (
             <div
               className="list-group-item d-flex justify-content-between align-items-center mb-2 custom-item productUp_admin flex-column flex-md-row"
-              key={product.product_id}
+              key={data.product_id || data.user_id}
             >
               <div className="d-flex align-items-center mb-2 mb-md-0">
-                <img
-                  src={product.image_url}
-                  alt="product"
-                  className="rounded-circle me-3"
-                  style={{ width: "50px", height: "50px" }}
-                />
+                {showProducts ? (
+                  <img
+                    src={data.image_url}
+                    alt="product"
+                    className="rounded-circle me-3"
+                    style={{ width: "50px", height: "50px" }}
+                  />
+                ) : (
+                  <span>{data.username}</span>
+                )}
                 <div className="d-grid gap-2">
-                  <h5 className="mb-1">{product.name}</h5>
-                  <small>${product.price}</small>
-                  <p className="mb-1">{product.description}</p>
+                  {showProducts ? (
+                    <>
+                      <h5 className="mb-1">{data.name}</h5>
+                      <small>${data.price}</small>
+                      <p className="mb-1">{data.description}</p>
+                    </>
+                  ) : (
+                    <p className="mb-1">{data.email}</p>
+                  )}
                 </div>
               </div>
-              <div className="d-flex">
-                <ModalComponentEdit product={product} onProductUpdated={handleProductUpdated} errorMessage={errorMessage} />
+              <div className="d-flex ">
+                {showProducts ? (
+                  <>
+                    <ModalComponentEdit
+                      product={selectedProduct}
+                      onProductUpdated={handleProductUpdated}
+                    />
+                  </>
+                ) : (
+                  <button
+                    className="btn btn-outline-primary ms-2"
+                    onClick={() => handleEditClick(data)}
+                  >
+                    Edit
+                  </button>
+                )}
                 <button
                   className="btn btn-outline-danger ms-2"
-                  onClick={() => handleDeleteClick(product.product_id)}
+                  onClick={() => handleDeleteClick(data.product_id)}
                 >
                   <FaRegTrashAlt />
                 </button>

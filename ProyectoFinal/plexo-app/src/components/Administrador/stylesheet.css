@@ -302,6 +302,7 @@
 
 .btnEdit_admin {
   color: rgba(116, 41, 186, 1);
+  cursor: pointer;
 }
 
 .btn-purple {

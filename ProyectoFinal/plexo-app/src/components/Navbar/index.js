@@ -8,7 +8,7 @@ import { UserContext } from "../ContextUser/context-user.jsx";
 function Navbar({ admin }) {
   // Paso el contexto al estado
   const { authState } = useContext(UserContext);
-  const { role } = authState;
+  const { isAdmin } = authState;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white custom-navbar">
@@ -41,9 +41,8 @@ function Navbar({ admin }) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link custom-nav-link" to="/cart">
-                  Cart
-                  <CiShoppingCart />
+                <Link className="nav-link custom-nav-link" to="/shopping-cart">
+                  <CiShoppingCart color="#7429ba" fontSize="2rem" />
                 </Link>
               </li>
             </>
@@ -56,8 +55,8 @@ function Navbar({ admin }) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link custom-nav-link" to="/cart">
-                  Carrito
+                <Link className="nav-link custom-nav-link" to="/shopping-cart">
+                  <CiShoppingCart color="#7429ba" fontSize="2rem" />
                 </Link>
               </li>
             </>

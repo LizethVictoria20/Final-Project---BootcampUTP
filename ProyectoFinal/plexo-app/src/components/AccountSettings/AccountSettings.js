@@ -5,8 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./AccountSettings.css";
 import api from "../../http/index";
 import updateUser from "./updateUser.js";
-<<<<<<< HEAD
-=======
 import Navbar from "../Navbar/index.js";
 
 const EditableField = ({
@@ -40,7 +38,6 @@ const EditableField = ({
     </div>
   </div>
 );
->>>>>>> d86f4db36132c7efb1598a3496f6f6d31537eb7c
 
 const AccountSettings = () => {
   const [user, setUser] = useState(null);

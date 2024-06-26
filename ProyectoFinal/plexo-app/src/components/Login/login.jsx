@@ -1,15 +1,16 @@
-import "./style-login.css";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../../http";
-
-import { useState } from "react";
+import { UserContext } from "../ContextUser/context-user";
 import Navbar from "../Navbar";
+import api from "../../http";
+import "./style-login.css";
 
 function Login() {
   const [userEmail, setuserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogged, setIsLogged] = useState(false);
   const [error, setError] = useState(null);
+  const { login } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -54,13 +55,13 @@ function Login() {
         setIsLogged(true);
         setError(null);
         console.log("Login successful");
+        login(response.data); // Utilizar la función login del contexto
         const userRole = response.data.admin;
         if (userRole === false) {
           navigate("/perfil");
         } else if (userRole === true) {
           navigate("/admin");
         }
-        console.log(userRole);
       } else {
         setIsLogged(false);
         window.alert("Error desconocido al iniciar sesión");

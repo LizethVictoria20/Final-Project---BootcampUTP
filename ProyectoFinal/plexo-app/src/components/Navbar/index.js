@@ -1,10 +1,15 @@
 import LogoPurple from "../../assets/images/logo-purple.jpeg";
-import { FaShoppingBag } from "react-icons/fa";
-import { FaUserCircle } from "react-icons/fa";
+import { CiShoppingCart } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
 import "./style-navbar.css";
+import { UserContext } from "../ContextUser/context-user.jsx";
 
-function Navbar() {
+function Navbar({ admin }) {
+  // Paso el contexto al estado
+  const { authState } = useContext(UserContext);
+  const { isAdmin } = authState;
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white custom-navbar">
       <div className="container-fluid custom-container-nav_bar">
@@ -14,16 +19,48 @@ function Navbar() {
           </Link>
         </div>
         <div className="navbar-nav ms-auto custom-items-navbar">
-          <li className="nav-item">
-            <Link className="nav-link custom-nav-link" to="/shopping-card">
-              <FaShoppingBag className="custom-menu-icon" color="#7429BA" />
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link custom-nav-link" to="/login">
-              <FaUserCircle className="custom-menu-icon" color="#7429BA" />
-            </Link>
-          </li>
+          {!authState.isAuthenticated && (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/register">
+                  Register
+                </Link>
+              </li>
+            </>
+          )}
+          {authState.isAuthenticated && !authState.isAdmin && (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/perfil">
+                  Perfil
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/shopping-cart">
+                  <CiShoppingCart color="#7429ba" fontSize="2rem" />
+                </Link>
+              </li>
+            </>
+          )}
+          {authState.isAuthenticated && authState.isAdmin && (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/admin">
+                  Admin Panel
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/shopping-cart">
+                  <CiShoppingCart color="#7429ba" fontSize="2rem" />
+                </Link>
+              </li>
+            </>
+          )}
         </div>
       </div>
     </nav>

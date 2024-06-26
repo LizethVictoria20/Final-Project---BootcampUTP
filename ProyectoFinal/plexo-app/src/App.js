@@ -15,7 +15,7 @@ import PaymentSuccess from "./components/PaymentSuccess/PaymentSuccess.js";
 import PaymentFailed from "./components/PaymentFailed/PaymentFailed.js";
 import AuthProvider from "./components/ContextUser/context-user.jsx";
 import Navbar from "./components/Navbar/index";
-
+import ProductoDescripcion from "./components/Products/ProductoDescripcion";
 function App() {
   return (
     <AuthProvider>
@@ -36,6 +36,10 @@ function App() {
           <Route path="/payment-failed" element={<PaymentFailed />} />
           <Route path="/erro-404" element={<NotFound />} />
           <Route path="/*" element={<NotFound />} />
+          <Route
+            path="/product/:product_id"
+            element={<ProductoDescripcion />}
+          />
         </Routes>
       </Router>
     </AuthProvider>

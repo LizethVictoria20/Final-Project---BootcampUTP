@@ -8,9 +8,9 @@
 }
 
 .container-productos {
-    margin-top: 13rem;
-
+    margin-top: 4rem;
 }
+
 .btn-primary{
     background-color: #7429BA;
     border: #7429BA;
@@ -34,16 +34,16 @@
 
 .container-img-product {
     border-radius: 2rem;
-    width: 29rem;
-
-}
-.product-name {
-    color: rgb(255, 255, 255);
+    width: 19rem;
 
 }
 
-.product-description{
-    color: white;
+.container-products-description {
+    padding: 4rem;
+    border-radius: 2rem;
+    width: 60rem;
+    height: 27rem;
+    box-shadow: inset 10px 10px 35px -12px rgba(155,144,171,1);
 }
 
 .product-stars{

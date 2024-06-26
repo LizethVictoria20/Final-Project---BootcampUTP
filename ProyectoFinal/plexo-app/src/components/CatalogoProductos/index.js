@@ -88,7 +88,9 @@ const Catalogo = () => {
             <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
-                  <Card key={product.product_id} product={product} />
+                  <Link to={`/product/${product.product_id}`} className="card-title-product">
+                    <Card key={product.product_id} product={product} />
+                  </Link>
                 ))
               ) : (
                 <p className="text-light">No products found</p>

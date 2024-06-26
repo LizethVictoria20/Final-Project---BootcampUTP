@@ -3,11 +3,12 @@ import { CiShoppingCart } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import "./style-navbar.css";
-import { UserContext } from "../ContextUser/context-user.jsx"; // Asegúrate de que esta ruta sea correcta
+import { UserContext } from "../ContextUser/context-user.jsx";
 
 function Navbar({ admin }) {
-  //Paso el contexto al estado
+  // Paso el contexto al estado
   const { authState } = useContext(UserContext);
+  const { role } = authState;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white custom-navbar">
@@ -18,7 +19,7 @@ function Navbar({ admin }) {
           </Link>
         </div>
         <div className="navbar-nav ms-auto custom-items-navbar">
-          {!authState.isAuthenticated && !authState.isRegistered && (
+          {!authState.isAuthenticated && (
             <>
               <li className="nav-item">
                 <Link className="nav-link custom-nav-link" to="/login">
@@ -32,29 +33,35 @@ function Navbar({ admin }) {
               </li>
             </>
           )}
-          {authState.isAuthenticated && authState.isRegistered && (
+          {authState.isAuthenticated && !authState.isAdmin && (
             <>
               <li className="nav-item">
-                <Link className="nav-link custom-nav-link" to="/admin">
-                  Admin
+                <Link className="nav-link custom-nav-link" to="/perfil">
+                  Perfil
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/cart">
+                  Cart
+                  <CiShoppingCart />
                 </Link>
               </li>
             </>
           )}
-          {!authState.isAuthenticated && authState.isRegistered && (
+          {authState.isAuthenticated && authState.isAdmin && (
             <>
               <li className="nav-item">
                 <Link className="nav-link custom-nav-link" to="/admin">
-                  AutenNoRgi
+                  Admin Panel
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/cart">
+                  Carrito
                 </Link>
               </li>
             </>
           )}
-          <li className="nav-item">
-            <Link className="nav-link custom-nav-link" to="/shopping-card">
-              <CiShoppingCart className="custom-menu-icon" color="#7429BA" />
-            </Link>
-          </li>
         </div>
       </div>
     </nav>

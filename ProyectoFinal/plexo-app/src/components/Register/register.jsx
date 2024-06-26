@@ -1,10 +1,10 @@
-import Axios from "axios";
 import "./style-register.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import Navbar from "../Navbar/index.js";
 import { UserContext } from "../ContextUser/context-user.jsx";
 import api from "../../http/index.js";
+
 function Register() {
   const [isRegister, setIsRegister] = useState(false);
   const [userName, setUserName] = useState("");
@@ -58,12 +58,12 @@ function Register() {
 
       if (response.status === 201 || response.status === 200) {
         setIsRegister(true);
-        register(response.data);
+        const userRole = response.data.admin;
+        register(response.data, userRole);
         setTimeout(() => {
-          const userRole = response.data.admin;
-          if (userRole === false) {
+          if (!userRole) {
             navigate("/perfil");
-          } else if (userRole === true) {
+          } else if (userRole) {
             navigate("/admin");
           }
         }, 1000);

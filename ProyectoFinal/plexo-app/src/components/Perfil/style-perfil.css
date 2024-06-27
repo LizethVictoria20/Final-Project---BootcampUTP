@@ -4,27 +4,29 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;  
+  margin-top: 100px;
   width: 100%;
   max-width: 1200px;
   margin: auto;
   padding: 0 15px; /* Adding padding for small screens */
 }
 
+
 .button-logo-logout {
   text-align: left;
   padding-left: 1.5rem;
 }
+
 .button-perfil a {
   color: black;
   text-decoration: none;
 }
 
-.button-perfil a:hover{
+.button-perfil a:hover {
   color: #7429BA !important;
 }
 
-.button-shopping:hover{
+.button-shopping:hover {
   color: #7429BA !important;
 }
 
@@ -32,7 +34,6 @@
   color: black;
   text-decoration: none;
 }
-
 
 .button-logo-accountsettings {
   text-align: left;
@@ -81,8 +82,10 @@
 }
 
 .profile-section {
-  margin-top: 1px;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  align-items: baseline;
   width: 100%;
 }
 
@@ -101,7 +104,9 @@
   border-radius: 12px;
   border: none;
   margin-bottom: 18px;
-  width: 100%; 
+  margin-left: 0;
+  margin-right: auto;
+  width: 100%;
 }
 
 .icono-user, .icono-shopp {
@@ -127,7 +132,7 @@
   padding: 20px;
   border-radius: 20px;
   width: 100%;
-  max-width: 500px;
+  max-width: 720px; /* Increased for better responsiveness */
   margin-left: 30px;
   margin-top: 15px;
 }
@@ -145,44 +150,71 @@
   align-items: center;
 }
 
-.profile-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
 .btn-custom .iconos {
-  margin-right: 15px; 
-  margin-left: -10px; 
+  margin-right: 15px;
+  margin-left: -10px;
 }
 
 .btn-custom .dos {
-  margin-right: 25px; 
-  margin-left: -18px; 
+  margin-right: 25px;
+  margin-left: -18px;
 }
 
 .container-form {
   display: flex;
   flex-direction: column;
-}
-.form-info {
-  width: 129%;
-  box-shadow: inset 10px 9px 35px -35px rgba(60,40,77,1);
-  height: 2rem;
-  border-radius: 1rem;
-  margin: .5rem;
+  width: 100%;
 }
 
+.form-info {
+  width: 100%;
+  box-shadow: 6px 2px 26px -3px rgba(0, 0, 0, 0.75);
+  height: auto;
+  border-radius: 1rem;
+  margin: 0.5rem 0;
+  padding: 10px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.form-value {
+  background-color: #fff;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
 
 /* MEDIA QUERY */
-@media (max-width: 768px) {
-  .form-group input {
+@media (max-width: 1024px) {
+  .profile-container {
+    margin-top: 80px;
+    padding: 0 20px;
+  }
+
+  .profile-form {
+    padding: 15px;
+    margin-left: 15px;
+  }
+  .container-form {
+    padding: 10px;
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    margin-top: 50px;
+    padding: 0 10px;
+  }
+
+  .myprofile-header {
+    margin: 20px;
   }
 
   .profile-form {
     margin-left: 0;
+    padding: 15px;
   }
 
   .button-container {
@@ -193,12 +225,128 @@
     align-items: center;
     width: 100%;
   }
-  .button-container:hover {
-    color: #7429BA !important;
-  }
 
   .btn-custom {
     margin: 10px;
     flex: 1 1 auto;
   }
+
+  .container-form {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .form-info {
+    padding: 8px;
+  }
+
+  .label-custom {
+    font-size: 14px;
+  }
+
+  .form-value {
+    padding: 8px;
+  }
 }
+
+@media (max-width: 576px) {
+  .profile-container {
+    margin-top: 30px;
+    padding: 0 5px;
+  }
+
+  .myprofile-header {
+    margin: 10px;
+  }
+
+  .profile-form {
+    padding: 10px;
+  }
+
+  .container-form {
+    width: 100%;
+  }
+
+  .label-custom {
+    font-size: 12px;
+  }
+
+  .form-value {
+    padding: 6px;
+  }
+
+  .form-info {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .btn-custom {
+    width: 100%;
+    margin: 5px 0;
+    height: 60px;
+  }
+
+  .form-group input {
+    height: 40px;
+  }
+
+  .profile-form {
+    padding: 5px;
+  }
+
+  .container-form {
+    padding: 5px;
+  }
+
+  .label-custom {
+    font-size: 10px;
+  }
+
+  .form-value {
+    padding: 5px;
+  }
+
+  .form-info {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 320px) {
+  .profile-container {
+    margin-top: 20px;
+    padding: 0 5px;
+  }
+
+  .btn-custom {
+    width: 100%;
+    height: 50px;
+    margin: 3px 0;
+  }
+
+  .form-group input {
+    height: 35px;
+  }
+
+  .profile-form {
+    padding: 5px;
+  }
+
+  .container-form {
+    padding: 3px;
+  }
+
+  .label-custom {
+    font-size: 8px;
+  }
+
+  .form-value {
+    padding: 4px;
+  }
+
+  .form-info {
+    padding: 4px;
+  }
+}
+
+/* By: Joaco 26/06/2024 */

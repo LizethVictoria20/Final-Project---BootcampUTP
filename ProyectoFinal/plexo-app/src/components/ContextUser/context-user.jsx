@@ -13,7 +13,7 @@ function AuthProvider({ children }) {
   const login = (user, isAdmin) => {
     setAuthState({
       isAuthenticated: true,
-      isRegistered: true,
+      isRegistered: false,
       user,
       isAdmin,
     });

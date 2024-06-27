@@ -1,4 +1,3 @@
-import LogoPurple from "../../assets/images/logo-purple.jpeg";
 import { CiShoppingCart } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -15,7 +14,7 @@ function Navbar({ admin }) {
       <div className="container-fluid custom-container-nav_bar">
         <div className="d-flex align-items-center custom-img-logo">
           <Link to="/">
-            <img src={LogoPurple} alt="Logo" className="custom-navbar-logo" />
+            <img src='https://i.ibb.co/D5hj0xf/Logo-PNGplexo.png' alt="Logo" className="custom-navbar-logo" />
           </Link>
         </div>
         <div className="navbar-nav ms-auto custom-items-navbar">

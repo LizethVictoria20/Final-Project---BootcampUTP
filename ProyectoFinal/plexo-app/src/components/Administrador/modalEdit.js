@@ -14,6 +14,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
+    console.log(product);
     if (product) {
       setName(product.name);
       setPrice(product.price.toString());

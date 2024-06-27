@@ -15,29 +15,37 @@ function Admin() {
   const [search, setSearch] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [showProducts, setShowProducts] = useState(true); // State to control what is shown
-  const [selectedProduct, setSelectedProduct] = useState(null); // State to hold the selected product
+  const [showProducts, setShowProducts] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const GetApiData = async () => {
     try {
-      const response = await api.get(showProducts ? "products" : "users"); // Change URL based on showProducts
-      setProductsData(response.data);
-      setFilteredProducts(response.data);
+      const response = await api.get(showProducts ? "products" : "users");
+      const data = response.data;
+      if (!showProducts) {
+        // Filtra usuarios que no son admin
+        const nonAdminUsers = data.filter(user => !user.admin);
+        setProductsData(nonAdminUsers);
+        setFilteredProducts(nonAdminUsers);
+      } else {
+        setProductsData(data);
+        setFilteredProducts(data);
+      }
     } catch (error) {
-      setErrorMessage("Error fetching data: " + error.response.data.message);
+      setErrorMessage("Error fetching data: " + (error.response?.data?.message || error.message));
     }
   };
 
   useEffect(() => {
     GetApiData();
-  }, [showProducts]); // Update data when showProducts changes
+  }, [showProducts]);
 
   const handleProductUpdated = async () => {
     try {
       await GetApiData();
       setSuccessMessage("Product updated successfully");
     } catch (error) {
-      setErrorMessage("Error updating product: " + error.response.data.message);
+      setErrorMessage("Error updating product: " + (error.response?.data?.message || error.message));
     }
   };
 
@@ -47,7 +55,7 @@ function Admin() {
       await GetApiData();
       setSuccessMessage("Product deleted successfully");
     } catch (error) {
-      setErrorMessage("Error deleting product: " + error.response.data.message);
+      setErrorMessage("Error deleting product: " + (error.response?.data?.message || error.message));
     }
   };
 
@@ -55,7 +63,7 @@ function Admin() {
     const searchTerm = e.target.value.toLowerCase();
     setSearch(searchTerm);
     const filteredResults = productsData.filter((data) =>
-      data.name.toLowerCase().includes(searchTerm)
+      (data.name || data.username).toLowerCase().includes(searchTerm)
     );
     setFilteredProducts(filteredResults);
   };
@@ -68,13 +76,7 @@ function Admin() {
         setSuccessMessage("Product added successfully");
       }
     } catch (error) {
-      console.log(error);
-      if (error.response.status === 400) {
-        await GetApiData();
-        setSuccessMessage("Product added successfully");
-      } else {
-        setErrorMessage("Error adding product: " + error.response.data.message);
-      }
+      setErrorMessage("Error adding product: " + (error.response?.data?.message || error.message));
     }
   };
 
@@ -87,16 +89,14 @@ function Admin() {
   };
 
   const handleEditClick = (product) => {
-    setSelectedProduct(product); // Set the selected product
+    setSelectedProduct(product);
   };
 
   return (
     <div className="container mt-5">
       <div className="p-4 shadow rounded containerAll_admin">
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
-          <h1 className="h1_admin">
-            {showProducts ? "Products" : "Users"}
-          </h1>
+          <h1 className="h1_admin">{showProducts ? "Products" : "Users"}</h1>
           <div className="d-flex flex-column flex-md-row align-items-center gap-3">
             <ModalComponentAdd color="red" onProductAdded={handleAddProduct} />
             <div className="d-flex align-items-center">
@@ -109,24 +109,21 @@ function Admin() {
                 type="text"
                 className="form-control"
                 placeholder="Search..."
+                value={search}
                 onChange={handleSearch}
               />
             </div>
             <div className="btn-group" role="group" aria-label="Basic example">
               <button
                 type="button"
-                className={`btn ${
-                  showProducts ? "btn-primary" : "btn-secondary"
-                }`}
+                className={`btn ${showProducts ? "btn-primary" : "btn-secondary"}`}
                 onClick={handleShowProducts}
               >
                 Products
               </button>
               <button
                 type="button"
-                className={`btn ${
-                  showProducts ? "btn-secondary" : "btn-primary"
-                }`}
+                className={`btn ${showProducts ? "btn-secondary" : "btn-primary"}`}
                 onClick={handleShowUsers}
               >
                 Users
@@ -134,12 +131,8 @@ function Admin() {
             </div>
           </div>
         </div>
-        {successMessage && (
-          <div className="alert alert-success">{successMessage}</div>
-        )}
-        {errorMessage && (
-          <div className="alert alert-danger">{errorMessage}</div>
-        )}
+        {successMessage && <div className="alert alert-success">{successMessage}</div>}
+        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
         <div className="list-group">
           {filteredProducts.map((data) => (
             <div
@@ -155,7 +148,10 @@ function Admin() {
                     style={{ width: "50px", height: "50px" }}
                   />
                 ) : (
-                  <span>{data.username}</span>
+                  <div>
+                    <h2>Username</h2>
+                    <span>{data.username}</span>
+                  </div>
                 )}
                 <div className="d-grid gap-2">
                   {showProducts ? (
@@ -165,32 +161,42 @@ function Admin() {
                       <p className="mb-1">{data.description}</p>
                     </>
                   ) : (
-                    <p className="mb-1">{data.email}</p>
+                    <>
+                      <h2>Email</h2>
+                      <p className="mb-1 mx-4">{data.email}</p>
+                    </>
                   )}
                 </div>
               </div>
-              <div className="d-flex ">
+              <div className="d-flex">
                 {showProducts ? (
                   <>
                     <ModalComponentEdit
-                      product={selectedProduct}
+                      product={data}
                       onProductUpdated={handleProductUpdated}
                     />
+                    <button
+                      className="btn btn-outline-danger ms-2"
+                      onClick={() => handleDeleteClick(data.product_id)}
+                    >
+                      <FaRegTrashAlt />
+                    </button>
                   </>
                 ) : (
                   <button
                     className="btn btn-outline-primary ms-2"
-                    onClick={() => handleEditClick(data)}
+                    onClick={async () => {
+                      try {
+                        const response = await api.put(`users/admin/${data.user_id}`);
+                        setSuccessMessage("User role updated successfully");
+                      } catch (error) {
+                        setErrorMessage("Error updating user role: " + (error.response?.data?.message || error.message));
+                      }
+                    }}
                   >
-                    Edit
+                    Volver admin
                   </button>
                 )}
-                <button
-                  className="btn btn-outline-danger ms-2"
-                  onClick={() => handleDeleteClick(data.product_id)}
-                >
-                  <FaRegTrashAlt />
-                </button>
               </div>
             </div>
           ))}

@@ -5,7 +5,7 @@ import "./style-card.css";
 function Card({ product }) {
   return (
     <div className=" container-general-card">
-      <div className="card card-container rounded-5 mb-4 w-75">
+      <div className="card card-container rounded-5 mb-4 w-85">
         <img
           src={product.image_url}
           className="card-img-top centered-image rounded-5 mx-auto"

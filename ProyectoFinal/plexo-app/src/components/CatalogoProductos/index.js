@@ -54,9 +54,15 @@ const Catalogo = () => {
   return (
     <>
       <div className="container-fluid text-center container-catalogo">
+        <div className="search-bar">
+          <SearchProducts
+            setFilteredProducts={setFilteredProducts}
+            products={products}
+          />
+        </div>
         <div className="row">
           <div className="col-lg-2 col-md-3 mb-4 text-black">
-            <div className="container-categories d-flex flex-column ">
+            <div className="container-categories d-flex flex-column">
               <button
                 id="category_btn"
                 className="container-categories-btn btn mb-3 text-black button-cateries"
@@ -79,16 +85,13 @@ const Catalogo = () => {
             </div>
           </div>
           <div className="col">
-            <div className="search-bar">
-              <SearchProducts
-                setFilteredProducts={setFilteredProducts}
-                products={products}
-              />
-            </div>
-            <div className="container-products d-flex flex-wrap justify-content-center">
+            <div className="container-products d-flex flex-wrap justify-content-center gap-3">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
-                  <Link to={`/product/${product.product_id}`} className="card-title-product">
+                  <Link
+                    to={`/product/${product.product_id}`}
+                    className="card-title-product"
+                  >
                     <Card key={product.product_id} product={product} />
                   </Link>
                 ))

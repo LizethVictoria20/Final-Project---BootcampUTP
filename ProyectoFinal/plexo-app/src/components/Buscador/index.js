@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import "./style-buscador.css";
+
 function SearchProducts({ setFilteredProducts, products }) {
   const [search, setSearch] = useState("");
 
@@ -18,10 +20,10 @@ function SearchProducts({ setFilteredProducts, products }) {
   };
 
   return (
-    <div>
+    <>
       <form className="search-form" role="search">
         <input
-          className="form-control me-2 search"
+          className="search search-field-products"
           type="search"
           placeholder="Enter your search..."
           aria-label="Search"
@@ -29,7 +31,7 @@ function SearchProducts({ setFilteredProducts, products }) {
           value={search}
         />
       </form>
-    </div>
+    </>
   );
 }
 

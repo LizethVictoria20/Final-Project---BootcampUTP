@@ -3,6 +3,7 @@ import api from "../../http/index";
 import { useParams } from "react-router-dom";
 import "./style-product.css";
 import { FaPlusCircle } from "react-icons/fa";
+import { IoIosReturnLeft } from "react-icons/io";
 
 function ProductoDescripcion() {
   const { product_id } = useParams();
@@ -21,6 +22,10 @@ function ProductoDescripcion() {
         console.error("Error fetching user:", error);
         setIsUser(false);
       });
+  };
+
+  const handleReturn = () => {
+    window.history.back();
   };
 
   useEffect(() => {
@@ -66,6 +71,11 @@ function ProductoDescripcion() {
     <>
       <div className="container container-productos">
         <div className="row mb-4 bg-white container-products-description mx-auto">
+          <div className="col-md-12 d-flex justify-content-end">
+          <button className="btn button-return" onClick={handleReturn}>
+          <IoIosReturnLeft color='#7429ba'/>
+          </button>
+          </div>
           <div className="col-md-6 ">
             <img
               src={producto.image_url || ""}
@@ -78,7 +88,6 @@ function ProductoDescripcion() {
             <h1 className="product-name">
               {producto.name || "Name not available"}
             </h1>
-            <h5 className="product-stars">★★★★☆</h5>
             <h6 className="details">Details: </h6>
             <p className="product-description">
               {producto.name}

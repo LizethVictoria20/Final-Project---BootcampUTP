@@ -26,16 +26,11 @@
     background-color: rgb(156, 11, 240);
   }
   
-  /* Botones generales */
-  .btn {
-    color: white;
+  .button-return:hover {
     border: #9c5fd4 solid 1px;
   }
-  
-  .btn:hover {
-    background-color: #7429BA;
-    border: #7429BA solid 1px;
-  }
+
+
   
   /* Contenedor de imagen de producto */
   .container-img-product {

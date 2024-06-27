@@ -12,8 +12,13 @@ function ModalComponentAdd({ onProductAdded }) {
   const [stock, setStock] = useState('');
   const [category_id, setCategory_id] = useState('');
   const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState('');
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setErrors({});
+    setApiError('');
+  };
   const handleShow = () => setShow(true);
 
   const validate = () => {
@@ -31,8 +36,6 @@ function ModalComponentAdd({ onProductAdded }) {
     }
     if (!image_url.trim()) {
       errors.image_url = "La URL de la imagen es obligatoria";
-    } else if (!image_url.startsWith('http')) {
-      errors.image_url = "Ingrese una direccion valida";
     }
     if (!stock) {
       errors.stock = "El stock es obligatorio";
@@ -82,7 +85,11 @@ function ModalComponentAdd({ onProductAdded }) {
       handleClose();
     } catch (error) {
       console.error('Error al agregar el producto:', error);
-      alert('No se pudo agregar el producto. Por favor, inténtelo de nuevo.');
+      if (error.response && error.response.data && error.response.data.message) {
+        setApiError(error.response.data.message);
+      } else {
+        setApiError('No se pudo agregar el producto. Por favor, inténtelo de nuevo.');
+      }
     }
   };
 
@@ -100,6 +107,7 @@ function ModalComponentAdd({ onProductAdded }) {
               <button type="button" className="close-button" onClick={handleClose}>&times;</button>
             </div>
             <div className="modal-body">
+              {apiError && <div className="alert alert-danger">{apiError}</div>}
               <form onSubmit={handleSubmit}>
                 <div className="d-flex flex-column align-items-center">
                   <div className="mb-3 w-100">

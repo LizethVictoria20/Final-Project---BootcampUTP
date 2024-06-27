@@ -30,7 +30,7 @@
 
 .h1_admin {
   padding-top: 25px;
-  width: 100%;
+  width: 35%;
   height: auto;
   gap: 0px;
   font-family: DM Sans, sans-serif;
@@ -302,6 +302,7 @@
 
 .btnEdit_admin {
   color: rgba(116, 41, 186, 1);
+  cursor: pointer;
 }
 
 .btn-purple {

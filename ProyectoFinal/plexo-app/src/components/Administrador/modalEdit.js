@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BiSolidPencil } from "react-icons/bi";
-import { updateProduct } from './AdminCrud';
+import { updateProduct } from './AdminCrud'; // Asegúrate de importar correctamente tu función de actualización
 import './stylesheet.css';
 
 function ModalComponentEdit({ product, onProductUpdated }) {
@@ -8,20 +8,20 @@ function ModalComponentEdit({ product, onProductUpdated }) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
-  const [image_url, setImage_url] = useState('');
+  const [image_url, setImageUrl] = useState('');
   const [stock, setStock] = useState('');
-  const [category_id, setCategory_id] = useState('');
+  const [category_id, setCategoryId] = useState('');
   const [errors, setErrors] = useState({});
 
-  React.useEffect(() => {
+  useEffect(() => {
+    console.log(product);
     if (product) {
-      console.log(product)
       setName(product.name);
       setPrice(product.price.toString());
       setDescription(product.description);
-      setImage_url(product.image_url);
+      setImageUrl(product.image_url);
       setStock(product.stock.toString());
-      setCategory_id(product.category_id.toString());
+      setCategoryId(product.category_id.toString());
     }
   }, [product]);
 
@@ -29,14 +29,15 @@ function ModalComponentEdit({ product, onProductUpdated }) {
     setShow(false);
     setErrors({});
   };
+
   const handleShow = () => setShow(true);
 
   const validate = () => {
     const newErrors = {};
     if (!name) newErrors.name = 'El nombre es obligatorio.';
     if (!price || isNaN(price)) newErrors.price = 'Debe ser un número válido.';
-    if (!description || description.length < 10) newErrors.description = 'Debe tener 10 caracteres.';
-    if (!image_url || !image_url.startsWith('http')) newErrors.image_url = 'Ingresa Url valida';
+    if (!description || description.length < 10) newErrors.description = 'Debe tener al menos 10 caracteres.';
+    if (!image_url) newErrors.image_url = 'Ingresa una URL';
     if (!stock || isNaN(stock)) newErrors.stock = 'Debe ser un número válido.';
     if (!category_id || isNaN(category_id)) newErrors.category_id = 'Debe ser un número válido.';
     return newErrors;
@@ -60,30 +61,24 @@ function ModalComponentEdit({ product, onProductUpdated }) {
         stock: parseInt(stock, 10),
         category_id: parseInt(category_id, 10),
       };
-      console.log(putProduct);
+
       const response = await updateProduct(putProduct);
-
-      if (onProductUpdated) {
-        onProductUpdated(response);
-      }
-
-      // reinicia los estados
-      setName('');
-      setPrice('');
-      setDescription('');
-      setImage_url('');
-      setStock('');
-      setCategory_id('');
-      handleClose();
+      if (response) {
+        if (onProductUpdated) {
+          onProductUpdated(); // Actualiza la lista de productos en el componente padre Admin
+        }
+        setErrors({});
+        handleClose();
+      } 
     } catch (error) {
       console.error('Error updating product:', error);
-      alert('No se pudo actualizar el producto');
+      setErrors({ general: 'Error al actualizar el producto.' });
     }
   };
 
   return (
     <>
-      <BiSolidPencil size="30px" onClick={handleShow} className='btnEdit_admin'/>
+      <BiSolidPencil size="30px" onClick={handleShow} className='btnEdit_admin' />
       {show && (
         <div className="modal-backdrop">
           <div className="custom-modal">
@@ -92,6 +87,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
               <button type="button" className="close-button" onClick={handleClose}>&times;</button>
             </div>
             <div className="modal-body">
+              {errors.general && <div className="alert alert-danger">{errors.general}</div>}
               <form onSubmit={handleSubmit}>
                 <div className="d-flex flex-column align-items-center">
                   <div className="mb-3 w-100 text-center">
@@ -100,7 +96,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
                       className="form-control"
                       placeholder="URL"
                       value={image_url}
-                      onChange={(e) => setImage_url(e.target.value)}
+                      onChange={(e) => setImageUrl(e.target.value)}
                     />
                     {errors.image_url && <div className="text-danger">{errors.image_url}</div>}
                   </div>
@@ -150,18 +146,9 @@ function ModalComponentEdit({ product, onProductUpdated }) {
                       className="form-control"
                       placeholder="Categoría"
                       value={category_id}
-                      onChange={(e) => setCategory_id(e.target.value)}
+                      onChange={(e) => setCategoryId(e.target.value)}
                     />
                     {errors.category_id && <div className="text-danger">{errors.category_id}</div>}
-                  </div>
-                  <div className="mb-3 w-100">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Descripción"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                    />
                   </div>
                   <button type="submit" className="btn btn-primary">Actualizar Producto</button>
                 </div>

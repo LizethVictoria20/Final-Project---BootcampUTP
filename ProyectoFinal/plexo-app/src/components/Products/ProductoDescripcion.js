@@ -8,8 +8,8 @@ function ProductoDescripcion() {
   const { product_id } = useParams();
   const [producto, setProducto] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
-  const [message, setMessage] = useState("");
   const [isUser, setIsUser] = useState(false);
+  const [message, setMessage] = useState("");
 
   const GetUser = () => {
     api
@@ -19,11 +19,13 @@ function ProductoDescripcion() {
       })
       .catch((error) => {
         console.error("Error fetching user:", error);
+        setIsUser(false);
       });
   };
 
   useEffect(() => {
     GetUser();
+
     api
       .get(`products/${product_id}`)
       .then((response) => {
@@ -36,26 +38,27 @@ function ProductoDescripcion() {
   }, [product_id]);
 
   if (!producto) return <div>Loading...</div>;
+
   const handleAddToCart = () => {
     if (isUser) {
       api
         .post("carts/items", { productName: producto.name, quantity: 1 })
         .then(() => {
-          setMessage("Producto agregado...");
+          setMessage("Producto agregado");
           setShowMessage(true);
           setTimeout(() => {
             setShowMessage(false);
-          }, 2000); // Ocultar el mensaje después de 3 segundos
+          }, 3000);
         })
         .catch((error) => {
           console.error("Error adding product to cart:", error);
         });
     } else {
-      setMessage("Debes iniciar sesión para agregar al carrito");
+      setMessage("Debe iniciar sesión antes de agregar productos al carrito");
       setShowMessage(true);
       setTimeout(() => {
         setShowMessage(false);
-      }, 2000); // Ocultar el mensaje después de 3 segundos
+      }, 3000);
     }
   };
 
@@ -93,8 +96,14 @@ function ProductoDescripcion() {
                 <p className="text-black">Agregar al carrito</p>
               </div>
               {showMessage && (
-                <div className="alert alert-success mt-3 text-black">
-                  Producto agregado
+                <div
+                  className={` ${
+                    isUser
+                      ? "alert alert-success mt-3 text-black"
+                      : "alert alert-warning mt-3 text-black"
+                  }`}
+                >
+                  {message}
                 </div>
               )}
             </div>

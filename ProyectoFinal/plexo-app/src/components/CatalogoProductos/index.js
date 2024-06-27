@@ -61,11 +61,11 @@ const Catalogo = () => {
           />
         </div>
         <div className="row">
-          <div className="col-lg-2 col-md-3 mb-4 text-black">
-            <div className="container-categories d-flex flex-column">
+          <div className="col-lg-2 col-md-3 mb-4">
+            <div className="container-categories d-flex flex-column text-white">
               <button
                 id="category_btn"
-                className="container-categories-btn btn mb-3 text-black button-cateries"
+                className="container-categories-btn btn mb-3 button-cateries"
                 onClick={() => handleCategoryChange("")}
               >
                 All categories
@@ -73,7 +73,7 @@ const Catalogo = () => {
               {categories.map((category) => (
                 <button
                   id={`category_${category.category_id}`}
-                  className={`container-categories-btn btn mb-3 text-black button-cateries ${
+                  className={`container-categories-btn btn mb-3 button-cateries ${
                     selectedCategory === category.category_id ? "active" : ""
                   }`}
                   key={category.category_id}
@@ -85,7 +85,7 @@ const Catalogo = () => {
             </div>
           </div>
           <div className="col">
-            <div className="container-products d-flex flex-wrap justify-content-center gap-3">
+            <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
                   <Link

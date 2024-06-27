@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ModalComponentEdit from "./modalEdit";
 import "./stylesheet.css";
 import { IoSearchCircle } from "react-icons/io5";
+import { CiSearch } from "react-icons/ci";
 import ModalComponentAdd from "./modalAdd";
 import { DeleteProduct } from "./AdminCrud";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -22,11 +23,11 @@ function Admin() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [search, setSearch] = useState("");
 
-    const GetApiData = () => {
-      api.get("products").then((response) => {
-        setProductsData(response.data);
-        setFilteredProducts(response.data);  // También actualizar los productos filtrados
-      });
+  const GetApiData = () => {
+    api.get("products").then((response) => {
+      setProductsData(response.data);
+      setFilteredProducts(response.data); // También actualizar los productos filtrados
+    });
   };
 
   useEffect(() => {
@@ -59,11 +60,7 @@ function Admin() {
                 onProductAdded={handleProductUpdated}
               />
               <div className="d-flex align-items-center">
-                <IoSearchCircle
-                  size="40px"
-                  color="white"
-                  className="addItem_admin"
-                />
+                <CiSearch size="40px" className="m-3" />
                 <SearchProducts
                   products={productsData}
                   setFilteredProducts={setFilteredProducts}

@@ -8,8 +8,22 @@ function ProductoDescripcion() {
   const { product_id } = useParams();
   const [producto, setProducto] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isUser, setIsUser] = useState(false);
+
+  const GetUser = () => {
+    api
+      .get("users/loginuser")
+      .then((response) => {
+        setIsUser(true);
+      })
+      .catch((error) => {
+        console.error("Error fetching user:", error);
+      });
+  };
 
   useEffect(() => {
+    GetUser();
     api
       .get(`products/${product_id}`)
       .then((response) => {
@@ -23,17 +37,28 @@ function ProductoDescripcion() {
 
   if (!producto) return <div>Loading...</div>;
   const handleAddToCart = () => {
-    api.post("carts/items", { productName: producto.name, quantity: 1 })
-      .then(() => {
-        setShowMessage(true);
-        setTimeout(() => {
-          setShowMessage(false);
-        }, 2000); // Ocultar el mensaje después de 3 segundos
-      })
-      .catch((error) => {
-        console.error("Error adding product to cart:", error);
-      });
+    if (isUser) {
+      api
+        .post("carts/items", { productName: producto.name, quantity: 1 })
+        .then(() => {
+          setMessage("Producto agregado...");
+          setShowMessage(true);
+          setTimeout(() => {
+            setShowMessage(false);
+          }, 2000); // Ocultar el mensaje después de 3 segundos
+        })
+        .catch((error) => {
+          console.error("Error adding product to cart:", error);
+        });
+    } else {
+      setMessage("Debes iniciar sesión para agregar al carrito");
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 2000); // Ocultar el mensaje después de 3 segundos
+    }
   };
+
   return (
     <>
       <div className="container container-productos">
@@ -67,11 +92,11 @@ function ProductoDescripcion() {
                 />
                 <p className="text-black">Agregar al carrito</p>
               </div>
-              {
-                showMessage && (
-                  <div className="alert alert-success mt-3 text-black">Producto agregado</div>
-                )
-              }
+              {showMessage && (
+                <div className="alert alert-success mt-3 text-black">
+                  Producto agregado
+                </div>
+              )}
             </div>
           </div>
         </div>

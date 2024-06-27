@@ -5,6 +5,7 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
+import Navbar from "../Navbar/index";
 import api from "../../http/index";
 import "./style-perfil.css";
 
@@ -40,6 +41,10 @@ function Perfil() {
     GetUser();
   }, []);
 
+  const handleLogout = async () => {
+    const response = await api.get("auth/logout");
+    console.log(response);
+  };
   return (
     <>
       <div className="profile-container">
@@ -53,19 +58,23 @@ function Perfil() {
           <div className="col-md-4 col-sm-12 button-container">
             <button className="btn-custom mb-2 bg-white button-perfil">
               <Link to="/myshopping">
-                <GiShoppingBag className="iconos" color="#7429BA"/> My Shopping
+                <GiShoppingBag className="iconos" color="#7429BA" /> My Shopping
               </Link>
             </button>
 
             <button className="btn-custom mb-2 bg-white button-perfil">
               <Link to="/setting">
-                <MdAdminPanelSettings className="iconos" color="#7429BA" /> Account Settings
+                <MdAdminPanelSettings className="iconos" color="#7429BA" />{" "}
+                Account Settings
               </Link>
             </button>
 
-            <button className="btn-custom mb-2 bg-white button-perfil">
+            <button
+              className="btn-custom mb-2 bg-white button-perfil"
+              onClick={handleLogout}
+            >
               <Link to="/">
-                <BiLogOut className="iconos" color="#7429BA"/> Logout
+                <BiLogOut className="iconos" color="#7429BA" /> Logout
               </Link>
             </button>
           </div>
@@ -73,23 +82,33 @@ function Perfil() {
             <div className="profile-section profile-form">
               <form className="container-form">
                 <div className="form-group form-info">
-                  <label className="label-custom"><b>Name: </b></label>
+                  <label className="label-custom">
+                    <b>Name: </b>
+                  </label>
                   <div className="form-value">{user.first_name}</div>
                 </div>
                 <div className="form-group form-info">
-                  <label className="label-custom"><b>Last Name:</b></label>
+                  <label className="label-custom">
+                    <b>Last Name:</b>
+                  </label>
                   <div className="form-value">{user.last_name}</div>
                 </div>
                 <div className="form-group form-info">
-                  <label className="label-custom"><b>Username:</b></label>
+                  <label className="label-custom">
+                    <b>Username:</b>
+                  </label>
                   <div className="form-value">{user.username}</div>
                 </div>
                 <div className="form-group form-info">
-                  <label className="label-custom"><b>Email:</b></label>
+                  <label className="label-custom">
+                    <b>Email:</b>
+                  </label>
                   <div className="form-value">{user.email}</div>
                 </div>
                 <div className="form-group form-info">
-                  <label className="label-custom"><b>Password:</b></label>
+                  <label className="label-custom">
+                    <b>Password:</b>
+                  </label>
                   <div className="form-value">***********</div>
                 </div>
               </form>

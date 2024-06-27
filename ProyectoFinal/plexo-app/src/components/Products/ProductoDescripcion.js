@@ -8,8 +8,24 @@ function ProductoDescripcion() {
   const { product_id } = useParams();
   const [producto, setProducto] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
+  const [isUser, setIsUser] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const GetUser = () => {
+    api
+      .get("users/loginuser")
+      .then((response) => {
+        setIsUser(true);
+      })
+      .catch((error) => {
+        console.error("Error fetching user:", error);
+        setIsUser(false);
+      });
+  };
 
   useEffect(() => {
+    GetUser();
+
     api
       .get(`products/${product_id}`)
       .then((response) => {
@@ -22,18 +38,30 @@ function ProductoDescripcion() {
   }, [product_id]);
 
   if (!producto) return <div>Loading...</div>;
+
   const handleAddToCart = () => {
-    api.post("carts/items", { productName: producto.name, quantity: 1 })
-      .then(() => {
-        setShowMessage(true);
-        setTimeout(() => {
-          setShowMessage(false);
-        }, 2000); // Ocultar el mensaje después de 3 segundos
-      })
-      .catch((error) => {
-        console.error("Error adding product to cart:", error);
-      });
+    if (isUser) {
+      api
+        .post("carts/items", { productName: producto.name, quantity: 1 })
+        .then(() => {
+          setMessage("Producto agregado");
+          setShowMessage(true);
+          setTimeout(() => {
+            setShowMessage(false);
+          }, 3000);
+        })
+        .catch((error) => {
+          console.error("Error adding product to cart:", error);
+        });
+    } else {
+      setMessage("Debe iniciar sesión antes de agregar productos al carrito");
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 3000);
+    }
   };
+
   return (
     <>
       <div className="container container-productos">
@@ -67,11 +95,17 @@ function ProductoDescripcion() {
                 />
                 <p className="text-black">Agregar al carrito</p>
               </div>
-              {
-                showMessage && (
-                  <div className="alert alert-success mt-3 text-black">Producto agregado</div>
-                )
-              }
+              {showMessage && (
+                <div
+                  className={` ${
+                    isUser
+                      ? "alert alert-success mt-3 text-black"
+                      : "alert alert-warning mt-3 text-black"
+                  }`}
+                >
+                  {message}
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -55,6 +55,11 @@ function Navbar({ admin }) {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/perfil">
+                  Perfil
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link custom-nav-link" to="/shopping-cart">
                   <CiShoppingCart color="#7429ba" fontSize="2rem" />
                 </Link>

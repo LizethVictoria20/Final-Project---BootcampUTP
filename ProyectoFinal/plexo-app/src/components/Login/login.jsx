@@ -61,7 +61,7 @@ function Login() {
         if (userRole === false) {
           navigate("/perfil");
         } else if (userRole === true) {
-          navigate("/admin");
+          navigate("/perfil");
         }
       } else {
         setIsLogged(false);

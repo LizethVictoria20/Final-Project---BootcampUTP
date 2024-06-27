@@ -6,8 +6,8 @@ import { BiLogOut } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { MdAccountCircle } from "react-icons/md";
 import api from "../../http/index";
-
 import "./style-perfil.css";
+
 function Perfil() {
   const [user, setUser] = useState({});
   const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ function Perfil() {
   }, []);
 
   return (
-    <div>
+    <>
       <div className="profile-container">
         <div className="myprofile-header">
           <h2>
@@ -52,53 +52,52 @@ function Perfil() {
         <div className="row">
           <div className="col-md-4 col-sm-12 button-container">
             <button className="btn-custom mb-2 bg-white button-perfil">
-              <Link to="/">
-                <FaHeart className="iconos" /> My Favourites
-              </Link>
-            </button>
-
-            <button className="btn-custom mb-2 bg-white button-perfil">
-              <Link to="/shopping-card">
-                <GiShoppingBag className="iconos" /> My Shopping
+              <Link to="/myshopping">
+                <GiShoppingBag className="iconos" color="#7429BA"/> My Shopping
               </Link>
             </button>
 
             <button className="btn-custom mb-2 bg-white button-perfil">
               <Link to="/setting">
-                <MdAdminPanelSettings className="iconos" /> Account Settings
+                <MdAdminPanelSettings className="iconos" color="#7429BA" /> Account Settings
               </Link>
             </button>
 
             <button className="btn-custom mb-2 bg-white button-perfil">
               <Link to="/">
-                <BiLogOut className="iconos" /> Logout
+                <BiLogOut className="iconos" color="#7429BA"/> Logout
               </Link>
             </button>
           </div>
-          <div className="col-md-8 col-sm-12">
+          <div className="col-md-8 ">
             <div className="profile-section profile-form">
               <form className="container-form">
                 <div className="form-group form-info">
-                  <div>{user.first_name}</div>
+                  <label className="label-custom"><b>Name: </b></label>
+                  <div className="form-value">{user.first_name}</div>
                 </div>
                 <div className="form-group form-info">
-                  <div>{user.last_name}</div>
+                  <label className="label-custom"><b>Last Name:</b></label>
+                  <div className="form-value">{user.last_name}</div>
                 </div>
                 <div className="form-group form-info">
-                  <div>{user.username}</div>
+                  <label className="label-custom"><b>Username:</b></label>
+                  <div className="form-value">{user.username}</div>
                 </div>
                 <div className="form-group form-info">
-                  <div>{user.email}</div>
+                  <label className="label-custom"><b>Email:</b></label>
+                  <div className="form-value">{user.email}</div>
                 </div>
                 <div className="form-group form-info">
-                  <div>***********</div>
+                  <label className="label-custom"><b>Password:</b></label>
+                  <div className="form-value">***********</div>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

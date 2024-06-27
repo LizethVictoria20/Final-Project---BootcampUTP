@@ -65,7 +65,7 @@ const Catalogo = () => {
             <div className="container-categories d-flex flex-column text-white">
               <button
                 id="category_btn"
-                className="container-categories-btn btn mb-3 button-cateries"
+                className="container-categories-btn btn mb-3 button-all-cateries"
                 onClick={() => handleCategoryChange("")}
               >
                 All categories
@@ -73,7 +73,7 @@ const Catalogo = () => {
               {categories.map((category) => (
                 <button
                   id={`category_${category.category_id}`}
-                  className={`container-categories-btn btn mb-3 button-cateries ${
+                  className={`container-categories-btn btn mb-3 button-cateries text-white ${
                     selectedCategory === category.category_id ? "active" : ""
                   }`}
                   key={category.category_id}

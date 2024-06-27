@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./AccountSettings.css";
 import api from "../../http/index";
 import updateUser from "./updateUser.js";
-
 const EditableField = ({
   id,
   label,
@@ -19,21 +18,42 @@ const EditableField = ({
   <div className="form-group mb-3">
     <label htmlFor={id}>{label}</label>
     <div className="input-wrapper d-flex align-items-center">
-      <input
-        type={type}
-        className="form-control"
-        id={id}
-        value={value}
-        onChange={onChange}
-        disabled={editableField !== id}
-        placeholder={placeholder}
-      />
-      <MdModeEditOutline
-        className="edit-icon mx-2"
-        onClick={() => onEditClick(id)}
-        color="#7429BA"
-        fontSize="1.5em"
-      />
+      {type === "file" ? (
+        <>
+          <input
+            type={type}
+            className="form-control-file className='selection-file'"
+            id={id}
+            onChange={onChange}
+            disabled={editableField !== id}
+            placeholder={placeholder}
+          />
+          <MdModeEditOutline
+            className="edit-icon mx-2"
+            onClick={() => onEditClick(id)}
+            color="#7429BA"
+            fontSize="1.5em"
+          />
+        </>
+      ) : (
+        <>
+          <input
+            type={type}
+            className="form-control"
+            id={id}
+            value={value}
+            onChange={onChange}
+            disabled={editableField !== id}
+            placeholder={placeholder}
+          />
+          <MdModeEditOutline
+            className="edit-icon mx-2"
+            onClick={() => onEditClick(id)}
+            color="#7429BA"
+            fontSize="1.5em"
+          />
+        </>
+      )}
     </div>
   </div>
 );
@@ -145,18 +165,17 @@ const AccountSettings = () => {
             <label
               htmlFor="profileImageUrl"
               className="upload-icon position-absolute top-0 end-0"
-            >
-            </label>
+            ></label>
           </div>
           <form className="account-settings-form">
             <EditableField
               id="profileImageUrl"
               label="Profile Image URL"
-              value={formData.profileImageUrl}
               onChange={handleChange}
               editableField={editableField}
               onEditClick={handleEditClick}
-              placeholder="Enter image URL"
+              type="file"
+              placeholder="Select or upload image"
             />
             <EditableField
               id="name"

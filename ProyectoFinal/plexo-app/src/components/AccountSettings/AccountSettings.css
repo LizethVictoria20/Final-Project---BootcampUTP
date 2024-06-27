@@ -61,7 +61,9 @@
 .input-wrapper .edit-icon {
   cursor: pointer;
 }
-
+.selection-file{
+  display: none; 
+}
 
 .save-button {
   background-color: #7429BA;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ModalComponentEdit from "./modalEdit";
 import "./stylesheet.css";
-import { IoSearchCircle } from "react-icons/io5";
+import { IoSearchCircle } from "react-icons/io5";import { FaUserCircle } from "react-icons/fa";
 import ModalComponentAdd from "./modalAdd";
 import { DeleteProduct } from "./AdminCrud";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -116,14 +116,14 @@ function Admin() {
             <div className="btn-group" role="group" aria-label="Basic example">
               <button
                 type="button"
-                className={`btn ${showProducts ? "btn-primary" : "btn-secondary"}`}
+                className={`btn ${showProducts ? "btn btn-Products" : "btn-secondary"}`}
                 onClick={handleShowProducts}
               >
                 Products
               </button>
               <button
                 type="button"
-                className={`btn ${showProducts ? "btn-secondary" : "btn-primary"}`}
+                className={`btn ${showProducts ? "btn-secondary" : "btn btn-Users"}`}
                 onClick={handleShowUsers}
               >
                 Users
@@ -184,7 +184,7 @@ function Admin() {
                   </>
                 ) : (
                   <button
-                    className="btn btn-outline-primary ms-2"
+                    className="btn btn-outline ms-2"
                     onClick={async () => {
                       try {
                         const response = await api.put(`users/admin/${data.user_id}`);

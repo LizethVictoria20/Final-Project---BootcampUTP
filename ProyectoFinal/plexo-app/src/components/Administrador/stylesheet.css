@@ -309,6 +309,10 @@
   background-color: rgba(116, 41, 186, 1);
 }
 
+.btn.btn-Users, .btn.btn-Products {
+  background-color: #7429BA;
+}
+
 /* Media queries for responsiveness */
 @media (max-width: 1200px) {
   .productUp_admin, .product_admin {

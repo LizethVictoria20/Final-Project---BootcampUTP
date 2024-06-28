@@ -14,7 +14,6 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-  const { register } = useContext(UserContext);
 
   const validate = () => {
     const errors = {};
@@ -58,10 +57,10 @@ function Register() {
       if (response.status === 201 || response.status === 200) {
         setIsRegister(true);
         const userRole = response.data.admin;
-        register(response.data, userRole);
+        console.log(userRole);
         setTimeout(() => {
           if (!userRole) {
-            navigate("/perfil");
+            navigate("/login");
           } else if (userRole) {
             navigate("/admin");
           }

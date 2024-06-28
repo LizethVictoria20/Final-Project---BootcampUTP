@@ -3,13 +3,34 @@ import api from "../../http/index";
 import { useParams } from "react-router-dom";
 import "./style-product.css";
 import { FaPlusCircle } from "react-icons/fa";
+import { IoIosReturnLeft } from "react-icons/io";
 
 function ProductoDescripcion() {
   const { product_id } = useParams();
   const [producto, setProducto] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
+  const [isUser, setIsUser] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const GetUser = () => {
+    api
+      .get("users/loginuser")
+      .then((response) => {
+        setIsUser(true);
+      })
+      .catch((error) => {
+        console.error("Error fetching user:", error);
+        setIsUser(false);
+      });
+  };
+
+  const handleReturn = () => {
+    window.history.back();
+  };
 
   useEffect(() => {
+    GetUser();
+
     api
       .get(`products/${product_id}`)
       .then((response) => {
@@ -22,22 +43,39 @@ function ProductoDescripcion() {
   }, [product_id]);
 
   if (!producto) return <div>Loading...</div>;
+
   const handleAddToCart = () => {
-    api.post("carts/items", { productName: producto.name, quantity: 1 })
-      .then(() => {
-        setShowMessage(true);
-        setTimeout(() => {
-          setShowMessage(false);
-        }, 2000); // Ocultar el mensaje después de 3 segundos
-      })
-      .catch((error) => {
-        console.error("Error adding product to cart:", error);
-      });
+    if (isUser) {
+      api
+        .post("carts/items", { productName: producto.name, quantity: 1 })
+        .then(() => {
+          setMessage("Producto agregado");
+          setShowMessage(true);
+          setTimeout(() => {
+            setShowMessage(false);
+          }, 3000);
+        })
+        .catch((error) => {
+          console.error("Error adding product to cart:", error);
+        });
+    } else {
+      setMessage("Debe iniciar sesión antes de agregar productos al carrito");
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 3000);
+    }
   };
+
   return (
     <>
       <div className="container container-productos">
         <div className="row mb-4 bg-white container-products-description mx-auto">
+          <div className="col-md-12 d-flex justify-content-end">
+          <button className="btn button-return" onClick={handleReturn}>
+          <IoIosReturnLeft color='#7429ba'/>
+          </button>
+          </div>
           <div className="col-md-6 ">
             <img
               src={producto.image_url || ""}
@@ -50,7 +88,6 @@ function ProductoDescripcion() {
             <h1 className="product-name">
               {producto.name || "Name not available"}
             </h1>
-            <h5 className="product-stars">★★★★☆</h5>
             <h6 className="details">Details: </h6>
             <p className="product-description">
               {producto.name}
@@ -67,11 +104,17 @@ function ProductoDescripcion() {
                 />
                 <p className="text-black">Agregar al carrito</p>
               </div>
-              {
-                showMessage && (
-                  <div className="alert alert-success mt-3 text-black">Producto agregado</div>
-                )
-              }
+              {showMessage && (
+                <div
+                  className={` ${
+                    isUser
+                      ? "alert alert-success mt-3 text-black"
+                      : "alert alert-warning mt-3 text-black"
+                  }`}
+                >
+                  {message}
+                </div>
+              )}
             </div>
           </div>
         </div>

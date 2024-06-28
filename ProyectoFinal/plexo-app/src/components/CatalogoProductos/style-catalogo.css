@@ -9,6 +9,7 @@
 /* Estilos para el contenedor de productos */
 .container-products {
     padding: 0 15px;
+    gap: 4rem
 }
 
 .container-general-card a {
@@ -71,10 +72,9 @@
 .container-categories {
     position: relative;
     padding: 20px;
-    background: linear-gradient(135deg, rgb(255, 255, 255), rgb(255, 255, 255));
-    border-radius: 50px;
+    border-radius: 1rem;
     margin: 20px;
-    width: auto;
+    width: 17rem;
     box-shadow: 10px 9px 35px -14px rgba(195,179,209,1);
 
 

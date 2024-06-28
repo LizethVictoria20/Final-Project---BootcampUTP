@@ -4,7 +4,7 @@ import { IoShieldCheckmarkSharp } from "react-icons/io5";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./AccountSettings.css";
 import api from "../../http/index";
-import updateUser from "./updateUser.js";
+import updateUser from "./updateUser.js"; // Asegúrate de que esta importación sea correcta
 
 const EditableField = ({
   id,
@@ -41,7 +41,7 @@ const EditableField = ({
 const AccountSettings = () => {
   const [user, setUser] = useState(null);
   const [editableField, setEditableField] = useState(null);
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState(null); // Cambiado a null para mejor manejo de estado
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -51,7 +51,7 @@ const AccountSettings = () => {
     mail: "",
     username: "",
     password: "",
-    profileImageUrl: "",
+    profileImageUrl: null, // Cambiado a null para mejor manejo de estado
   });
 
   const GetUser = async () => {
@@ -66,9 +66,9 @@ const AccountSettings = () => {
           mail: response.data.email || "",
           username: response.data.username || "",
           password: "",
-          profileImageUrl: response.data.image || "",
+          profileImageUrl: response.data.image || null, // Cambiado a null para mejor manejo de estado
         });
-        setProfileImage(response.data.image || "");
+        setProfileImage(response.data.image || null); // Cambiado a null para mejor manejo de estado
       }
     } catch (error) {
       console.error("Error fetching user:", error);
@@ -96,15 +96,11 @@ const AccountSettings = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfileImage(reader.result);
-        setFormData({
-          ...formData,
-          profileImageUrl: reader.result,
-        });
-      };
-      reader.readAsDataURL(file);
+      setProfileImage(URL.createObjectURL(file));
+      setFormData({
+        ...formData,
+        profileImageUrl: file, // Guarda el archivo en el estado formData
+      });
     }
   };
 
@@ -124,14 +120,37 @@ const AccountSettings = () => {
       last_name: formData.lastname,
       email: formData.mail,
       password: formData.password,
-      image: formData.profileImageUrl,
     };
 
     try {
-      const response = await updateUser(updatedUser);
+      let imageUrl = formData.profileImageUrl;
+      if (typeof formData.profileImageUrl == "object") {
+        console.log('entraste ----------------');
+        const imageFormData = new FormData();
+        imageFormData.append("image", formData.profileImageUrl);
+
+        try {
+          const response = await api.post(`images/users`, imageFormData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          });
+          console.log(response);
+          imageUrl = response.data.imagePath;
+          setProfileImage(response.data.imagePath);
+        } catch (err) {
+          console.error("Error uploading image:", err);
+          setErrorMessage("Error uploading image.");
+          setLoading(false);
+          return;
+        }
+      }
+
+      updatedUser.image = imageUrl;
+
+      const response = await updateUser(updatedUser); // Asegúrate de que esta función esté correctamente implementada
       if (response.data) {
         setUser(response.data);
-        setProfileImage(response.data.image || "");
         setSuccessMessage("Changes saved successfully!");
       }
     } catch (error) {
@@ -143,6 +162,11 @@ const AccountSettings = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSave();
+  };
+
   return (
     <div className="account-settings-wrapper d-flex justify-content-center align-items-center min-vh-100">
       <div className="account-settings-container p-4 bg-white rounded shadow">
@@ -152,7 +176,7 @@ const AccountSettings = () => {
         </div>
         <div className="profile-picture-container position-relative mb-3">
           <img
-            src={profileImage}
+            src={profileImage || "/default-profile-image.jpg"} // Coloca una imagen predeterminada si profileImage es null
             alt="Profile"
             className="profile-picture rounded-circle border border-primary"
           />
@@ -173,7 +197,7 @@ const AccountSettings = () => {
             onChange={handleFileChange}
           />
         </div>
-        <form className="account-settings-form">
+        <form className="account-settings-form" onSubmit={handleSubmit}>
           <EditableField
             id="name"
             label="Name"
@@ -194,7 +218,7 @@ const AccountSettings = () => {
           />
           <EditableField
             id="username"
-            label="User Name"
+            label="Username"
             value={formData.username}
             onChange={handleChange}
             editableField={editableField}
@@ -203,7 +227,7 @@ const AccountSettings = () => {
           />
           <EditableField
             id="mail"
-            label="Mail"
+            label="Email"
             value={formData.mail}
             onChange={handleChange}
             editableField={editableField}
@@ -216,32 +240,20 @@ const AccountSettings = () => {
             label="Password"
             value={formData.password}
             onChange={handleChange}
-            editableField={editableField}
+            editableField="password"
             onEditClick={handleEditClick}
             type="password"
-            placeholder="***********"
+            placeholder="Enter your password"
           />
-
-          {loading && <div className="alert alert-info">Loading...</div>}
+          <button type="submit" className="btn btn-primary w-100">
+            {loading ? "Saving..." : "Save Changes"}
+          </button>
           {successMessage && (
-            <div className="alert alert-success" role="alert">
-              {successMessage}
-            </div>
+            <div className="alert alert-success mt-3">{successMessage}</div>
           )}
           {errorMessage && (
-            <div className="alert alert-danger" role="alert">
-              {errorMessage}
-            </div>
+            <div className="alert alert-danger mt-3">{errorMessage}</div>
           )}
-
-          <button
-            type="button"
-            className="btn save-button w-100"
-            onClick={handleSave}
-            disabled={loading}
-          >
-            Save
-          </button>
         </form>
       </div>
     </div>

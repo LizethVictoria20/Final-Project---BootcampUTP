@@ -1,8 +1,8 @@
-.search-form input {
-    background-color: #e1e1e1;
-    border: none;
+.search-field-products {
     width: 20rem;
-}
-.search {
-    box-shadow: inset 10px 9px 35px -18px rgba(60,40,77,1);
+    height: 3rem;
+    background-color: white;
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
 }

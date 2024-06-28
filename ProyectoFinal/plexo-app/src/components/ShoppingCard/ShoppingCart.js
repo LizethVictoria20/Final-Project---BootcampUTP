@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../Navbar";
 import Product from "./Product";
 import "./ShoppingCart.css";
 import {
@@ -96,7 +95,6 @@ const ShoppingCart = () => {
 
   return (
     <>
-      <Navbar />
       <div className="container mt-5">
         <div className="row">
           <div className="col-lg-8 col-md-12 mb-4">

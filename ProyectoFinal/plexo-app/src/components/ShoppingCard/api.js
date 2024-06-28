@@ -2,7 +2,7 @@ import api from "../../http";
 
 /**
  * Función para obtener el cartId y userId.
- * @returns {Promise<string|null>} El cartId si se obtiene correctamente, de lo contrario null.
+ * @returns {Promise<string|null>} 
  */
 export const fetchCartId = async () => {
   try {

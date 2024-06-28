@@ -1,7 +1,6 @@
 import "./style-register.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
-import Navbar from "../Navbar/index.js";
 import { UserContext } from "../ContextUser/context-user.jsx";
 import api from "../../http/index.js";
 
@@ -15,7 +14,6 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
-  const { register } = useContext(UserContext);
 
   const validate = () => {
     const errors = {};
@@ -29,7 +27,7 @@ function Register() {
     }
     if (!userPassword.trim()) {
       errors.userPassword = "Password isn't correct";
-    } else if (!/^(?=.*[0-9])[A-Za-z0-9]{6,}$/.test(userPassword)) {
+    } else if (!/^(?=.*[0-9])[A-Za-z0-9]{8,}$/.test(userPassword)) {
       errors.userPassword =
         "The password must be at least 6 characters, contain at least one number, and have no special characters";
     }
@@ -59,10 +57,10 @@ function Register() {
       if (response.status === 201 || response.status === 200) {
         setIsRegister(true);
         const userRole = response.data.admin;
-        register(response.data, userRole);
+        console.log(userRole);
         setTimeout(() => {
           if (!userRole) {
-            navigate("/perfil");
+            navigate("/login");
           } else if (userRole) {
             navigate("/admin");
           }
@@ -76,7 +74,6 @@ function Register() {
 
   return (
     <>
-      <Navbar />
       <div className="card card-container-login text-dark mx-auto">
         <div className="card-body card-body-login">
           <h5 className="card-title">Welcome 👋🏻</h5>

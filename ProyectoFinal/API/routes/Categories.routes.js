@@ -6,7 +6,7 @@ import { isAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", authenticateJWT, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const categories = await Category.findAll();
     res.json(categories);
@@ -16,7 +16,7 @@ router.get("/", authenticateJWT, async (req, res) => {
   }
 });
 
-router.get('/:id', authenticateJWT, async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const category = await Category.findByPk(req.params.id);
     if (!category) {

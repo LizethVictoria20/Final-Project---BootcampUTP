@@ -1,70 +1,72 @@
+
 .account-settings-wrapper {
-    background-color: #131313;
-  }
-  
-  .account-settings-container {
-    max-width: 600px;
-  }
-  
-  .title-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .account-settings-title {
-    margin-left: 10px;
-  }
-  
-  .profile-picture-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    position: relative;
-  }
-  
-  .profile-picture {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #7429BA;
-  }
-  
-  .upload-icon {
-    position: absolute;
-    right: -10px;
-    top: -10px;
-    cursor: pointer;
-  }
-  
-  .account-settings-form .form-group {
-    position: relative;
-    margin-bottom: 20px;
-    overflow: hidden;
-  }
-  
-  .input-wrapper {
-    display: flex;
-    align-items: center;
-  }
-  
-  .input-wrapper .form-control {
-    flex-grow: 1;
-  }
-  
-  .input-wrapper .edit-icon {
-    margin-left: 10px;
-    cursor: pointer;
-  }
-  
-  .save-button {
-    background-color: #7429BA;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-  }
-  
+  background-color: #131313;
+}
+
+.account-settings-container {
+  margin-top: 5%;
+  width: 57%;
+  margin-bottom: 5%;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.account-settings-title {
+  margin-left: 10px;
+}
+
+.profile-picture-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #7429BA;
+}
+
+.upload-icon {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  cursor: pointer;
+}
+
+.account-settings-form .form-group {
+  position: relative;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper .form-control {
+  flex-grow: 1;
+}
+
+.input-wrapper .edit-icon {
+  cursor: pointer;
+}
+
+
+.save-button {
+  background-color: #7429BA;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}

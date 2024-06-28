@@ -13,10 +13,15 @@
     margin-right: auto;
     position: relative;
     height: 200px;
-    width: 96%;
+    width: 72%;
     object-fit: cover;
 
 
+}
+
+.container-general-card {
+    width: 17rem;
+    text-decoration: none;
 }
 
 .card-body {

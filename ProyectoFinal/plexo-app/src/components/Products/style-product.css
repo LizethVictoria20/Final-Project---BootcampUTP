@@ -1,0 +1,165 @@
+/* Imágenes fluidas y redondeadas con sombras */
+.img-fluid {
+    border-radius: 12px;
+    width: 100%;
+    max-width: 540px;
+    height: auto; /* Proporción de la imagen */
+    border-radius: 108px;
+    box-shadow: 1px 0px 80px 30px rgba(136, 9, 255, 0.2);
+    margin-bottom: 10px;
+  }
+  
+  /* Contenedor de productos */
+  .container-productos {
+    margin-top: 4rem;
+  }
+  
+  /* Botones principales */
+  .btn-primary {
+    background-color: #7429BA;
+    border: none;
+    color: white;
+    font-size: 1rem;
+  }
+  
+  .btn-primary:hover {
+    background-color: rgb(156, 11, 240);
+  }
+  
+  .button-return:hover {
+    border: #9c5fd4 solid 1px;
+  }
+
+
+  
+  /* Contenedor de imagen de producto */
+  .container-img-product {
+    border-radius: 2rem;
+    width: 100%;
+    max-width: 19rem;
+  }
+  
+  /* Descripción del producto */
+  .container-products-description {
+    padding: 2rem; /* Ajuste de padding para pantallas pequeñas */
+    border-radius: 2rem;
+    width: 100%;
+    max-width: 60rem;
+    height: auto;
+    box-shadow: inset 10px 10px 35px -12px rgba(155,144,171,1);
+  }
+  
+  /* Estrellas de producto */
+  .product-stars {
+    color: #7429BA;
+  }
+  
+  /* Botones secundarios */
+  .btn .btn-secondary .me-2 {
+    background-color: black;
+  }
+  
+  .btn-secondary, .ms-2 {
+    background-color: #000000;
+    border: none;
+  }
+  
+  /* Detalles de producto */
+  .details {
+    color: dimgrey;
+  }
+  
+  /* Títulos */
+  h4 {
+    font-size: 1.25rem;
+    color: #7429BA;
+  }
+  
+  /* Insignias */
+  .badge {
+    font-size: 1rem;
+  }
+  
+  /* Controles de formulario */
+  .form-control {
+    font-size: 1rem;
+    color: #7429BA;
+  }
+  
+  .mt-3 {
+    color: white;
+  }
+  
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .container-products-description {
+      padding: 3rem;
+    }
+    
+    .btn-primary {
+      font-size: 0.9rem;
+    }
+  
+    .badge, .form-control {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .container-products-description {
+      padding: 2rem;
+      max-width: 50rem;
+    }
+    
+    .btn-primary {
+      font-size: 0.85rem;
+    }
+  
+    .badge, .form-control {
+      font-size: 0.85rem;
+    }
+  
+    h4 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .container-products-description {
+      padding: 1.5rem;
+      max-width: 40rem;
+    }
+    
+    .btn-primary {
+      font-size: 0.8rem;
+    }
+  
+    .badge, .form-control {
+      font-size: 0.8rem;
+    }
+  
+    h4 {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .container-products-description {
+      padding: 1rem;
+      max-width: 100%;
+    }
+    
+    .btn-primary {
+      font-size: 0.75rem;
+    }
+  
+    .badge, .form-control {
+      font-size: 0.75rem;
+    }
+  
+    h4 {
+      font-size: 0.9rem;
+    }
+  }
+  
+/* By Joaco - 26/06/2024 */

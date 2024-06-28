@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaCirclePlus } from 'react-icons/fa6';
-import { addProduct } from './AdminCrud'; // Asegúrate de que este archivo tenga la función addProduct exportada correctamente
+import { addProduct } from './AdminCrud';
 import './stylesheet.css';
 
 function ModalComponentAdd({ onProductAdded }) {

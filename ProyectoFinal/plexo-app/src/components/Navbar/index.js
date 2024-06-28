@@ -6,7 +6,7 @@ import { UserContext } from "../ContextUser/context-user.jsx";
 
 function Navbar({ admin }) {
   // Paso el contexto al estado
-  const { authState } = useContext(UserContext);
+  const { authState, logout } = useContext(UserContext);
   const { isAdmin } = authState;
 
   return (
@@ -51,6 +51,11 @@ function Navbar({ admin }) {
               <li className="nav-item">
                 <Link className="nav-link custom-nav-link" to="/admin">
                   Admin Panel
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link custom-nav-link" to="/perfil">
+                  Perfil
                 </Link>
               </li>
               <li className="nav-item">

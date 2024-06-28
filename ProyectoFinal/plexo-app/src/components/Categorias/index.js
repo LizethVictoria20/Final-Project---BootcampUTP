@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../http/index";
 
 const ProductFilter = () => {
   const [products, setProducts] = useState([]);
@@ -10,9 +10,7 @@ const ProductFilter = () => {
     // Fetch products from the API
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(
-          "https://final-project-bootcamputp.onrender.com/api/products"
-        );
+        const response = await api.get("products");
         const productsData = response.data;
         setProducts(productsData);
 

@@ -7,7 +7,7 @@ import { UserContext } from "../ContextUser/context-user.jsx";
 
 function Navbar({ admin }) {
   // Paso el contexto al estado
-  const { authState } = useContext(UserContext);
+  const { authState, logout } = useContext(UserContext);
   const { isAdmin } = authState;
 
   return (

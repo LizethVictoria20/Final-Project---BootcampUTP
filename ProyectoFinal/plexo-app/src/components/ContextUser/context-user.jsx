@@ -26,9 +26,16 @@ function AuthProvider({ children }) {
       isAdmin,
     });
   };
+  const logout = (isAdmin) => {
+    setAuthState({
+      isAuthenticated: false,
+      isRegistered: false,
+      isAdmin: false,
+    });
+  };
 
   return (
-    <UserContext.Provider value={{ authState, login, register }}>
+    <UserContext.Provider value={{ authState, login, register, logout }}>
       {children}
     </UserContext.Provider>
   );

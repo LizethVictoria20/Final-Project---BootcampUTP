@@ -42,6 +42,7 @@ function Perfil() {
   }, []);
 
   const handleLogout = async () => {
+    window.location.reload(true);
     const response = await api.get("auth/logout");
     console.log(response);
   };

@@ -54,7 +54,8 @@ function Login() {
         setIsLogged(true);
         setError(null);
         console.log("Login successful");
-
+        const res = await api.post('carts/')
+        console.log(res.data)
         const userRole = response.data.admin;
         login(response.data, userRole);
 

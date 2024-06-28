@@ -19,7 +19,11 @@ function Register() {
     const errors = {};
     if (!firstName.trim()) errors.firstName = "Name is mandatory";
     if (!lastName.trim()) errors.lastName = "Last name is mandatory";
-    if (!userName.trim()) errors.userName = "Username is mandatory";
+    if (!userName.trim()) {
+      errors.userName = "Username is mandatory";
+    } else if (userName.length < 3 || userName.length > 50) {
+      errors.userName = "Username must be between 3 and 50 characters";
+    }
     if (!userEmail.trim()) {
       errors.userEmail = "Email is mandatory";
     } else if (!/\S+@\S+\.\S+/.test(userEmail)) {
@@ -27,12 +31,14 @@ function Register() {
     }
     if (!userPassword.trim()) {
       errors.userPassword = "Password isn't correct";
-    } else if (!/^(?=.*[0-9])[A-Za-z0-9]{8,}$/.test(userPassword)) {
+    } else if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/.test(userPassword)
+    ) {
       errors.userPassword =
-        "The password must be at least 6 characters, contain at least one number, and have no special characters";
+        "The password must be at least 8 characters, contain at least one uppercase letter, one lowercase letter, and one number.";
     }
     if (userPassword !== confirmPassword) {
-      errors.confirmPassword = "Password don't match";
+      errors.confirmPassword = "Passwords don't match";
     }
     return errors;
   };
@@ -135,7 +141,7 @@ function Register() {
                 type="password"
                 className="form-control"
                 id="exampleInputPassword1"
-                placeholder="*******"
+                placeholder="*********"
                 value={userPassword}
                 onChange={(event) => setUserPassword(event.target.value)}
               />
@@ -149,7 +155,7 @@ function Register() {
                 type="password"
                 className="form-control"
                 id="exampleInputPassword2"
-                placeholder="*******"
+                placeholder="********"
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
               />

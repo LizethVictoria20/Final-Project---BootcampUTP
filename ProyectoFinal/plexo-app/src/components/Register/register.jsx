@@ -31,7 +31,9 @@ function Register() {
     }
     if (!userPassword.trim()) {
       errors.userPassword = "Password isn't correct";
-    } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/.test(userPassword)) {
+    } else if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/.test(userPassword)
+    ) {
       errors.userPassword =
         "The password must be at least 8 characters, contain at least one uppercase letter, one lowercase letter, and one number.";
     }
@@ -139,7 +141,7 @@ function Register() {
                 type="password"
                 className="form-control"
                 id="exampleInputPassword1"
-                placeholder="The password must contain 8 characters, one uppercase, one lowercase, and one number."
+                placeholder="*********"
                 value={userPassword}
                 onChange={(event) => setUserPassword(event.target.value)}
               />
@@ -153,7 +155,7 @@ function Register() {
                 type="password"
                 className="form-control"
                 id="exampleInputPassword2"
-                placeholder=""
+                placeholder="********"
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
               />

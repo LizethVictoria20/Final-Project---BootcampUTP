@@ -25,7 +25,7 @@ function Admin() {
       const data = response.data;
       if (!showProducts) {
         // Filtra usuarios que no son admin
-        const nonAdminUsers = data.filter(user => !user.admin);
+        const nonAdminUsers = data.filter((user) => !user.admin);
         setProductsData(nonAdminUsers);
         setFilteredProducts(nonAdminUsers);
       } else {
@@ -33,7 +33,10 @@ function Admin() {
         setFilteredProducts(data);
       }
     } catch (error) {
-      setErrorMessage("Error fetching data: " + (error.response?.data?.message || error.message));
+      setErrorMessage(
+        "Error fetching data: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
@@ -46,7 +49,10 @@ function Admin() {
       await GetApiData();
       setSuccessMessage("Product updated successfully");
     } catch (error) {
-      setErrorMessage("Error updating product: " + (error.response?.data?.message || error.message));
+      setErrorMessage(
+        "Error updating product: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
@@ -56,7 +62,10 @@ function Admin() {
       await GetApiData();
       setSuccessMessage("Product deleted successfully");
     } catch (error) {
-      setErrorMessage("Error deleting product: " + (error.response?.data?.message || error.message));
+      setErrorMessage(
+        "Error deleting product: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
@@ -72,17 +81,19 @@ function Admin() {
   const handleAddProduct = async (newProduct) => {
     try {
       const response = await api.post("products", newProduct);
-      if (response.status === 201 || response.status === 400)  {
+      if (response.status === 201 || response.status === 400) {
         await GetApiData();
         setSuccessMessage("Product added successfully");
       }
-
     } catch (error) {
-      if(error.status === 400){
+      if (error.status === 400) {
         await GetApiData();
         setSuccessMessage("Product added successfully");
       }
-      setErrorMessage("Error adding product: " + (error.response?.data?.message || error.message));
+      setErrorMessage(
+        "Error adding product: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
@@ -122,14 +133,18 @@ function Admin() {
             <div className="btn-group" role="group" aria-label="Basic example">
               <button
                 type="button"
-                className={`btn ${showProducts ? "btn btn-Products" : "btn-secondary"}`}
+                className={`btn ${
+                  showProducts ? "btn btn-Products" : "btn-secondary"
+                }`}
                 onClick={handleShowProducts}
               >
                 Products
               </button>
               <button
                 type="button"
-                className={`btn ${showProducts ? "btn-secondary" : "btn btn-Users"}`}
+                className={`btn ${
+                  showProducts ? "btn-secondary" : "btn btn-Users"
+                }`}
                 onClick={handleShowUsers}
               >
                 Users
@@ -137,8 +152,12 @@ function Admin() {
             </div>
           </div>
         </div>
-        {successMessage && <div className="alert alert-success">{successMessage}</div>}
-        {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+        {successMessage && (
+          <div className="alert alert-success">{successMessage}</div>
+        )}
+        {errorMessage && (
+          <div className="alert alert-danger">{errorMessage}</div>
+        )}
         <div className="list-group">
           {filteredProducts.map((data) => (
             <div
@@ -182,7 +201,7 @@ function Admin() {
                       onProductUpdated={handleProductUpdated}
                     />
                     <button
-                      className="btn btn-outline-danger ms-2"
+                      className="btn btn-outline-danger"
                       onClick={() => handleDeleteClick(data.product_id)}
                     >
                       <FaRegTrashAlt />
@@ -190,13 +209,18 @@ function Admin() {
                   </>
                 ) : (
                   <button
-                    className="btn btn-outline ms-2"
+                    className="btn btn-outline btn-admin"
                     onClick={async () => {
                       try {
-                        const response = await api.put(`users/admin/${data.user_id}`);
+                        const response = await api.put(
+                          `users/admin/${data.user_id}`
+                        );
                         setSuccessMessage("User role updated successfully");
                       } catch (error) {
-                        setErrorMessage("Error updating user role: " + (error.response?.data?.message || error.message));
+                        setErrorMessage(
+                          "Error updating user role: " +
+                            (error.response?.data?.message || error.message)
+                        );
                       }
                     }}
                   >

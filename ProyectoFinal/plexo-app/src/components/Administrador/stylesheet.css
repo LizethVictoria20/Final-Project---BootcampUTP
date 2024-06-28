@@ -55,6 +55,10 @@
   cursor: pointer;
 }
 
+.btn-admin:hover {
+  border: .5px solid #7429BA
+}
+
 .searchImg_admin {
   justify-content: center;
 }

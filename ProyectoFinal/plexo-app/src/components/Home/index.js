@@ -10,7 +10,7 @@ function Home() {
   return (
     <>
       <div className="container-sm container-home1 rounded-4 mb-4">
-        <Link to="catalogo">
+        <Link to="/catalogoPlexo">
           <img src={Home1} alt="" />
         </Link>
       </div>
@@ -22,29 +22,29 @@ function Home() {
       <div className="container text-center container-best_seller d-flex flex-wrap justify-content-center">
         <div className="row">
           <div className="col col-catalogo">
-            <Link to="catalogo">
+            <Link to="https://plexoshop.vercel.app/product/195">
               <img src={Product} alt="" />
             </Link>
           </div>
           <div className="col col-catalogo">
-            <Link to="catalogo">
+            <Link to="https://plexoshop.vercel.app/product/196">
               <img src={Product1} alt="" />
             </Link>{" "}
           </div>
           <div className="col col-catalogo">
-            <Link to="catalogo">
+            <Link to="https://plexoshop.vercel.app/product/194">
               <img src={Product2} alt="" />
             </Link>
           </div>
           <div className="col col-catalogo">
-            <Link to="catalogo">
+            <Link to="https://plexoshop.vercel.app/product/195">
               <img src={Product} alt="" />
             </Link>
           </div>
         </div>
       </div>
       <div className="container-sm container-home rounded-4 mb-4">
-        <Link to="catalogo">
+        <Link to="/catalogoPlexo">
           <img src={Home2} alt="" />
         </Link>
       </div>

@@ -43,7 +43,7 @@ export const fetchCartItems = async (setProducts, navigate) => {
     }
   } catch (error) {
     console.error("Error al obtener los artículos del carrito:", error);
-    alert("Hubo un problema al cargar los artículos del carrito. Por favor, intenta de nuevo más tarde.");
+    alert("Hubo un problema al cargar los artículos del carrito. ¿estas seguro que añadiste items al carrito? Por favor, intenta de nuevo más tarde.");
   }
 };
 

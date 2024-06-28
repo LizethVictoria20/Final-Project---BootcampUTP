@@ -1,0 +1,90 @@
+/* Encapsula los estilos dentro del contenedor notfound-container para evitar conflictos globales */
+.notfound-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .notfound-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: #7429BA; /* Color morado */
+    z-index: 1;
+    transform: translateY(-50%);
+  }
+  
+  .notfound-image {
+    max-width: 100%;
+    height: auto;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .notfound-title {
+    margin-top: 20px;
+    font-size: 2rem;
+  }
+  
+  .notfound-text {
+    font-size: 1.25rem;
+  }
+  
+  /* Media queries para mejor responsividad */
+  @media (max-width: 1200px) {
+    .notfound-title {
+      font-size: 1.75rem;
+    }
+  
+    .notfound-text {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .notfound-title {
+      font-size: 1.5rem;
+    }
+  
+    .notfound-text {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .notfound-title {
+      font-size: 1.25rem;
+    }
+  
+    .notfound-text {
+      font-size: 0.9rem;
+    }
+  
+    .notfound-line {
+      height: 4px; /* Reducir el grosor de la línea en pantallas más pequeñas */
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .notfound-title {
+      font-size: 1rem;
+    }
+  
+    .notfound-text {
+      font-size: 0.8rem;
+    }
+  
+    .notfound-line {
+      height: 3px; /* Reducir aún más el grosor de la línea en pantallas más pequeñas */
+    }
+  }
+/* By Joaco - 26/06/2024 */

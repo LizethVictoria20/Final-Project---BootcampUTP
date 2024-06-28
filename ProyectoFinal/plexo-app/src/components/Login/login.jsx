@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../ContextUser/context-user";
-import Navbar from "../Navbar";
 import api from "../../http";
 import "./style-login.css";
 
@@ -62,7 +61,7 @@ function Login() {
         if (userRole === false) {
           navigate("/perfil");
         } else if (userRole === true) {
-          navigate("/admin");
+          navigate("/perfil");
         }
       } else {
         setIsLogged(false);
@@ -83,7 +82,6 @@ function Login() {
 
   return (
     <>
-      <Navbar />
       <div className="card card-container-login mx-auto">
         <div className="card-body card-body-login">
           <h5 className="card-title">Welcome Back 👋🏻</h5>

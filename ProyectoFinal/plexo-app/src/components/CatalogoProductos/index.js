@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./style-catalogo.css";
 import Card from "../Card/index";
 import api from "../../http/index.js";
-import Navbar from "../Navbar/index";
 import SearchProducts from "../Buscador/index";
 import { Link } from "react-router-dom";
 
@@ -54,7 +53,6 @@ const Catalogo = () => {
 
   return (
     <>
-      <Navbar />
       <div className="container-fluid text-center container-catalogo">
         <div className="row">
           <div className="col-lg-2 col-md-3 mb-4 text-black">
@@ -90,7 +88,9 @@ const Catalogo = () => {
             <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
-                  <Card key={product.product_id} product={product} />
+                  <Link to={`/product/${product.product_id}`} className="card-title-product">
+                    <Card key={product.product_id} product={product} />
+                  </Link>
                 ))
               ) : (
                 <p className="text-light">No products found</p>

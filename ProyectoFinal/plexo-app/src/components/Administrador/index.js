@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Navbar from "../Navbar/index";
 import ModalComponentEdit from "./modalEdit";
 import "./stylesheet.css";
 import { IoSearchCircle } from "react-icons/io5";
@@ -50,7 +49,6 @@ function Admin() {
 
   return (
     <>
-      <Navbar />
       <div className="container mt-5">
         <div className="p-4 shadow rounded containerAll_admin">
           <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">

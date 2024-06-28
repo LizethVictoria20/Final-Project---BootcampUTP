@@ -1,80 +1,146 @@
 .custom-container-nav_bar {
-    padding: 0 2rem;
-  }
-  
-  .custom-navbar {
-    height: 100px;
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000; /* Para asegurarse de que la navbar esté siempre encima del contenido */
-  }
-  
-  .custom-items-navbar {
-    display: flex;
-    align-items: center;
-    gap: 20px; /* Espacio entre los íconos */
-  }
-  
-  .custom-navbar-logo {
-    width: 50%;
-    height: auto;
-    max-height: 100%;
-  }
-  
-  .custom-nav-link {
-    color: #7429ba;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .custom-nav-link:hover {
-    color: #000;
-  }
-  
-  .custom-menu-icon {
-    font-size: 2em;
-  }
-  
-  /* Media Queries */
-  @media (max-width: 992px) {
-    .custom-items-navbar {
-      gap: 15px; /* Reducir espacio entre los íconos */
-    }
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .custom-menu-icon {
-      font-size: 1.8em; /* Reducir el tamaño de los íconos */
-    }
+.custom-navbar {
+  height: 100px;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Para asegurarse de que la navbar esté siempre encima del contenido */
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-navbar-logo {
+  width: 120px;
+  height: auto;
+  max-height: 100%;
+  transition: width 0.3s ease;
+}
+
+.custom-items-navbar {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espacio entre los íconos */
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  white-space: nowrap;
+  justify-content: flex-end; /* Alinear los elementos a la derecha en desktop */
+}
+
+.custom-nav-link {
+  color: #7429ba;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: font-size 0.3s ease;
+}
+
+.custom-nav-link:hover {
+  color: #000;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+
+  .custom-navbar-logo {
+    width: 100px;
   }
-  
-  @media (max-width: 768px) {
-    .custom-items-navbar {
-      gap: 10px; /* Reducir más el espacio entre los íconos */
-    }
-    .custom-navbar-logo {
-      width: 90px; /* Reducir más el tamaño del logo */
-    }
-    .custom-menu-icon {
-      font-size: 1.6em; /* Reducir más el tamaño de los íconos */
-    }
+
+  .custom-items-navbar {
+    gap: 15px; /* Reducir espacio entre los íconos */
   }
-  
-  @media (max-width: 576px) {
-    .custom-items-navbar {
-      gap: 8px; /* Reducir aún más el espacio entre los íconos */
-    }
-    .custom-menu-icon {
-      font-size: 1.4em; /* Reducir aún más el tamaño de los íconos */
-    }
+
+  .custom-nav-link {
+    font-size: 0.9em;
   }
-  
-  @media (max-width: 360px) {
-    .custom-items-navbar {
-      gap: 5px; /* Reducir el espacio entre los íconos al mínimo */
-    }
-    .custom-menu-icon {
-      font-size: 1.2em; /* Reducir el tamaño de los íconos al mínimo */
-    }
+}
+
+@media (max-width: 992px) {
+  .custom-navbar {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
+
+  .custom-navbar-logo {
+    width: 130px;
+  }
+
+  .custom-items-navbar {
+    gap: 10px; /* Reducir más el espacio entre los íconos */
+  }
+
+  .custom-nav-link {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-navbar {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .custom-navbar-logo {
+    width: 130px;
+  }
+
+  .custom-items-navbar {
+    gap: 8px; /* Reducir más el espacio entre los íconos */
+    justify-content: flex-start; /* Alinear los elementos a la izquierda */
+  }
+
+  .custom-nav-link {
+    font-size: 0.7em;
+  }
+}
+
+@media (max-width: 576px) {
+  .custom-navbar {
+    padding: 0 1rem;
+  }
+
+  .custom-navbar-logo {
+    width: 120px;
+  }
+
+  .custom-items-navbar {
+    gap: 5px; /* Reducir aún más el espacio entre los íconos */
+    justify-content: flex-start; /* Alinear los elementos a la izquierda */
+  }
+
+  .custom-nav-link {
+    font-size: 0.6em;
+  }
+}
+
+@media (max-width: 360px) {
+  .custom-navbar {
+    padding: 0 0.5rem;
+  }
+
+  .custom-navbar-logo {
+    width: 120px;
+  }
+
+  .custom-items-navbar {
+    gap: 3px; /* Reducir el espacio entre los íconos al mínimo */
+    justify-content: flex-start; /* Alinear los elementos a la izquierda */
+  }
+
+  .custom-nav-link {
+    font-size: 0.5em;
+  }
+}

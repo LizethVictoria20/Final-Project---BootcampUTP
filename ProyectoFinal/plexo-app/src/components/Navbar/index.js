@@ -17,7 +17,7 @@ function Navbar({ admin }) {
             <img src='https://i.ibb.co/D5hj0xf/Logo-PNGplexo.png' alt="Logo" className="custom-navbar-logo" />
           </Link>
         </div>
-        <div className="navbar-nav ms-auto custom-items-navbar">
+        <ul className="navbar-nav ms-auto custom-items-navbar">
           {!authState.isAuthenticated && (
             <>
               <li className="nav-item">
@@ -65,7 +65,7 @@ function Navbar({ admin }) {
               </li>
             </>
           )}
-        </div>
+        </ul>
       </div>
     </nav>
   );

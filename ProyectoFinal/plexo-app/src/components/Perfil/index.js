@@ -63,7 +63,7 @@ function Perfil() {
             </button>
 
             <button className="btn-custom mb-2 bg-white button-perfil">
-              <Link to="/setting">
+              <Link to="/settingUserPlexo">
                 <MdAdminPanelSettings className="iconos" color="#7429BA" />{" "}
                 Account Settings
               </Link>

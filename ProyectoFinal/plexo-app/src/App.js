@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Admin from "./components/Administrador";
-import Card from "./components/Card";
 import Catalogo from "./components/CatalogoProductos";
 import Login from "./components/Login/login.jsx";
 import Register from "./components/Register/register.jsx";
@@ -25,14 +24,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/card" element={<Card />} />
-          <Route path="/catalogo" element={<Catalogo />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/catalogoPlexo" element={<Catalogo />} />
+          <Route path="/loginUserPlexo" element={<Login />} />
+          <Route path="/registerUserPlexo" element={<Register />} />
           <Route path="/shopping-cart" element={<ShoppingCart />} />
-          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/perfilUserPlexo" element={<Perfil />} />
           <Route path="/shipping" element={<Shipping />} />
-          <Route path="/setting" element={<Setting />} />
+          <Route path="/settingUserPlexo" element={<Setting />} />
           <Route path="/historial" element={<Historial />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/payment-failed" element={<PaymentFailed />} />

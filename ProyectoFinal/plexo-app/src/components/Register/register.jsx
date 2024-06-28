@@ -66,7 +66,7 @@ function Register() {
         console.log(userRole);
         setTimeout(() => {
           if (!userRole) {
-            navigate("/login");
+            navigate("/loginUserPlexo");
           } else if (userRole) {
             navigate("/admin");
           }

@@ -59,9 +59,9 @@ function Login() {
         login(response.data, userRole);
 
         if (userRole === false) {
-          navigate("/perfil");
+          navigate("/perfilUserPlexo");
         } else if (userRole === true) {
-          navigate("/perfil");
+          navigate("/perfilUserPlexo");
         }
       } else {
         setIsLogged(false);
@@ -133,7 +133,7 @@ function Login() {
               ¿Don't you have an account?{" "}
               <span>
                 {" "}
-                <Link className="nav-link-login" to="/register">
+                <Link className="nav-link-login" to="/registerUserPlexo">
                   Sign up
                 </Link>
               </span>

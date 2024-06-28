@@ -50,14 +50,12 @@ function Perfil() {
     <>
       <div className="profile-container">
         <div className="myprofile-header">
-          <h2>
-            My Profile
-          </h2>
+          <h2>My Profile</h2>
         </div>
         <div className="row">
           <div className="col-md-4 col-sm-12 button-container">
             <button className="btn-custom mb-2 bg-white button-perfil">
-              <Link to="/myshopping">
+              <Link to="/historial">
                 <GiShoppingBag className="iconos" color="#7429BA" /> My Shopping
               </Link>
             </button>
@@ -81,7 +79,11 @@ function Perfil() {
           <div className="col-md-8 ">
             <div className="profile-section profile-form">
               <form className="container-form">
-              <img src={user.image} alt="Imagen de perfil" className="image-profile-perfil" />
+                <img
+                  src={user.image}
+                  alt="Imagen de perfil"
+                  className="image-profile-perfil"
+                />
                 <div className="form-group form-info">
                   <label className="label-custom">
                     <b>Name: </b>

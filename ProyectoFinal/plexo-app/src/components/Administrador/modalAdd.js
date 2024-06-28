@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { addProduct } from './AdminCrud';
 import './stylesheet.css';
+import api from '../../http';
 
 function ModalComponentAdd({ onProductAdded }) {
   const [show, setShow] = useState(false);
@@ -15,7 +16,7 @@ function ModalComponentAdd({ onProductAdded }) {
   const [apiError, setApiError] = useState('');
   const [preview, setPreview] = useState(null);
   const [dragging, setDragging] = useState(false);
-
+  const [File, setFile] = useState(null);
   const handleClose = () => {
     setShow(false);
     setErrors({});
@@ -61,6 +62,7 @@ function ModalComponentAdd({ onProductAdded }) {
         setImageUrl(reader.result);
       };
       reader.readAsDataURL(file);
+      setFile(file)
     }
   };
 
@@ -92,8 +94,29 @@ function ModalComponentAdd({ onProductAdded }) {
       setErrors(validationErrors);
       return;
     }
-
+    if(File){
+      const formData = new FormData();
+      formData.append('image', File);
+      console.log(formData)
+      try {
+        const response = await api.post(`images/users`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        setImageUrl(response.data.imagePath)
+      } catch (err) {
+        if (err.response && err.response.status === 400) {
+          setErrors({ image_url: 'Invalid image format' });
+        } else {
+          setErrors({ general: 'Error uploading image' });
+        }
+        return
+      }
+      
+    }
     try {
+      console.log(image_url);
       const newProduct = {
         name,
         price: parseFloat(price),

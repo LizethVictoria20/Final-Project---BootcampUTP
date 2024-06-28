@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BiSolidPencil } from "react-icons/bi";
 import { updateProduct } from './AdminCrud'; // Asegúrate de importar correctamente tu función de actualización
 import './stylesheet.css';
+import api from '../../http';
 
 function ModalComponentEdit({ product, onProductUpdated }) {
   const [show, setShow] = useState(false);
@@ -14,6 +15,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
   const [errors, setErrors] = useState({});
   const [preview, setPreview] = useState(null);
   const [dragging, setDragging] = useState(false);
+  const [File, setFile] = useState(null);
 
   useEffect(() => {
     if (product) {
@@ -23,7 +25,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
       setImageUrl(product.image_url);
       setStock(product.stock.toString());
       setCategoryId(product.category_id.toString());
-      setPreview(product.image_url); // Inicializar la vista previa de la imagen
+      setPreview(product.image_url); 
     }
   }, [product]);
 
@@ -39,7 +41,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
     if (!name) newErrors.name = 'El nombre es obligatorio.';
     if (!price || isNaN(price)) newErrors.price = 'Debe ser un número válido.';
     if (!description || description.length < 10) newErrors.description = 'Debe tener al menos 10 caracteres.';
-    if (!image_url) newErrors.image_url = 'Ingresa una URL';
+    if (!image_url) newErrors.image_url = 'Ingresa una imagen';
     if (!stock || isNaN(stock)) newErrors.stock = 'Debe ser un número válido.';
     if (!category_id || isNaN(category_id)) newErrors.category_id = 'Debe ser un número válido.';
     return newErrors;
@@ -53,6 +55,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
         setImageUrl(reader.result);
       };
       reader.readAsDataURL(file);
+      setFile(file)
     }
   };
 
@@ -84,7 +87,27 @@ function ModalComponentEdit({ product, onProductUpdated }) {
       setErrors(validationErrors);
       return;
     }
-
+    if(File){
+      const formData = new FormData();
+      formData.append('image', File);
+      console.log(formData)
+      try {
+        const response = await api.post(`images/users`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        setImageUrl(response.data.imagePath)
+      } catch (err) {
+        if (err.response && err.response.status === 400) {
+          setErrors({ image_url: 'Invalid image format' });
+        } else {
+          setErrors({ general: 'Error uploading image' });
+        }
+        return
+      }
+      
+    }
     try {
       const putProduct = {
         id: product.product_id,
@@ -99,7 +122,7 @@ function ModalComponentEdit({ product, onProductUpdated }) {
       const response = await updateProduct(putProduct);
       if (response) {
         if (onProductUpdated) {
-          onProductUpdated(); // Actualiza la lista de productos en el componente padre Admin
+          onProductUpdated(); 
         }
         setErrors({});
         handleClose();

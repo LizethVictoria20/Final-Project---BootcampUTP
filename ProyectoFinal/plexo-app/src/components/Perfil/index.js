@@ -51,7 +51,6 @@ function Perfil() {
       <div className="profile-container">
         <div className="myprofile-header">
           <h2>
-            <MdAccountCircle color="#7429BA" fontSize="1em" />
             My Profile
           </h2>
         </div>
@@ -82,6 +81,7 @@ function Perfil() {
           <div className="col-md-8 ">
             <div className="profile-section profile-form">
               <form className="container-form">
+              <img src={user.image} alt="Imagen de perfil" className="image-profile-perfil" />
                 <div className="form-group form-info">
                   <label className="label-custom">
                     <b>Name: </b>

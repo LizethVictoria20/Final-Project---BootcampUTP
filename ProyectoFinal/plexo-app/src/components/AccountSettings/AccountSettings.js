@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./AccountSettings.css";
 import api from "../../http/index";
 import updateUser from "./updateUser.js";
+
 const EditableField = ({
   id,
   label,
@@ -18,42 +19,21 @@ const EditableField = ({
   <div className="form-group mb-3">
     <label htmlFor={id}>{label}</label>
     <div className="input-wrapper d-flex align-items-center">
-      {type === "file" ? (
-        <>
-          <input
-            type={type}
-            className="form-control-file className='selection-file'"
-            id={id}
-            onChange={onChange}
-            disabled={editableField !== id}
-            placeholder={placeholder}
-          />
-          <MdModeEditOutline
-            className="edit-icon mx-2"
-            onClick={() => onEditClick(id)}
-            color="#7429BA"
-            fontSize="1.5em"
-          />
-        </>
-      ) : (
-        <>
-          <input
-            type={type}
-            className="form-control"
-            id={id}
-            value={value}
-            onChange={onChange}
-            disabled={editableField !== id}
-            placeholder={placeholder}
-          />
-          <MdModeEditOutline
-            className="edit-icon mx-2"
-            onClick={() => onEditClick(id)}
-            color="#7429BA"
-            fontSize="1.5em"
-          />
-        </>
-      )}
+      <input
+        type={type}
+        className="form-control"
+        id={id}
+        value={value}
+        onChange={onChange}
+        disabled={editableField !== id}
+        placeholder={placeholder}
+      />
+      <MdModeEditOutline
+        className="edit-icon mx-2"
+        onClick={() => onEditClick(id)}
+        color="#7429BA"
+        fontSize="1.5em"
+      />
     </div>
   </div>
 );
@@ -113,6 +93,21 @@ const AccountSettings = () => {
     });
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImage(reader.result);
+        setFormData({
+          ...formData,
+          profileImageUrl: reader.result,
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSave = async () => {
     if (!formData.password) {
       setErrorMessage("Please enter a password.");
@@ -149,106 +144,107 @@ const AccountSettings = () => {
   };
 
   return (
-    <>
-      <div className="account-settings-wrapper d-flex justify-content-center align-items-center min-vh-100">
-        <div className="account-settings-container p-4 bg-white rounded shadow">
-          <div className="title-container d-flex align-items-center justify-content-center mb-3">
-            <IoShieldCheckmarkSharp className="settingsshield" fontSize="2em" />
-            <h2 className="account-settings-title mb-0">Account Settings</h2>
-          </div>
-          <div className="profile-picture-container position-relative mb-3">
-            <img
-              src={profileImage}
-              alt="Profile"
-              className="profile-picture rounded-circle border border-primary"
-            />
-            <label
-              htmlFor="profileImageUrl"
-              className="upload-icon position-absolute top-0 end-0"
-            ></label>
-          </div>
-          <form className="account-settings-form">
-            <EditableField
-              id="profileImageUrl"
-              label="Profile Image URL"
-              onChange={handleChange}
-              editableField={editableField}
-              onEditClick={handleEditClick}
-              type="file"
-              placeholder="Select or upload image"
-            />
-            <EditableField
-              id="name"
-              label="Name"
-              value={formData.name}
-              onChange={handleChange}
-              editableField={editableField}
-              onEditClick={handleEditClick}
-              placeholder={user ? user.first_name : ""}
-            />
-            <EditableField
-              id="lastname"
-              label="Last Name"
-              value={formData.lastname}
-              onChange={handleChange}
-              editableField={editableField}
-              onEditClick={handleEditClick}
-              placeholder={user ? user.last_name : ""}
-            />
-            <EditableField
-              id="username"
-              label="User Name"
-              value={formData.username}
-              onChange={handleChange}
-              editableField={editableField}
-              onEditClick={handleEditClick}
-              placeholder={user ? user.username : ""}
-            />
-            <EditableField
-              id="mail"
-              label="Mail"
-              value={formData.mail}
-              onChange={handleChange}
-              editableField={editableField}
-              onEditClick={handleEditClick}
-              type="email"
-              placeholder={user ? user.email : ""}
-            />
-            <EditableField
-              id="password"
-              label="Password"
-              value={formData.password}
-              onChange={handleChange}
-              editableField={editableField}
-              onEditClick={handleEditClick}
-              type="password"
-              placeholder="***********"
-            />
-
-            {loading && <div className="alert alert-info">Loading...</div>}
-            {successMessage && (
-              <div className="alert alert-success" role="alert">
-                {successMessage}
-              </div>
-            )}
-            {errorMessage && (
-              <div className="alert alert-danger" role="alert">
-                {errorMessage}
-              </div>
-            )}
-
-            <button
-              type="button"
-              className="btn save-button w-100"
-              onClick={handleSave}
-              disabled={loading}
-            >
-              Save
-            </button>
-          </form>
+    <div className="account-settings-wrapper d-flex justify-content-center align-items-center min-vh-100">
+      <div className="account-settings-container p-4 bg-white rounded shadow">
+        <div className="title-container d-flex align-items-center justify-content-center mb-3">
+          <IoShieldCheckmarkSharp className="settingsshield" fontSize="2em" />
+          <h2 className="account-settings-title mb-0">Account Settings</h2>
         </div>
+        <div className="profile-picture-container position-relative mb-3">
+          <img
+            src={profileImage}
+            alt="Profile"
+            className="profile-picture rounded-circle border border-primary"
+          />
+          <label
+            htmlFor="profileImageFile"
+            className="upload-icon position-absolute"
+          >
+            <MdModeEditOutline
+              className="edit-icon"
+              color="#7429BA"
+              fontSize="1.5em"
+            />
+          </label>
+          <input
+            type="file"
+            id="profileImageFile"
+            className="d-none"
+            onChange={handleFileChange}
+          />
+        </div>
+        <form className="account-settings-form">
+          <EditableField
+            id="name"
+            label="Name"
+            value={formData.name}
+            onChange={handleChange}
+            editableField={editableField}
+            onEditClick={handleEditClick}
+            placeholder={user ? user.first_name : ""}
+          />
+          <EditableField
+            id="lastname"
+            label="Last Name"
+            value={formData.lastname}
+            onChange={handleChange}
+            editableField={editableField}
+            onEditClick={handleEditClick}
+            placeholder={user ? user.last_name : ""}
+          />
+          <EditableField
+            id="username"
+            label="User Name"
+            value={formData.username}
+            onChange={handleChange}
+            editableField={editableField}
+            onEditClick={handleEditClick}
+            placeholder={user ? user.username : ""}
+          />
+          <EditableField
+            id="mail"
+            label="Mail"
+            value={formData.mail}
+            onChange={handleChange}
+            editableField={editableField}
+            onEditClick={handleEditClick}
+            type="email"
+            placeholder={user ? user.email : ""}
+          />
+          <EditableField
+            id="password"
+            label="Password"
+            value={formData.password}
+            onChange={handleChange}
+            editableField={editableField}
+            onEditClick={handleEditClick}
+            type="password"
+            placeholder="***********"
+          />
+
+          {loading && <div className="alert alert-info">Loading...</div>}
+          {successMessage && (
+            <div className="alert alert-success" role="alert">
+              {successMessage}
+            </div>
+          )}
+          {errorMessage && (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage}
+            </div>
+          )}
+
+          <button
+            type="button"
+            className="btn save-button w-100"
+            onClick={handleSave}
+            disabled={loading}
+          >
+            Save
+          </button>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 

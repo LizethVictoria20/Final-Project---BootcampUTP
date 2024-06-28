@@ -110,7 +110,6 @@ const Historial = () => {
 
   return (
     <>
-      <Navbar />
       <div className="history-container">
         <h2>Historial de Compras</h2>
         {history.length === 0 ? (
@@ -124,7 +123,7 @@ const Historial = () => {
                 <p>Total: ${parseFloat(purchase.total).toFixed(2)}</p>
                 <p>User ID: {purchase.user_id}</p>
                 <button
-                  className="details-button"
+                  className="details-button btn"
                   onClick={() => toggleDetails(purchase.order_id)}
                 >
                   {showDetails ? "Ocultar Detalles" : "Ver Detalles"}

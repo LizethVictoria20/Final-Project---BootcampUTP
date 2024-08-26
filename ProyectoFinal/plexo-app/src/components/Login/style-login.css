@@ -32,12 +32,6 @@
     background-color: #9c70c4;
 }
 
-.card-container-login .card-title, 
-.card-container-login .card-text, 
-.card-container-login .form-label,
-.card-container-login .form-text {
-    color: #121212 !important;
-}
 
 
 
@@ -45,7 +39,6 @@ hr {
     color: white;
 }
 .nav-link-login {
-    color:#121212 !important;
     text-decoration: none;
 }
 .nav-link-login:hover {

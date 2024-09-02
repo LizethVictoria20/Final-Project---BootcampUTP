@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import "./style-navbar.css";
 import { UserContext } from "../ContextUser/context-user.jsx";
+import { CiShoppingBasket } from "react-icons/ci";
 
 function Navbar({ admin }) {
   // Paso el contexto al estado
@@ -22,13 +23,29 @@ function Navbar({ admin }) {
           {!authState.isAuthenticated && (
             <>
               <li className="nav-item">
+                <Link
+                  className="nav-link custom-nav-link"
+                  to="/products"
+                >
+                  Products
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link custom-nav-link" to="/loginUserPlexo">
                   Login
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link custom-nav-link" to="/registerUserPlexo">
+                <Link
+                  className="nav-link custom-nav-link"
+                  to="/registerUserPlexo"
+                >
                   Register
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link>
+                  <CiShoppingBasket color='#6c6c6c' size={30}/>
                 </Link>
               </li>
             </>
@@ -36,7 +53,10 @@ function Navbar({ admin }) {
           {authState.isAuthenticated && !authState.isAdmin && (
             <>
               <li className="nav-item">
-                <Link className="nav-link custom-nav-link" to="/perfilUserPlexo">
+                <Link
+                  className="nav-link custom-nav-link"
+                  to="/perfilUserPlexo"
+                >
                   Perfil
                 </Link>
               </li>
@@ -55,7 +75,10 @@ function Navbar({ admin }) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link custom-nav-link" to="/perfilUserPlexo">
+                <Link
+                  className="nav-link custom-nav-link"
+                  to="/perfilUserPlexo"
+                >
                   Perfil
                 </Link>
               </li>

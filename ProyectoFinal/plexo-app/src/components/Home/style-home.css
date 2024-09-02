@@ -81,7 +81,7 @@
   justify-content: center;
   gap: 15px;
   margin-top: 20px;
-  width: 103%;
+  width: 100%;
 }
 .product-card{
   cursor: pointer;
@@ -123,8 +123,7 @@
   line-height: 1;
   color: white;
   width: 91%;
-  /* margin-top: 120px; */
-  margin: 4rem;
+  margin: 10rem 4rem 4rem 4rem;
 }
 .footer-banner-image {
   position: absolute;

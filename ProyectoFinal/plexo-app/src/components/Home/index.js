@@ -37,7 +37,7 @@ function Home() {
           <p>speaker There are many variations passages</p>
         </div>
 
-        <div className="products-container">
+        <div className="products-container-heading">
           {products?.slice(0, 4).map((product) => 
             <>
               <div className="product-card" key={product.product_id}>
@@ -55,6 +55,30 @@ function Home() {
          
         </div>
       </div>
+
+      {/* Footer  */}
+      <div className="footer-banner-container">
+      <div className="banner-desc">
+        <div className="left">
+          <p>20% OFF</p>
+          <h3>FINE</h3>
+          <h3>SMILE</h3>
+          <p>15 Nov to 7 Dec</p>
+        </div>
+        <div className="right">
+          <p>Beats Solo Air</p>
+          <h3>Summer Sale</h3>
+          <p>Best headphones on the market</p>
+            <button type="button">Shop Now</button>
+        </div>
+
+        <img
+            src="https://cdn.sanity.io/images/vfxfwnaw/production/a64b345016e96adfb8849af5521c8e0ecfe8f027-555x555.webp"
+            alt="headphones"
+            className="footer-banner-image"
+          />
+      </div>
+    </div>
     </>
   );
 }

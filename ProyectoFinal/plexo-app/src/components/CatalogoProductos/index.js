@@ -54,26 +54,22 @@ const Catalogo = () => {
   return (
     <>
       <div className="container-fluid text-center container-catalogo">
-        <div className="search-bar">
-          <SearchProducts
-            setFilteredProducts={setFilteredProducts}
-            products={products}
-          />
-        </div>
-        <div className="row">
-          <div className="col-lg-2 col-md-3 mb-4">
-            <div className="container-categories d-flex flex-column text-white">
-              <button
-                id="category_btn"
-                className="container-categories-btn btn mb-3 button-all-cateries"
-                onClick={() => handleCategoryChange("")}
-              >
-                All categories
-              </button>
+        <div className="container-search d-flex">
+          <div className="dropdown">
+            <button
+              className="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Categorias
+            </button>
+            <ul className="dropdown-menu">
+              <button className="container-categories-btn btn mb-3 button-cateries text-black"><Link to="/catalogoPlexo">All</Link></button>
               {categories.map((category) => (
                 <button
                   id={`category_${category.category_id}`}
-                  className={`container-categories-btn btn mb-3 button-cateries text-white ${
+                  className={`container-categories-btn btn mb-3 button-cateries text-black ${
                     selectedCategory === category.category_id ? "active" : ""
                   }`}
                   key={category.category_id}
@@ -82,8 +78,16 @@ const Catalogo = () => {
                   {category.name}
                 </button>
               ))}
-            </div>
+            </ul>
           </div>
+          <div className="search-bar">
+            <SearchProducts
+              setFilteredProducts={setFilteredProducts}
+              products={products}
+            />
+          </div>
+        </div>
+        <div className="row">
           <div className="col">
             <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (

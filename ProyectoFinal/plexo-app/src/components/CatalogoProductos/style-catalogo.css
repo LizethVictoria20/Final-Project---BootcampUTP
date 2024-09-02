@@ -9,7 +9,7 @@
 /* Estilos para el contenedor de productos */
 .container-products {
     padding: 0 15px;
-    gap: 4rem
+    gap: 2rem
 }
 
 .container-general-card a {
@@ -76,8 +76,8 @@
     margin: 20px;
     width: 17rem;
     box-shadow: 10px 9px 35px -14px rgba(195,179,209,1);
-
-
+    width: 25%;
+    height: 20%;
 }
 
 /* Media queries para pantallas pequeñas (teléfonos) */
@@ -110,9 +110,24 @@
 
 /* Estilos adicionales para la barra de búsqueda */
 .search-bar {
-    max-width: 500px;
-    margin: 0 auto 20px;
-    margin-bottom: 5rem;
+  margin-left: 13rem;
+}
+.search-bar input {
+  width: 50rem;
+}
+.dropdown {
+  margin-left: 3rem;
+}
+
+.dropdown-menu.show {
+  display: flex !important;
+  flex-direction: column;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  height: 20rem;
+}
+.container-categories-btn:hover {
+  background-color: #8f38df36;
 }
 
 @media (max-width: 767px) {
@@ -125,4 +140,9 @@
     .search-bar {
         max-width: 600px;
     }
+}
+
+
+.container-search {
+  margin-left: 5rem;
 }

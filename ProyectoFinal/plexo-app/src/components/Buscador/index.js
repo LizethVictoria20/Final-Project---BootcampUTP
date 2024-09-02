@@ -23,7 +23,7 @@ function SearchProducts({ setFilteredProducts, products }) {
     <>
       <form className="search-form" role="search">
         <input
-          className="search search-field-products"
+          className="search search-field-products shadow p-3 mb-5 bg-body-tertiary rounded"
           type="search"
           placeholder="Enter your search..."
           aria-label="Search"

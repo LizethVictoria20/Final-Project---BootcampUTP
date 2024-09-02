@@ -25,7 +25,7 @@ function Navbar({ admin }) {
               <li className="nav-item">
                 <Link
                   className="nav-link custom-nav-link"
-                  to="/products"
+                  to="/catalogoPlexo"
                 >
                   Products
                 </Link>

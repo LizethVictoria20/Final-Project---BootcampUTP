@@ -80,8 +80,8 @@ function Register() {
 
   return (
     <>
-      <div className="card card-container-login text-dark mx-auto">
-        <div className="card-body card-body-login">
+      <div className="card-container-register text-dark mx-auto">
+        <div className="card-body card-body-register">
           <h5 className="card-title">Welcome 👋🏻</h5>
           <p className="card-text"></p>
           <form onSubmit={postNewUser}>

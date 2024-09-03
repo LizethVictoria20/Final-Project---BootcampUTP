@@ -167,7 +167,7 @@ function Register() {
               <div className="alert alert-success">Registro exitoso</div>
             )}
             <div className="d-flex justify-content-center">
-              <button type="submit" className="btn button-sign_in text-white">
+              <button type="submit" className="button-sign_in text-white">
                 Sign in
               </button>
             </div>

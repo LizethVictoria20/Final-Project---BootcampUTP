@@ -16,7 +16,7 @@
 .form-text-login {
     text-align: center;
 }
-.login {
+.button-login {
     background-color: #7429ba;
     width: 100%;
     border: none;
@@ -24,7 +24,7 @@
     height: 3rem;
 }
 
-.login:hover {
+.button-login:hover {
     background-color: #ab6be7;
 }
 

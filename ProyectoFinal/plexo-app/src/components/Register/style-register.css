@@ -1,9 +1,9 @@
 .card-container-register {
-  width: 60%;
-  background-color: rgba(225, 192, 255, 0.2); /* Fondo #e1C0ff con 20% de opacidad */
+  width: 50%;
+  background-color: rgb(218 205 229 / 20%);
   padding: 3rem;;
   margin-top: 6%;
-  box-shadow: 1px 3px 76px 24px rgb(232 225 239);
+  box-shadow: 10px 9px 35px -14px rgba(195,179,209,1);
   border-radius: 1rem;
 }
 
@@ -15,12 +15,15 @@
     text-align: center;
 }
 .button-sign_in {
-    /* background-color: #7429ba;
-    width: 100%; */
+    background-color: #7429ba;
+    width: 100%;
+    border: none;
+    border-radius: .5rem;
+    height: 3rem;
 }
 
 .button-sign_in:hover {
-    /* background-color: #9c70c4; */
+    background-color: #ab6be7;
 }
 
 hr {
@@ -72,7 +75,7 @@ hr {
 
 @media (max-width: 414px) { 
     .card-container-register {
-        width: 71%;
+        width: 50%;
     }
     .card-body-register{
         padding: 1rem;

@@ -125,7 +125,7 @@ function Login() {
               <div className="alert alert-success">Login successful!</div>
             )}
             <div className="d-flex justify-content-center">
-              <button type="submit" className="login text-white">
+              <button type="submit" className="button-login text-white">
                 Sign in
               </button>
             </div>

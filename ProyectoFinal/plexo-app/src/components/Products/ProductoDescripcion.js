@@ -8,12 +8,12 @@ import {
 import api from "../../http/index";
 import { useParams } from "react-router-dom";
 import "./style-product.css";
-import { FaPlusCircle } from "react-icons/fa";
-import { IoIosReturnLeft, IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 
 function ProductoDescripcion() {
   const { product_id } = useParams();
   const [producto, setProducto] = useState(null);
+  const [allProducts, setAllProducts] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
   const [isUser, setIsUser] = useState(false);
   const [message, setMessage] = useState("");
@@ -21,7 +21,7 @@ function ProductoDescripcion() {
 
   const GetUser = () => {
     api
-      .get("users/loginuser")
+      .get("/users/loginuser")
       .then((response) => {
         setIsUser(true);
       })
@@ -43,12 +43,21 @@ function ProductoDescripcion() {
   };
 
   useEffect(() => {
+    api
+      .get("/products")
+      .then((response) => {
+        const allProducts = response.data;
+        setAllProducts(allProducts);
+        console.log(allProducts);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
     GetUser();
 
     api
       .get(`products/${product_id}`)
       .then((response) => {
-        console.log(response.data.product);
         setProducto(response.data.product);
       })
       .catch((error) => {
@@ -80,10 +89,15 @@ function ProductoDescripcion() {
       }, 3000);
     }
   };
-
+  console.log(allProducts);
   return (
     <>
-      <IoIosArrowBack  className="back-button" color="#7429BA" size={60} onClick={handleReturn}/>
+      <IoIosArrowBack
+        className="back-button"
+        color="#7429BA"
+        size={60}
+        onClick={handleReturn}
+      />
       <div className="product-detail-container">
         <div>
           <div className="image-container">
@@ -147,6 +161,26 @@ function ProductoDescripcion() {
             <button type="button" className="buy-now">
               Buy Now
             </button>
+          </div>
+        </div>
+      </div>
+      <div className="maylike-products-wrapper">
+        <h2>You may also like</h2>
+        <div className="marquee">
+          <div className="maylike-products-container track">
+            {allProducts?.map((item) => (
+              <div className="product-card">
+                <img
+                  src={item.image_url}
+                  width={250}
+                  height={250}
+                  className="product-image"
+                  alt={item.name}
+                />
+                <p className="product-name">{item.name}</p>
+                <p className="product-price">${item.price}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

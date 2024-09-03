@@ -65,7 +65,9 @@ const Catalogo = () => {
               Categorias
             </button>
             <ul className="dropdown-menu">
-              <button className="container-categories-btn btn mb-3 button-cateries text-black"><Link to="/catalogoPlexo">All</Link></button>
+              <button className="container-categories-btn btn mb-3 button-cateries text-black">
+                <Link to="/catalogoPlexo">All</Link>
+              </button>
               {categories.map((category) => (
                 <button
                   id={`category_${category.category_id}`}
@@ -92,12 +94,14 @@ const Catalogo = () => {
             <div className="container-products d-flex flex-wrap justify-content-center">
               {getFilteredProducts().length > 0 ? (
                 getFilteredProducts().map((product) => (
-                  <Link
-                    to={`/product/${product.product_id}`}
-                    className="card-title-product"
-                  >
-                    <Card key={product.product_id} product={product} />
-                  </Link>
+                  <div key={product.product_id}>
+                    <Link
+                      to={`/product/${product.product_id}`}
+                      className="card-title-product"
+                    >
+                      <Card key={product.product_id} product={product} />
+                    </Link>
+                  </div>
                 ))
               ) : (
                 <p className="text-light">No products found</p>

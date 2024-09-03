@@ -169,7 +169,7 @@ function ProductoDescripcion() {
         <div className="marquee">
           <div className="maylike-products-container track">
             {allProducts?.map((item) => (
-              <div className="product-card">
+              <div className="product-card" key={item.product_id}>
                 <img
                   src={item.image_url}
                   width={250}

@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
+import {
+  AiOutlineMinus,
+  AiOutlinePlus,
+  AiFillStar,
+  AiOutlineStar,
+} from "react-icons/ai";
 import api from "../../http/index";
 import { useParams } from "react-router-dom";
 import "./style-product.css";
 import { FaPlusCircle } from "react-icons/fa";
-import { IoIosReturnLeft } from "react-icons/io";
+import { IoIosReturnLeft, IoIosArrowBack } from "react-icons/io";
 
 function ProductoDescripcion() {
   const { product_id } = useParams();
@@ -11,6 +17,7 @@ function ProductoDescripcion() {
   const [showMessage, setShowMessage] = useState(false);
   const [isUser, setIsUser] = useState(false);
   const [message, setMessage] = useState("");
+  const [quantity, setQuantity] = useState(1);
 
   const GetUser = () => {
     api
@@ -22,6 +29,13 @@ function ProductoDescripcion() {
         console.error("Error fetching user:", error);
         setIsUser(false);
       });
+  };
+
+  const incrementQuantity = () => {
+    setQuantity((quantity) => quantity + 1);
+  };
+  const decrementQuantity = () => {
+    setQuantity((quantity) => quantity - 1);
   };
 
   const handleReturn = () => {
@@ -69,7 +83,75 @@ function ProductoDescripcion() {
 
   return (
     <>
-      <div className="container container-productos">
+      <IoIosArrowBack  className="back-button" color="#7429BA" size={60} onClick={handleReturn}/>
+      <div className="product-detail-container">
+        <div>
+          <div className="image-container">
+            <img
+              src={producto.image_url}
+              className="product-detail-image"
+              alt={"product"}
+            />
+          </div>
+        </div>
+
+        <div className="product-detail-desc">
+          <h1>{producto.name}</h1>
+          <div className="reviews">
+            <div>
+              <AiFillStar />
+              <AiFillStar />
+              <AiFillStar />
+              <AiFillStar />
+              <AiOutlineStar />
+            </div>
+            <p>(20)</p>
+          </div>
+          <h4>Details: </h4>
+          <p>
+            {producto.details}
+            {producto.description || "Description not available"}
+          </p>
+          <p className="price">${producto.price}</p>
+          <div className="quantity">
+            <h3>Quantity:</h3>
+            <p className="quantity-desc">
+              <span className="minus" onClick={decrementQuantity}>
+                <AiOutlineMinus />
+              </span>
+              <span className="num">{quantity}</span>
+              <span className="plus" onClick={incrementQuantity}>
+                <AiOutlinePlus />
+              </span>
+            </p>
+          </div>
+          <div className="buttons">
+            <button
+              type="button"
+              className="add-to-cart"
+              onClick={handleAddToCart}
+            >
+              Add to Cart
+            </button>
+            {showMessage && (
+              <div
+                className={` ${
+                  isUser
+                    ? "alert alert-success mt-3 text-black"
+                    : "alert alert-warning mt-3 text-black"
+                }`}
+              >
+                {message}
+              </div>
+            )}
+            <button type="button" className="buy-now">
+              Buy Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className="container container-productos">
         <div className="row mb-4 bg-white container-products-description mx-auto">
           <div className="col-md-12 d-flex justify-content-end">
           <button className="btn button-return" onClick={handleReturn}>
@@ -118,7 +200,7 @@ function ProductoDescripcion() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

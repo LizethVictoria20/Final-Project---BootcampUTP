@@ -83,7 +83,7 @@ function Login() {
 
   return (
     <>
-      <div className="card card-container-login mx-auto">
+      <div className="card-container-login mx-auto">
         <div className="card-body card-body-login">
           <h5 className="card-title">Welcome Back 👋🏻</h5>
           <p className="card-text">
@@ -125,7 +125,7 @@ function Login() {
               <div className="alert alert-success">Login successful!</div>
             )}
             <div className="d-flex justify-content-center">
-              <button type="submit" className="btn button-sign_in text-white">
+              <button type="submit" className="login text-white">
                 Sign in
               </button>
             </div>
@@ -134,7 +134,7 @@ function Login() {
               ¿Don't you have an account?{" "}
               <span>
                 {" "}
-                <Link className="nav-link-login" to="/registerUserPlexo">
+                <Link className="nav-link-login text-black" to="/registerUserPlexo">
                   Sign up
                 </Link>
               </span>

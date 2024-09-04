@@ -1,15 +1,13 @@
-import api from '../../http/index.js';
+import api from "../../utils/api.js";
 
 const updateUser = async (userData) => {
   try {
-    console.log(userData)
-    const response = await api.put('users/',
-      userData
-    );
-    console.log(response)
+    console.log(userData);
+    const response = await api.put("users/", userData);
+    console.log(response);
     return response.data;
   } catch (error) {
-    throw new Error('Error updating user:', error);
+    throw new Error("Error updating user:", error);
   }
 };
 

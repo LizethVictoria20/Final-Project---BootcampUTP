@@ -3,7 +3,7 @@
 // import { IoShieldCheckmarkSharp } from "react-icons/io5";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "./AccountSettings.css";
-// import api from "../../http/index";
+// import api from "../../utils/api.js";
 // import updateUser from "./updateUser.js"; // Asegúrate de que esta importación sea correcta
 
 // const EditableField = ({

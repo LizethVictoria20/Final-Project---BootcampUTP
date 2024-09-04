@@ -1,4 +1,4 @@
-import api from "../../http";
+import api from "../../utils/api.js";
 
 /**
  * Función para obtener el cartId y userId.

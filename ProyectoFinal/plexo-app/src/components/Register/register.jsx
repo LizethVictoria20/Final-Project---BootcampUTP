@@ -1,8 +1,7 @@
-import "./style-register.css";
 import { useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
-import { UserContext } from "../ContextUser/context-user.jsx";
-import api from "../../http/index.js";
+import { useState } from "react";
+import api from "../../utils/api.js";
+import "./style-register.css";
 
 function Register() {
   const [isRegister, setIsRegister] = useState(false);

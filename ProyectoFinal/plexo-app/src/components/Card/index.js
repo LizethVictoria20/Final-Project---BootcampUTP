@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import api from "../../http/index.js";
+import React from "react";
 import "./style-card.css";
 
 function Card({ product }) {

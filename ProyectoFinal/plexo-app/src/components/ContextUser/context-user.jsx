@@ -26,6 +26,7 @@ function AuthProvider({ children }) {
       isAdmin,
     });
   };
+  
   const logout = (isAdmin) => {
     setAuthState({
       isAuthenticated: false,

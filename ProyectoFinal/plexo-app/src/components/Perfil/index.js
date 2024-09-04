@@ -5,10 +5,10 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { GiShoppingBag } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
+import api from "../../utils/api.js";
+import updateUser from "../AccountSettings/updateUser"; 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style-perfil.css";
-import api from "../../http/index";
-import updateUser from "../AccountSettings/updateUser"; // Asegúrate de que esta importación sea correcta
 
 const EditableField = ({
   id,

@@ -1,13 +1,13 @@
-import LogoPurple from "../../assets/images/logo-purple.jpeg";
 import { CiShoppingCart } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import "./style-navbar.css";
 import { UserContext } from "../ContextUser/context-user.jsx";
 import { CiShoppingBasket } from "react-icons/ci";
+import LogoPurple from "../../assets/images/logo-purple.jpeg";
+import "./style-navbar.css";
 
 function Navbar({ admin }) {
-  // Paso el contexto al estado
+  
   const { authState, logout } = useContext(UserContext);
   const { isAdmin } = authState;
 

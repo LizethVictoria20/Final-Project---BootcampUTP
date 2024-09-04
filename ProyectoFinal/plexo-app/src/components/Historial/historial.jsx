@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import api from "../../http";
-import "./style-historial.css"; // Importar el archivo de estilos aquí
+import api from "../../utils/api.js";
+import "./style-historial.css"; 
 
 const Historial = () => {
   const [history, setHistory] = useState([]);

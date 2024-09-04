@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Product from "./Product";
-import "./ShoppingCart.css";
 import {
   fetchCartId,
   fetchCartItems,
@@ -10,7 +8,9 @@ import {
   deleteProduct as deleteProductAPI,
   calculateTotal,
 } from "./api";
-import api from "../../http";
+import api from "../../utils/api.js";
+import Product from "./Product";
+import "./ShoppingCart.css";
 
 const ShoppingCart = () => {
   const [products, setProducts] = useState([]);

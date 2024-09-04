@@ -6,7 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import ModalComponentAdd from "./modalAdd";
 import { DeleteProduct } from "./AdminCrud";
 import { FaRegTrashAlt } from "react-icons/fa";
-import api from "../../http/index";
+import api from "../../utils/api.js";
 
 function Admin() {
   const deleteProduct = DeleteProduct();

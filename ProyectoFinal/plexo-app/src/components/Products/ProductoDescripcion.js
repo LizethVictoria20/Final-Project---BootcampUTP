@@ -5,10 +5,10 @@ import {
   AiFillStar,
   AiOutlineStar,
 } from "react-icons/ai";
-import api from "../../http/index";
 import { useParams } from "react-router-dom";
-import "./style-product.css";
 import { IoIosArrowBack } from "react-icons/io";
+import api from "../../utils/api.js";
+import "./style-product.css";
 
 function ProductoDescripcion() {
   const { product_id } = useParams();

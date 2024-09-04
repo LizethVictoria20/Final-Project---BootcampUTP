@@ -1,4 +1,3 @@
-import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Admin from "./components/Administrador";
@@ -16,6 +15,7 @@ import AuthProvider from "./components/ContextUser/context-user.jsx";
 import Navbar from "./components/Navbar/index";
 import ProductoDescripcion from "./components/Products/ProductoDescripcion";
 import Historial from "./components/Historial/historial.jsx";
+
 function App() {
   return (
     <AuthProvider>

@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
-import "./style-home.css";
 import { useState, useEffect } from "react";
-import api from "../../http/index";
+import api from "../../utils/api.js";
+import "./style-home.css";
 
 function Home() {
   const [products, setProducts] = useState([]);

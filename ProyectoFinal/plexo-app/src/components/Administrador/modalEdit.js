@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BiSolidPencil } from "react-icons/bi";
 import { updateProduct } from "./AdminCrud"; // Asegúrate de importar correctamente tu función de actualización
 import "./stylesheet.css";
-import api from "../../http";
+import api from "../../utils/api.js";
 
 function ModalComponentEdit({ product, onProductUpdated }) {
   const [show, setShow] = useState(false);

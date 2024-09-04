@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./style-catalogo.css";
-import Card from "../Card/index";
-import api from "../../http/index.js";
-import SearchProducts from "../Buscador/index";
 import { Link } from "react-router-dom";
+import api from "../../utils/api.js";
+import Card from "../Card/index";
+import SearchProducts from "../Buscador/index";
+import "./style-catalogo.css";
 
 const Catalogo = () => {
   const [products, setProducts] = useState([]);

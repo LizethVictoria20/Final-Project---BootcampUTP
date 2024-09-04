@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../ContextUser/context-user";
-import api from "../../http";
+import api from "../../utils/api.js";
 import "./style-login.css";
 
 function Login() {

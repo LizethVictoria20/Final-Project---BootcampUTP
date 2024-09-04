@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import api from "../../http/index";
+import api from "../../utils/api.js";
 
 function UserProfile({ userId }) {
   const [history, setHistory] = useState([]);

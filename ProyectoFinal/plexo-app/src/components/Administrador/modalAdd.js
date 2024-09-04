@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaCirclePlus } from 'react-icons/fa6';
 import { addProduct } from './AdminCrud';
 import './stylesheet.css';
-import api from '../../http';
+import api from "../../utils/api.js";
 
 function ModalComponentAdd({ onProductAdded }) {
   const [show, setShow] = useState(false);

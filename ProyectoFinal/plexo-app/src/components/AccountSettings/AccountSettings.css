@@ -80,9 +80,10 @@
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-}
+} 
 
 /* Responsive Styles */
+
 @media (max-width: 1200px) {
   .account-settings-container {
     padding: 15px;

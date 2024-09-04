@@ -1,13 +1,12 @@
 import { CiShoppingCart } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../ContextUser/context-user.jsx";
+import { UserContext } from "../../utils/context-user.jsx";
 import { CiShoppingBasket } from "react-icons/ci";
 import LogoPurple from "../../assets/images/logo-purple.jpeg";
 import "./style-navbar.css";
 
 function Navbar({ admin }) {
-  
   const { authState, logout } = useContext(UserContext);
   const { isAdmin } = authState;
 
@@ -23,10 +22,7 @@ function Navbar({ admin }) {
           {!authState.isAuthenticated && (
             <>
               <li className="nav-item">
-                <Link
-                  className="nav-link custom-nav-link"
-                  to="/catalogoPlexo"
-                >
+                <Link className="nav-link custom-nav-link" to="/catalogoPlexo">
                   Products
                 </Link>
               </li>
@@ -45,7 +41,7 @@ function Navbar({ admin }) {
               </li>
               <li className="nav-item">
                 <Link>
-                  <CiShoppingBasket color='#6c6c6c' size={30}/>
+                  <CiShoppingBasket color="#6c6c6c" size={30} />
                 </Link>
               </li>
             </>

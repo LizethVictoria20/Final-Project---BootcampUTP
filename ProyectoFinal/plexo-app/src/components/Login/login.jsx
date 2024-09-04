@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../ContextUser/context-user";
+import { UserContext } from "../../utils/context-user.jsx";
 import api from "../../utils/api.js";
 import "./style-login.css";
 
@@ -54,8 +54,8 @@ function Login() {
         setIsLogged(true);
         setError(null);
         console.log("Login successful");
-        const res = await api.post('carts/')
-        console.log(res.data)
+        const res = await api.post("carts/");
+        console.log(res.data);
         const userRole = response.data.admin;
         login(response.data, userRole);
 
@@ -134,7 +134,10 @@ function Login() {
               ¿Don't you have an account?{" "}
               <span>
                 {" "}
-                <Link className="nav-link-login text-black" to="/registerUserPlexo">
+                <Link
+                  className="nav-link-login text-black"
+                  to="/registerUserPlexo"
+                >
                   Sign up
                 </Link>
               </span>

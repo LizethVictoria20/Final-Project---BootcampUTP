@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { GiShoppingBag } from "react-icons/gi";
 import { BiLogOut } from "react-icons/bi";
 import api from "../../utils/api.js";
-import updateUser from "../AccountSettings/updateUser"; 
+import updateUser from "../AccountSettings/updateUser";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style-perfil.css";
 
@@ -129,7 +129,7 @@ const AccountSettings = () => {
     try {
       let imageUrl = formData.profileImageUrl;
       if (typeof formData.profileImageUrl == "object") {
-        console.log('entraste ----------------');
+        console.log("entraste ----------------");
         const imageFormData = new FormData();
         imageFormData.append("image", formData.profileImageUrl);
 
@@ -180,7 +180,6 @@ const AccountSettings = () => {
   return (
     <div className="account-settings-wrapper d-flex justify-content-center align-items-center min-vh-100">
       <div className="account-settings-container p-4">
-
         <div className="banner-profile position-relative"></div>
         <img
           src={profileImage || "/default-profile-image.jpg"} // Coloca una imagen predeterminada si profileImage es null
@@ -200,100 +199,92 @@ const AccountSettings = () => {
           onChange={handleFileChange}
         />
 
-        <div class="container text-center">
-          <div class="row container-account">
-            <div class="col">
-            <div className="col-md-4 col-sm-12 button-container">
-            <button className="btn-custom mb-2 bg-white button-perfil">
-              <Link to="/historial">
-                <GiShoppingBag className="iconos" color="#7429BA" /> My Shopping
-              </Link>
-            </button>
-
-            <button className="btn-custom mb-2 bg-white button-perfil">
-              <Link to="/settingUserPlexo">
-                <MdAdminPanelSettings className="iconos" color="#7429BA" />{" "}
-                Account Settings
-              </Link>
-            </button>
-
-            <button
-              className="btn-custom mb-2 bg-white button-perfil"
-              onClick={handleLogout}
-            >
-              <Link to="/">
-                <BiLogOut className="iconos" color="#7429BA" /> Logout
-              </Link>
-            </button>
-          </div>
-            </div>
-            <div class="col order-5">
-            <form className="account-settings-form" onSubmit={handleSubmit}>
-          <div className="title-container d-flex align-items-center justify-content-center mb-3">
+        <div className="container text-center">
+          <div className="title-account_setting">
             <IoShieldCheckmarkSharp className="settingsshield" fontSize="2em" />
             <h2 className="account-settings-title mb-0">Account Settings</h2>
           </div>
-          <EditableField
-            id="name"
-            label="Name"
-            value={formData.name}
-            onChange={handleChange}
-            editableField={editableField}
-            onEditClick={handleEditClick}
-            placeholder={user ? user.first_name : ""}
-          />
-          <EditableField
-            id="lastname"
-            label="Last Name"
-            value={formData.lastname}
-            onChange={handleChange}
-            editableField={editableField}
-            onEditClick={handleEditClick}
-            placeholder={user ? user.last_name : ""}
-          />
-          <EditableField
-            id="username"
-            label="Username"
-            value={formData.username}
-            onChange={handleChange}
-            editableField={editableField}
-            onEditClick={handleEditClick}
-            placeholder={user ? user.username : ""}
-          />
-          <EditableField
-            id="mail"
-            label="Email"
-            value={formData.mail}
-            onChange={handleChange}
-            editableField={editableField}
-            onEditClick={handleEditClick}
-            type="email"
-            placeholder={user ? user.email : ""}
-          />
-          <EditableField
-            id="password"
-            label="Password"
-            value={formData.password}
-            onChange={handleChange}
-            editableField="password"
-            onEditClick={handleEditClick}
-            type="password"
-            placeholder="Enter your password"
-          />
-          <button type="submit" className="btn btn-primary w-100">
-            {loading ? "Saving..." : "Save Changes"}
-          </button>
-          {successMessage && (
-            <div className="alert alert-success mt-3">{successMessage}</div>
-          )}
-          {errorMessage && (
-            <div className="alert alert-danger mt-3">{errorMessage}</div>
-          )}
-        </form>
+          <div className="row container-account">
+            <div className="col">
+              <div className="col-md-4 col-sm-12 button-container">
+                <button className="button-perfil">
+                  <Link to="/historial">
+                    <GiShoppingBag className="iconos" color="#7429BA" /> My
+                    Shopping
+                  </Link>
+                </button>
+
+                <button className="button-perfil" onClick={handleLogout}>
+                  <Link to="/">
+                    <BiLogOut className="iconos" color="#7429BA" /> Logout
+                  </Link>
+                </button>
+              </div>
+            </div>
+            <div className="col order-5">
+              <form className="account-settings-form" onSubmit={handleSubmit}>
+                <EditableField
+                  id="name"
+                  label="Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  editableField={editableField}
+                  onEditClick={handleEditClick}
+                  placeholder={user ? user.first_name : ""}
+                />
+                <EditableField
+                  id="lastname"
+                  label="Last Name"
+                  value={formData.lastname}
+                  onChange={handleChange}
+                  editableField={editableField}
+                  onEditClick={handleEditClick}
+                  placeholder={user ? user.last_name : ""}
+                />
+                <EditableField
+                  id="username"
+                  label="Username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  editableField={editableField}
+                  onEditClick={handleEditClick}
+                  placeholder={user ? user.username : ""}
+                />
+                <EditableField
+                  id="mail"
+                  label="Email"
+                  value={formData.mail}
+                  onChange={handleChange}
+                  editableField={editableField}
+                  onEditClick={handleEditClick}
+                  type="email"
+                  placeholder={user ? user.email : ""}
+                />
+                <EditableField
+                  id="password"
+                  label="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  editableField="password"
+                  onEditClick={handleEditClick}
+                  type="password"
+                  placeholder="Enter your password"
+                />
+                <button type="submit" className="btn-save_changes">
+                  {loading ? "Saving..." : "Save Changes"}
+                </button>
+                {successMessage && (
+                  <div className="alert alert-success mt-3">
+                    {successMessage}
+                  </div>
+                )}
+                {errorMessage && (
+                  <div className="alert alert-danger mt-3">{errorMessage}</div>
+                )}
+              </form>
             </div>
           </div>
         </div>
-        
       </div>
     </div>
   );

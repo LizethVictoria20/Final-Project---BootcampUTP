@@ -81,7 +81,10 @@ function Register() {
     <>
       <div className="card-container-register text-dark mx-auto">
         <div className="card-body card-body-register">
-          <h5 className="card-title">Welcome 👋🏻</h5>
+          <h5 className="card-title text-center">
+            Bienvenido, aquí podrás crear tu cuenta para comprar y/o administrar
+            tus productos 👋🏻
+          </h5>
           <p className="card-text"></p>
           <form onSubmit={postNewUser}>
             <div className="mb-3">
